@@ -5,11 +5,16 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import HomeScreen from "../Containers/HomeScreen";
+//import AboutScreen from "../Containers/AboutScreen";
+import SlideMenu from "../Containers/SideMenu";
+
+
+
 
 
 const TabNav = createBottomTabNavigator({
     Find: { screen: HomeScreen },
-},
+}, 
 {
     headerMode: "none",
     defaultNavigationOptions : { 
@@ -23,18 +28,17 @@ const TabNav = createBottomTabNavigator({
 
 })
 
-
 const Drawer = createDrawerNavigator(
-    {
-      Find: { screen: HomeScreen },
-      Tabs: { screen: TabNav }
-    },
-    {
-      initialRouteName: "Find",
-      backBehavior:"history"
-    }
+  {
+    Find: { screen: HomeScreen },
+    Tabs: { screen: TabNav }
+  },
+  {
+    initialRouteName: "Find",
+    contentComponent: SlideMenu,
+    backBehavior:"history"
+  }
 );
-
 
 const AppNavigator = createStackNavigator(
     {
