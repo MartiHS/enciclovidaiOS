@@ -17,6 +17,40 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* EnciclovidaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EnciclovidaTests.m */; };
 		3E2203F365F38F3A4C3E50F3 /* libPods-Enciclovida-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD79ABF8C04A9E464CB3FB75 /* libPods-Enciclovida-tvOSTests.a */; };
+		4185F15023AF3E1D00B93080 /* TitilliumWeb-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F13F23AF3E1C00B93080 /* TitilliumWeb-LightItalic.ttf */; };
+		4185F15123AF3E1D00B93080 /* TitilliumWeb-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F13F23AF3E1C00B93080 /* TitilliumWeb-LightItalic.ttf */; };
+		4185F15223AF3E1D00B93080 /* TitilliumWeb-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14023AF3E1C00B93080 /* TitilliumWeb-SemiBold.ttf */; };
+		4185F15323AF3E1D00B93080 /* TitilliumWeb-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14023AF3E1C00B93080 /* TitilliumWeb-SemiBold.ttf */; };
+		4185F15423AF3E1D00B93080 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14123AF3E1C00B93080 /* TitilliumWeb-SemiBoldItalic.ttf */; };
+		4185F15523AF3E1D00B93080 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14123AF3E1C00B93080 /* TitilliumWeb-SemiBoldItalic.ttf */; };
+		4185F15623AF3E1D00B93080 /* recipes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14223AF3E1D00B93080 /* recipes.ttf */; };
+		4185F15723AF3E1D00B93080 /* recipes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14223AF3E1D00B93080 /* recipes.ttf */; };
+		4185F15823AF3E1D00B93080 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14323AF3E1D00B93080 /* TitilliumWeb-Bold.ttf */; };
+		4185F15923AF3E1D00B93080 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14323AF3E1D00B93080 /* TitilliumWeb-Bold.ttf */; };
+		4185F15A23AF3E1D00B93080 /* CaviarDreams_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14423AF3E1D00B93080 /* CaviarDreams_Bold.ttf */; };
+		4185F15B23AF3E1D00B93080 /* CaviarDreams_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14423AF3E1D00B93080 /* CaviarDreams_Bold.ttf */; };
+		4185F15C23AF3E1D00B93080 /* recipes_v1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14523AF3E1D00B93080 /* recipes_v1.ttf */; };
+		4185F15D23AF3E1D00B93080 /* recipes_v1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14523AF3E1D00B93080 /* recipes_v1.ttf */; };
+		4185F15E23AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14623AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf */; };
+		4185F15F23AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14623AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf */; };
+		4185F16023AF3E1D00B93080 /* TitilliumWeb-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14723AF3E1D00B93080 /* TitilliumWeb-Black.ttf */; };
+		4185F16123AF3E1D00B93080 /* TitilliumWeb-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14723AF3E1D00B93080 /* TitilliumWeb-Black.ttf */; };
+		4185F16223AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14823AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf */; };
+		4185F16323AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14823AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf */; };
+		4185F16423AF3E1D00B93080 /* CaviarDreams.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14923AF3E1D00B93080 /* CaviarDreams.ttf */; };
+		4185F16523AF3E1D00B93080 /* CaviarDreams.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14923AF3E1D00B93080 /* CaviarDreams.ttf */; };
+		4185F16623AF3E1E00B93080 /* TitilliumWeb-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14A23AF3E1D00B93080 /* TitilliumWeb-Italic.ttf */; };
+		4185F16723AF3E1E00B93080 /* TitilliumWeb-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14A23AF3E1D00B93080 /* TitilliumWeb-Italic.ttf */; };
+		4185F16823AF3E1E00B93080 /* TitilliumWeb-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14B23AF3E1D00B93080 /* TitilliumWeb-BoldItalic.ttf */; };
+		4185F16923AF3E1E00B93080 /* TitilliumWeb-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14B23AF3E1D00B93080 /* TitilliumWeb-BoldItalic.ttf */; };
+		4185F16A23AF3E1E00B93080 /* CaviarDreams_BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14C23AF3E1D00B93080 /* CaviarDreams_BoldItalic.ttf */; };
+		4185F16B23AF3E1E00B93080 /* CaviarDreams_BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14C23AF3E1D00B93080 /* CaviarDreams_BoldItalic.ttf */; };
+		4185F16C23AF3E1E00B93080 /* CaviarDreams_Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14D23AF3E1D00B93080 /* CaviarDreams_Italic.ttf */; };
+		4185F16D23AF3E1E00B93080 /* CaviarDreams_Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14D23AF3E1D00B93080 /* CaviarDreams_Italic.ttf */; };
+		4185F16E23AF3E1E00B93080 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14E23AF3E1D00B93080 /* TitilliumWeb-Light.ttf */; };
+		4185F16F23AF3E1E00B93080 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14E23AF3E1D00B93080 /* TitilliumWeb-Light.ttf */; };
+		4185F17023AF3E1E00B93080 /* TitilliumWeb-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14F23AF3E1D00B93080 /* TitilliumWeb-Regular.ttf */; };
+		4185F17123AF3E1E00B93080 /* TitilliumWeb-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4185F14F23AF3E1D00B93080 /* TitilliumWeb-Regular.ttf */; };
 		4EF2124C58BF08F54B2B3A2A /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2786E1882C2D3D44EDB160D1 /* libPods-Enciclovida-tvOS.a */; };
 		BD85F60C20F76BBFDF54ED5F /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BF4D5065F29EB5930EA688 /* libPods-Enciclovida.a */; };
 		C8FDEB52E3AA01574FFA6478 /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 389841E30BEBC1E6BCA3BF47 /* libPods-EnciclovidaTests.a */; };
@@ -59,6 +93,23 @@
 		389841E30BEBC1E6BCA3BF47 /* libPods-EnciclovidaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EnciclovidaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39CBBA5B9ED421403101D717 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5F37529FA94F7CE6D8B0D3 /* Pods-EnciclovidaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.release.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.release.xcconfig"; sourceTree = "<group>"; };
+		4185F13F23AF3E1C00B93080 /* TitilliumWeb-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-LightItalic.ttf"; path = "../../assets/fonts/TitilliumWeb-LightItalic.ttf"; sourceTree = "<group>"; };
+		4185F14023AF3E1C00B93080 /* TitilliumWeb-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-SemiBold.ttf"; path = "../../assets/fonts/TitilliumWeb-SemiBold.ttf"; sourceTree = "<group>"; };
+		4185F14123AF3E1C00B93080 /* TitilliumWeb-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-SemiBoldItalic.ttf"; path = "../../assets/fonts/TitilliumWeb-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		4185F14223AF3E1D00B93080 /* recipes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = recipes.ttf; path = ../../assets/fonts/recipes.ttf; sourceTree = "<group>"; };
+		4185F14323AF3E1D00B93080 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-Bold.ttf"; path = "../../assets/fonts/TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
+		4185F14423AF3E1D00B93080 /* CaviarDreams_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaviarDreams_Bold.ttf; path = ../../assets/fonts/CaviarDreams_Bold.ttf; sourceTree = "<group>"; };
+		4185F14523AF3E1D00B93080 /* recipes_v1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = recipes_v1.ttf; path = ../../assets/fonts/recipes_v1.ttf; sourceTree = "<group>"; };
+		4185F14623AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-ExtraLight.ttf"; path = "../../assets/fonts/TitilliumWeb-ExtraLight.ttf"; sourceTree = "<group>"; };
+		4185F14723AF3E1D00B93080 /* TitilliumWeb-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-Black.ttf"; path = "../../assets/fonts/TitilliumWeb-Black.ttf"; sourceTree = "<group>"; };
+		4185F14823AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-ExtraLightItalic.ttf"; path = "../../assets/fonts/TitilliumWeb-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		4185F14923AF3E1D00B93080 /* CaviarDreams.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaviarDreams.ttf; path = ../../assets/fonts/CaviarDreams.ttf; sourceTree = "<group>"; };
+		4185F14A23AF3E1D00B93080 /* TitilliumWeb-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-Italic.ttf"; path = "../../assets/fonts/TitilliumWeb-Italic.ttf"; sourceTree = "<group>"; };
+		4185F14B23AF3E1D00B93080 /* TitilliumWeb-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-BoldItalic.ttf"; path = "../../assets/fonts/TitilliumWeb-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4185F14C23AF3E1D00B93080 /* CaviarDreams_BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaviarDreams_BoldItalic.ttf; path = ../../assets/fonts/CaviarDreams_BoldItalic.ttf; sourceTree = "<group>"; };
+		4185F14D23AF3E1D00B93080 /* CaviarDreams_Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CaviarDreams_Italic.ttf; path = ../../assets/fonts/CaviarDreams_Italic.ttf; sourceTree = "<group>"; };
+		4185F14E23AF3E1D00B93080 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-Light.ttf"; path = "../../assets/fonts/TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
+		4185F14F23AF3E1D00B93080 /* TitilliumWeb-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TitilliumWeb-Regular.ttf"; path = "../../assets/fonts/TitilliumWeb-Regular.ttf"; sourceTree = "<group>"; };
 		7346DA77A388AA6F30CE3B52 /* Pods-Enciclovida.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida/Pods-Enciclovida.release.xcconfig"; sourceTree = "<group>"; };
 		B2BF4D5065F29EB5930EA688 /* libPods-Enciclovida.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B558E504DAD97C32542A8594 /* Pods-Enciclovida-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +200,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4185F13E23AF3DCC00B93080 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4185F14423AF3E1D00B93080 /* CaviarDreams_Bold.ttf */,
+				4185F14C23AF3E1D00B93080 /* CaviarDreams_BoldItalic.ttf */,
+				4185F14D23AF3E1D00B93080 /* CaviarDreams_Italic.ttf */,
+				4185F14923AF3E1D00B93080 /* CaviarDreams.ttf */,
+				4185F14523AF3E1D00B93080 /* recipes_v1.ttf */,
+				4185F14223AF3E1D00B93080 /* recipes.ttf */,
+				4185F14723AF3E1D00B93080 /* TitilliumWeb-Black.ttf */,
+				4185F14323AF3E1D00B93080 /* TitilliumWeb-Bold.ttf */,
+				4185F14B23AF3E1D00B93080 /* TitilliumWeb-BoldItalic.ttf */,
+				4185F14623AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf */,
+				4185F14823AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf */,
+				4185F14A23AF3E1D00B93080 /* TitilliumWeb-Italic.ttf */,
+				4185F14E23AF3E1D00B93080 /* TitilliumWeb-Light.ttf */,
+				4185F13F23AF3E1C00B93080 /* TitilliumWeb-LightItalic.ttf */,
+				4185F14F23AF3E1D00B93080 /* TitilliumWeb-Regular.ttf */,
+				4185F14023AF3E1C00B93080 /* TitilliumWeb-SemiBold.ttf */,
+				4185F14123AF3E1C00B93080 /* TitilliumWeb-SemiBoldItalic.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +238,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* EnciclovidaTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				4185F13E23AF3DCC00B93080 /* Resources */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E5E6D3ACD82F8C3510DFFFB6 /* Pods */,
 			);
@@ -194,7 +270,6 @@
 				B998A9ABB1AF07357A02A52A /* Pods-EnciclovidaTests.debug.xcconfig */,
 				3A5F37529FA94F7CE6D8B0D3 /* Pods-EnciclovidaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +384,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -330,6 +406,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4185F15923AF3E1D00B93080 /* TitilliumWeb-Bold.ttf in Resources */,
+				4185F16B23AF3E1E00B93080 /* CaviarDreams_BoldItalic.ttf in Resources */,
+				4185F16F23AF3E1E00B93080 /* TitilliumWeb-Light.ttf in Resources */,
+				4185F15523AF3E1D00B93080 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */,
+				4185F15323AF3E1D00B93080 /* TitilliumWeb-SemiBold.ttf in Resources */,
+				4185F15F23AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf in Resources */,
+				4185F15B23AF3E1D00B93080 /* CaviarDreams_Bold.ttf in Resources */,
+				4185F17123AF3E1E00B93080 /* TitilliumWeb-Regular.ttf in Resources */,
+				4185F16323AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */,
+				4185F16523AF3E1D00B93080 /* CaviarDreams.ttf in Resources */,
+				4185F16123AF3E1D00B93080 /* TitilliumWeb-Black.ttf in Resources */,
+				4185F15723AF3E1D00B93080 /* recipes.ttf in Resources */,
+				4185F16723AF3E1E00B93080 /* TitilliumWeb-Italic.ttf in Resources */,
+				4185F15D23AF3E1D00B93080 /* recipes_v1.ttf in Resources */,
+				4185F16923AF3E1E00B93080 /* TitilliumWeb-BoldItalic.ttf in Resources */,
+				4185F16D23AF3E1E00B93080 /* CaviarDreams_Italic.ttf in Resources */,
+				4185F15123AF3E1D00B93080 /* TitilliumWeb-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,8 +430,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4185F16E23AF3E1E00B93080 /* TitilliumWeb-Light.ttf in Resources */,
+				4185F16423AF3E1D00B93080 /* CaviarDreams.ttf in Resources */,
+				4185F17023AF3E1E00B93080 /* TitilliumWeb-Regular.ttf in Resources */,
+				4185F15223AF3E1D00B93080 /* TitilliumWeb-SemiBold.ttf in Resources */,
+				4185F16223AF3E1D00B93080 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */,
+				4185F15E23AF3E1D00B93080 /* TitilliumWeb-ExtraLight.ttf in Resources */,
+				4185F15C23AF3E1D00B93080 /* recipes_v1.ttf in Resources */,
+				4185F16623AF3E1E00B93080 /* TitilliumWeb-Italic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				4185F16823AF3E1E00B93080 /* TitilliumWeb-BoldItalic.ttf in Resources */,
+				4185F15023AF3E1D00B93080 /* TitilliumWeb-LightItalic.ttf in Resources */,
+				4185F15A23AF3E1D00B93080 /* CaviarDreams_Bold.ttf in Resources */,
+				4185F15823AF3E1D00B93080 /* TitilliumWeb-Bold.ttf in Resources */,
+				4185F16C23AF3E1E00B93080 /* CaviarDreams_Italic.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				4185F15623AF3E1D00B93080 /* recipes.ttf in Resources */,
+				4185F16023AF3E1D00B93080 /* TitilliumWeb-Black.ttf in Resources */,
+				4185F15423AF3E1D00B93080 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */,
+				4185F16A23AF3E1E00B93080 /* CaviarDreams_BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +482,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		07D0DDF57D0D2220464E5387 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -713,7 +823,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 313F1348A0A3D6687BCDDC9F /* Pods-Enciclovida-tvOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -741,7 +850,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B558E504DAD97C32542A8594 /* Pods-Enciclovida-tvOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
