@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import HomeScreen from "../Containers/HomeScreen";
 import EnciclovidaScreen from "../Containers/EnciclovidaScreen";
+import SymbologyScreen from "../Containers/SymbologyScreen";
 import SlideMenu from "../Containers/SideMenu";
 
 
@@ -14,7 +15,7 @@ import SlideMenu from "../Containers/SideMenu";
 
 const TabNav = createBottomTabNavigator({
     Find: { screen: HomeScreen },
-}, 
+},  
 {
     headerMode: "none",
     defaultNavigationOptions : { 
@@ -32,6 +33,7 @@ const Drawer = createDrawerNavigator(
   {
     Find: { screen: HomeScreen },
     Info: { screen: EnciclovidaScreen },
+    Symbology: { screen: SymbologyScreen },
     Tabs: { screen: TabNav }
   },
   {
