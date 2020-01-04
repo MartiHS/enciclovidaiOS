@@ -5,7 +5,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import HomeScreen from "../Containers/HomeScreen";
-//import AboutScreen from "../Containers/AboutScreen";
+import EnciclovidaScreen from "../Containers/EnciclovidaScreen";
 import SlideMenu from "../Containers/SideMenu";
 
 
@@ -31,6 +31,7 @@ const TabNav = createBottomTabNavigator({
 const Drawer = createDrawerNavigator(
   {
     Find: { screen: HomeScreen },
+    Info: { screen: EnciclovidaScreen },
     Tabs: { screen: TabNav }
   },
   {
