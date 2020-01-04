@@ -228,9 +228,9 @@ class HomeScreen extends Component {
         const { query } = this.state;
         const { data } = this.state;
         return (
+            /* Barra de navegación */
             <View style={[styles.mainScreen]}>
-                <NavBar white={true} title="" 
-                    menuLightButton={true}/>
+                <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
                     <View style={styles.view}>
                         <CustomIcon name="find" size={25} color="#304E5B" style={styles.favicon} />

@@ -5,12 +5,12 @@ const family = {
     //base_bold: "CaviarDreams_Bold",
     //base_italic: "CaviarDreams_Italic",
     //base_bold_italic: "CaviarDreams_BoldItalic",
-    base: "TitilliumWeb-Regular",
-    base_bold: "TitilliumWeb-Bold",
-    base_italic: "TitilliumWeb-Italic",
-    base_bold_italic: "TitilliumWeb-BoldItalic",
-    base_semibold: "TitilliumWeb-SemiBold",
-    base_semibold_italic: "TitilliumWeb-SemiBoldItalic",
+    base: "Arial",
+    base_bold: "Arial",
+    base_italic: "Arial",
+    base_bold_italic: "Arial",
+    base_semibold: "Arial",
+    base_semibold_italic: "Arial",
 }
 const size = {
     big: 36,

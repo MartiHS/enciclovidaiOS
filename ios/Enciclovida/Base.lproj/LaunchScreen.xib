@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="332" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Backgrounds" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-nm-WRc">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background-11" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-nm-WRc">
                     <rect key="frame" x="0.0" y="0.0" width="332" height="480"/>
                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                 </imageView>
@@ -31,6 +31,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Backgrounds" width="172.66667175292969" height="267.66665649414062"/>
+        <image name="Background-11" width="172.66667175292969" height="267"/>
     </resources>
 </document>
