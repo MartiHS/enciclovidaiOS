@@ -1,4 +1,3 @@
-
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -10,17 +9,18 @@ import SymbologyScreen from "../Containers/SymbologyScreen";
 import ListSpeciesScreen from "../Containers/ListSpeciesScreen";
 import SlideMenu from "../Containers/SideMenu";
 
-
-
+import AboutScreen from "../Containers/AboutScreen";
+import MapScreen from "../Containers/MapScreen"; 
 
 
 const TabNav = createBottomTabNavigator({
-    Find: { screen: HomeScreen },
-},  
-{
+  About: { screen: AboutScreen },
+  Map: {screen: MapScreen},
+},
+  {
     headerMode: "none",
-    defaultNavigationOptions : { 
-      tabBarVisible: false ,
+    defaultNavigationOptions: {
+      tabBarVisible: false,
     },
     backBehavior: 'initialRoute',
     swipeEnabled: true,
@@ -28,7 +28,7 @@ const TabNav = createBottomTabNavigator({
     shifting: true,
 
 
-})
+  })
 
 const Drawer = createDrawerNavigator(
   {
@@ -43,22 +43,22 @@ const Drawer = createDrawerNavigator(
   {
     initialRouteName: "Find",
     contentComponent: SlideMenu,
-    backBehavior:"history"
+    backBehavior: "history"
   }
 );
 
 const AppNavigator = createStackNavigator(
-    {
-      Home: {
-        screen: Drawer
-      },
-      Tabs: { screen: TabNav }
-    },{
-        headerMode: "none",
-        disableKeyboardHandling: true,
-        initialRouteName: "Home"
+  {
+    Home: {
+      screen: Drawer
+    },
+    Tabs: { screen: TabNav }
+  }, {
+  headerMode: "none",
+  disableKeyboardHandling: true,
+  initialRouteName: "Home"
 
-    }
+}
 )
 
 // export default AppNavigator;
