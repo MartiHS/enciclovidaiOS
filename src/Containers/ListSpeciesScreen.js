@@ -1,6 +1,7 @@
 //import liraries
 import React, {Component} from 'react';
 import {
+  StyleSheet,
   View,
   FlatList,
   Image,
@@ -189,41 +190,47 @@ class ListSpeciesScreen extends Component {
 
   render() {
     return ( 
-      <View style = {[styles.mainScreen]} >
+      <View style = {[sstyles.MainContainer]} >
         <NavBar menuBlackButton = {true} filterButton = {true}/> 
         <View style = {styles.container} >
           <Spinner visible = {this.state.spinner} textContent = {'Cargando...'} textStyle = {{color: '#FFF'}} /> 
-          <FlatList 
-            style = {styles.flatList} 
-            data = {this.state.data} 
+
+
+          <FlatList
+            data={this.state.data} 
             extraData = {this.state} 
             keyExtractor = {(item) => item.id.toString()} 
             ListEmptyComponent = {this._listEmptyComponent}
             ListFooterComponent = {this.renderFooter.bind(this)}
-            renderItem = {({item, index}) => (
-              <TouchableOpacity onPress = {() => {this.handlePress(item)}} >
-                <View style = {styles.viewflat} >
-                  <Image source = {{uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small'}}
-                    style = {item.imagen ? styles.image : styles.imageempty}/> 
-                  <View style = {styles.view_text_image} >
-                    <Text style = {styles.view_text_title} > {item.title} </Text> 
-                    <Text style = {styles.view_text_subtitle} > {item.subtitle} </Text> 
-                  </View> 
-                </View> 
-              </TouchableOpacity>
-              )
-            }
-            onEndReached = {this._handleLoadMore}
-            onEndReachedThreshold = {0.1}
-            initialNumToRender = {50}
-            onRefresh = {this._handleRefresh}
-            refreshing = {this.state.refreshing}
-          /> 
+            renderItem={({item, index}) => (
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                <Image style={sstyles.imageThumbnail} source={{uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small'}} />
+              </View>
+            )}
+            //Setting the number of column
+            numColumns={3}
+            keyExtractor={(item, index) => index.toString()}
+          />
+
         </View> 
       </View>
     );
   }
 }
+
+
+const sstyles = StyleSheet.create({
+  MainContainer: {
+    justifyContent: 'center',
+    flex: 1,
+    paddingTop: 30,
+  },
+  imageThumbnail: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
+});
 
 //make this component available to the app
 export default withNavigation(ListSpeciesScreen);

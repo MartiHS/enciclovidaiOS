@@ -5,7 +5,7 @@
   import Autocomplete from 'react-native-autocomplete-input';
   import { withNavigation } from "react-navigation";
   
-  import NavBar from '../Components/NavBar';
+  import NavBar from '../Components/NavBar'; 
   import config from "../Theme/Fonts/config"
   import styles from "../Components/Styles/HomeScreenStyles";
 
