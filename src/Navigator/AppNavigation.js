@@ -11,11 +11,13 @@ import SlideMenu from "../Containers/SideMenu";
 
 import AboutScreen from "../Containers/AboutScreen";
 import MapScreen from "../Containers/MapScreen"; 
+import MediaScreen from "../Containers/MediaScreen";
 
 
 const TabNav = createBottomTabNavigator({
   About: { screen: AboutScreen },
   Map: {screen: MapScreen},
+  Media: {screen: MediaScreen},
 },
   {
     headerMode: "none",
