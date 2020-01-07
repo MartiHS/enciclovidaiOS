@@ -16,6 +16,7 @@
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-autocomplete-input": "github:mrlaessig/react-native-autocomplete-input",
+    "react-native-final-tree-view": "^2.0.1",
     "react-native-gallery-swiper": "^1.24.1",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-image-zoom-viewer": "^2.2.27",

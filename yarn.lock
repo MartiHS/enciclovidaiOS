@@ -4332,6 +4332,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -5568,6 +5573,13 @@ react-native-easy-view-transformer@^1.1.4:
     prop-types "^15.6.2"
     react-native-easy-guesture-responder "^1.1.2"
     react-native-scrolling "^1.0.2"
+
+react-native-final-tree-view@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-final-tree-view/-/react-native-final-tree-view-2.0.1.tgz#f09df3aef1b782ba05c4dd3ff8ee74a108f098f7"
+  integrity sha512-8SBdKCrxgCmJYJVLKcf/25r5lze4yLOL1B/M1/pTufemccCXgx7YgwHO23Vnx+FX/IJJa/0lzFrb9fYKIwOKHw==
+  dependencies:
+    lodash.get "^4.4.2"
 
 react-native-gallery-swiper@^1.24.1:
   version "1.24.1"
