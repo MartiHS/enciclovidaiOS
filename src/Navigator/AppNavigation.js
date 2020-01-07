@@ -12,12 +12,14 @@ import SlideMenu from "../Containers/SideMenu";
 import AboutScreen from "../Containers/AboutScreen";
 import MapScreen from "../Containers/MapScreen"; 
 import MediaScreen from "../Containers/MediaScreen";
+import ClassificationScreen from "../Containers/ClassificationScreen";
 
 
 const TabNav = createBottomTabNavigator({
   About: { screen: AboutScreen },
   Map: {screen: MapScreen},
   Media: {screen: MediaScreen},
+  Classification: {screen: ClassificationScreen},
 },
   {
     headerMode: "none",

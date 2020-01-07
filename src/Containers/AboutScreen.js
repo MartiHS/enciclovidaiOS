@@ -36,6 +36,8 @@ class AboutScreen extends Component {
     .then((json) => {
       let specieImage=json.fotos && json.fotos.length > 0? json.fotos[0].photo.medium_url :"";
       this.setState({ imagen: specieImage});
+      console.log(`${SPECIE_PHOTOS_ENDPOINT}${id_specie}/fotos-naturalista.json`);
+      console.log(json);
     }).catch(error => {
       Alert.alert("Error en los datos");
       console.log(error);
