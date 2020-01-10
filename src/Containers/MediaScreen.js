@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, FlatList, Image, Text, TouchableWithoutFeedback, BackHandler } from 'react-native';
+import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
+
+import { Modal } from 'react-native';
 
 import styles from '../Components/Styles/MediaScreenStyles';
 
@@ -103,30 +105,7 @@ class MediaScreen extends Component {
             textContent="Cargando..."
             textStyle={{ color: '#FFF' }}
           />
-          <Dialog
-            onDismiss={() => {
-              this.setState({ showimage: false });
-            }}
-            width={1}
-            height={0.5}
-            onTouchOutside={() => {
-              this.setState({ showimage: false });
-            }}
-            visible={this.state.showimage}
-            containerStyle={styles.navBarDialog}
-            rounded
-            actionsBordered
-          >
-            <DialogContent style={[{ flex: 1, paddingVertical: 20 }]}>
-              <ImageViewer
-                imageUrls={[{ url: this.state.image_tmp }]}
-                enableImageZoom
-                saveToLocalByLongPress={false}
-                renderIndicator={(currentIndex, allSize) => <Text />}
-                backgroundColor="#ffffff"
-              />
-            </DialogContent>
-          </Dialog>
+          
 
           <FlatList
             style={styles.flatList}
@@ -134,22 +113,32 @@ class MediaScreen extends Component {
             extraData={this.state}
             keyExtractor={item => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={styles.viewflat}>
-                <TouchableWithoutFeedback
+
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+
+
+                <TouchableOpacity
                   onPress={() => {
                     this.handlePress(item.imagen);
+                    <Modal visible={true} transparent={true}>
+                      <ImageViewer imageUrls={item.imagen}/> 
+                    </Modal>
                   }}
                 >
-                  <Image
+
+                  
+                  <Image 
                     source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }}
-                    style={item.imagen ? styles.image : styles.imageempty}
+                    style={item.imagen ? sstyles.imageThumbnail : styles.imageempty}
                   />
-                </TouchableWithoutFeedback>
-                <View style={styles.view_text_image}>
-                  <Text style={styles.view_text}>{item.text}</Text>
-                </View>
+                </TouchableOpacity>
+
+                
+                
               </View>
-            )}
+              )}
+              
+              numColumns={3}
           />
         </View>
         <TabBar shownav selected="Media" />
@@ -157,6 +146,21 @@ class MediaScreen extends Component {
     );
   }
 }
+
+
+const sstyles = StyleSheet.create({
+  MainContainer: {
+    justifyContent: 'center',
+    flex: 1,
+    paddingTop: 30,
+  },
+
+  imageThumbnail: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
+});
 
 // make this component available to the app
 export default withNavigation(MediaScreen);
