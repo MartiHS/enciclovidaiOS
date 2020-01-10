@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,7 +9,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import {withNavigation,NavigationActions} from "react-navigation";
+import { withNavigation, NavigationActions } from "react-navigation";
 import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 
@@ -32,47 +32,47 @@ class ListSpeciesScreen extends Component {
   }
 
   getSpeciesInfo = async (filter) => {
-    this.setState({spinner: true, refreshing: false, loadingMore: false});
+    this.setState({ spinner: true, refreshing: false, loadingMore: false });
 
     if (filter != "") {
       console.log("ListSpeciesScreen:", `${API}/especies/busqueda/avanzada?nivel=%3D${filter}`);
       fetch(`${API}/especies/busqueda/avanzada?nivel=%3D${filter}`)
-      .then(res => res.json())
-      .then((json) => {
-        try {
-          const result = json.taxa.map(item => {
-            return {
-              id: item.IdNombre,
-              imagen: item.foto_principal,
-              title: item.nombre_comun_principal,
-              subtitle: item.NombreCompleto
-            };
-          });
+        .then(res => res.json())
+        .then((json) => {
+          try {
+            const result = json.taxa.map(item => {
+              return {
+                id: item.IdNombre,
+                imagen: item.foto_principal,
+                title: item.nombre_comun_principal,
+                subtitle: item.NombreCompleto
+              };
+            });
 
-          var entries = json.x_total_entries;
-          var len = json.taxa.length;
-          var totpage = 0;
-          var limit = 50;
-          if (len == limit) {
-            totpage = entries / len | 0;
-            var exact = json.x_total_entries % json.taxa.length;
-            if (exact != 0) {
-              totpage = totpage;
-            } else {
-              totpage = totpage + 1;
+            var entries = json.x_total_entries;
+            var len = json.taxa.length;
+            var totpage = 0;
+            var limit = 50;
+            if (len == limit) {
+              totpage = entries / len | 0;
+              var exact = json.x_total_entries % json.taxa.length;
+              if (exact != 0) {
+                totpage = totpage;
+              } else {
+                totpage = totpage + 1;
+              }
             }
+            //Alert.alert("Total", json.x_total_entries.toString());
+            this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+          } catch (e) {
+            this.setState({ spinner: false });
+            Alert.alert("Error en los datos");
           }
-          //Alert.alert("Total", json.x_total_entries.toString());
-          this.setState({data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
-        } catch (e) {
-          this.setState({spinner: false});
-          Alert.alert("Error en los datos");
-        }
-      }).catch(error => {
-        this.setState({spinner: false});
-      });
+        }).catch(error => {
+          this.setState({ spinner: false });
+        });
     } else {
-      this.setState({spinner: false});
+      this.setState({ spinner: false });
     }
   }
 
@@ -113,25 +113,25 @@ class ListSpeciesScreen extends Component {
 
   renderFooter() {
     if (this.state.loadingMore) {
-      return ( 
-        <View style = {styles.footer} >
-          <TouchableOpacity activeOpacity = {0.9} style = {styles.btnfooter} >
-            <Text style = {styles.textfooter} > Cargar Pagina {this.state.page} de {this.state.total} </Text> 
-          </TouchableOpacity> 
-          </View>
+      return (
+        <View style={styles.footer} >
+          <TouchableOpacity activeOpacity={0.9} style={styles.btnfooter} >
+            <Text style={styles.textfooter} > Cargar Pagina {this.state.page} de {this.state.total} </Text>
+          </TouchableOpacity>
+        </View>
       );
     } else {
-      return ( 
-        <View style = {styles.footer}/>
+      return (
+        <View style={styles.footer} />
       );
     }
   }
 
   _listEmptyComponent = () => {
-    return ( 
-      <View style = {styles.empty_text} >
-        <Text > No hay resultados </Text> 
-        </View>
+    return (
+      <View style={styles.empty_text} >
+        <Text > No hay resultados </Text>
+      </View>
     )
   }
 
@@ -144,7 +144,7 @@ class ListSpeciesScreen extends Component {
     this.props.navigation.navigate("About", {});
   };
 
-  handlePress=(item)=> {
+  handlePress = (item) => {
     //console.log("handlePress:", item);
     this.viewDetails(item.id, item.title, item.subtitle)
   }
@@ -165,9 +165,9 @@ class ListSpeciesScreen extends Component {
 
   _handleRefresh = () => {
     this.setState({
-        page: 1,
-        refreshing: true
-      },
+      page: 1,
+      refreshing: true
+    },
       () => {
         this.setState({
           data: []
@@ -189,30 +189,46 @@ class ListSpeciesScreen extends Component {
   };
 
   render() {
-    return ( 
-      <View style = {[sstyles.MainContainer]} >
-        <NavBar menuBlackButton = {true} filterButton = {true}/> 
-        <View style = {styles.container} >
-          <Spinner visible = {this.state.spinner} textContent = {'Cargando...'} textStyle = {{color: '#FFF'}} /> 
+    return (
+
+      <View style={[styles.MainContainer]} >
+        <NavBar menuBlackButton={true} filterButton={true} />
+        
+        <View style={sstyles.container}>
+          <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
 
 
           <FlatList
-            data={this.state.data} 
-            extraData = {this.state} 
-            keyExtractor = {(item) => item.id.toString()} 
-            ListEmptyComponent = {this._listEmptyComponent}
-            ListFooterComponent = {this.renderFooter.bind(this)}
-            renderItem={({item, index}) => (
-              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                <Image style={sstyles.imageThumbnail} source={{uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small'}} />
+
+            data={this.state.data}
+            extraData={this.state}
+            keyExtractor={(item) => item.id.toString()}
+            ListEmptyComponent={this._listEmptyComponent}
+            ListFooterComponent={this.renderFooter.bind(this)}
+            renderItem={({ item, index }) => (
+
+              <View style={sstyles.listItem}>
+
+                <Image source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }} style={sstyles.imageItem} />
+                <View style={{ alignItems: "center", flex: 1 }}>
+                  <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
+                  <Text>{item.subtitle}</Text>
+                </View>
+                
+                <TouchableOpacity style={{ height: 50, width: 50, justifyContent: "center", alignItems: "center" }} onPress = {() => {this.handlePress(item)}} >
+                  <Text style={{ color: "green" }}>Ver</Text>
+                </TouchableOpacity>
+
               </View>
+
+
             )}
             //Setting the number of column
-            numColumns={3}
+            numColumns={1}
             keyExtractor={(item, index) => index.toString()}
           />
 
-        </View> 
+        </View>
       </View>
     );
   }
@@ -220,16 +236,25 @@ class ListSpeciesScreen extends Component {
 
 
 const sstyles = StyleSheet.create({
-  MainContainer: {
+  container: {
+    backgroundColor: '#F7F7F7',
     justifyContent: 'center',
+  },
+  imageItem: {
+    width: 80, 
+    height: 80, 
+    borderRadius: 35
+  },
+  listItem: {
+    margin: 5,
+    padding: 10,
+    backgroundColor: "white",
+    width: "90%",
     flex: 1,
-    paddingTop: 30,
-  },
-  imageThumbnail: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 100,
-  },
+    alignSelf: "center",
+    flexDirection: "row",
+    borderRadius: 5
+  }
 });
 
 //make this component available to the app
