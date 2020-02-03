@@ -18,45 +18,27 @@ const API = 'http://api.enciclovida.mx';
 
 var maxlevel = 0;
 
-const family = [
-  {
-    id: 'Grandparent',
-    name: 'Grandpa',
-    age: 78,
-    children: [
-      {
-        id: 'Me',
-        name: 'Me',
-        age: 30,
-        children: [
-          {
-            id: 'Erick',
-            name: 'Erick',
-            age: 10,
-          },
-          {
-            id: 'Rose',
-            name: 'Rose',
-            age: 12,
-          },
-        ],
-      },
-    ],
-  },
-]
-
-function getIndicator(isExpanded, hasChildrenNodes) {
+function getIndicator(isExpanded, hasChildrenNodes, level) {
+    // Cuando el nivel es el final:
     if (!hasChildrenNodes) {
-      return '-'
-    } else if (isExpanded) {
-      return '\\/'
+        return <Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />
     } else {
-      return '>'
+        // Si aún tiene hijos:
+        if (isExpanded) {
+            if (level == 0) // Si hablamos del nivel 0:
+                return <Image style={styles.image} source={{ uri: 'ic_tree_start' }} />
+            else // Si hablamos de hijos
+                return <Image style={styles.image} source={{ uri: 'ic_tree' }} />
+        } else { // Si hay contenido a expandir
+            return ">"
+        }
     }
-  }
+}
+
 
 // create a component
 class ClassificationScreen extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -187,21 +169,57 @@ class ClassificationScreen extends Component {
                     />
                     <View style={{ padding: 20 }}>
                         <ScrollView horizontal={true}>
-                        <TreeView
-                            data={family} // defined above
-                            renderNode={({ node, level, isExpanded, hasChildrenNodes }) => {
-                                return (
-                                <View>
-                                    <Text
-                                    style={{
-                                        marginLeft: 25 * level,
-                                    }}
-                                    >
-                                    {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
-                                    </Text>
-                                </View>
-                                )
-                            }}
+                            <TreeView
+                                data={this.state.data}
+                                initialExpanded={true}
+                                collapsedItemHeightForLevel={40}
+
+                                /*
+                                
+                               
+                                renderNode =  { ({ node, level, isExpanded, hasChildrenNodes }) => {
+                                   return (
+                                     <View>
+                                       <Text
+                                         style={{
+                                           marginLeft: 25 * level,
+                                         }}
+                                       >
+                                         {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
+                                       </Text>
+                                     </View>
+                                   )
+                                 }}*/
+
+                                renderNode={
+                                    ({ node, level, isExpanded, hasChildrenNodes }) => {
+                                        return (
+                                            <View style={{ marginLeft: node.last ? 0 : 9.5 * level, marginTop: node.last && level > 1 ? 30 : 0, flexDirection: "row" }} >
+                                                {node.collapsed !== null ? (
+                                                    <View>
+                                                        {node.initial ? (node.collapsed ? (<Image style={[styles.image]} source={{ uri: 'ic_tree_unique' }} />)
+                                                            : (<Image style={[styles.image]} source={{ uri: 'ic_tree_start' }} />)
+                                                        )
+                                                            :
+                                                            (node.collapsed ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
+                                                                (node.last_list ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
+                                                                    (<Image style={styles.image} source={{ uri: 'ic_tree' }} />)
+                                                                )
+                                                            )}
+                                                    </View>
+                                                ) : (
+                                                        <Image style={styles.image} source={{ uri: 'ic_tree_unique' }} />
+                                                    )}
+                                                <View>
+                                                    <Text style={styles.text} numberOfLines={1} ellipsizeMode={'tail'}>
+                                                        {node.abreviacion_categoria} <Text style={styles.text_comun}> {node.nombre_comun}</Text>
+                                                    </Text>
+                                                    <Text style={styles.text_cientifico}> {node.nombre_cientifico}</Text>
+                                                </View>
+                                            </View>
+                                        )
+                                    }
+                                }
                             />
                         </ScrollView>
                     </View>
