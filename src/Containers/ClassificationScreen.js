@@ -1,17 +1,59 @@
-//import liraries
+// Librerías de react
 import React, { Component } from 'react';
 import { View, Text, Image, Alert, ScrollView } from 'react-native';
+
+// Librerías específicas
 import { withNavigation } from "react-navigation";
 import TreeView from 'react-native-final-tree-view'
 import Spinner from 'react-native-loading-spinner-overlay';
+
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 
+// Importar estilos, tipografías y más
 import styles from "../Components/Styles/ClassificationScreenStyles";
 
+// Por mover
 const API = 'http://api.enciclovida.mx';
 
 var maxlevel = 0;
+
+const family = [
+  {
+    id: 'Grandparent',
+    name: 'Grandpa',
+    age: 78,
+    children: [
+      {
+        id: 'Me',
+        name: 'Me',
+        age: 30,
+        children: [
+          {
+            id: 'Erick',
+            name: 'Erick',
+            age: 10,
+          },
+          {
+            id: 'Rose',
+            name: 'Rose',
+            age: 12,
+          },
+        ],
+      },
+    ],
+  },
+]
+
+function getIndicator(isExpanded, hasChildrenNodes) {
+    if (!hasChildrenNodes) {
+      return '-'
+    } else if (isExpanded) {
+      return '\\/'
+    } else {
+      return '>'
+    }
+  }
 
 // create a component
 class ClassificationScreen extends Component {
@@ -135,8 +177,8 @@ class ClassificationScreen extends Component {
     render() {
         return (
             <View style={[styles.mainScreen]}>
-                <NavBar menuBlackButton={true}
-                    infoButton={true} />
+                <NavBar menuBlackButton={true} infoButton={true} />
+
                 <View style={styles.container}>
                     <Spinner
                         visible={this.state.spinner}
@@ -145,54 +187,21 @@ class ClassificationScreen extends Component {
                     />
                     <View style={{ padding: 20 }}>
                         <ScrollView horizontal={true}>
-                            <TreeView
-                                ref={ref => (this.treeView = ref)}
-                                data={this.state.data}
-                                collapsedItemHeight={40}
-                                onItemPress={(node, level) => {
-                                    //alert('Level: ' + level + '\n' + 'Node: ' + JSON.stringify(node));
-                                    if (maxlevel != level) {
-                                        this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
-                                        /*Alert.alert("Cambiar Busqueda", 
-                                        `¿Deseas cambiar a "${node.nombre_cientifico}" los resultados de la busqueda?`, 
-                                            [
-                                                {
-                                                    text: 'SI', 
-                                                    onPress: () => this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
-                                                },
-                                                {
-                                                    text: 'No',
-                                                },
-                                            ],
-                                            { cancelable: false }
-                                        );*/
-                                    }
-                                }}
-                                renderItem={(item, level) => (
-                                    <View style={{ marginLeft: item.last ? 0 : 9.5 * level, marginTop: item.last && level > 1 ? 30 : 0, flexDirection: "row" }} >
-                                        {item.collapsed !== null ? (
-                                            <View>
-                                                {item.initial ? (item.collapsed ? (<Image style={[styles.image]} source={{ uri: 'ic_tree_unique' }} />)
-                                                    : (<Image style={[styles.image]} source={{ uri: 'ic_tree_start' }} />)
-                                                )
-                                                    :
-                                                    (item.collapsed ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
-                                                        (item.last_list ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
-                                                            (<Image style={styles.image} source={{ uri: 'ic_tree' }} />)
-                                                        )
-                                                    )}
-                                            </View>
-                                        ) : (
-                                                <Image style={styles.image} source={{ uri: 'ic_tree_unique' }} />
-                                            )}
-                                        <View>
-                                            <Text style={styles.text} numberOfLines={1} ellipsizeMode={'tail'}>
-                                                {item.abreviacion_categoria} <Text style={styles.text_comun}> {item.nombre_comun}</Text>
-                                            </Text>
-                                            <Text style={styles.text_cientifico}> {item.nombre_cientifico}</Text>
-                                        </View>
-                                    </View>
-                                )}
+                        <TreeView
+                            data={family} // defined above
+                            renderNode={({ node, level, isExpanded, hasChildrenNodes }) => {
+                                return (
+                                <View>
+                                    <Text
+                                    style={{
+                                        marginLeft: 25 * level,
+                                    }}
+                                    >
+                                    {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
+                                    </Text>
+                                </View>
+                                )
+                            }}
                             />
                         </ScrollView>
                     </View>
