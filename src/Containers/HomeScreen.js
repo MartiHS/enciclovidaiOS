@@ -15,7 +15,7 @@ import memoize from "lodash.memoize";
 
 import {
     I18nManager,
-    SafeAreaView,
+    SafeAreaView, 
     ScrollView,
     StyleSheet,
   } from "react-native";

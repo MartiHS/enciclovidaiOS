@@ -17,7 +17,7 @@ import styles from "../Components/Styles/ClassificationScreenStyles";
 const API = 'http://api.enciclovida.mx';
 
 var maxlevel = 0;
-
+    
 function getIndicator(isExpanded, hasChildrenNodes, level) {
     // Cuando el nivel es el final:
     if (!hasChildrenNodes) {
@@ -34,7 +34,6 @@ function getIndicator(isExpanded, hasChildrenNodes, level) {
         }
     }
 }
-
 
 // create a component
 class ClassificationScreen extends Component {
@@ -174,22 +173,26 @@ class ClassificationScreen extends Component {
                                 initialExpanded={true}
                                 collapsedItemHeightForLevel={40}
 
-                                /*
-                                
-                               
-                                renderNode =  { ({ node, level, isExpanded, hasChildrenNodes }) => {
-                                   return (
-                                     <View>
-                                       <Text
-                                         style={{
-                                           marginLeft: 25 * level,
-                                         }}
-                                       >
-                                         {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
-                                       </Text>
-                                     </View>
-                                   )
-                                 }}*/
+                              
+                                onNodePress = { (node, level) => {
+                                    //alert('Level: ' + level + '\n' + 'Node: ' + JSON.stringify(node));
+                                    if(maxlevel != level){
+                                        this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
+                                        /*Alert.alert("Cambiar Busqueda", 
+                                        `¿Deseas cambiar a "${node.nombre_cientifico}" los resultados de la busqueda?`, 
+                                            [
+                                                {
+                                                    text: 'SI', 
+                                                    onPress: () => this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
+                                                },
+                                                {
+                                                    text: 'No',
+                                                },
+                                            ],
+                                            { cancelable: false }
+                                        );*/
+                                    }
+                                }}
 
                                 renderNode={
                                     ({ node, level, isExpanded, hasChildrenNodes }) => {
@@ -210,6 +213,8 @@ class ClassificationScreen extends Component {
                                                 ) : (
                                                         <Image style={styles.image} source={{ uri: 'ic_tree_unique' }} />
                                                     )}
+                                                
+                                                { getIndicator(isExpanded, hasChildrenNodes, level) }
                                                 <View>
                                                     <Text style={styles.text} numberOfLines={1} ellipsizeMode={'tail'}>
                                                         {node.abreviacion_categoria} <Text style={styles.text_comun}> {node.nombre_comun}</Text>
