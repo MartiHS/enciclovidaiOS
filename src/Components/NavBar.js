@@ -233,7 +233,7 @@ class NavBar extends React.Component {
     this.setState({title: global.title, subtitle: global.subtitle});
   }
 
-  componentWillReceiveProps = () => {
+  UNSAFE_componentWillReceiveProps = () => {
     
     this.getSpecieInfo(global.id_specie);
     if(global.LastlistSpecies != global.listSpecies){

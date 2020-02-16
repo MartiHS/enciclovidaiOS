@@ -1,4 +1,3 @@
-  //import liraries
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
@@ -13,6 +12,7 @@ import styles from "../Components/Styles/HomeScreenStyles";
 const CustomIcon = createIconSetFromFontello(config);
 
 const API = 'http://api.enciclovida.mx';
+
 const resultCategories=[
     'especie', 'subespecie', 
     'variedad', 'subvariedad', 
@@ -29,6 +29,7 @@ const resultCategories=[
     'seccion', 'subseccion',
     'serie', 'subserie',
 ];
+
 var arraydata = [];
 
 // create a component

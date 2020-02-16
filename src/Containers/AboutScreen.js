@@ -27,7 +27,7 @@ class AboutScreen extends Component {
       spinner: false
     };
     this.fetchData = this.fetchData.bind(this);
-    this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this);
+    this.UNSAFE_componentWillReceiveProps=this.UNSAFE_componentWillReceiveProps.bind(this);
   }   
 
   getSpecieImageUrl(id_specie){
@@ -120,7 +120,7 @@ class AboutScreen extends Component {
 
     
 
-    componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps() {
         //Alert.alert("idProps", this.state.load.toString());
         this.fetchData(global.id_specie, global.about_id_specie);
     }

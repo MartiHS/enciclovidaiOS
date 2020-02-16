@@ -136,7 +136,7 @@ class MapScreen extends Component {
     componentDidMount = () => {
         this.fetchData(global.id_specie, global.map_id_specie);
     }
-    componentWillReceiveProps = () => {
+    UNSAFE_componentWillReceiveProps = () => {
         this.fetchData(global.id_specie, global.map_id_specie);
     };
 
@@ -174,11 +174,11 @@ class MapScreen extends Component {
                         <View style={styles.overlay}>
                             <View style={styles.row}>
                                 <CustomIcon name="mark" size={12} color={colors.iconMap1} style={styles.favicon} />
-                                <Text style={styles.textLeyend, styles.textLeyend1}> Registros científicos</Text>
+                                <Text style={(styles.textLeyend, styles.textLeyend1)}> Registros científicos</Text>
                             </View>
                             <View style={styles.row}>
                                 <CustomIcon name="mark" size={12} color={colors.iconMap2} style={styles.favicon} />
-                                <Text style={styles.textLeyend, styles.textLeyend2}> Ciencia Ciudadana</Text>
+                                <Text style={(styles.textLeyend, styles.textLeyend2)}> Ciencia Ciudadana</Text>
                             </View>
                         </View>
                     </View>

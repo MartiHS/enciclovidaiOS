@@ -64,7 +64,7 @@ class MediaScreen extends Component {
     }
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.media_id_specie);
   }

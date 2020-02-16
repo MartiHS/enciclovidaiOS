@@ -142,7 +142,7 @@ class ClassificationScreen extends Component {
 
     };
 
-    componentWillReceiveProps = () => {
+    UNSAFE_componentWillReceiveProps = () => {
         //Alert.alert("idProps", this.state.load.toString());
         //Alert.alert("idProps", global.id_specie.toString());
 

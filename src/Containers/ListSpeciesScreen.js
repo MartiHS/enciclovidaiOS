@@ -177,7 +177,7 @@ class ListSpeciesScreen extends Component {
     );
   };
 
-  componentWillReceiveProps = () => {
+  UNSAFE_componentWillReceiveProps = () => {
     this._handleRefresh();
   };
 
