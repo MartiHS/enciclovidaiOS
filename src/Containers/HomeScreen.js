@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Autocomplete from 'react-native-autocomplete-input';
@@ -32,9 +33,11 @@ const resultCategories=[
 
 var arraydata = [];
 
-// create a component
+/* HOMESCREEN: pantalla en la que se muestra el buscador de especies junto al menú  izquierdo */
 class HomeScreen extends Component {
+
     constructor(props) {
+        console.log("\n\n\nLlamada a HomeScreen\n---------------------------------\n");
         super(props);
         global.id_specie = 0;
         global.title = "";
@@ -65,6 +68,7 @@ class HomeScreen extends Component {
         }
     }
 
+    // Se invoca inmediatamente después de que un componente se monte (se inserte en el árbol)
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener(
             'keyboardDidShow',
@@ -76,22 +80,22 @@ class HomeScreen extends Component {
         );
     }
 
+    // Este método es llamado cuando un componente se elimina del DOM
     componentWillUnmount() {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
-
+    
     fetchData = async (text) => {
         this.setState({ query: text })
+        // Si existe una query para llamar:
         if(text != null && text.length > 1){
             fetch(`${API}/autocompleta/especies/${encodeURIComponent(text)}`)
             .then(res => res.json())
             .then((json) => {
                 arraydata = [];
-                if(json.error){
-                }
-                else{
-                    resultCategories.forEach(category=>{
+                if(!json.error){
+                    resultCategories.forEach( category => {
                         Array.prototype.push.apply(
                             arraydata, 
                             json.results[category].filter(item=> item.data.publico)
@@ -102,15 +106,13 @@ class HomeScreen extends Component {
             }).catch((error) => {
 
             });
-        }
-        else
-        {
+        } else {
             this.setState({ data : [] });
         }
     }
 
+    // Función encargada de la acción al presionar una sugerencia:
     handlePress(item) {
-        
         this.setState({ query: "" })
         this.setState({ data : [] });
         //TODO Validar 
@@ -118,8 +120,8 @@ class HomeScreen extends Component {
         global.title = item.nombre_comun;
         global.subtitle = item.nombre_cientifico;
         global.classificationList = [];
-        this.props.navigation.navigate("About", {});
-        
+        // Ir a "Acerca de"
+        this.props.navigation.navigate("About", {id_specie: item.id});
     }
 
     footer = () => {
