@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity,TouchableWithoutFeedback, BackHandler } from 'react-native';
+import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -7,42 +7,15 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
 
-import { Modal } from 'react-native';
-
-import GallerySwiper from "react-native-gallery-swiper";
 import ImageView from 'react-native-image-view';
 
 import styles from '../Components/Styles/MediaScreenStyles';
-
-
-
-function getImages(JSONImages) {
-
-  var listImages = [];
-
-  for(var i = 0; i< JSONImages.length; i++) {
-    console.log("\n\n\nIMAGENES: \n---------------------------------\n" + JSON.stringify(JSONImages[i]['imagen']));
-    
-    var image = {
-      id: JSONImages[i]['id'],
-      source: {
-        uri: JSONImages[i]['imagen']
-      },
-      title: JSONImages[i]['text']
-    }
-
-    listImages.push(image);
-  }
-
-  return listImages;
-  
-}
-
 
 const API = 'http://enciclovida.mx';
 
 // create a component
 class MediaScreen extends Component {
+  // CONSTRUCTOR DE EL COMPONENTE
   constructor(props) {
     console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
     super(props);
@@ -55,6 +28,41 @@ class MediaScreen extends Component {
     };
     this.fetchData = this.fetchData.bind(this);
   }
+
+  // FUNCION PARA ARMAR EL JSON DE LA GALERÏA
+  getImages(JSONImages) {
+
+    try {
+
+      var listImages = [];
+
+      for(var i = 0; i< JSONImages.length; i++) {    
+          var image = {
+            id: JSONImages[i]['id'],
+            source: {
+              uri: JSONImages[i]['imagen']
+            },
+            title: JSONImages[i]['text']
+          }
+          listImages.push(image);
+      }
+
+      return listImages;
+
+    } catch (error) {
+
+      return [];
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   setMediaIdSpecie = (id_specie) => {
     global.media_id_specie = id_specie;
@@ -86,7 +94,7 @@ class MediaScreen extends Component {
           console.error(error);
         }
         finally {
-          this.setState({ data: result, spinner: false, listImages: getImages(result)});
+          this.setState({ data: result, spinner: false, listImages: this.getImages(result)});
         }
       } else {
         this.setState({ spinner: false });
@@ -126,6 +134,14 @@ class MediaScreen extends Component {
     });
   }
 
+  renderFooter({title}) {
+    return (
+      <View style={styles.view_text_image}>
+      <Text style={styles.view_text}>{title}</Text>
+    </View>
+    );
+  }
+
   render() {
     return (
       <View style={[styles.mainScreen]}>
@@ -141,11 +157,11 @@ class MediaScreen extends Component {
             glideAlways
             images={this.state.listImages}
             imageIndex={this.state.currentIndex}
-            animationType="fade"
+            animationType="slide"
+            //animationType="fade"
             isVisible={this.state.showimage}
             renderFooter={this.renderFooter}
-            renderFooter={(currentImage) => (<View><Text>My footer</Text></View>)}
-            onClose={() => this.setState({ showimage: false })}
+            onClose={() => this.setState({ showimage: false })} 
             onImageChange={index => {
                 console.log(index);
             }}
@@ -197,6 +213,9 @@ const sstyles = StyleSheet.create({
   },
 });
 
+
+
+
 // make this component available to the app
 export default withNavigation(MediaScreen);
 
@@ -204,8 +223,6 @@ export default withNavigation(MediaScreen);
 
 /*
 
-<View style={styles.view_text_image}>
-                  <Text style={styles.view_text}>{item.text}</Text>
-                </View>
+
 
 */
