@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler } from 'react-native';
+import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity,TouchableWithoutFeedback, BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -9,16 +9,46 @@ import TabBar from '../Components/TabBar';
 
 import { Modal } from 'react-native';
 
+import GallerySwiper from "react-native-gallery-swiper";
+import ImageView from 'react-native-image-view';
+
 import styles from '../Components/Styles/MediaScreenStyles';
+
+
+
+function getImages(JSONImages) {
+
+  var listImages = [];
+
+  for(var i = 0; i< JSONImages.length; i++) {
+    console.log("\n\n\nIMAGENES: \n---------------------------------\n" + JSON.stringify(JSONImages[i]['imagen']));
+    
+    var image = {
+      id: JSONImages[i]['id'],
+      source: {
+        uri: JSONImages[i]['imagen']
+      },
+      title: JSONImages[i]['text']
+    }
+
+    listImages.push(image);
+  }
+
+  return listImages;
+  
+}
+
 
 const API = 'http://enciclovida.mx';
 
 // create a component
 class MediaScreen extends Component {
   constructor(props) {
+    console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
     super(props);
     this.state = {
       data: [],
+      listImages: [],
       showimage: false,
       image_tmp: '',
       spinner: false,
@@ -30,7 +60,7 @@ class MediaScreen extends Component {
     global.media_id_specie = id_specie;
   }
 
-  async fetchData(specie_id, media_specie_id) {
+  async fetchData(specie_id, media_specie_id) { 
     if (specie_id !== media_specie_id) {
       let result = [];
       this.setState({ spinner: true, data: [] });
@@ -56,7 +86,7 @@ class MediaScreen extends Component {
           console.error(error);
         }
         finally {
-          this.setState({ data: result, spinner: false });
+          this.setState({ data: result, spinner: false, listImages: getImages(result)});
         }
       } else {
         this.setState({ spinner: false });
@@ -88,10 +118,11 @@ class MediaScreen extends Component {
     }
     */
 
-  handlePress(image) {
+  handlePress(image, index) {
     this.setState({
       showimage: true,
       image_tmp: image || 'ic_imagen_not_found_small',
+      currentIndex: index
     });
   }
 
@@ -103,41 +134,45 @@ class MediaScreen extends Component {
           <Spinner
             visible={this.state.spinner}
             textContent="Cargando..."
-            textStyle={{ color: '#FFF' }}
+            textStyle={{ color: 'black' }}
           />
 
-
+          <ImageView
+            glideAlways
+            images={this.state.listImages}
+            imageIndex={this.state.currentIndex}
+            animationType="fade"
+            isVisible={this.state.showimage}
+            renderFooter={this.renderFooter}
+            renderFooter={(currentImage) => (<View><Text>My footer</Text></View>)}
+            onClose={() => this.setState({ showimage: false })}
+            onImageChange={index => {
+                console.log(index);
+            }}
+            
+          />
+                    
           <FlatList
             style={styles.flatList}
             data={this.state.data}
             extraData={this.state}
             keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
 
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-
-
-                <TouchableOpacity
-                  onPress={() => {
-                    this.handlePress(item.imagen);
-                    <Modal visible={true} transparent={true}>
-                      <ImageViewer imageUrls={item.imagen} />
-                    </Modal>
-                  }}
-                >
-
-
-                  <Image
-                    source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }}
-                    style={item.imagen ? sstyles.imageThumbnail : styles.imageempty}
-                  />
-                </TouchableOpacity>
-
-
-
+                  <TouchableOpacity
+                      onPress={() => {
+                        console.log("\n\n\n item : " + JSON.stringify(index));
+                        this.handlePress(item.imagen, index);
+                      }}
+                  >
+                      <Image
+                        source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }}
+                        style={item.imagen ? sstyles.imageThumbnail : styles.imageempty}
+                      />
+                  </TouchableOpacity>
               </View>
             )}
-
             numColumns={3}
           />
         </View>
@@ -164,3 +199,13 @@ const sstyles = StyleSheet.create({
 
 // make this component available to the app
 export default withNavigation(MediaScreen);
+
+
+
+/*
+
+<View style={styles.view_text_image}>
+                  <Text style={styles.view_text}>{item.text}</Text>
+                </View>
+
+*/
