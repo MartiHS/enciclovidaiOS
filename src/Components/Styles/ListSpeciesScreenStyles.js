@@ -10,55 +10,45 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.mainBackground
   },
-  navBar: {
-    height: Metrics.navBarHeight,
-    backgroundColor: Colors.navBarBackground,
-    alignItems: "center",
-    justifyContent: "center"
+
+  container: {
+    backgroundColor: '#F7F7F7',
+    justifyContent: 'center',
   },
-  title: {
-    //fontWeight: "bold",
-    fontFamily: Fonts.family.base_bold,
-  },
-  flatList:{
-    flex:1
-  },
-  viewflat:{
+  touchableItem: {
     flexDirection: 'row',
-    alignItems: 'center'
-  },
-  image: {
-    height: 300,
     width: '100%',
+    margin: 0,
+    padding: 0,
   },
-  imageempty: {
-    opacity: 0.5,
-    height: 180,
-    width: '100%',
-    resizeMode:"cover"
-  },
-  view_text_image: {
+  listItem: {
+    margin: 5,
     padding: 10,
-    backgroundColor: '#000000',
-    opacity: 0.8,
-    position: 'absolute', 
-    left: 0, 
-    right: 0, 
-    bottom: 0, 
-    justifyContent: 'center', 
-    alignItems: 'center'
+    backgroundColor: "white",
+    width: "90%",
+    flex: 1,
+    alignSelf: "center",
+    flexDirection: "row",
+    borderRadius: 5
   },
-  view_text_title: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    //fontWeight: "bold",
-    fontFamily: Fonts.family.base_bold,
+  imageItem: {
+    width: 80,
+    height: 80,
+    borderRadius: 40
   },
-  view_text_subtitle: {
-    color: "#FFFFFF",
-    fontSize: 13,
-    //fontStyle: "italic",
-    fontFamily: Fonts.family.base_italic,
+  textRow: {
+    padding: 10,
+    alignItems: "center",
+    justifyContent: 'center',
+    textAlign: 'center',
+    flex: 1
+  },
+  titleRow: {
+    textAlign: 'center',
+    fontWeight: "bold",
+    justifyContent: 'center',
+    paddingBottom: 8
+
   },
   btnfooter: {
     padding: 10,
@@ -79,4 +69,26 @@ export default StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center'
   },
+
+  /* BASURA: 
+  
+    navBar: {
+    height: Metrics.navBarHeight,
+    backgroundColor: Colors.navBarBackground,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+    title: {
+    //fontWeight: "bold",
+    fontFamily: Fonts.family.base_bold,
+  },
+    imageempty: {
+    opacity: 0.5,
+    height: 180,
+    width: '100%',
+    resizeMode:"cover"
+  },
+  
+  */
 });

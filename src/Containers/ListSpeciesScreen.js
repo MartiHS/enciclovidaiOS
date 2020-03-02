@@ -1,18 +1,10 @@
 //import liraries
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Image,
-  Alert,
-  Text,
-  TouchableOpacity
-} from 'react-native';
-import { withNavigation, NavigationActions } from "react-navigation";
+import {StyleSheet, View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
+import { withNavigation } from "react-navigation";
 import Spinner from 'react-native-loading-spinner-overlay';
-import NavBar from '../Components/NavBar';
 
+import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/ListSpeciesScreenStyles";
 
 const API = 'http://api.enciclovida.mx';
@@ -193,13 +185,11 @@ class ListSpeciesScreen extends Component {
 
       <View style={[styles.MainContainer]} >
         <NavBar menuBlackButton={true} filterButton={true} />
-        
-        <View style={sstyles.container}>
+
+        <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
 
-
           <FlatList
-
             data={this.state.data}
             extraData={this.state}
             keyExtractor={(item) => item.id.toString()}
@@ -207,23 +197,16 @@ class ListSpeciesScreen extends Component {
             ListFooterComponent={this.renderFooter.bind(this)}
             renderItem={({ item, index }) => (
 
-              <View style={sstyles.listItem}>
-
-                <Image source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }} style={sstyles.imageItem} />
-                <View style={{ alignItems: "center", flex: 1 }}>
-                  <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
-                  <Text>{item.subtitle}</Text>
-                </View>
-                
-                <TouchableOpacity style={{ height: 50, width: 50, justifyContent: "center", alignItems: "center" }} onPress = {() => {this.handlePress(item)}} >
-                  <Text style={{ color: "green" }}>Ver</Text>
+              <View style={styles.listItem}>
+                <TouchableOpacity style={styles.touchableItem} onPress={() => { this.handlePress(item) }} >
+                  <Image source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }} style={styles.imageItem} />
+                  <View style={styles.textRow}>
+                    <Text style={styles.titleRow}>{item.title}</Text>
+                    <Text>{item.subtitle}</Text>
+                  </View>
                 </TouchableOpacity>
-
               </View>
-
-
             )}
-            //Setting the number of column
             numColumns={1}
             keyExtractor={(item, index) => index.toString()}
           />
@@ -233,29 +216,6 @@ class ListSpeciesScreen extends Component {
     );
   }
 }
-
-
-const sstyles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F7F7F7',
-    justifyContent: 'center',
-  },
-  imageItem: {
-    width: 80, 
-    height: 80, 
-    borderRadius: 35
-  },
-  listItem: {
-    margin: 5,
-    padding: 10,
-    backgroundColor: "white",
-    width: "90%",
-    flex: 1,
-    alignSelf: "center",
-    flexDirection: "row",
-    borderRadius: 5
-  }
-});
 
 //make this component available to the app
 export default withNavigation(ListSpeciesScreen);
