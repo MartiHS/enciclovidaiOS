@@ -10,42 +10,6 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.mainBackground
   },
-  navBar: {
-    height: Metrics.navBarHeight,
-    backgroundColor: Colors.navBarBackground,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  navBarDialog: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  flatList:{
-    flex:1
-  },
-  viewflat:{
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  image: {
-    height: 300,
-    width: '100%',
-  },
-  imageempty: {
-    opacity: 0.5,
-    height: 300,
-    width: '100%',
-  },
-  imageshow: {
-    marginTop: 7,
-    justifyContent: 'center', 
-    alignItems: 'center',
-    height: '100%',
-    width: '100%',
-    padding:-10,
-    marginRight:0
-  },
   view_text_image: {
     padding: 10,
     backgroundColor: '#000000',
@@ -60,7 +24,38 @@ export default StyleSheet.create({
   view_text: {
     color: "#FFFFFF",
     fontSize: 13,
-    //fontWeight: "bold",
-    
-  }
+  },
+  flatList:{
+    flex:1
+  },
+  imageempty: {
+    opacity: 0.5,
+    height: 300,
+    width: '100%',
+  },
+  imageThumbnail: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
+
+  /*
+  BASURA: 
+  
+  navBar: {
+    height: Metrics.navBarHeight,
+    backgroundColor: Colors.navBarBackground,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  imageshow: {
+    marginTop: 7,
+    justifyContent: 'center', 
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
+    padding:-10,
+    marginRight:0
+  },
+  */
 });

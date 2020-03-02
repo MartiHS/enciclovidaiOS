@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import ImageViewer from 'react-native-image-zoom-viewer';
 import Spinner from 'react-native-loading-spinner-overlay';
-import NavBar from '../Components/NavBar';
-import TabBar from '../Components/TabBar';
-
 import ImageView from 'react-native-image-view';
 
+import NavBar from '../Components/NavBar';
+import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
 const API = 'http://enciclovida.mx';
 
-// create a component
+/* MediaScreen: Pantalla en la que se muestra la galería de imágenes sobre X especie */
 class MediaScreen extends Component {
   // CONSTRUCTOR DE EL COMPONENTE
   constructor(props) {
-    console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
+    //console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
     super(props);
     this.state = {
       data: [],
@@ -29,9 +26,8 @@ class MediaScreen extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
 
-  // FUNCION PARA ARMAR EL JSON DE LA GALERÏA
+  // FUNCION PARA ARMAR EL JSON DE LA GALERÍA
   getImages(JSONImages) {
-
     try {
 
       var listImages = [];
@@ -50,19 +46,9 @@ class MediaScreen extends Component {
       return listImages;
 
     } catch (error) {
-
       return [];
     }
   }
-
-
-
-
-
-
-
-
-
 
   setMediaIdSpecie = (id_specie) => {
     global.media_id_specie = id_specie;
@@ -75,8 +61,10 @@ class MediaScreen extends Component {
       if (specie_id !== 0) {
         try {
           const response = await fetch(`${API}/especies/${specie_id}/fotos-naturalista.json`);
+          console.log("\n**Se realizaá la llamada al sifuiente servicio: ");
           console.log(`${API}/especies/${specie_id}/fotos-naturalista.json`);
           const json = await response.json();
+          console.log("\n**La respuesta fué: ");
           console.log(json);
           if (json.estatus) {
             result = json.fotos.map(data => {
@@ -165,7 +153,6 @@ class MediaScreen extends Component {
             onImageChange={index => {
                 console.log(index);
             }}
-            
           />
                     
           <FlatList
@@ -184,7 +171,7 @@ class MediaScreen extends Component {
                   >
                       <Image
                         source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }}
-                        style={item.imagen ? sstyles.imageThumbnail : styles.imageempty}
+                        style={item.imagen ? styles.imageThumbnail : styles.imageempty}
                       />
                   </TouchableOpacity>
               </View>
@@ -198,31 +185,5 @@ class MediaScreen extends Component {
   }
 }
 
-
-const sstyles = StyleSheet.create({
-  MainContainer: {
-    justifyContent: 'center',
-    flex: 1,
-    paddingTop: 30,
-  },
-
-  imageThumbnail: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 100,
-  },
-});
-
-
-
-
 // make this component available to the app
 export default withNavigation(MediaScreen);
-
-
-
-/*
-
-
-
-*/
