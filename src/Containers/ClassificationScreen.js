@@ -1,8 +1,6 @@
 // Librerías de react
 import React, { Component } from 'react';
 import { View, Text, Image, Alert, ScrollView } from 'react-native';
-
-// Librerías específicas
 import { withNavigation } from "react-navigation";
 import TreeView from 'react-native-final-tree-view'
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -13,28 +11,10 @@ import TabBar from "../Components/TabBar";
 // Importar estilos, tipografías y más
 import styles from "../Components/Styles/ClassificationScreenStyles";
 
-// Por mover
 const API = 'http://api.enciclovida.mx';
 
 var maxlevel = 0;
     
-function getIndicator(isExpanded, hasChildrenNodes, level) {
-    // Cuando el nivel es el final:
-    if (!hasChildrenNodes) {
-        return <Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />
-    } else {
-        // Si aún tiene hijos:
-        if (isExpanded) {
-            if (level == 0) // Si hablamos del nivel 0:
-                return <Image style={styles.image} source={{ uri: 'ic_tree_start' }} />
-            else // Si hablamos de hijos
-                return <Image style={styles.image} source={{ uri: 'ic_tree' }} />
-        } else { // Si hay contenido a expandir
-            return ">"
-        }
-    }
-}
-
 // create a component
 class ClassificationScreen extends Component {
 
@@ -131,6 +111,7 @@ class ClassificationScreen extends Component {
     }
 
     refreshdata = (id, nombre_comun, nombre_cientifico) => {
+   
         global.classificationList.push({ "id": global.id_specie, "title": global.title, "subtitle": global.subtitle });
         global.id_specie = id;
         global.title = nombre_comun;
@@ -155,6 +136,31 @@ class ClassificationScreen extends Component {
         this.fetchData(global.id_specie, global.classification_id_specie);
     };
 
+    getIndicator= (node, isExpanded, hasChildrenNodes, level) => {
+        
+        // Cuando el nivel es el final:
+        if (hasChildrenNodes) {
+
+            // Si aún tiene hijos:
+            if (isExpanded) {
+                if (level == 0) // Si hablamos del nivel 0:
+                    return <Image style={styles.image} source={{ uri: 'ic_tree_start' }} />
+                else { // Si hablamos de hijos
+                    if(node.last_list) {
+                        return <Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />
+                    } else {
+                        return <Image style={styles.image} source={{ uri: 'ic_tree' }} />
+                    }
+                }
+            } else { // Si hay contenido a expandir
+                return <Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />
+            }
+
+        } else {
+            return <Image style={styles.image} source={{ uri: 'ic_tree_unique' }} />
+        } 
+    }
+
     render() {
         return (
             <View style={[styles.mainScreen]}>
@@ -173,12 +179,10 @@ class ClassificationScreen extends Component {
                                 initialExpanded={true}
                                 collapsedItemHeightForLevel={40}
 
-                              
-                                onNodePress = { (node, level) => {
-                                    //alert('Level: ' + level + '\n' + 'Node: ' + JSON.stringify(node));
-                                    if(maxlevel != level){
-                                        this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
-                                        /*Alert.alert("Cambiar Busqueda", 
+                                onNodePress={({ node, level}) => {
+                                    
+                                    if(maxlevel != level) {
+                                        Alert.alert("Cambiar Busqueda",  
                                         `¿Deseas cambiar a "${node.nombre_cientifico}" los resultados de la busqueda?`, 
                                             [
                                                 {
@@ -190,31 +194,18 @@ class ClassificationScreen extends Component {
                                                 },
                                             ],
                                             { cancelable: false }
-                                        );*/
+                                        );
+                                        
+                                        //this.refreshdata(node.id, node.nombre_comun, node.nombre_cientifico)
                                     }
+
+                                    return false;
                                 }}
 
-                                renderNode={
-                                    ({ node, level, isExpanded, hasChildrenNodes }) => {
+                                renderNode={({ node, level, isExpanded, hasChildrenNodes }) => {
                                         return (
                                             <View style={{ marginLeft: node.last ? 0 : 9.5 * level, marginTop: node.last && level > 1 ? 30 : 0, flexDirection: "row" }} >
-                                                {node.collapsed !== null ? (
-                                                    <View>
-                                                        {node.initial ? (node.collapsed ? (<Image style={[styles.image]} source={{ uri: 'ic_tree_unique' }} />)
-                                                            : (<Image style={[styles.image]} source={{ uri: 'ic_tree_start' }} />)
-                                                        )
-                                                            :
-                                                            (node.collapsed ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
-                                                                (node.last_list ? (<Image style={styles.image} source={{ uri: 'ic_tree_finish' }} />) :
-                                                                    (<Image style={styles.image} source={{ uri: 'ic_tree' }} />)
-                                                                )
-                                                            )}
-                                                    </View>
-                                                ) : (
-                                                        <Image style={styles.image} source={{ uri: 'ic_tree_unique' }} />
-                                                    )}
-                                                
-                                                { getIndicator(isExpanded, hasChildrenNodes, level) }
+                                                { this.getIndicator(node, isExpanded, hasChildrenNodes, level)}
                                                 <View>
                                                     <Text style={styles.text} numberOfLines={1} ellipsizeMode={'tail'}>
                                                         {node.abreviacion_categoria} <Text style={styles.text_comun}> {node.nombre_comun}</Text>
