@@ -8,13 +8,14 @@ import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
-const API = 'http://enciclovida.mx';
+import Constants from '../Config/Constants';
+import Helpers from '../Config/Helpers';
 
-/* MediaScreen: Pantalla en la que se muestra la galería de imágenes sobre X especie */
+/* MediaScreen: Pantalla en la que se muestra la galería de imágenes sobre X especie */ 
 class MediaScreen extends Component {
   // CONSTRUCTOR DE EL COMPONENTE
   constructor(props) {
-    //console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
+    console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" );
     super(props);
     this.state = {
       data: [],
@@ -24,30 +25,6 @@ class MediaScreen extends Component {
       spinner: false,
     };
     this.fetchData = this.fetchData.bind(this);
-  }
-
-  // FUNCION PARA ARMAR EL JSON DE LA GALERÍA
-  getImages(JSONImages) {
-    try {
-
-      var listImages = [];
-
-      for(var i = 0; i< JSONImages.length; i++) {    
-          var image = {
-            id: JSONImages[i]['id'],
-            source: {
-              uri: JSONImages[i]['imagen']
-            },
-            title: JSONImages[i]['text']
-          }
-          listImages.push(image);
-      }
-
-      return listImages;
-
-    } catch (error) {
-      return [];
-    }
   }
 
   setMediaIdSpecie = (id_specie) => {
@@ -60,9 +37,9 @@ class MediaScreen extends Component {
       this.setState({ spinner: true, data: [] });
       if (specie_id !== 0) {
         try {
-          const response = await fetch(`${API}/especies/${specie_id}/fotos-naturalista.json`);
+          const response = await fetch(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`);
           console.log("\n**Se realizaá la llamada al sifuiente servicio: ");
-          console.log(`${API}/especies/${specie_id}/fotos-naturalista.json`);
+          console.log(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`); 
           const json = await response.json();
           console.log("\n**La respuesta fué: ");
           console.log(json);
@@ -82,7 +59,7 @@ class MediaScreen extends Component {
           console.error(error);
         }
         finally {
-          this.setState({ data: result, spinner: false, listImages: this.getImages(result)});
+          this.setState({ data: result, spinner: false, listImages: Helpers.createJSONImagesFor_image_view(result)});
         }
       } else {
         this.setState({ spinner: false });
@@ -106,13 +83,6 @@ class MediaScreen extends Component {
     if (this.state.showimage)
       this.setState({ showimage: false });
   }
-  /*
-    componentWillMount (){
-        this.setState({ data : [] });
-        //Alert.alert("idMount", this.state.load.toString());
-        this.fetchData(global.id_specie);
-    }
-    */
 
   handlePress(image, index) {
     this.setState({
@@ -151,7 +121,7 @@ class MediaScreen extends Component {
             renderFooter={this.renderFooter}
             onClose={() => this.setState({ showimage: false })} 
             onImageChange={index => {
-                console.log(index);
+                //console.log(index);
             }}
           />
                     
@@ -165,7 +135,7 @@ class MediaScreen extends Component {
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <TouchableOpacity
                       onPress={() => {
-                        console.log("\n\n\n item : " + JSON.stringify(index));
+                        //console.log("\n\n\n item : " + JSON.stringify(index));
                         this.handlePress(item.imagen, index);
                       }}
                   >
@@ -187,3 +157,11 @@ class MediaScreen extends Component {
 
 // make this component available to the app
 export default withNavigation(MediaScreen);
+
+/*
+    componentWillMount (){
+        this.setState({ data : [] });
+        //Alert.alert("idMount", this.state.load.toString());
+        this.fetchData(global.id_specie);
+    }
+*/
