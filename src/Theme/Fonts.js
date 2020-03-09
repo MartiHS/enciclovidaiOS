@@ -1,17 +1,14 @@
 import colors from "./Colors";
 
 const family = {
-    //base: Platform.OS === "ios" ? 'Sriracha-Regular' : 'Sriracha-Regular',
-    //base_bold: "CaviarDreams_Bold",
-    //base_italic: "CaviarDreams_Italic",
-    //base_bold_italic: "CaviarDreams_BoldItalic",
-    base: "Arial", 
-    base_bold: "Arial",
-    base_italic: "Arial",
-    base_bold_italic: "Arial",
-    base_semibold: "Arial",
-    base_semibold_italic: "Arial",
+    base: Platform.OS === "ios" ? "Avenir Next" : "TitilliumWeb-Regular",
+    base_bold: Platform.OS === "ios" ? "AvenirNext-Bold" : "TitilliumWeb-Bold",
+    base_italic: Platform.OS === "ios" ? "AvenirNext-Italic" : "TitilliumWeb-Italic",
+    base_bold_italic: Platform.OS === "ios" ? "AvenirNext-BoldItalic" : "TitilliumWeb-BoldItalic",
+    base_semibold: Platform.OS === "ios" ? "AvenirNext-Medium" : "TitilliumWeb-SemiBold",
+    base_semibold_italic: Platform.OS === "ios" ? "AvenirNext-MediumItalic" : "TitilliumWeb-SemiBoldItalic"
 }
+
 const size = {
     big: 36,
     h1: 20,
@@ -21,6 +18,7 @@ const size = {
     small: 13, 
     tiny: 10
 }
+
 const style = {
     textsmall: {
         fontFamily: family.base,
