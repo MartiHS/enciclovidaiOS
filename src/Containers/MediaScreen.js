@@ -35,17 +35,26 @@ class MediaScreen extends Component {
       let result = [];
       this.setState({ spinner: true, data: [] });
       if (specie_id !== 0) {
-        // Obtener las fotos: desde el servicio NaturaLista
-        const response = await Helper.fetchDataFromNaturalista(id_specie);
-        const fotos = await response;
-        // Si el servicio devolvió {}, llamar a BDI
-        if(fotos.length == 0) {
-          //console.log("No hubo fotos en NaturaLista");
-          const response2 = await Helper.fetchDataFromBDI(id_specie);
-          const fotos2 = response2;
-          result = Helper.getDataImages(fotos2, true);
+
+        
+        // Si hay algo en taxonPhotos, quiere decir que se guardaron ya las fotos desde About (Que siempre debería ser así)
+        if(global.taxonPhotos !== [] ) {
+          console.log("No fué necesario llamar al servicio de nuevo!! :D");
+          result = Helper.getDataImages(global.taxonPhotos, global.taxonPhotos_BDI_source);
         } else {
-          result = Helper.getDataImages(fotos, false);
+            // Si no se guardaron o se perdieron (Extrañamente debería pasar aquí)
+            // Obtener las fotos: desde el servicio NaturaLista
+            const response = await Helper.fetchDataFromNaturalista(id_specie);
+            const fotos = await response;
+            // Si el servicio devolvió {}, llamar a BDI
+            if(fotos.length == 0) {
+              //console.log("No hubo fotos en NaturaLista");
+              const response2 = await Helper.fetchDataFromBDI(id_specie);
+              const fotos2 = response2;
+              result = Helper.getDataImages(fotos2, true);
+            } else {
+              result = Helper.getDataImages(fotos, false);
+            }
         }
         
         this.setMediaIdSpecie(specie_id);
@@ -145,7 +154,6 @@ class MediaScreen extends Component {
   }
 }
 
-// make this component available to the app
 export default withNavigation(MediaScreen);
 
 /*

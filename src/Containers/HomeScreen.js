@@ -23,6 +23,8 @@ class HomeScreen extends Component {
         global.id_specie = 0;
         global.title = "";
         global.subtitle = "";
+        global.taxonPhotos = [];
+        global.taxonPhotos_BDI_source = false;
         global.filtro = "";
         global.listSpecies = "";
         global.LastlistSpecies = "";
@@ -30,31 +32,7 @@ class HomeScreen extends Component {
         global.ListReino = [];
         global.ListAnimales = [];
         global.ListPlantas = [];
-        
-        global.epecieActual = {
-            id_specie: 0,
-            about_id_specie: "",
-            media_id_specie: 0,
-            map_id_specie: 0,
-            title: "",
-            subtitle: "",
-            about_specie: [],
-            media_specie: [],
-            map_specie: [],
-            classificationList: [],
-        }
-        
-        global.filtroEspecieActual = {
-            id_specie: 0,
-            filtro: "",
-            listSpecies: "",
-            LastlistSpecies: "",
-            ListReino: [],
-            ListAnimales: [],
-            ListPlantas: [],  
-            navigator: []
-        }
-        
+
         this.state = {
             data: [],
             query: '',
@@ -122,10 +100,6 @@ class HomeScreen extends Component {
         this.setState({ query: "" })
         this.setState({ data : [] });
         //TODO Validar 
-        global.epecieActual.id_specie = item.id;
-        global.epecieActual.title = item.nombre_comun;
-        global.epecieActual.subtitle = item.nombre_cientifico;
-        
         global.id_specie = item.id;
         global.title = item.nombre_comun;
         global.subtitle = item.nombre_cientifico;

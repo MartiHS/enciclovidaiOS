@@ -116,25 +116,15 @@ class ClassificationScreen extends Component {
     }
 
     refreshdata = (id, nombre_comun, nombre_cientifico) => {
-        
-        global.epecieActual.id_specie = id;
-        global.epecieActual.title = nombre_comun;
-        global.epecieActual.subtitle = nombre_cientifico;
-        global.epecieActual.classificationList.push({ "id": id, "title": nombre_comun, "subtitle": nombre_cientifico });
-
-
         global.classificationList.push({ "id": global.id_specie, "title": global.title, "subtitle": global.subtitle });
         global.id_specie = id;
         global.title = nombre_comun;
         global.subtitle = nombre_cientifico;
 
-        
-
         this.setState({ data: [] });
         this.fetchData(global.id_specie);
 
         this.props.navigation.navigate("About", {});
-
     };
 
     UNSAFE_componentWillReceiveProps = () => {

@@ -9,7 +9,6 @@ import TabBar from "../Components/TabBar";
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/AboutScreenStyles"; 
 
-import CurrentTaxon from '../Config/Consola';
 import Constants from '../Config/Constants';
 import Helper from '../Config/Helpers';
 
@@ -87,8 +86,6 @@ class AboutScreen extends Component {
         finally {
           // Obtener el resumen de la especie
           this.setState({ contenido_render_array: result, spinner: false });
-          global.epecieActual.about_specie = result.map(value => { return value });
-          //console.log("EL RESUMEN ES: " + global.epecieActual.about_specie);
         }
       }).catch(error => {
         this.setState({ spinner: false });
@@ -115,8 +112,12 @@ class AboutScreen extends Component {
           //console.log("No hubo fotos en NaturaLista");
           const response2 = await Helper.fetchDataFromBDI(id_specie);
           const fotos2 = response2;
+          global.taxonPhotos = fotos2;
+          global.taxonPhotos_BDI_source = true;
           defaultPhoto = Helper.getRandomImage(fotos2, true);
         } else {
+          global.taxonPhotos = fotos;
+          global.taxonPhotos_BDI_source = false;
           defaultPhoto = Helper.getRandomImage(fotos, false);
         }
         
@@ -135,9 +136,7 @@ class AboutScreen extends Component {
   UNSAFE_componentWillReceiveProps(props) {
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde AboutScreen- - \n\n");
     console.log(props.params);
-    //console.log(global.epecieActual);
 
-    //global.epecieActual
     //about_id_specie
     //media_id_specie
 
