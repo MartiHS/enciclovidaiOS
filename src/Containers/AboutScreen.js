@@ -8,56 +8,32 @@ import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/AboutScreenStyles"; 
- 
+
+import CurrentTaxon from '../Config/Consola';
+import Constants from '../Config/Constants';
+import Helper from '../Config/Helpers';
+
 const CustomIcon = createIconSetFromFontello(config);
 
-const SPECIE_PHOTOS_ENDPOINT = 'http://enciclovida.mx/especies/';
-const SPECIE_INFO_ENDPOINT = 'http://api.enciclovida.mx/especie/descripcion/';
+// Esta pantalla será la primera que se ejecute al seleccionar una especie: lo ideal es que, como ya manda a llamar la galería de la especie, la almacene para que 
+// Media no tenga que volver a hacer la llamada al servicio
 
 /* ABOUTSCREEN: Pantalla en la que se muestra Una foto junto con información de la especie */
 class AboutScreen extends Component {
   constructor(props) {
-    console.log("\n\n\nLlamada a AboutScreen desde constructor \n---------------------------------\n" + JSON.stringify(props));
+    
+    // JSON.stringify(props)
+    console.log("\n\n\nLlamada a AboutScreen desde constructor \n---------------------------------\n");
+    ////CurrentTaxon.id_specie = 7632873;
     super(props)
     this.state = {
       imagen: "",
       contenido_render_array: [],
       spinner: false
     };
+
     this.fetchData = this.fetchData.bind(this);
     this.UNSAFE_componentWillReceiveProps = this.UNSAFE_componentWillReceiveProps.bind(this);
-  }
-
-  getSpecieImageUrl(id_specie) {   
-    fetch(`${SPECIE_PHOTOS_ENDPOINT}${id_specie}/fotos-naturalista.json`)
-      .then(res => res.json())
-      .then((json) => {
-        let specieImage = json.fotos && json.fotos.length > 0 ? json.fotos[0].photo.medium_url : "";
-        this.setState({ imagen: specieImage });
-        console.log(`${SPECIE_PHOTOS_ENDPOINT}${id_specie}/fotos-naturalista.json`);
-        console.log(json);
-      }).catch(error => {
-        // En el caso de que el servicio fotos-naturalista no devuelva fotos, llamara BDI
-        this.getSpecieImageFromBDI(id_specie);
-        console.log(error);
-      });
-  }
- 
-  getSpecieImageFromBDI(id_specie) {
-    fetch(`${SPECIE_PHOTOS_ENDPOINT}${id_specie}/fotos-bdi.json`)
-      .then(res => res.json())
-      .then((json) => {
-        console.log("BDI");
-        console.log(json.fotos);
-        console.log(json.fotos[0].medium_url);
-        let specieImage = json.fotos && json.fotos.length > 0 ? json.fotos[0].medium_url : "";
-        this.setState({ imagen: specieImage });
-        console.log(`${SPECIE_PHOTOS_ENDPOINT}${id_specie}/fotos-bdi.json`);
-        console.log("json");
-      }).catch(error => {
-        Alert.alert("Error en los datos");
-        console.log(error);
-      });
   }
 
   getList(content, start, finish, type) {
@@ -77,9 +53,10 @@ class AboutScreen extends Component {
     } while (exist);
     return original;
   }
-
+ 
   getSpecieResume(id_specie) {
-    fetch(`${SPECIE_INFO_ENDPOINT}${id_specie}/resumen-wikipedia`)
+    console.log(Constants.SPECIE_INFO_ENDPOINT);
+    fetch(`${Constants.SPECIE_INFO_ENDPOINT}${id_specie}/resumen-wikipedia`)
       .then(res => res.json())
       .then((json) => {
         let result = [];
@@ -109,14 +86,17 @@ class AboutScreen extends Component {
           Alert.alert("Error en los datos");
         }
         finally {
+          // Obtener el resumen de la especie
           this.setState({ contenido_render_array: result, spinner: false });
+          global.epecieActual.about_specie = result.map(value => { return value });
+          //console.log("EL RESUMEN ES: " + global.epecieActual.about_specie);
         }
       }).catch(error => {
         this.setState({ spinner: false });
       });
   }
 
-  /* to prevent reload data from the same specie */
+  /* Para evitar la recarga de datos de la misma especie ya consultada */
   setAboutIdSpecie = (id_specie) => {
     global.about_id_specie = id_specie;
   }
@@ -126,21 +106,42 @@ class AboutScreen extends Component {
     if (id_specie != about_id_specie) {
       this.setState({ imagen: "", contenido_render_array: [], spinner: true });
       if (id_specie !== 0) {
-
-        await this.getSpecieImageUrl(id_specie);
+        console.log("FETCH - LLAMADA A FOTOS Y RESUMEN");
+        var defaultPhoto = "";
+        // Obtener las fotos: desde el servicio NaturaLista
+        const response = await Helper.fetchDataFromNaturalista(id_specie);
+        const fotos = await response;
+        // Si el servicio devolvió {}, llamar a BDI
+        if(fotos.length == 0) {
+          //console.log("No hubo fotos en NaturaLista");
+          const response2 = await Helper.fetchDataFromBDI(id_specie);
+          const fotos2 = response2;
+          defaultPhoto = Helper.getRandomImage(fotos2, true);
+        } else {
+          defaultPhoto = Helper.getRandomImage(fotos, false);
+        }
+        
+        this.setState({ imagen: defaultPhoto });
+        
         await this.getSpecieResume(id_specie);
-      }
-      else {
+      
+      } else {
         this.setState({ spinner: false, pins: [] });
       }
       this.setAboutIdSpecie(id_specie);
     }
   }
 
-
   // se invoca antes de que un componente montado reciba nuevos props
   UNSAFE_componentWillReceiveProps(props) {
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde AboutScreen- - \n\n");
+    console.log(props.params);
+    console.log(global.epecieActual);
+
+    //global.epecieActual
+    //about_id_specie
+    //media_id_specie
+
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.about_id_specie);
   }
