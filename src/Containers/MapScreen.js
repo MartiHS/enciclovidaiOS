@@ -17,13 +17,6 @@ import Constants from '../Config/Constants';
 
 const CustomIcon = createIconSetFromFontello(config);
 
-const defaultRegion = {
-    latitude: 24.286809,
-    longitude: -102.817436,
-    latitudeDelta: 18.612920,
-    longitudeDelta: 36.986230,
-};
-
 var arraydata = [];
 
 // create a component
@@ -33,7 +26,7 @@ class MapScreen extends Component {
         this.state = {
             pins: [],
             spinner: false,
-            region: defaultRegion,
+            region: Constants.DEFAULT_REGION,
             showmap: false,
         }
         this.fetchData = this.fetchData.bind(this);
@@ -56,10 +49,10 @@ class MapScreen extends Component {
                     Array.prototype.push.apply(arraydata, result);
 
                     if (this.state.pins.length == 0)
-                        this.setState({ pins: arraydata, spinner: false, region: defaultRegion });
+                        this.setState({ pins: arraydata, spinner: false, region: Constants.DEFAULT_REGION });
                     else {
 
-                        this.setState({ pins: arraydata, spinner: false, showmap: true, region: defaultRegion });
+                        this.setState({ pins: arraydata, spinner: false, showmap: true, region: Constants.DEFAULT_REGION });
                     }
                 }
                 else {
@@ -82,7 +75,7 @@ class MapScreen extends Component {
     }
     fetchData = async (id_specie, map_id_specie) => {
         if (id_specie != map_id_specie) {
-            this.setState({ pins: [], region: defaultRegion, spinner: true });
+            this.setState({ pins: [], region: Constants.DEFAULT_REGION, spinner: true });
             if (id_specie != 0) {
                 fetch(`${Constants.API_ENCICLOVIDA}/especie/${id_specie}`).then(res => res.json()).then((json) => {
                     const url = json.e_geodata.naturalista_mapa_json;
