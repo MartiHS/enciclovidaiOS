@@ -72,14 +72,24 @@ export default class Helper {
       }
   }
 
-  static getDataImages(images) {
+  static getDataImages(images, bdi) {
     result = images.map(data => {
-      return {
-        id: data.photo.id,
-        imagen: data.photo.medium_url,
-        text: data.photo.attribution,
-      };
+      if(bdi) {
+        return {
+          id: 0,
+          imagen: data.medium_url,
+          text: data.attribution,
+        };
+      } else {
+        return {
+          id: data.photo.id,
+          imagen: data.photo.medium_url,
+          text: data.photo.attribution,
+        };
+      }
     });
+
+    return result;
   }
 
 

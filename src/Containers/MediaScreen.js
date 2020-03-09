@@ -9,7 +9,7 @@ import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
 import Constants from '../Config/Constants';
-import Helpers from '../Config/Helpers';
+import Helper from '../Config/Helpers';
 
 /* MediaScreen: Pantalla en la que se muestra la galería de imágenes sobre X especie */ 
 class MediaScreen extends Component {
@@ -31,36 +31,27 @@ class MediaScreen extends Component {
     global.media_id_specie = id_specie;
   }
 
-  async fetchData(specie_id, media_specie_id) { 
+  async fetchData(specie_id, media_specie_id) {
     if (specie_id !== media_specie_id) {
       let result = [];
       this.setState({ spinner: true, data: [] });
       if (specie_id !== 0) {
-        try {
-          const response = await fetch(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`);
-          console.log("\n**Se realizaá la llamada al sifuiente servicio: ");
-          console.log(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`); 
-          const json = await response.json();
-          console.log("\n**La respuesta fué: ");
-          console.log(json);
-          if (json.estatus) {
-            result = json.fotos.map(data => {
-              return {
-                id: data.photo.id,
-                imagen: data.photo.medium_url,
-                text: data.photo.attribution,
-              };
-            });
-            this.setMediaIdSpecie(specie_id);
-          }
-
-        } catch (error) {
-
-          console.error(error);
+        // Obtener las fotos: desde el servicio NaturaLista
+        const response = await Helper.fetchDataFromNaturalista(id_specie);
+        const fotos = await response;
+        // Si el servicio devolvió {}, llamar a BDI
+        if(fotos.length == 0) {
+          //console.log("No hubo fotos en NaturaLista");
+          const response2 = await Helper.fetchDataFromBDI(id_specie);
+          const fotos2 = response2;
+          result = Helper.getDataImages(fotos2, true);
+        } else {
+          result = Helper.getDataImages(fotos, false);
         }
-        finally {
-          this.setState({ data: result, spinner: false, listImages: Helpers.createJSONImagesFor_image_view(result)});
-        }
+        
+        this.setMediaIdSpecie(specie_id);
+        this.setState({ data: result, spinner: false, listImages: Helper.createJSONImagesFor_image_view(result)});
+
       } else {
         this.setState({ spinner: false });
       }
