@@ -1,18 +1,13 @@
 import React from "react";
-
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  TouchableHighlight
-} from "react-native";
+import {View, Text, ScrollView, TouchableOpacity, Image, TouchableHighlight} from "react-native";
 import {createIconSetFromFontello} from "react-native-vector-icons";
 import {withNavigation} from "react-navigation";
+
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/SideMenuStyles";
+
 const CustomIcon = createIconSetFromFontello(config);
+
 const DataFilterReinos = [ 
   {id: 1, name: "Animales", icon: "ic_re_animales", order: 1, selected: false },
   {id: 4, name: "Hongos", icon: "ic_re_hongos", order: 2, selected: false },
@@ -52,6 +47,7 @@ const DataFilterPlantas = [
 ];
 
 var nav_dispatch = null;
+
 const listsParams = {
   SpeciesRisk: {
     filter: "&edo_cons=%5B17%2C15%2C14%2C16%2C29%2C28%2C27%2C26%2C25%5D",
@@ -66,7 +62,9 @@ const listsParams = {
     title: "Especies endémicas",
   }
 };
+
 global.navigator = undefined;
+
 class SideMenu extends React.Component {
   goToFind = () => {
     const {navigation} = this.props;

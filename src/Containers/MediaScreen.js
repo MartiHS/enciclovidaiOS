@@ -8,7 +8,6 @@ import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
-import Constants from '../Config/Constants';
 import Helper from '../Config/Helpers';
 
 /* MediaScreen: Pantalla en la que se muestra la galería de imágenes sobre X especie */ 

@@ -20,8 +20,7 @@ const TabNav = createBottomTabNavigator({
   Map: {screen: MapScreen},
   Media: {screen: MediaScreen},
   Classification: {screen: ClassificationScreen},
-},
-  {
+},{
     headerMode: "none",
     defaultNavigationOptions: {
       tabBarVisible: false,
@@ -30,9 +29,7 @@ const TabNav = createBottomTabNavigator({
     swipeEnabled: true,
     animationEnabled: false,
     shifting: true,
-
-
-  })
+})
 
 const Drawer = createDrawerNavigator(
   {

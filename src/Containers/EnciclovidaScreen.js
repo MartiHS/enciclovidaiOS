@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Linking } from 'react-native';
 import { withNavigation } from "react-navigation";
+
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 

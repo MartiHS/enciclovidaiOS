@@ -7,7 +7,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/ListSpeciesScreenStyles";
 
-const API = 'http://api.enciclovida.mx';
+import Constants from '../Config/Constants';
+
 var arraydata = [];
 // create a component
 class ListSpeciesScreen extends Component {
@@ -27,8 +28,8 @@ class ListSpeciesScreen extends Component {
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
 
     if (filter != "") {
-      console.log("ListSpeciesScreen:", `${API}/especies/busqueda/avanzada?nivel=%3D${filter}`);
-      fetch(`${API}/especies/busqueda/avanzada?nivel=%3D${filter}`)
+      //console.log("ListSpeciesScreen:", `${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}`);
+      fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}`)
         .then(res => res.json())
         .then((json) => {
           try {
@@ -75,7 +76,7 @@ class ListSpeciesScreen extends Component {
     const filter = global.filtro;
     const page = this.state.page;
     if (filter != "") {
-      fetch(`${API}/especies/busqueda/avanzada?nivel=%3D${filter}&pagina=${page}`).then(res => res.json()).then((json) => {
+      fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}&pagina=${page}`).then(res => res.json()).then((json) => {
         arraydata = [];
         const result = json.taxa.map(data => {
           return {
@@ -129,6 +130,10 @@ class ListSpeciesScreen extends Component {
 
   viewDetails = (id, nombre_comun, nombre_cientifico) => {
     //console.log(id);
+    global.epecieActual.id_specie = id;
+    global.epecieActual.title = nombre_comun;
+    global.epecieActual.subtitle = nombre_cientifico;
+    
     global.id_specie = id;
     global.title = nombre_comun;
     global.subtitle = nombre_cientifico;
@@ -170,6 +175,7 @@ class ListSpeciesScreen extends Component {
   };
 
   UNSAFE_componentWillReceiveProps = () => {
+    console.log("\n\n - - UNSAFE_componentWillReceiveProps desde ListSpeciesScreen- - \n\n");
     this._handleRefresh();
   };
 

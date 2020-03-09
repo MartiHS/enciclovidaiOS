@@ -55,7 +55,6 @@ class AboutScreen extends Component {
   }
  
   getSpecieResume(id_specie) {
-    console.log(Constants.SPECIE_INFO_ENDPOINT);
     fetch(`${Constants.SPECIE_INFO_ENDPOINT}${id_specie}/resumen-wikipedia`)
       .then(res => res.json())
       .then((json) => {
@@ -136,7 +135,7 @@ class AboutScreen extends Component {
   UNSAFE_componentWillReceiveProps(props) {
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde AboutScreen- - \n\n");
     console.log(props.params);
-    console.log(global.epecieActual);
+    //console.log(global.epecieActual);
 
     //global.epecieActual
     //about_id_specie

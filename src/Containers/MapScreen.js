@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
 import { Marker, Callout } from 'react-native-maps'
@@ -6,17 +5,17 @@ import { withNavigation } from "react-navigation";
 import ClusteredMapView from 'react-native-maps-super-cluster';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
+
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 
 import config from "../Theme/Fonts/config"
-
 import styles from "../Components/Styles/MapScreenStyles";
 import colors from "../Theme/Colors";
 
-const CustomIcon = createIconSetFromFontello(config);
+import Constants from '../Config/Constants';
 
-const API = 'http://api.enciclovida.mx';
+const CustomIcon = createIconSetFromFontello(config);
 
 const defaultRegion = {
     latitude: 24.286809,
@@ -85,7 +84,7 @@ class MapScreen extends Component {
         if (id_specie != map_id_specie) {
             this.setState({ pins: [], region: defaultRegion, spinner: true });
             if (id_specie != 0) {
-                fetch(`${API}/especie/${id_specie}`).then(res => res.json()).then((json) => {
+                fetch(`${Constants.API_ENCICLOVIDA}/especie/${id_specie}`).then(res => res.json()).then((json) => {
                     const url = json.e_geodata.naturalista_mapa_json;
                     const url_snib = json.e_geodata.snib_mapa_json;
                     if (url || url_snib) {
@@ -118,7 +117,7 @@ class MapScreen extends Component {
             </Marker>
         )
     }
-
+ 
     renderMarker = (pin) => {
         return (
             <Marker identifier={`pin-${pin.id}`} key={pin.id} coordinate={pin.location}>
@@ -137,6 +136,7 @@ class MapScreen extends Component {
         this.fetchData(global.id_specie, global.map_id_specie);
     }
     UNSAFE_componentWillReceiveProps = () => {
+        console.log("\n\n - - UNSAFE_componentWillReceiveProps desde MapScreen- - \n\n");
         this.fetchData(global.id_specie, global.map_id_specie);
     };
 

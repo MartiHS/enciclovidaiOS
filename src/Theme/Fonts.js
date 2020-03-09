@@ -1,11 +1,11 @@
 import colors from "./Colors";
 
 const family = {
-    //base: "CaviarDreams",
+    //base: Platform.OS === "ios" ? 'Sriracha-Regular' : 'Sriracha-Regular',
     //base_bold: "CaviarDreams_Bold",
     //base_italic: "CaviarDreams_Italic",
     //base_bold_italic: "CaviarDreams_BoldItalic",
-    base: "Arial",
+    base: "Arial", 
     base_bold: "Arial",
     base_italic: "Arial",
     base_bold_italic: "Arial",

@@ -1,14 +1,11 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { withNavigation } from "react-navigation";
-import NavBar from '../Components/NavBar';
-import TabBar from "../Components/TabBar";
-
-import styles from "../Components/Styles/SymbologyScreenStyle";
 import { ScrollView } from 'react-native-gesture-handler';
 
-
+import NavBar from '../Components/NavBar';
+import TabBar from "../Components/TabBar";
+import styles from "../Components/Styles/SymbologyScreenStyle";
 
 // create a component
 class SymbologyScreen extends Component {

@@ -26,7 +26,7 @@ export default class Helper {
 
   // Obtener imágenes de Naturalista
   static fetchDataFromNaturalista(id_especie) {
-    var linkToCall = `${Constants.API_ENCICLOVIDA}${id_especie}/${Constants.NATURALISTA_ENDPOINT}`;
+    var linkToCall = `${Constants.API_ENCICLOVIDA_ESPECIES}${id_especie}/${Constants.NATURALISTA_ENDPOINT}`;
     return fetch(linkToCall).then(res => res.json()).then((json) => {
       console.log("Se realizó una llamada a: " + linkToCall);
       if(json.estatus) {
@@ -43,7 +43,7 @@ export default class Helper {
 
   // Obtener imágeens desde Banco De Imágenes
   static fetchDataFromBDI(id_especie) {
-      var linkToCall = `${Constants.API_ENCICLOVIDA}${id_especie}/${Constants.BDI_ENDPOINT}`;
+      var linkToCall = `${Constants.API_ENCICLOVIDA_ESPECIES}${id_especie}/${Constants.BDI_ENDPOINT}`;
       return fetch(linkToCall).then(res => res.json()).then((json) => {
         console.log("Se realizó una llamada a: " + linkToCall);
         if(json.estatus) {
@@ -72,6 +72,7 @@ export default class Helper {
       }
   }
 
+  // Obtener el Data de images para usar en FlatList
   static getDataImages(images, bdi) {
     result = images.map(data => {
       if(bdi) {
@@ -91,87 +92,5 @@ export default class Helper {
 
     return result;
   }
-
-
-
-
-  async fetchPhotos(id_specie, about_id_specie) {
-
-    if (id_specie != about_id_specie) {
-      this.setState({ imagen: "", contenido_render_array: [], spinner: true, data: []});
-      if (id_specie !== 0) {
-
-        try {
-
-          // Obtener las fotos: desde el servicio NaturaLista
-          var fotos = await this.fetchDataFromNaturalista(id_specie);
-          // Si el servicio devolvió {}, llamar a BDI
-          if(fotos.length > 0) {
-            fotos = await this.fetchDataFromBDI(id_specie) 
-          }
-
-
-        } catch (error) {
-
-          console.error(error);
-        }
-        finally {
-          this.setState({ data: result, spinner: false, listImages: Helpers.createJSONImagesFor_image_view(result)});
-        }
-
-      } else {
-        this.setState({ spinner: false, pins: []});
-      }
-      this.setAboutIdSpecie(id_specie);
-    }
-  }
-
-
-
-  async fetchData(specie_id, media_specie_id) { 
-    if (specie_id !== media_specie_id) {
-      
-      this.setState({ spinner: true, data: [] });
-
-      let result = [];
-      if (specie_id !== 0) {
-
-
-
-
-        try {
-          const response = await fetch(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`);
-          
-          console.log("\n**Se realizaá la llamada al sifuiente servicio: ");
-          console.log(`${Constants.API_ENCICLOVIDA}${specie_id}/fotos-naturalista.json`); 
-          const json = await response.json();
-          console.log("\n**La respuesta fué: ");
-          console.log(json);
-          
-          if (json.estatus) {
-            result = json.fotos.map(data => {
-              return {
-                id: data.photo.id,
-                imagen: data.photo.medium_url,
-                text: data.photo.attribution,
-              };
-            });
-            this.setMediaIdSpecie(specie_id);
-          }
-
-        } catch (error) {
-
-          console.error(error);
-        }
-        finally {
-          this.setState({ data: result, spinner: false, listImages: Helpers.createJSONImagesFor_image_view(result)});
-        }
-      } else {
-        this.setState({ spinner: false });
-      }
-    }
-  }
-
-
 
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Autocomplete from 'react-native-autocomplete-input';
@@ -9,27 +8,9 @@ import NavBar from '../Components/NavBar';
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/HomeScreenStyles";
 
+import Constants from '../Config/Constants';
 
 const CustomIcon = createIconSetFromFontello(config);
-
-const API = 'http://api.enciclovida.mx';
-
-const resultCategories=[
-    'especie', 'subespecie', 
-    'variedad', 'subvariedad', 
-    'forma', 'subforma', 
-    'reino', 'subreino',
-    'division', 'subdivision',
-    'superphylum', 'phylum', 'subphylum',
-    'superclase', 'clase','subclase', 'infraclase',
-    'grado',
-    'superorden', 'orden', 'suborden', 'infraorden',
-    'superfamilia', 'familia',  'subfamilia',
-    'supertribu', 'tribu', 'subtribu',
-    'genero', 'subgenero', 
-    'seccion', 'subseccion',
-    'serie', 'subserie',
-];
 
 var arraydata = [];
 
@@ -38,7 +19,7 @@ class HomeScreen extends Component {
 
     constructor(props) {
         console.log("\n\n\nLlamada a HomeScreen\n---------------------------------\n");
-        super(props);
+        super(props); 
         global.id_specie = 0;
         global.title = "";
         global.subtitle = "";
@@ -49,6 +30,30 @@ class HomeScreen extends Component {
         global.ListReino = [];
         global.ListAnimales = [];
         global.ListPlantas = [];
+        
+        global.epecieActual = {
+            id_specie: 0,
+            about_id_specie: "",
+            media_id_specie: 0,
+            map_id_specie: 0,
+            title: "",
+            subtitle: "",
+            about_specie: [],
+            media_specie: [],
+            map_specie: [],
+            classificationList: [],
+        }
+        
+        global.filtroEspecieActual = {
+            id_specie: 0,
+            filtro: "",
+            listSpecies: "",
+            LastlistSpecies: "",
+            ListReino: [],
+            ListAnimales: [],
+            ListPlantas: [],  
+            navigator: []
+        }
         
         this.state = {
             data: [],
@@ -90,12 +95,12 @@ class HomeScreen extends Component {
         this.setState({ query: text })
         // Si existe una query para llamar:
         if(text != null && text.length > 1){
-            fetch(`${API}/autocompleta/especies/${encodeURIComponent(text)}`)
+            fetch(`${Constants.API_ENCICLOVIDA}/autocompleta/especies/${encodeURIComponent(text)}`)
             .then(res => res.json())
             .then((json) => {
                 arraydata = [];
                 if(!json.error){
-                    resultCategories.forEach( category => {
+                    Constants.RESULT_CATEGORIES.forEach( category => {
                         Array.prototype.push.apply(
                             arraydata, 
                             json.results[category].filter(item=> item.data.publico)
@@ -113,15 +118,20 @@ class HomeScreen extends Component {
 
     // Función encargada de la acción al presionar una sugerencia:
     handlePress(item) {
+        console.log("\n\n**Nueva seleccion\n\n");
         this.setState({ query: "" })
         this.setState({ data : [] });
         //TODO Validar 
+        global.epecieActual.id_specie = item.id;
+        global.epecieActual.title = item.nombre_comun;
+        global.epecieActual.subtitle = item.nombre_cientifico;
+        
         global.id_specie = item.id;
         global.title = item.nombre_comun;
         global.subtitle = item.nombre_cientifico;
         global.classificationList = [];
         // Ir a "Acerca de"
-        this.props.navigation.navigate("About", {id_specie: item.id});
+        this.props.navigation.navigate("About", {});
     }
 
     footer = () => {

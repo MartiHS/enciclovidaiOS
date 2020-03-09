@@ -8,10 +8,10 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 
+import Constants from '../Config/Constants';
+
 // Importar estilos, tipografías y más
 import styles from "../Components/Styles/ClassificationScreenStyles";
-
-const API = 'http://api.enciclovida.mx';
 
 var maxlevel = 0;
     
@@ -19,6 +19,9 @@ var maxlevel = 0;
 class ClassificationScreen extends Component {
 
     constructor(props) {
+
+        console.log("\n\n\nLlamada a ClassificationScreen desde constructor \n---------------------------------\n");
+
         super(props);
         this.state = {
             data: [],
@@ -95,7 +98,9 @@ class ClassificationScreen extends Component {
         if (id_specie !== classification_id_specie) {
             this.setState({ spinner: true, data: [] });
             if (id_especie != 0) {
-                fetch(`${API}/especie/${id_especie}/ancestry`).then(res => res.json()).then((json) => {
+                var linkToCall = `${Constants.API_ENCICLOVIDA}especie/${id_especie}/ancestry`;
+                console.log("Se realizó una llamada a: " + linkToCall);
+                fetch(linkToCall).then(res => res.json()).then((json) => {
                     maxlevel = 0;
                     const results = this.constructJSON(json, true);
                     this.setState({ data: results, spinner: false });
@@ -111,11 +116,20 @@ class ClassificationScreen extends Component {
     }
 
     refreshdata = (id, nombre_comun, nombre_cientifico) => {
-   
+        
+        global.epecieActual.id_specie = id;
+        global.epecieActual.title = nombre_comun;
+        global.epecieActual.subtitle = nombre_cientifico;
+        global.epecieActual.classificationList.push({ "id": id, "title": nombre_comun, "subtitle": nombre_cientifico });
+
+
         global.classificationList.push({ "id": global.id_specie, "title": global.title, "subtitle": global.subtitle });
         global.id_specie = id;
         global.title = nombre_comun;
         global.subtitle = nombre_cientifico;
+
+        
+
         this.setState({ data: [] });
         this.fetchData(global.id_specie);
 
@@ -126,7 +140,8 @@ class ClassificationScreen extends Component {
     UNSAFE_componentWillReceiveProps = () => {
         //Alert.alert("idProps", this.state.load.toString());
         //Alert.alert("idProps", global.id_specie.toString());
-
+        
+        console.log("\n\n - - UNSAFE_componentWillReceiveProps desde ClassificationScreen- - \n\n");
         this.fetchData(global.id_specie, global.classification_id_specie);
     };
 
