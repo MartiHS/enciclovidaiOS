@@ -4,6 +4,7 @@ import { Metrics, Colors, Fonts } from "../../Theme/"
 
 export default styles = StyleSheet.create({
     navBar: {
+        top: 20,
         height: Metrics.navBarHeight,
         backgroundColor: Colors.navBarBackground,
         flexDirection: "row",

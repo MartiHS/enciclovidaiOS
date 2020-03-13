@@ -13,6 +13,7 @@ export default StyleSheet.create({
     justifyContent:"space-between", 
   },
   menu: {
+    top: 20,
     flex:1,
     justifyContent:"flex-start",
     alignItems:"flex-start",

@@ -48,6 +48,9 @@ export default StyleSheet.create({
   },
   
   inputContainerStyle:{
+    paddingLeft: 35,
+    fontFamily: Fonts.family.base_bold,
+
     backgroundColor: '#f1f1f1',
     borderRadius:10,
     borderWidth: 1,
@@ -56,7 +59,8 @@ export default StyleSheet.create({
   
   autocompleteContainer: {
     flex: 1,
-    height: 200,
+    minHeight: 100,
+    maxHeight: 200,
   },
   
 

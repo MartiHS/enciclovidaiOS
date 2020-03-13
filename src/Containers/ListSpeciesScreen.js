@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import {StyleSheet, View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
+import {View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from "react-navigation";
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -129,11 +129,6 @@ class ListSpeciesScreen extends Component {
   }
 
   viewDetails = (id, nombre_comun, nombre_cientifico) => {
-    //console.log(id);
-    global.epecieActual.id_specie = id;
-    global.epecieActual.title = nombre_comun;
-    global.epecieActual.subtitle = nombre_cientifico;
-    
     global.id_specie = id;
     global.title = nombre_comun;
     global.subtitle = nombre_cientifico;

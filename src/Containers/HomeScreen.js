@@ -135,7 +135,7 @@ class HomeScreen extends Component {
                         <Autocomplete
                             autoCapitalize="none"
                             autoCorrect={false}
-                            style={styles.autocomplete}
+                            //style={styles.autocomplete}
                             inputContainerStyle={styles.inputContainerStyle}
                             containerStyle={styles.autocompleteContainer}
                             data={data}
