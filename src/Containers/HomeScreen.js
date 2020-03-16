@@ -133,11 +133,12 @@ class HomeScreen extends Component {
                     <View style={styles.view}>
                         <CustomIcon name="find" size = {25} color="#304E5B" style={styles.favicon} />
                         <Autocomplete
+                            style={styles.autocomplete}
                             autoCapitalize="none"
                             autoCorrect={false}
-                            //style={styles.autocomplete}
                             inputContainerStyle={styles.inputContainerStyle}
                             containerStyle={styles.autocompleteContainer}
+                            listStyle={styles.listStyle}
                             data={data}
                             defaultValue={query}
                             onChangeText={text => this.fetchData(text)}

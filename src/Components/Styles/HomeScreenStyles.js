@@ -28,7 +28,7 @@ export default StyleSheet.create({
     paddingRight: 20,
     height: 70,
   },
-
+  
   // Imagen de fondo (enciclovida)
   image: {
     resizeMode: "contain",
@@ -45,24 +45,25 @@ export default StyleSheet.create({
   autocomplete: {
     paddingLeft: 35,
     fontFamily: Fonts.family.base_bold,
+    height: 45,
   },
   
   inputContainerStyle:{
-    paddingLeft: 35,
-    fontFamily: Fonts.family.base_bold,
-
     backgroundColor: '#f1f1f1',
-    borderRadius:10,
+    borderRadius: 10,
     borderWidth: 1,
     opacity: .8,
   },
   
   autocompleteContainer: {
     flex: 1,
-    minHeight: 100,
-    maxHeight: 200,
+    height: 300,
   },
   
+  listStyle: {
+    borderRadius: 10,
+    height: 300,
+  },
 
   contentItem: {
     flexDirection: "row",
