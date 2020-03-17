@@ -1,5 +1,5 @@
 const metrics = {
-    navBarHeight: 76,
+    navBarHeight: 56,
     buttonSize: 50,
     tabBarHeight: 46,
     smallSpace: 8,

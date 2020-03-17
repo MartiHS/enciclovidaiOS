@@ -4,7 +4,7 @@ import { Metrics, Colors, Fonts } from "../../Theme/"
 
 export default styles = StyleSheet.create({
     navBar: {
-        top: 20,
+        top: 0,
         height: Metrics.navBarHeight,
         backgroundColor: Colors.navBarBackground,
         flexDirection: "row",
@@ -37,8 +37,18 @@ export default styles = StyleSheet.create({
         alignContent:"center",
         alignItems:"center",
         textAlign:"center",
-        justifyContent:"center"
-
+        justifyContent:"center",
+    },
+    favIcon2: {
+        alignContent:"center",
+        alignItems:"center",
+        textAlign:"center",
+        justifyContent:"center",
+        fontSize: 12,
+        padding: 3,
+        borderRadius: 11,
+        borderWidth: 1.5,
+        borderColor: "white"
     },
     faviconmenu:{
     },

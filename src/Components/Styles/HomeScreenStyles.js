@@ -46,13 +46,21 @@ export default StyleSheet.create({
     paddingLeft: 35,
     fontFamily: Fonts.family.base_bold,
     height: 45,
+    
   },
   
   inputContainerStyle:{
-    backgroundColor: '#f1f1f1',
+    backgroundColor: 'white',
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 0.5,
     opacity: .8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 2.46,
   },
   
   autocompleteContainer: {
@@ -99,8 +107,18 @@ export default StyleSheet.create({
     zIndex: 2,
     top: 10,
     left: 25,
+    
   },
   
+  customSearchIcon: {
+    position: "absolute",
+    zIndex: 2,
+    top: 10,
+    left: 28,
+    fontSize: 25,
+    color: Colors.navBarBackground,
+  },
+
   footerImage: {
     position: "absolute",
     height: '30%',

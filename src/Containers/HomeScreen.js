@@ -3,14 +3,16 @@ import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } fro
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import NavBar from '../Components/NavBar'; 
-import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/HomeScreenStyles";
-
 import Constants from '../Config/Constants';
 
+import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
+
+
 
 var arraydata = [];
 
@@ -131,7 +133,8 @@ class HomeScreen extends Component {
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
                     <View style={styles.view}>
-                        <CustomIcon name="find" size = {25} color="#304E5B" style={styles.favicon} />
+                        
+                        <Icon name="ios-search" style={styles.customSearchIcon} />
                         <Autocomplete
                             style={styles.autocomplete}
                             autoCapitalize="none"

@@ -2,6 +2,7 @@ import React from "react";
 import {View, Text, ScrollView, TouchableOpacity, Image, TouchableHighlight} from "react-native";
 import {createIconSetFromFontello} from "react-native-vector-icons";
 import {withNavigation} from "react-navigation";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/SideMenuStyles";
@@ -124,12 +125,19 @@ class SideMenu extends React.Component {
         <ScrollView contentContainerStyle = {styles.menu} >
         <View >
           <TouchableHighlight style = {[styles.touchmenu]} onPress = {this.closeMenu} >
-            <CustomIcon name = "menu" size = {25} color = "#304E5B" style = {[styles.favicon, styles.pt_10]}/>
+            {
+             //<CustomIcon name = "menu" size = {25} color = "#304E5B" style = {[styles.favicon, styles.pt_10]}/>
+            }
+            <Icon name="ios-menu"  size = {25} color = "#304E5B" style = {[styles.favicon, styles.pt_10]} />
           </TouchableHighlight >
         </View>
         <TouchableHighlight onPress = {this.goToFind} style = { [styles.menuItem] } >
           <View style = {styles.row2} >
-            <CustomIcon name = "find" size = {25} color = "#fff" style = {styles.favicon }/>
+            
+            {
+             //<CustomIcon name = "ios-find" size = {25} color = "#fff" style = {styles.favicon }/>
+            }
+            <Icon name="ios-search"  size = {25} color = "#fff" style = {styles.favicon } />
             <Text style = {styles.title} > Busca una especie </Text>
           </View >
           </TouchableHighlight>
