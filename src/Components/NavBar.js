@@ -1,8 +1,11 @@
 //import liraries
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking, StatusBar } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import { withNavigation } from "react-navigation";
+import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/Fontisto';
+
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import styles from "./Styles/NavBarStyle";
 import config from "../Theme/Fonts/config";
@@ -76,31 +79,46 @@ class NavBar extends React.Component {
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
     return(
       <TouchableOpacity style={styles.touchmenu} onPress={this.displayDrawerMenu}>
-        <CustomIcon name="menu" size={25} color={iconColor} style={styles.faviconmenu} />
+        {
+          //<CustomIcon name="menu" size={25} color={iconColor} style={styles.faviconmenu} />
+        }
+        <Icon name="ios-menu" size={25} color={iconColor} style={styles.faviconmenu} />
       </TouchableOpacity>
     ) 
     };
 
   renderRightButton = () => {
     const { infoButton, filterButton, imageButton } = this.props;
+    const { menuLightButton} = this.props;
+    const iconColor= menuLightButton? "#304E5B" : "#FFF";
     if(infoButton){
       return(
-        <TouchableOpacity onPress={this.showSpecieInfo} style={{backgroundColor:"#fff", borderRadius:15, padding:1}} >
-          <CustomIcon name="new_info" size={30} color="#000" style={[styles.favIcon,]}></CustomIcon>
+        <TouchableOpacity onPress={this.showSpecieInfo} >
+          {
+            //<CustomIcon name="new_info" size={30} color="#000" style={[styles.favIcon,]}></CustomIcon>
+          }
+          <Icon name="ios-information-circle-outline" size={30} color={iconColor} style={[styles.favIcon]} />
+          
         </TouchableOpacity>
       )
     }
     else if(imageButton){
       return(
         <TouchableOpacity onPress={() => Linking.openURL('http://enciclovida.mx/')}>
-          <CustomIcon name="enciclovida" size={30} color="#FFF" style={styles.favIcon} />
+          {
+            //<CustomIcon name="enciclovida" size={30} color="#FFF" style={styles.favIcon} />
+          }
+          <Icon name="ios-information-circle-outline" size={30} color={iconColor} style={[styles.favIcon]} />
         </TouchableOpacity>
       )
     }
     else if(filterButton){
       return(
-        <TouchableOpacity onPress={this.showFilterDialog} style={{backgroundColor:"#fff", borderRadius:15, padding:1}}>
-          <CustomIcon name="new_filter" size={30} color="#000" style={styles.favIcon}></CustomIcon>
+        <TouchableOpacity onPress={this.showFilterDialog} >
+          {
+            //<CustomIcon name="new_filter" size={30} color="#000" style={styles.favIcon}></CustomIcon> ios-arrow-dropdown
+          }
+          <Icon2 name="filter" color={iconColor} style={styles.favIcon2} />
         </TouchableOpacity>
       )
     }
@@ -257,6 +275,8 @@ class NavBar extends React.Component {
     const subtitle=this.state.subtitle;
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
+        <StatusBar barStyle="dark-content" />
+        <StatusBar hidden={false} />
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
         <View style={styles.titleWrapper}>
           <Text style={[styles.title, title != null && title.length > 40 ? styles.title_small : null]}>{title}</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
+import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler, StatusBar } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
@@ -122,7 +122,7 @@ class HomeScreen extends Component {
                 <View></View>
             )
         }
-    };
+    }; 
 
     render() {
         const { query } = this.state;
@@ -130,10 +130,10 @@ class HomeScreen extends Component {
         return (
             /* Barra de navegación */
             <View style={[styles.mainScreen]}>
+                <StatusBar barStyle="light-content" />
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
                     <View style={styles.view}>
-                        
                         <Icon name="ios-search" style={styles.customSearchIcon} />
                         <Autocomplete
                             style={styles.autocomplete}

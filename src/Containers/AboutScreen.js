@@ -135,7 +135,7 @@ class AboutScreen extends Component {
   // se invoca antes de que un componente montado reciba nuevos props
   UNSAFE_componentWillReceiveProps(props) {
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde AboutScreen- - \n\n");
-    console.log(props.params);
+    //console.log(props.params);
 
     //about_id_specie
     //media_id_specie

@@ -1,11 +1,13 @@
 import { StyleSheet } from "react-native";
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import { Metrics, Colors, Fonts } from "../../Theme/"
 
 export default styles = StyleSheet.create({
     navBar: {
+        paddingTop: (Platform.OS === 'ios') ? getStatusBarHeight() : 0,
         top: 0,
-        height: Metrics.navBarHeight,
+        height: Metrics.navBarHeight + getStatusBarHeight(),
         backgroundColor: Colors.navBarBackground,
         flexDirection: "row",
         alignItems: "center",
