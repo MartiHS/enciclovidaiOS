@@ -1,3 +1,4 @@
+/*
 import * as RNLocalize from "react-native-localize";
 import i18n from "i18n-js";
 import memoize from "lodash.memoize"; 
@@ -55,3 +56,4 @@ class Translate {
 
    
 }
+*/

@@ -6,8 +6,8 @@ import colors from "../../Theme/Colors";
 
 export default StyleSheet.create({
   flex_1:{flex:1},
-  pt_10:{paddingTop: getStatusBarHeight()},
-  p_10:{padding:10},
+  pt_10:{ paddingTop: (Platform.OS === 'ios') ? getStatusBarHeight() : 0},
+  p_10:{ padding:10},
   content: {
     backgroundColor: Colors.backgroundSlide,
     flexDirection:"column",

@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     navBar: {
         paddingTop: (Platform.OS === 'ios') ? getStatusBarHeight() : 0,
         top: 0,
-        height: Metrics.navBarHeight + getStatusBarHeight(),
+        height: (Platform.OS === 'ios') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
         backgroundColor: Colors.navBarBackground,
         flexDirection: "row",
         alignItems: "center",
@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
         backgroundColor: Colors.white,
     },
     navBarDialog: {
-        top: Metrics.navBarHeight,
+        top: (Platform.OS === 'ios') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
     },

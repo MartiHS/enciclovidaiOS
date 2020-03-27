@@ -275,7 +275,7 @@ class NavBar extends React.Component {
     const subtitle=this.state.subtitle;
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" />
         <StatusBar hidden={false} />
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
         <View style={styles.titleWrapper}>
