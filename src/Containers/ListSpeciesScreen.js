@@ -75,6 +75,7 @@ class ListSpeciesScreen extends Component {
     });
     const filter = global.filtro;
     const page = this.state.page;
+    //console.log("Se cargarán más...");
     if (filter != "") {
       fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}&pagina=${page}`).then(res => res.json()).then((json) => {
         arraydata = [];
@@ -183,14 +184,12 @@ class ListSpeciesScreen extends Component {
 
   render() {
     return (
-
       <View style={[styles.MainContainer]} >
         <NavBar menuBlackButton={true} filterButton={true} />
-
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
-
           <FlatList
+            style = {styles.flatList} 
             data={this.state.data}
             extraData={this.state}
             keyExtractor={(item) => item.id.toString()}
@@ -209,7 +208,11 @@ class ListSpeciesScreen extends Component {
               </View>
             )}
             numColumns={1}
-            keyExtractor={(item, index) => index.toString()}
+            onEndReached = {this._handleLoadMore}
+            onEndReachedThreshold = {0.1}
+            initialNumToRender = {50}
+            onRefresh = {this._handleRefresh}
+            refreshing = {this.state.refreshing}
           />
 
         </View>
