@@ -5,7 +5,7 @@ import { withNavigation } from "react-navigation";
 import ClusteredMapView from 'react-native-maps-super-cluster';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
@@ -118,7 +118,7 @@ class MapScreen extends Component {
                 {
                     //<CustomIcon name="mark" size={12} color={pin.color} style={styles.favicon} />
                 }
-                <Icon name="ios-pin" size={12} color={pin.color} style={styles.favicon} />
+                <Icon name="circle" size={10} color={pin.color} style={styles.favicon} />
             </Marker>
         )
     }
@@ -173,14 +173,15 @@ class MapScreen extends Component {
                                 {
                                     //<CustomIcon name="mark" size={12} color={colors.iconMap1} style={styles.favicon} />
                                 }
-                                <Icon name="ios-pin" size={12} color={colors.iconMap1} style={styles.favicon} />
+                                <Icon name="circle" size={10} color={colors.iconMap1} style={styles.favicon} />
                                 <Text style={(styles.textLeyend, styles.textLeyend1)}> Registros científicos</Text>
                             </View>
                             <View style={styles.row}>
                                 {
                                     //<CustomIcon name="mark" size={12} color={colors.iconMap2} style={styles.favicon} />
                                 }
-                                <Icon name="ios-pin" size={12} color={colors.iconMap2} style={styles.favicon} />
+                                <Icon name="circle" size={10} color={colors.iconMap2} style={styles.favicon} />
+                                
                                 <Text style={(styles.textLeyend, styles.textLeyend2)}> Ciencia Ciudadana</Text>
                             </View>
                         </View>
