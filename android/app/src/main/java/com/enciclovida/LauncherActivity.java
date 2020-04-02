@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,51 +26,52 @@ public class LauncherActivity extends AppCompatActivity {
     activity = this;
 
     RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_launcher);
+    ImageView img = (ImageView) findViewById(R.id.imageView);
     TextView txtVersion = (TextView) findViewById(R.id.version);
     int numero = (int) (Math.random() * 12) + 1;
     switch (numero) {
       case 1:
-        layout.setBackgroundResource(R.drawable.fondo1);
+        img.setImageResource(R.drawable.fondo1);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 2:
-        layout.setBackgroundResource(R.drawable.fondo2);
+        img.setImageResource(R.drawable.fondo2);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 3:
-        layout.setBackgroundResource(R.drawable.fondo3);
+        img.setImageResource(R.drawable.fondo3);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 4:
-        layout.setBackgroundResource(R.drawable.fondo4);
+        img.setImageResource(R.drawable.fondo4);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 5:
-        layout.setBackgroundResource(R.drawable.fondo5);
+        img.setImageResource(R.drawable.fondo5);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 6:
-        layout.setBackgroundResource(R.drawable.fondo6);
+        img.setImageResource(R.drawable.fondo6);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 7:
-        layout.setBackgroundResource(R.drawable.fondo7);
+        img.setImageResource(R.drawable.fondo7);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 8:
-        layout.setBackgroundResource(R.drawable.fondo8);
+        img.setImageResource(R.drawable.fondo8);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 9:
-        layout.setBackgroundResource(R.drawable.fondo9);
+        img.setImageResource(R.drawable.fondo9);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 10:
-        layout.setBackgroundResource(R.drawable.fondo10);
+        img.setImageResource(R.drawable.fondo10);
         txtVersion.setTextColor(getResources().getColor(R.color.color_white));
         break;
       case 11:
-        layout.setBackgroundResource(R.drawable.fondo11);
+        img.setImageResource(R.drawable.fondo11);
         txtVersion.setTextColor(getResources().getColor(R.color.color_black));
         break;
     }
