@@ -15,10 +15,13 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* EnciclovidaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EnciclovidaTests.m */; };
-		3E2203F365F38F3A4C3E50F3 /* libPods-Enciclovida-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD79ABF8C04A9E464CB3FB75 /* libPods-Enciclovida-tvOSTests.a */; };
-		4EF2124C58BF08F54B2B3A2A /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2786E1882C2D3D44EDB160D1 /* libPods-Enciclovida-tvOS.a */; };
-		BD85F60C20F76BBFDF54ED5F /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BF4D5065F29EB5930EA688 /* libPods-Enciclovida.a */; };
-		C8FDEB52E3AA01574FFA6478 /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 389841E30BEBC1E6BCA3BF47 /* libPods-EnciclovidaTests.a */; };
+		35988653711781F8BBEC742E /* libPods-Enciclovida-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5C0D112EBF13D1F97035B2 /* libPods-Enciclovida-tvOSTests.a */; };
+		3A1D35AAE4A0AF1DC913538D /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0507F18301B8122D7FA229EA /* libPods-Enciclovida.a */; };
+		4127B8E72436AA8000C493AE /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127B8E52436AA8000C493AE /* Launch.swift */; };
+		4127B8EA2436AADA00C493AE /* Lauch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127B8E92436AADA00C493AE /* Lauch.storyboard */; };
+		4127B8EC2436B36800C493AE /* launchi.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127B8EB2436B36800C493AE /* launchi.storyboard */; };
+		BBB56154968B667A99F02A2C /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB04860133D0479D2FB9BE6 /* libPods-EnciclovidaTests.a */; };
+		FCC6CE8F229A4691CCDCC029 /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588956501ADA3CCB427691BE /* libPods-Enciclovida-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,7 @@
 		00E356F21AD99517003FC87E /* EnciclovidaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnciclovidaTests.m; sourceTree = "<group>"; };
 		01EA54FBDC8F4609AA9E1B4F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		03D525DB829C4BE9BCEC97E4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		0507F18301B8122D7FA229EA /* libPods-Enciclovida.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F867DBA8E4F4996B22808F6 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		10FDC585EE154645A3F0A088 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		13A3435DF42F42B58FBE3C18 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
@@ -55,35 +59,37 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Enciclovida/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Enciclovida/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Enciclovida/main.m; sourceTree = "<group>"; };
-		1D6797E90A8DCB8C2EF4C48F /* Pods-Enciclovida-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		2786E1882C2D3D44EDB160D1 /* libPods-Enciclovida-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1851A74C90BF26A5518D5341 /* Pods-Enciclovida-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		22FED8D6A3F5EC38738A0C87 /* Pods-EnciclovidaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.release.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Enciclovida-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Enciclovida-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Enciclovida-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Enciclovida-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		313F1348A0A3D6687BCDDC9F /* Pods-Enciclovida-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		389841E30BEBC1E6BCA3BF47 /* libPods-EnciclovidaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EnciclovidaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		39CBBA5B9ED421403101D717 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A59A3F6D2C64F4D9624F5A5 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		3A5F37529FA94F7CE6D8B0D3 /* Pods-EnciclovidaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.release.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.release.xcconfig"; sourceTree = "<group>"; };
+		4127B8E52436AA8000C493AE /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		4127B8E92436AADA00C493AE /* Lauch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lauch.storyboard; sourceTree = "<group>"; };
+		4127B8EB2436B36800C493AE /* launchi.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = launchi.storyboard; sourceTree = "<group>"; };
 		47E8880B7170449C87EB4860 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		588956501ADA3CCB427691BE /* libPods-Enciclovida-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B5C0D112EBF13D1F97035B2 /* libPods-Enciclovida-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB04860133D0479D2FB9BE6 /* libPods-EnciclovidaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EnciclovidaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F6AEC3E7BA26F6DFB3B035B /* Pods-Enciclovida-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		675237AE4C1EBAF19DF71062 /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		68AF33FCECA7955E33E2FBA6 /* Pods-Enciclovida-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		70C4335BE8C9449F832EA34E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		7346DA77A388AA6F30CE3B52 /* Pods-Enciclovida.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida/Pods-Enciclovida.release.xcconfig"; sourceTree = "<group>"; };
 		76946D767E904EA7ABC14114 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		845F525F976C42D4B86F3A4F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		8BB7960264634B4F858D67C9 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		8EF79406CEC159F9DD59938D /* Pods-Enciclovida.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida/Pods-Enciclovida.release.xcconfig"; sourceTree = "<group>"; };
 		94F908C43DD84519BDD40AD6 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		9A7F64FBB443492096E694D4 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		B1ADCB6E146644A38BBDB622 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		B2BF4D5065F29EB5930EA688 /* libPods-Enciclovida.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B558E504DAD97C32542A8594 /* Pods-Enciclovida-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		B998A9ABB1AF07357A02A52A /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BAE2938864A94DACAA062681 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		C756F886104D4088A37E03DC /* Sriracha-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Sriracha-Regular.ttf"; path = "../assets/fonts/Sriracha-Regular.ttf"; sourceTree = "<group>"; };
 		D456001F93EB4848AFB65413 /* CaviarDreams.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = CaviarDreams.ttf; path = ../assets/fonts/CaviarDreams.ttf; sourceTree = "<group>"; };
-		DD79ABF8C04A9E464CB3FB75 /* libPods-Enciclovida-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9280A79A542DFF321275DBE /* Pods-Enciclovida.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida/Pods-Enciclovida.debug.xcconfig"; sourceTree = "<group>"; };
 		E22C13976D3D4FD4ADB98841 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		E7A49C776968461BC05B2414 /* Pods-Enciclovida.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida/Pods-Enciclovida.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F8E0357FA9F420003EF4BCF7 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8FDEB52E3AA01574FFA6478 /* libPods-EnciclovidaTests.a in Frameworks */,
+				BBB56154968B667A99F02A2C /* libPods-EnciclovidaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD85F60C20F76BBFDF54ED5F /* libPods-Enciclovida.a in Frameworks */,
+				3A1D35AAE4A0AF1DC913538D /* libPods-Enciclovida.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EF2124C58BF08F54B2B3A2A /* libPods-Enciclovida-tvOS.a in Frameworks */,
+				FCC6CE8F229A4691CCDCC029 /* libPods-Enciclovida-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E2203F365F38F3A4C3E50F3 /* libPods-Enciclovida-tvOSTests.a in Frameworks */,
+				35988653711781F8BBEC742E /* libPods-Enciclovida-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +155,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				4127B8E52436AA8000C493AE /* Launch.swift */,
+				4127B8E92436AADA00C493AE /* Lauch.storyboard */,
+				4127B8EB2436B36800C493AE /* launchi.storyboard */,
 			);
 			name = Enciclovida;
 			sourceTree = "<group>";
@@ -158,10 +167,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				B2BF4D5065F29EB5930EA688 /* libPods-Enciclovida.a */,
-				2786E1882C2D3D44EDB160D1 /* libPods-Enciclovida-tvOS.a */,
-				DD79ABF8C04A9E464CB3FB75 /* libPods-Enciclovida-tvOSTests.a */,
-				389841E30BEBC1E6BCA3BF47 /* libPods-EnciclovidaTests.a */,
+				0507F18301B8122D7FA229EA /* libPods-Enciclovida.a */,
+				588956501ADA3CCB427691BE /* libPods-Enciclovida-tvOS.a */,
+				5B5C0D112EBF13D1F97035B2 /* libPods-Enciclovida-tvOSTests.a */,
+				5EB04860133D0479D2FB9BE6 /* libPods-EnciclovidaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -228,14 +237,14 @@
 		E5E6D3ACD82F8C3510DFFFB6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E7A49C776968461BC05B2414 /* Pods-Enciclovida.debug.xcconfig */,
-				7346DA77A388AA6F30CE3B52 /* Pods-Enciclovida.release.xcconfig */,
-				313F1348A0A3D6687BCDDC9F /* Pods-Enciclovida-tvOS.debug.xcconfig */,
-				B558E504DAD97C32542A8594 /* Pods-Enciclovida-tvOS.release.xcconfig */,
-				39CBBA5B9ED421403101D717 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */,
-				1D6797E90A8DCB8C2EF4C48F /* Pods-Enciclovida-tvOSTests.release.xcconfig */,
-				B998A9ABB1AF07357A02A52A /* Pods-EnciclovidaTests.debug.xcconfig */,
-				3A5F37529FA94F7CE6D8B0D3 /* Pods-EnciclovidaTests.release.xcconfig */,
+				D9280A79A542DFF321275DBE /* Pods-Enciclovida.debug.xcconfig */,
+				8EF79406CEC159F9DD59938D /* Pods-Enciclovida.release.xcconfig */,
+				1851A74C90BF26A5518D5341 /* Pods-Enciclovida-tvOS.debug.xcconfig */,
+				68AF33FCECA7955E33E2FBA6 /* Pods-Enciclovida-tvOS.release.xcconfig */,
+				F8E0357FA9F420003EF4BCF7 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */,
+				5F6AEC3E7BA26F6DFB3B035B /* Pods-Enciclovida-tvOSTests.release.xcconfig */,
+				675237AE4C1EBAF19DF71062 /* Pods-EnciclovidaTests.debug.xcconfig */,
+				22FED8D6A3F5EC38738A0C87 /* Pods-EnciclovidaTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -247,7 +256,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EnciclovidaTests" */;
 			buildPhases = (
-				EEA5CD1B69F6F2B0955A6664 /* [CP] Check Pods Manifest.lock */,
+				EDB6E1448F11FCEBC28892E4 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -266,13 +275,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Enciclovida" */;
 			buildPhases = (
-				E05F785F25D2F279EC2A8AD0 /* [CP] Check Pods Manifest.lock */,
+				C0FDF4940EF1045547065919 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				5DBAA2B32C75DD051C47C92A /* [CP] Copy Pods Resources */,
+				6A44F8EF7F4CFDFCE4562F0F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -287,7 +296,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Enciclovida-tvOS" */;
 			buildPhases = (
-				47109820FB6C7B117AABB4E2 /* [CP] Check Pods Manifest.lock */,
+				98997D109B42A1C84694D8FD /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -307,7 +316,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Enciclovida-tvOSTests" */;
 			buildPhases = (
-				3EA933ADB4578D14284B2C57 /* [CP] Check Pods Manifest.lock */,
+				5703B57C1C67B4F9A1FCDE24 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -334,6 +343,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1130;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -379,6 +391,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4127B8EA2436AADA00C493AE /* Lauch.storyboard in Resources */,
+				4127B8EC2436B36800C493AE /* launchi.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -429,7 +443,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		3EA933ADB4578D14284B2C57 /* [CP] Check Pods Manifest.lock */ = {
+		5703B57C1C67B4F9A1FCDE24 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -451,29 +465,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		47109820FB6C7B117AABB4E2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Enciclovida-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5DBAA2B32C75DD051C47C92A /* [CP] Copy Pods Resources */ = {
+		6A44F8EF7F4CFDFCE4562F0F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -521,7 +513,29 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Enciclovida/Pods-Enciclovida-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E05F785F25D2F279EC2A8AD0 /* [CP] Check Pods Manifest.lock */ = {
+		98997D109B42A1C84694D8FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Enciclovida-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0FDF4940EF1045547065919 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -543,7 +557,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEA5CD1B69F6F2B0955A6664 /* [CP] Check Pods Manifest.lock */ = {
+		EDB6E1448F11FCEBC28892E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -619,6 +633,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				4127B8E72436AA8000C493AE /* Launch.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,8 +685,9 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B998A9ABB1AF07357A02A52A /* Pods-EnciclovidaTests.debug.xcconfig */;
+			baseConfigurationReference = 675237AE4C1EBAF19DF71062 /* Pods-EnciclovidaTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -693,8 +709,9 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A5F37529FA94F7CE6D8B0D3 /* Pods-EnciclovidaTests.release.xcconfig */;
+			baseConfigurationReference = 22FED8D6A3F5EC38738A0C87 /* Pods-EnciclovidaTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = EnciclovidaTests/Info.plist;
@@ -713,9 +730,10 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7A49C776968461BC05B2414 /* Pods-Enciclovida.debug.xcconfig */;
+			baseConfigurationReference = D9280A79A542DFF321275DBE /* Pods-Enciclovida.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
@@ -727,15 +745,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovida.enciclovida;
 				PRODUCT_NAME = Enciclovida;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7346DA77A388AA6F30CE3B52 /* Pods-Enciclovida.release.xcconfig */;
+			baseConfigurationReference = 8EF79406CEC159F9DD59938D /* Pods-Enciclovida.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -746,13 +767,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovida.enciclovida;
 				PRODUCT_NAME = Enciclovida;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 313F1348A0A3D6687BCDDC9F /* Pods-Enciclovida-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 1851A74C90BF26A5518D5341 /* Pods-Enciclovida-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -779,7 +801,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B558E504DAD97C32542A8594 /* Pods-Enciclovida-tvOS.release.xcconfig */;
+			baseConfigurationReference = 68AF33FCECA7955E33E2FBA6 /* Pods-Enciclovida-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -806,7 +828,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39CBBA5B9ED421403101D717 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = F8E0357FA9F420003EF4BCF7 /* Pods-Enciclovida-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -833,7 +855,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D6797E90A8DCB8C2EF4C48F /* Pods-Enciclovida-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 5F6AEC3E7BA26F6DFB3B035B /* Pods-Enciclovida-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -955,6 +977,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

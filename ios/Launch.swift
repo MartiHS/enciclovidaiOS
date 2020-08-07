@@ -9,22 +9,16 @@
 import UIKit
 
 class Launch: UIViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.view.backgroundColor = UIColor.red
+    
+    let number = Int.random(in: 0 ..< 11)
+    let imageBackG = "Background-\(number)"
+    print(imageBackG)
+  }
+  
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
