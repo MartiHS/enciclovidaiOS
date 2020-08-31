@@ -39,6 +39,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMainNibFile</key>
+	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -61,8 +63,6 @@
 		<string>Sriracha-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>Lauch</string>
-	<key>UIMainStoryboardFile</key>
 	<string>Lauch</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

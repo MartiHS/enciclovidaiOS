@@ -5,9 +5,9 @@ import { Metrics, Colors, Fonts } from "../../Theme/"
 
 export default styles = StyleSheet.create({
     navBar: {
-        paddingTop: (Platform.OS === 'ios') ? getStatusBarHeight() : 0,
+        paddingTop: (Platform.OS === 'android') ? getStatusBarHeight() : 0,
         top: 0,
-        height: (Platform.OS === 'ios') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
+        height: (Platform.OS === 'android') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
         backgroundColor: Colors.navBarBackground,
         flexDirection: "row",
         alignItems: "center",
@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
         backgroundColor: Colors.white,
     },
     navBarDialog: {
-        top: (Platform.OS === 'ios') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
+        top: Metrics.navBarHeight + getStatusBarHeight(),
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
     },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Alert, Image } from 'react-native';
-import { Marker, Callout } from 'react-native-maps'
+import { View, Text, Image } from 'react-native';
+import { Marker } from 'react-native-maps'
 import { withNavigation } from "react-navigation";
 import ClusteredMapView from 'react-native-maps-super-cluster';
 import { createIconSetFromFontello } from "react-native-vector-icons";
@@ -71,9 +71,11 @@ class MapScreen extends Component {
                 this.loadgeodata(url_snib, null, true);
         }
     }
+    
     setMapIdSpecie = (id_specie) => {
         global.map_id_specie = id_specie;
     }
+    
     fetchData = async (id_specie, map_id_specie) => {
         if (id_specie != map_id_specie) {
             this.setState({ pins: [], region: Constants.DEFAULT_REGION, spinner: true });
@@ -162,9 +164,7 @@ class MapScreen extends Component {
                             mapType = {"hybrid"}
                             //initialRegion={this.state.region}
                             region = {this.state.region}
-
-                        //region={this.state.region}
-
+                            animateClusters={false}
                         >
                             {}
                         </ClusteredMapView>

@@ -1,4 +1,5 @@
 const colors = {
+    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "#304E5B",
     navBarBackground: "#304E5B",
     black: "#000000",
     white: "#FFFFFF",
@@ -12,7 +13,7 @@ const colors = {
     backgroundSlideItem: "#8A9D46",
     textdialog: "#5D5D5D",
     link: "#3B3BFF",
-    iconMap1: "#bdd500",
+    iconMap1: "#bdd500", 
     iconMap2: "#ff8421",
 }
 

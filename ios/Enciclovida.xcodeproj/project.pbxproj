@@ -19,7 +19,6 @@
 		3A1D35AAE4A0AF1DC913538D /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0507F18301B8122D7FA229EA /* libPods-Enciclovida.a */; };
 		4127B8E72436AA8000C493AE /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127B8E52436AA8000C493AE /* Launch.swift */; };
 		4127B8EA2436AADA00C493AE /* Lauch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127B8E92436AADA00C493AE /* Lauch.storyboard */; };
-		4127B8EC2436B36800C493AE /* launchi.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127B8EB2436B36800C493AE /* launchi.storyboard */; };
 		BBB56154968B667A99F02A2C /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB04860133D0479D2FB9BE6 /* libPods-EnciclovidaTests.a */; };
 		FCC6CE8F229A4691CCDCC029 /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588956501ADA3CCB427691BE /* libPods-Enciclovida-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		3A59A3F6D2C64F4D9624F5A5 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		4127B8E52436AA8000C493AE /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		4127B8E92436AADA00C493AE /* Lauch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lauch.storyboard; sourceTree = "<group>"; };
-		4127B8EB2436B36800C493AE /* launchi.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = launchi.storyboard; sourceTree = "<group>"; };
 		47E8880B7170449C87EB4860 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		588956501ADA3CCB427691BE /* libPods-Enciclovida-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5C0D112EBF13D1F97035B2 /* libPods-Enciclovida-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,7 +155,6 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				4127B8E52436AA8000C493AE /* Launch.swift */,
 				4127B8E92436AADA00C493AE /* Lauch.storyboard */,
-				4127B8EB2436B36800C493AE /* launchi.storyboard */,
 			);
 			name = Enciclovida;
 			sourceTree = "<group>";
@@ -342,10 +339,13 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = Q8NCRPVSGG;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = Q8NCRPVSGG;
 						LastSwiftMigration = 1130;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -392,7 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4127B8EA2436AADA00C493AE /* Lauch.storyboard in Resources */,
-				4127B8EC2436B36800C493AE /* launchi.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -689,6 +688,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = Q8NCRPVSGG;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -713,7 +714,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = Q8NCRPVSGG;
 				INFOPLIST_FILE = EnciclovidaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -734,8 +737,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = Q8NCRPVSGG;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -745,8 +751,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovida.enciclovida;
 				PRODUCT_NAME = Enciclovida;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -757,7 +765,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8NCRPVSGG;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -767,7 +778,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovida.enciclovida;
 				PRODUCT_NAME = Enciclovida;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

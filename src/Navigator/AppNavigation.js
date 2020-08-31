@@ -1,7 +1,7 @@
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
 
 import HomeScreen from "../Containers/HomeScreen";
 import EnciclovidaScreen from "../Containers/EnciclovidaScreen";
