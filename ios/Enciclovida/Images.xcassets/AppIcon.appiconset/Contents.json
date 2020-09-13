@@ -3,7 +3,7 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "launcherX2.png",
+      "filename" : "launcher_notificationsX2-1.png",
       "scale" : "2x"
     },
     {
@@ -13,8 +13,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "launcher_settingsX2-1.png",
       "scale" : "2x"
     },
     {
@@ -24,8 +25,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "launcher_spotlightX2-1.png",
       "scale" : "2x"
     },
     {
@@ -35,14 +37,15 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "launcher_appX2-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "launcher_appX3.png.png",
+      "filename" : "launcher_appX3-1.png",
       "scale" : "3x"
     },
     {
