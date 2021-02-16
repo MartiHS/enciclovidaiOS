@@ -184,7 +184,7 @@ PODS:
   - React-jsinspector (0.62.0)
   - react-native-maps (0.27.1):
     - React
-  - react-native-webview (8.0.2):
+  - react-native-webview (8.2.1):
     - React
   - React-RCTActionSheet (0.62.0):
     - React-Core/RCTActionSheetHeaders (= 0.62.0)
@@ -381,7 +381,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8bf0b2707f05865113415088c398a7f98c0cf546
   React-jsinspector: 8e5913c4c6c54f0d3f9c9fc630c465a89cded65d
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-webview: 88b0a0453a88cd7e3c0729ce8723a66783814dd6
+  react-native-webview: d3cf75764f98fd433f1222f5a7ca8e355ada2a15
   React-RCTActionSheet: 674afbc8b9c76e0a83520e0a51da29a70802c03f
   React-RCTAnimation: f5f24330d09ee677fb49e0782f8321868f4df431
   React-RCTBlob: b773ce6138ab0d172ebd8a455fd4efd200a92549
@@ -401,4 +401,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6770b3a513d311f1d17d2505ddfaa5d0d466e868
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

@@ -69,6 +69,7 @@ class AboutScreen extends Component {
       }
       finally {
         // Obtener el resumen de la especie
+        //resumen_HTML += "<h1>HOLAAAAAA</h1>";
         this.setState({ resumen_HTML: html, spinner: false });
       }
       
@@ -185,10 +186,12 @@ class AboutScreen extends Component {
             textContent={'Cargando...'}
             textStyle={{ color: '#FFF' }}
           />
-          <ScrollView>
-            <Image source={{ uri: defaultimage }} style={styles.image} />
+          <ScrollView style={{flex:1}}>
+            <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={{flex: 1, flexDirection: "column" }, styles.image} />
+            
             <AutoHeightWebView 
-              style={styles.textcontent, { width: Dimensions.get('window').width, marginTop: 0 }}
+              style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
+              //style={styles.textcontent, { width: Dimensions.get('window').width, marginTop: 0 }}
               customScript={`document.body.style.background = 'transparent';`}
               customStyle={styles.customStyleView}
               source={ { html: this.state.resumen_HTML} } 
