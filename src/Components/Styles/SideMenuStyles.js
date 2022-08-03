@@ -45,10 +45,16 @@ export default StyleSheet.create({
   },
   touchmenu:{
     //height:50,
-},
+  },
   title: {
     ...Fonts.style.h3,
     color: Colors.white,
+  },
+  titleHeader: {
+    ...Fonts.style.h4,
+    color: Colors.white,
+    paddingLeft: 25,
+    paddingTop: 15,
   },
   tabLine: {
     backgroundColor: Colors.white,
@@ -58,6 +64,13 @@ export default StyleSheet.create({
   },
   menuItem:{
     width:"100%",
+    alignItems:"flex-start",
+    justifyContent:"center",
+    alignContent:"center",
+  },
+  subMenuItem:{
+    width:"100%",
+    paddingLeft:40,
     alignItems:"flex-start",
     justifyContent:"center",
     alignContent:"center",
