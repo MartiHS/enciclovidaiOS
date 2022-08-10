@@ -39,7 +39,7 @@ const InfoArray = [
 ];
 var arraydata = [];
 
-const API = 'http://api.enciclovida.mx';
+const API = 'https://api.enciclovida.mx';
 
 // create a component
 class NavBar extends React.Component {
@@ -275,8 +275,6 @@ class NavBar extends React.Component {
     const subtitle=this.state.subtitle;
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
-        <StatusBar barStyle="light-content" />
-        <StatusBar hidden={false} />
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
         <View style={styles.titleWrapper}>
           <Text style={[styles.title, title != null && title.length > 40 ? styles.title_small : null]}>{title}</Text>

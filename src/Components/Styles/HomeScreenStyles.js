@@ -46,7 +46,7 @@ export default StyleSheet.create({
     paddingLeft: 35,
     fontFamily: Fonts.family.base_bold,
     height: 45,
-    
+    color: Colors.black,
   },
   
   inputContainerStyle:{

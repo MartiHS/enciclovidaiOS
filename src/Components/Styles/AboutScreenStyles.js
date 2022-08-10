@@ -25,8 +25,10 @@ export default StyleSheet.create({
     width: '100%',
   },
   textcontent: {
-    padding: 20,
-    //fontFamily: Fonts.family.base,
+    margin: 50,
+  },
+  customStyleView: {
+    padding: '10px',
   },
   text: {
     fontFamily: Fonts.family.base,

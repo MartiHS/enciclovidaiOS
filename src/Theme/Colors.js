@@ -1,4 +1,5 @@
 const colors = {
+    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "#304E5B",
     navBarBackground: "#304E5B",
     black: "#000000",
     white: "#FFFFFF",

@@ -1,9 +1,10 @@
 const constants = {
-    API_ENCICLOVIDA: 'http://api.enciclovida.mx/',
-    API_ENCICLOVIDA_ESPECIES: 'http://enciclovida.mx/especies/',
+    API_ENCICLOVIDA: 'https://api.enciclovida.mx/',
+    API_ENCICLOVIDA_ESPECIES: 'https://enciclovida.mx/especies/',
     NATURALISTA_ENDPOINT: 'fotos-naturalista.json',
     BDI_ENDPOINT: 'fotos-bdi.json',
-    SPECIE_INFO_ENDPOINT: 'http://api.enciclovida.mx/especie/descripcion/',
+    SPECIE_INFO_ENDPOINT: 'https://api.enciclovida.mx/especie/descripcion/',
+    SPECIE_INFO_HTML: '/descripcion-app',
     RESULT_CATEGORIES:[
         'especie', 'subespecie', 
         'variedad', 'subvariedad', 

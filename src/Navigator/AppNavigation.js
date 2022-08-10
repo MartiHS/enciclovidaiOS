@@ -1,9 +1,10 @@
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack';
 
 import HomeScreen from "../Containers/HomeScreen";
+import FindByLocation from "../Containers/FindByLocationScreen";
 import EnciclovidaScreen from "../Containers/EnciclovidaScreen";
 import SymbologyScreen from "../Containers/SymbologyScreen";
 import ListSpeciesScreen from "../Containers/ListSpeciesScreen";
@@ -34,6 +35,7 @@ const TabNav = createBottomTabNavigator({
 const Drawer = createDrawerNavigator(
   {
     Find: { screen: HomeScreen },
+    FindByLocation: { screen: FindByLocation },
     SpeciesRisk: { screen: ListSpeciesScreen },
     SpeciesExotic: { screen: ListSpeciesScreen },
     SpeciesEndemic: { screen: ListSpeciesScreen },
@@ -42,7 +44,7 @@ const Drawer = createDrawerNavigator(
     Tabs: { screen: TabNav }
   },
   {
-    initialRouteName: "Find",
+    initialRouteName: "FindByLocation",
     contentComponent: SlideMenu,
     backBehavior: "history"
   }

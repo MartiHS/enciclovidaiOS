@@ -4,6 +4,9 @@ import { withNavigation } from "react-navigation";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
 
+import AutoHeightWebView from 'react-native-autoheight-webview'
+import { Dimensions } from 'react-native'
+
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 import config from "../Theme/Fonts/config"
@@ -52,44 +55,27 @@ class AboutScreen extends Component {
     } while (exist);
     return original;
   }
- 
-  getSpecieResume(id_specie) {
-    fetch(`${Constants.SPECIE_INFO_ENDPOINT}${id_specie}/resumen-wikipedia`)
-      .then(res => res.json())
-      .then((json) => {
-        let result = [];
-        try {
-          var original = json.sumamry;
-          if (original != "") {
-            var arraytmp = [];
-            var contet = this.getList(original, "<i><b>", "</b></i>", 1);
-            contet = this.getList(contet, "<b>", "</b>", 2);
-            contet = this.getList(contet, "<i>", "</i>", 3);
-            arraytmp = contet.split("@");
-            result = arraytmp.map((data, index) => {
-              if (data.indexOf("~1") > -1)
-                return this.renderTextBoldItalic(data.replace("~1", ""), index);
-              if (data.indexOf("~2") > -1)
-                return this.renderTextBold(data.replace("~2", ""), index);
-              if (data.indexOf("~3") > -1)
-                return this.renderTextItalic(data.replace("~3", ""), index);
-              else
-                return data;
-            });
-          } else {
-            result = ["No existe ninguna descripción para esta especie"];
-          }
-        }
-        catch (e) {
-          Alert.alert("Error en los datos");
-        }
-        finally {
-          // Obtener el resumen de la especie
-          this.setState({ contenido_render_array: result, spinner: false });
-        }
-      }).catch(error => {
-        this.setState({ spinner: false });
-      });
+  
+  getHTMLSpecieResume(id_specie) {
+    var urlToGetSpecieInfo = `${Constants.API_ENCICLOVIDA_ESPECIES}${id_specie}${Constants.SPECIE_INFO_HTML}`;
+    console.log(urlToGetSpecieInfo);
+    fetch(urlToGetSpecieInfo).then((response) => {
+      return response.text();
+    }).then((html) => {
+      try {
+        
+      } catch (e) {
+        Alert.alert("Error en los datos");
+      }
+      finally {
+        // Obtener el resumen de la especie
+        //resumen_HTML += "<h1>HOLAAAAAA</h1>";
+        this.setState({ resumen_HTML: html, spinner: false });
+      }
+      
+    }).catch(error => {
+      this.setState({ spinner: false });
+    });
   }
 
   /* Para evitar la recarga de datos de la misma especie ya consultada */
@@ -122,9 +108,8 @@ class AboutScreen extends Component {
         }
         
         this.setState({ imagen: defaultPhoto });
-        
-        await this.getSpecieResume(id_specie);
-      
+        await this.getHTMLSpecieResume(id_specie);
+
       } else {
         this.setState({ spinner: false, pins: [] });
       }
@@ -143,6 +128,7 @@ class AboutScreen extends Component {
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.about_id_specie);
   }
+  
   // Se invoca inmediatamente después de que un componente se monte (se inserte en el árbol)
   componentDidMount() {
     console.log("\n\n - - componentDidMount - - \n\n");
@@ -158,25 +144,6 @@ class AboutScreen extends Component {
     // this.s2! = this.props.navigation.addListener('willBlur', this.onEvent);
     // this.s3! = this.props.navigation.addListener('didBlur', this.onEvent);
   }
-
-    /*/ Se invoca inmediatamente después de que la actualización ocurra. Este método no es llamado para el renderizador inicial
-  componentDidUpdate(props) {
-    console.log("\n\n - - componentDidUpdate - - \n\n");
-    return true;
-  }*/
-
-  /*/ Para avisar a React si la salida de un componente no se ve afectada por el cambio actual en el estado o los accesorios
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("\n\n - - shouldComponentUpdate - - \n\n");
-    return true; 
-  }*/
-
-  /*/ se invoca justo antes de llamar al método de render
-  static getDerivedStateFromProps(props, state) { 
-    console.log("\n\n - - getDerivedStateFromProps - - \n\n");
-    console.log("Llamada a AboutScreen \n" + JSON.stringify(props.navigation.state.params.id_specie));
-    return true; 
-  }*/
   
   // Se invoca inmediatamente antes de desmontar y destruir un componente
   componentWillUnmount() {
@@ -219,13 +186,19 @@ class AboutScreen extends Component {
             textContent={'Cargando...'}
             textStyle={{ color: '#FFF' }}
           />
-          <ScrollView>
-            <Image source={{ uri: defaultimage }} style={styles.image} />
-            <View style={styles.textcontent}>
-              <Text style={styles.text}>
-                {this.state.contenido_render_array.map(value => { return value })}
-              </Text>
-            </View>
+          <ScrollView style={{flex:1}}>
+            <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={{flex: 1, flexDirection: "column" }, styles.image} />
+            
+            <AutoHeightWebView 
+              style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
+              //style={styles.textcontent, { width: Dimensions.get('window').width, marginTop: 0 }}
+              customScript={`document.body.style.background = 'transparent';`}
+              customStyle={styles.customStyleView}
+              source={ { html: this.state.resumen_HTML} } 
+              scalesPageToFit={true}
+              viewportContent={'width=device-width, user-scalable=no'}
+              showsVerticalScrollIndicator={true}
+            />
           </ScrollView>
         </View>
         <TabBar shownav={true} selected="About" />
