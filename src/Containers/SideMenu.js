@@ -1,11 +1,11 @@
 import React from "react";
-import {View, Text, ScrollView, TouchableOpacity, Image, TouchableHighlight} from "react-native";
+import {View, Text, ScrollView, TouchableOpacity, StatusBar, Image, TouchableHighlight} from "react-native";
 import {createIconSetFromFontello} from "react-native-vector-icons";
 import {withNavigation} from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import config from "../Theme/Fonts/config"
 import styles from "../Components/Styles/SideMenuStyles";
+import { Colors } from "../Theme";
 
 const CustomIcon = createIconSetFromFontello(config);
 
@@ -128,6 +128,7 @@ class SideMenu extends React.Component {
     const itemUnderlaycolor = "#304E5B";
     return (
       <View style = {[styles.content, styles.flex_1]} >
+        <StatusBar barStyle="light-content" backgroundColor={Colors.statusBarBackground} /> 
         <ScrollView contentContainerStyle = {styles.menu} >
           <View >
             <TouchableHighlight style = {[styles.touchmenu]} onPress = {this.closeMenu} >

@@ -13,7 +13,6 @@ import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
 
 
-
 var arraydata = [];
 
 /* HOMESCREEN: pantalla en la que se muestra el buscador de especies junto al menú  izquierdo */

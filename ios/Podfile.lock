@@ -184,7 +184,7 @@ PODS:
   - React-jsinspector (0.62.0)
   - react-native-maps (0.26.1):
     - React
-  - react-native-webview (8.0.2):
+  - react-native-webview (8.2.1):
     - React
   - React-RCTActionSheet (0.62.0):
     - React-Core/RCTActionSheetHeaders (= 0.62.0)
@@ -251,7 +251,7 @@ PODS:
     - React
   - RNReanimated (1.4.0):
     - React
-  - RNScreens (2.0.0-alpha.19):
+  - RNScreens (2.0.0-alpha.22):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -381,7 +381,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8bf0b2707f05865113415088c398a7f98c0cf546
   React-jsinspector: 8e5913c4c6c54f0d3f9c9fc630c465a89cded65d
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
-  react-native-webview: 99bdfd6c189772b0f15494f728430c23b18b93e4
+  react-native-webview: 160ac8d6bb974e2933f2de6bb7464a8e934ff31d
   React-RCTActionSheet: 674afbc8b9c76e0a83520e0a51da29a70802c03f
   React-RCTAnimation: f5f24330d09ee677fb49e0782f8321868f4df431
   React-RCTBlob: b773ce6138ab0d172ebd8a455fd4efd200a92549
@@ -395,10 +395,10 @@ SPEC CHECKSUMS:
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNLocalize: 07eb7a91d10021cdf59d80061ebf3adb8a5b5688
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
-  RNScreens: 62284de159bbddba268edd282337afdb8771aaed
+  RNScreens: 6adf01eb4080f44af6cca551207c6b0505066857
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 9db9ff2025ad21d1ac0a8b3c85d5ac4e7c29d525
 
-PODFILE CHECKSUM: 6770b3a513d311f1d17d2505ddfaa5d0d466e868
+PODFILE CHECKSUM: 70bed8b7c3bab3b272323eea9074d09e148dba75
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.11.2
