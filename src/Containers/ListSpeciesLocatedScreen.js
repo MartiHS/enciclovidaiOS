@@ -23,60 +23,6 @@ class ListSpeciesScreen extends Component {
       refreshing: false,
     };
   }
-  
-  fetchSpeciesByLocation = async (location) => { 
-    this.setState({ spinner: true, refreshing: false, loadingMore: false });
-    console.log("------------------");
-    this.setState({ query: "text" })
-    // Si existe una query para llamar:
-    if(location != null){
-        console.log(`https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}`);
-        fetch(`https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}`)
-        .then(res => res.json())
-        .then((json) => {
-            try {
-              console.log("-----------------sss-");
-                const result = json.map(item => {
-                  return {
-                    id: item.especie.IdNombre,
-                    imagen: item.especie.foto_principal,
-                    title: item.especie.nombre_comun_principal,
-                    subtitle: item.especie.NombreCompleto
-                  };
-                });
-
-
-                var entries = json.x_total_entries;
-                var len = json.length;
-                var totpage = 0;
-                var limit = 7;
-                if (len == limit) {
-                  totpage = entries / len | 0;
-                  var exact = json.x_total_entries % json.length;
-                  if (exact != 0) {
-                    totpage = totpage;
-                  } else {
-                    totpage = totpage + 1;
-                  }
-                }
-                //Alert.alert("Total", json.x_total_entries.toString());
-                this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
-                console.log("------------------FIN");
-              } catch (e) {
-                this.setState({ spinner: false });
-                console.log(e);
-                Alert.alert("Error en los datos");
-              }
-
-        }).catch((error) => {
-            console.log("------------------");
-        });
-    } else {
-      console.log("------------------ NOOO");
-        this.setState({ data: [] });
-    }
-  }
-
 
   getSpeciesInfo = async (filter) => {
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
@@ -211,10 +157,6 @@ class ListSpeciesScreen extends Component {
   };
 
   _handleRefresh = () => {
-
-    console.log("\n\n - - _handleRefresh - - \n\n");
-
-
     this.setState({
       page: 1,
       refreshing: true
@@ -223,31 +165,12 @@ class ListSpeciesScreen extends Component {
         this.setState({
           data: []
         });
-        
-
-        let params = this.props.navigation.state;
-    
-        console.log(params.routeName); 
-    
-        if(params.routeName == "SpeciesByLocation"){
-          console.log(" - - SpeciesByLocation"); 
-          let locationData = params.params.data.location;
-    
-          global.title = locationData.nom_reg;  
-          global.subtitle = locationData.tipo_region;
-    
-          this.fetchSpeciesByLocation(locationData);
-          
-        } else { // Si no, hacer búsqueda normal
-          this.getSpeciesInfo(global.filtro);
-        }
-
+        this.getSpeciesInfo(global.filtro);
       }
     );
   };
 
   UNSAFE_componentWillReceiveProps = () => {
-    console.log("Cargar datosddd 1");
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde ListSpeciesScreen- - \n\n");
     this._handleRefresh();
   };
@@ -256,30 +179,7 @@ class ListSpeciesScreen extends Component {
     this.setState({
       data: []
     });
-
-    console.log("Cargar datosddd 2 "); 
-    
-   
-
-
-    // -- Inicio de la vista, leer el origen si viene desde la ubicación: realizar busquedas por ubicación
-    let params = this.props.navigation.state;
-    
-    console.log(params.routeName); 
-
-    if(params.routeName == "SpeciesByLocation"){
-      console.log(" - - SpeciesByLocation"); 
-      let locationData = params.params.data.location;
-
-      global.title = locationData.nom_reg;  
-      global.subtitle = locationData.tipo_region;
-
-      this.fetchSpeciesByLocation(locationData);
-      
-    } else { // Si no, hacer búsqueda normal
-      this.getSpeciesInfo(global.filtro);
-    }
-    
+    this.getSpeciesInfo(global.filtro);
   };
 
   render() {

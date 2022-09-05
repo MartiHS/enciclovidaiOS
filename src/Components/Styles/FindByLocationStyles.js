@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { Metrics, AppStyles, Colors, Fonts } from "../../Theme/";
+import { Metrics, AppStyles, Colors, Fonts } from "../../Theme";
 
 export default StyleSheet.create({
   ...AppStyles.screen,
@@ -23,10 +23,14 @@ export default StyleSheet.create({
   // Vista que contiene el campo de texto (autocomplete)
   view: {
     alignItems: 'stretch',
-    flexDirection: "row",
-    paddingLeft: 20,
+    paddingLeft: 35,
     paddingRight: 20,
-    height: 70,
+    height: 55,
+    width:"90%"
+  },
+
+  viewResultLocationStyle:{
+    paddingLeft: 55,
   },
   
   // Imagen de fondo (enciclovida)
@@ -38,15 +42,39 @@ export default StyleSheet.create({
   viewImage: {
     height: 60,
     zIndex:-1,
+    marginTop:20
     //marginBottom:40,
   },
 
+  searchBar:{
+    flexDirection: "row",
+    width:"100%"
+  },
   // - - - autocompletado
   autocomplete: {
-    paddingLeft: 35,
+    paddingRight: 15,
+    paddingLeft: 15,
     fontFamily: Fonts.family.base_bold,
     height: 45,
-    
+    color: Colors.black,
+  },
+
+  findBLAutocomplete: {
+    paddingRight: 15,
+    paddingLeft: 15,
+    fontFamily: Fonts.family.base_bold,
+    height: 45,
+    color: Colors.black,
+  },
+
+  customLocationIconTouch:{ 
+    top: 5,
+    left: 18,
+  },
+
+  customLocationIcon: {
+    fontSize: 35,
+    color: Colors.navBarBackground,
   },
   
   inputContainerStyle:{
@@ -109,13 +137,20 @@ export default StyleSheet.create({
     left: 25,
     
   },
+
+  text_element:{
+    fontSize: 15,
+    paddingLeft: 10,
+    color: "#777777",
+    fontFamily: Fonts.family.base,
+  },
   
   customSearchIcon: {
     position: "absolute",
     zIndex: 2,
-    top: 10,
-    left: 28,
-    fontSize: 25,
+    top: 5,
+    left: 18,
+    fontSize: 35,
     color: Colors.navBarBackground,
   },
 

@@ -24,12 +24,18 @@ export default StyleSheet.create({
   listItem: {
     margin: 5,
     padding: 10,
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
     width: "90%",
     flex: 1,
     alignSelf: "center",
     flexDirection: "row",
-    borderRadius: 5
+    borderTopLeftRadius: 20,
+    borderBottomEndRadius: 20,
+    // Sobreado
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 10,
   },
   imageItem: {
     width: 80,

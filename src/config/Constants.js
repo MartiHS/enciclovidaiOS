@@ -21,6 +21,12 @@ const constants = {
         'seccion', 'subseccion',
         'serie', 'subserie',
     ],
+    RESULT_LOCATIONS:[
+        'municipio',
+        'estado',
+        'anp',
+        
+    ],
     DEFAULT_REGION: {
         latitude: 24.286809,
         longitude: -102.817436,

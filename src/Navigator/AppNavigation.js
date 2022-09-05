@@ -36,6 +36,7 @@ const Drawer = createDrawerNavigator(
   {
     Find: { screen: HomeScreen },
     FindByLocation: { screen: FindByLocation },
+    SpeciesByLocation: { screen: ListSpeciesScreen },
     SpeciesRisk: { screen: ListSpeciesScreen },
     SpeciesExotic: { screen: ListSpeciesScreen },
     SpeciesEndemic: { screen: ListSpeciesScreen },
