@@ -35,6 +35,13 @@ export default styles = StyleSheet.create({
         ...Fonts.style.h3_small,
         color: Colors.white
     },
+    dialogTitle: {
+        ...Fonts.style.h1,
+        color: Colors.gray,
+        paddingTop:10,
+        paddingBottom:10
+        
+    },
     favIcon: {
         alignContent:"center",
         alignItems:"center",
@@ -46,11 +53,17 @@ export default styles = StyleSheet.create({
         alignItems:"center",
         textAlign:"center",
         justifyContent:"center",
-        fontSize: 12,
+        fontSize: 20,
         padding: 3,
-        borderRadius: 11,
-        borderWidth: 1.5,
-        borderColor: "white"
+        color: "white"
+    },
+    filteredIcon:{
+        alignContent:"center",
+        alignItems:"center",
+        textAlign:"center",
+        justifyContent:"center",
+        fontSize: 25,
+        color:Colors.navBarBackground,
     },
     faviconmenu:{
     },
@@ -68,6 +81,11 @@ export default styles = StyleSheet.create({
     title_flat:{
         ...Fonts.style.h3,
         fontFamily: Fonts.family.base_bold,
+    },
+    flat_multiSelect:{
+        width:"100%",
+        paddingTop:10,
+      
     },
     imageIconFilter:{
         width:60,

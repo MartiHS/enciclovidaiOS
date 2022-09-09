@@ -73,7 +73,7 @@ export default StyleSheet.create({
   },
 
   customLocationIcon: {
-    fontSize: 35,
+    fontSize: 30,
     color: Colors.navBarBackground,
   },
   

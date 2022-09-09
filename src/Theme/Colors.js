@@ -15,6 +15,12 @@ const colors = {
     link: "#3B3BFF",
     iconMap1: "#bdd500",
     iconMap2: "#ff8421",
+    // -- 
+    // Colores para el multiselect
+    green: "#8A9D46",
+    blue: "#304E5B",
+    gray: 'gray',
+
 }
 
 export default colors; 

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, FlatList, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
-import { createIconSetFromFontello } from "react-native-vector-icons";
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import NavBar from '../Components/NavBar'; 
 import styles from "../Components/Styles/FindByLocationStyles";
@@ -12,15 +10,13 @@ import Constants from '../Config/Constants';
 
 import stylesListEspecies from "../Components/Styles/ListSpeciesScreenStyles";
 
-
+import { createIconSetFromFontello } from "react-native-vector-icons";
 import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
 
+
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
-
-
-import styless from "../Components/Styles/ListSpeciesScreenStyles";
 
 
 import { NetworkInfo } from "react-native-network-info";
@@ -324,7 +320,7 @@ class HomeScreen extends Component {
                                 }
                             }}
                         >
-                            <Icon name="pescado-ev-icon" style={styles.customLocationIcon}></Icon>
+                            <CustomIcon name="distribucion" style={styles.customLocationIcon}></CustomIcon>
                         </TouchableOpacity>
                         <View style={styles.view}>
                             <Autocomplete
@@ -356,46 +352,12 @@ class HomeScreen extends Component {
                                 )}
                             />
                         </View> 
+                    </View>                   
+
+                    <View style={[styles.view, styles.viewImage]}>
+                        <Image style={styles.image}
+                            source={{uri: 'ic_top_home'}}/>
                     </View>
-
-
-                    <View style={styles.viewResultLocationStyle}>
-                        <Text style={styles.text_element}>{}</Text> 
-                    </View>
-                    
-                   
-
-                    <FlatList
-                        style = {stylesListEspecies.flatList} 
-                        data={this.state.dataEsp}
-                        extraData={this.state}
-                        keyExtractor={(item) => item.id.toString()}
-                        ListEmptyComponent={this._listEmptyComponent}
-                        ListFooterComponent={this.renderFooter.bind(this)}
-                        renderItem={({ item, index }) => (
-
-                        <View style={stylesListEspecies.listItem}>
-                            <TouchableOpacity style={stylesListEspecies.touchableItem} onPress={() => { this.handlePress(item) }} >
-                            <Image source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }} style={stylesListEspecies.imageItem} />
-                            <View style={stylesListEspecies.textRow}>
-                                <Text style={stylesListEspecies.titleRow}>{item.title}</Text>
-                                <Text>{item.subtitle}</Text> 
-                            </View>
-                            </TouchableOpacity>
-                        </View>
-                        )}
-                        numColumns={1}
-                        onEndReached = {this._handleLoadMore}
-                        onEndReachedThreshold = {0.1}
-                        initialNumToRender = {50}
-                        onRefresh = {this._handleRefresh}
-                        refreshing = {this.state.refreshing}
-                        />
-
-
-                 
-
-                    
 
                     {this.footer()}
                 </View>

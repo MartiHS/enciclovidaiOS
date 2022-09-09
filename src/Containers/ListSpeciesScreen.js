@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import {View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from "react-navigation";
 import Spinner from 'react-native-loading-spinner-overlay';
-
 import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/ListSpeciesScreenStyles";
-
 import Constants from '../Config/Constants';
+
+
 
 var arraydata = [];
 // create a component
@@ -283,9 +283,21 @@ class ListSpeciesScreen extends Component {
   };
 
   render() {
+    let params = this.props.navigation.state;
+    let filterButton, filterButtonByL;
+
+    if(params.routeName == "SpeciesByLocation"){
+      filterButtonByL = true;
+      filterButton= false;
+    } else { // Si no, hacer búsqueda normal
+      filterButtonByL = false;
+      filterButton= true;
+    }
+
+
     return (
       <View style={[styles.MainContainer]} >
-        <NavBar menuBlackButton={true} filterButton={true} />
+        <NavBar menuBlackButton={true} filterButton={filterButton} filterButtonByL={filterButtonByL} />
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
           <FlatList
