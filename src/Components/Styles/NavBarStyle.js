@@ -39,8 +39,44 @@ export default styles = StyleSheet.create({
         ...Fonts.style.h1,
         color: Colors.gray,
         paddingTop:10,
-        paddingBottom:10
+        paddingBottom:10,
+        //marginTop:-20
         
+    },
+    dialogButton: {
+        backgroundColor: Colors.blue,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop:10,
+        paddingBottom:10,
+        borderRadius: 8,
+        width:"48%",
+        marginRight:"4%",
+    },
+    dialogButton2: {
+        backgroundColor: Colors.green,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop:10,
+        paddingBottom:10,
+        borderRadius: 8,
+        width:"48%",
+    },
+    dialogButton3: {
+        backgroundColor: Colors.green,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding:7,
+        
+        paddingRight:0,
+        borderRadius: 20,
+        
+    }, 
+    dialogButtonIcon: {
+       paddingRight: 8
     },
     favIcon: {
         alignContent:"center",
@@ -91,11 +127,49 @@ export default styles = StyleSheet.create({
         width:60,
         height:60,
     },
+    imageIconFilterHo:{
+        width:50,
+        height:50,
+    },
     column:{
         flex: 1, 
         flexDirection: 'column', 
         margin: 1, 
         alignItems: 'center'
+    },
+    columnHo1:{
+        margin: 1, 
+        alignItems: 'center',
+        width: 100,
+        height: 115,
+        borderColor: Colors.gray,
+        marginBottom: 10,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 2,
+    },
+    columnHo2:{
+        margin: 1, 
+        alignItems: 'center',
+        width: 100,
+        height: 130,
+        borderColor: Colors.gray,
+        marginBottom: 10,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 2,
     },
     columnSelect:{
         flex: 1, 
@@ -103,6 +177,30 @@ export default styles = StyleSheet.create({
         margin: 1, 
         alignItems: 'center',
         backgroundColor: '#999999'
+    },
+    columnSelectHo1:{
+        flex: 1, 
+        flexDirection: 'column', 
+        margin: 1, 
+        alignItems: 'center',
+        backgroundColor: Colors.green,
+        width: 100,
+        height: 115,
+        borderColor: Colors.gray,
+        marginBottom: 10,
+        padding: 10,
+    },
+    columnSelectHo2:{
+        flex: 1, 
+        flexDirection: 'column', 
+        margin: 1, 
+        alignItems: 'center',
+        backgroundColor: Colors.green,
+        width: 100,
+        height: 130,
+        borderColor: Colors.gray,
+        marginBottom: 10,
+        padding: 10,
     },
     view_text:{
         ...Fonts.style.textsmall,
@@ -137,6 +235,15 @@ export default styles = StyleSheet.create({
         backgroundColor: "#B5B3AE",
         height: 2,
         margin: 10,
+    },
+    upButtons:{
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: 'flex-start',
+    },
+    bottomButtons:{
+        flexDirection: "row",
+        width: "100%",
     },
     items: {
         ...Fonts.style.textsmall,

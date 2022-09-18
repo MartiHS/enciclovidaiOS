@@ -18,18 +18,6 @@ const CustomIcon = createIconSetFromFontello(config);
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
-
-import { NetworkInfo } from "react-native-network-info";
-
-NetworkInfo.getIPAddress().then(ipAddress => {
-    console.log(ipAddress);
-  }); 
-
-  NetworkInfo.getGatewayIPAddress().then(defaultGateway => {
-    console.log(defaultGateway);
-  })
-
-
 var arraydata = []; 
 
 /* HOMESCREEN: pantalla en la que se muestra el buscador de especies junto al menú  izquierdo */
@@ -41,15 +29,19 @@ class HomeScreen extends Component {
         global.id_specie = 0;
         global.title = "";
         global.subtitle = "";
+        global.tipo_region = "";
+        global.nom_reg = "";
+        global.locationData = {nom_reg: ""}
         global.taxonPhotos = [];
         global.taxonPhotos_BDI_source = false;
         global.filtro = "";
         global.listSpecies = "";
         global.LastlistSpecies = "";
+        global.lastLocationData = ""
         global.classificationList = [];
-        global.ListReino = [];
-        global.ListAnimales = [];
-        global.ListPlantas = [];
+        global.ListReino = global.DataFilterReinos;
+        global.ListAnimales = global.DataFilterAnimales;
+        global.ListPlantas = global.DataFilterPlantas;
 
         this.state = {
             data: [],
@@ -150,7 +142,7 @@ class HomeScreen extends Component {
                 let dataLocation = {
                     region_id: json.munid,
                     nom_reg: json.nom_mun + ', ' + json.nom_ent,
-                    tipo_region: 'Municipio'
+                    tipo_region: 'Municipio' 
                 };
 
                 console.log("------------------");
@@ -164,8 +156,10 @@ class HomeScreen extends Component {
                 //this.fetchSpeciesByLocation(dataLocation);
 
                 const{navigation}=this.props;
-
-                navigation.navigate('SpeciesByLocation', {
+                global.listSpecies = "SpeciesByLocation";
+                global.filtro = "";
+                global.locationData = dataLocation;
+                navigation.navigate(global.listSpecies, {
                     data: { 
                         origen: 'ByLocation',
                         location: dataLocation
@@ -228,12 +222,14 @@ class HomeScreen extends Component {
 
         const{navigation}=this.props;
 
-        navigation.navigate('SpeciesByLocation', {
+        global.listSpecies = "SpeciesByLocation";
+        navigation.navigate(global.listSpecies, {
             data: { 
                 origen: 'ByLocation',
                 location: dataLocation
             },
         });
+        navigation.closeDrawer();
         
 
         //this.fetchSpeciesByLocation(dataLocation);

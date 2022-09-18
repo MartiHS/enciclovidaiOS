@@ -9,7 +9,7 @@ import { Colors } from "../Theme";
 
 const CustomIcon = createIconSetFromFontello(config);
 
-const DataFilterReinos = [ 
+global.DataFilterReinos = [ 
   {id: 1, name: "Animales", icon: "ic_re_animales", order: 1, selected: false },
   {id: 4, name: "Hongos", icon: "ic_re_hongos", order: 2, selected: false },
   {id: 2, name: "Plantas", icon: "ic_re_plantas", order: 3, selected: false},
@@ -17,7 +17,7 @@ const DataFilterReinos = [
   {id: 5, name: "Protozoarios", icon: "ic_re_protozoarios", order: 5, selected: false},
 ];
 
-const DataFilterAnimales = [
+global.DataFilterAnimales = [
   {id: 22653, name: "Mamíferos", icon: "ic_ga_mamiferos", order: 1, selected: false },
   {id: 22655, name: "Aves", icon: "ic_ga_aves", order: 2, selected: false},
   {id: 22647, name: "Reptiles", icon: "ic_ga_reptiles", order: 3, selected: false},
@@ -37,7 +37,7 @@ const DataFilterAnimales = [
   {id: 40657, name: "Esponjas y parientes", icon: "ic_ga_esponjas", order: 17, selected: false},
 ];
 
-const DataFilterPlantas = [
+global.DataFilterPlantas = [
   {id: 135296,name: "Musgos, hepáticas y parientes", icon: "ic_gp_musgos", order: 1, selected: false},
   {id: 135299, name: "Antoceros", icon: "ic_gp_antoceros", order: 2, selected: false },
   {id: 135313, name: "Helechos y parientes", icon: "ic_gp_helechos", order: 3,selected: false},
@@ -61,6 +61,10 @@ const listsParams = {
   SpeciesEndemic: {
     filter: "&dist=%5B3%5D",
     title: "Especies endémicas",
+  },
+  SpeciesByLocation: {
+    filter: "",
+    title: "BY L",
   }
 };
 
@@ -75,6 +79,7 @@ class SideMenu extends React.Component {
 
   goToFindByLocation = () => {
     const {navigation} = this.props;
+    this.loadFilterOptions();
     navigation.navigate("FindByLocation");
     navigation.closeDrawer();
   };
@@ -88,9 +93,16 @@ class SideMenu extends React.Component {
     global.title = listsParams[speciesClass].title;
     global.listSpecies = speciesClass;
     global.subtitle = "";
-    global.ListReino = DataFilterReinos;
-    global.ListAnimales = DataFilterAnimales;
-    global.ListPlantas = DataFilterPlantas;
+    global.ListReino = global.DataFilterReinos;
+    global.ListAnimales = global.DataFilterAnimales;
+    global.ListPlantas = global.DataFilterPlantas;
+    global.id_specie = 0;
+  };
+
+  loadFilterOptions = () => {
+    global.ListReino = global.DataFilterReinos;
+    global.ListAnimales = global.DataFilterAnimales;
+    global.ListPlantas = global.DataFilterPlantas;
     global.id_specie = 0;
   };
 
