@@ -13,6 +13,8 @@ import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
 
 
+const CustomIcon = createIconSetFromFontello(config);
+
 // Tipo de distribución:
 const T_DISTRIBUCION = [
   {id:"3", name: "Endémica", icon: "endemica", order: 1, selected: false},
@@ -105,33 +107,30 @@ const T_AMBIENTE = [
   {id:1210, name: "Hipersalino", icon: "hipersalino", order: 1, selected: false}, 
 ];
 
-
-const CustomIcon = createIconSetFromFontello(config);
-
 const InfoArray = [
-    {id: 10, name: "Exótica", icon:"ic_10",title: "Tipo de distribución", order: 1 },
-    {id: 7, name: "Nativa", icon:"ic_7", title: "Tipo de distribución", order: 2 },
-    {id: 6, name: "Exótica - Invasora", icon:"ic_6", title: "Tipo de distribución", order: 3 },
-    {id: 3, name: "Endémica", icon:"ic_3", title: "Tipo de distribución", order: 4 },
-    {id: 17, name: "Sujeta a protección especial (Pr)", icon:"ic_17", title: "Categoría nacional de riesgo", order: 5 },
-    {id: 15, name: "Amenazada (A)", icon:"ic_15", title: "Categoría nacional de riesgo", order: 6 },
-    {id: 14, name: "En peligro de extinción (P)", icon:"ic_14", title: "Categoría nacional de riesgo", order: 7 },
-    {id: 16, name: "Probablemente extinta en el medio silvestre (E)", icon:"ic_16", title: "Categoría nacional de riesgo", order: 8 },
-    {id: 29, name: "Vulnerable (VU)", icon:"ic_29", title: "Categoría internacional de riesgo", order: 9 },
-    {id: 28, name: "En peligro (EN)", icon:"ic_28", title: "Categoría internacional de riesgo", order: 10 },
-    {id: 27, name: "En peligro crítico (CR)", icon:"ic_27", title: "Categoría internacional de riesgo", order: 11 },
-    {id: 26, name: "Extinto en estado silvestre (EW)", icon:"ic_26", title: "Categoría internacional de riesgo", order: 12 },
-    {id: 25, name: "Extinto (EX)", icon:"ic_25", title: "Categoría internacional de riesgo", order: 13 },
-    {id: 22, name: "Apéndice I", icon:"ic_22", title: "Protegidas del comercio internacional", order: 14 },
-    {id: 23, name: "Apéndice II", icon:"ic_23", title: "Protegidas del comercio internacional", order: 15 },
-    {id: 24, name: "Apéndice III", icon:"ic_24", title: "Protegidas del comercio internacional", order: 16 },
-    {id: 1033, name: "Prioritaria con grado alta", icon:"ic_1033", title: "Prioritarias para la conservación", order: 17 },
-    {id: 1034, name: "Prioritaria con grado media", icon:"ic_1034", title: "Prioritarias para la conservación", order: 18 },
-    {id: 1035, name: "Prioritaria con grado menor", icon:"ic_1053", title: "Prioritarias para la conservación", order: 19 },
-    {id: 1026, name: "Terrestre", icon:"ic_1026", title: "Ambiente", order: 20 },
-    {id: 1025, name: "Dulceacuícola", icon:"ic_1025", title: "Ambiente", order: 21 },
-    {id: 1024, name: "Marino", icon:"ic_1024", title: "Ambiente", order: 23 },
-    {id: 1027, name: "Salobre", icon:"ic_1027", title: "Ambiente", order: 24 },
+    {id: 10, name: "Exótica", iconFont: 'exotica', icon:"ic_10",title: "Tipo de distribución", order: 1 },
+    {id: 7, name: "Nativa", iconFont: 'nativa', icon:"ic_7dd", title: "Tipo de distribución", order: 2 },
+    {id: 6, name: "Exótica - Invasora", iconFont: 'exotica-invasora', icon:"ic_6", title: "Tipo de distribución", order: 3 },
+    {id: 3, name: "Endémica", iconFont: 'endemica', icon:"ic_3", title: "Tipo de distribución", order: 4 },
+    {id: 17, name: "Sujeta a protección especial (Pr)", iconFont: 'sujeta-a-proteccion-especial-pr', icon:"ic_17", title: "Categoría nacional de riesgo", order: 5 },
+    {id: 15, name: "Amenazada (A)", iconFont: 'amenazada-a', icon:"ic_15", title: "Categoría nacional de riesgo", order: 6 },
+    {id: 14, name: "En peligro de extinción (P)", iconFont: 'en-peligro-de-extincion-p', icon:"ic_14", title: "Categoría nacional de riesgo", order: 7 },
+    {id: 16, name: "Probablemente extinta en el medio silvestre (E)", iconFont: 'probablemente-extinta-en-el-medio-silvestre-e', icon:"ic_16", title: "Categoría nacional de riesgo", order: 8 },
+    {id: 29, name: "Vulnerable (VU)", iconFont: 'vulnerable-vu', icon:"ic_29", title: "Categoría internacional de riesgo", order: 9 },
+    {id: 28, name: "En peligro (EN)", iconFont: 'en-peligro-en', icon:"ic_28", title: "Categoría internacional de riesgo", order: 10 },
+    {id: 27, name: "En peligro crítico (CR)", iconFont: 'en-peligro-critico-cr', icon:"ic_27", title: "Categoría internacional de riesgo", order: 11 },
+    {id: 26, name: "Extinto en estado silvestre (EW)", iconFont: 'extinto-en-estado-silvestre-ew', icon:"ic_26", title: "Categoría internacional de riesgo", order: 12 },
+    {id: 25, name: "Extinto (EX)", iconFont: 'extinto-ex', icon:"ic_25", title: "Categoría internacional de riesgo", order: 13 },
+    {id: 22, name: "Apéndice I", iconFont: 'apendice-i', icon:"ic_22", title: "Protegidas del comercio internacional", order: 14 },
+    {id: 23, name: "Apéndice II", iconFont: 'apendice-ii', icon:"ic_23", title: "Protegidas del comercio internacional", order: 15 },
+    {id: 24, name: "Apéndice III", iconFont: 'apendice-iii', icon:"ic_24", title: "Protegidas del comercio internacional", order: 16 },
+    {id: 1033, name: "Prioritaria con grado alta", iconFont: 'alta', icon:"ic_1033", title: "Prioritarias para la conservación", order: 17 },
+    {id: 1034, name: "Prioritaria con grado media", iconFont: 'media', icon:"ic_1034", title: "Prioritarias para la conservación", order: 18 },
+    {id: 1035, name: "Prioritaria con grado menor", iconFont: 'menor', icon:"ic_1053", title: "Prioritarias para la conservación", order: 19 },
+    {id: 1026, name: "Terrestre", iconFont: 'terrestre', icon:"ic_1026", title: "Ambiente", order: 20 },
+    {id: 1025, name: "Dulceacuícola", iconFont: 'dulceacuicola', icon:"ic_1025", title: "Ambiente", order: 21 },
+    {id: 1024, name: "Marino", iconFont: 'marino', icon:"ic_1024", title: "Ambiente", order: 23 },
+    {id: 1027, name: "Salobre", iconFont: 'salobre', icon:"ic_1027", title: "Ambiente", order: 24 },
 ];
 var arraydata = [];
 
@@ -260,6 +259,7 @@ class NavBar extends React.Component {
           isLast: false, 
           name: found.name, 
           icon: found.icon, 
+          iconFont: found.iconFont, 
           title: found.title, 
           order: found.order 
         };
@@ -271,6 +271,7 @@ class NavBar extends React.Component {
   getSpecieInfo = async (id_especie) => {
     if(id_especie != 0 && id_especie != this.state.id_tmp){
       this.setState({ id_tmp: id_especie });
+      console.log(`${API}/especie/${id_especie}`);
       fetch(`${API}/especie/${id_especie}`)
       .then(res => res.json())
       .then((json) => {
@@ -290,6 +291,9 @@ class NavBar extends React.Component {
         });
 
         arraydata[arraydata.length-1].isLast = true;
+
+        console.log(arraydata);
+
         this.setState({ data: arraydata });
       }).catch(error => {
 
@@ -355,14 +359,17 @@ class NavBar extends React.Component {
     global.ListPlantas = planta;
   };
 
-  renderItem = ({ last, title, content, icon }) => {
+  renderItem = ({ last, title, content, icon, iconFont }) => {
+    console.log(title);
+    console.log(content);
+    console.log(icon);
     return(
       <View>
         <Text style={styles.items}>{title}</Text>
         <Text style={[styles.items, styles.itemsdetails]}>{content}</Text>
         {!last && <View style={styles.tabLine} />}
         <View style={[styles.image, last ? styles.imagelast : null ]}>
-          <Image source={{ uri: icon }} style={styles.imageIcon} />
+          <CustomIcon name={iconFont} style={[styles.iconImage, { color: Colors[iconFont] }]}></CustomIcon>  
         </View>
       </View>
     )
@@ -650,7 +657,7 @@ class NavBar extends React.Component {
                         extraData={this.state}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={({ item }) => (
-                          this.renderItem({last: item.isLast, title: item.title, content: item.name, icon: item.icon})
+                          this.renderItem({last: item.isLast, title: item.title, content: item.name, icon: item.icon, iconFont: item.iconFont})
                         )}
                     />
                 </DialogContent>
@@ -681,10 +688,10 @@ class NavBar extends React.Component {
               <Text style={styles.title_flat}>Reinos</Text>
               <FlatList
                 data={global.ListReino}
-                renderItem={({ item }) => (
+                renderItem={({ item }) => ( 
                   <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
                     <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                      <Image style={styles.imageIconFilterHo} source={{ uri: item.icon }} />
+                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View> 
@@ -699,7 +706,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
                     <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                      <Image style={styles.imageIconFilterHo} source={{ uri: item.icon }} />
+                    <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>
@@ -714,7 +721,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
                     <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                      <Image style={styles.imageIconFilter} source={{ uri: item.icon }} />
+                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>
@@ -1028,7 +1035,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelect : styles.column }>
                     <TouchableOpacity onPress={() => {this.handlePress(item.id, 2)}}>
-                      <Image style={styles.imageIconFilter} source={{ uri: item.icon }} />
+                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>
@@ -1043,7 +1050,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelect : styles.column }>
                     <TouchableOpacity onPress={() => {this.handlePress(item.id, 3)}}>
-                      <Image style={styles.imageIconFilter} source={{ uri: item.icon }} />
+                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>

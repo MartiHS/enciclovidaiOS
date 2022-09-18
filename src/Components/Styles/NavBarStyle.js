@@ -114,6 +114,9 @@ export default styles = StyleSheet.create({
         width:25,
         height:25,
     },
+    iconImage:{
+        fontSize:20,
+    },
     title_flat:{
         ...Fonts.style.h3,
         fontFamily: Fonts.family.base_bold,
@@ -131,6 +134,9 @@ export default styles = StyleSheet.create({
         width:50,
         height:50,
     },
+    IconFilterHo:{
+        fontSize:42
+    },
     column:{
         flex: 1, 
         flexDirection: 'column', 
@@ -140,6 +146,7 @@ export default styles = StyleSheet.create({
     columnHo1:{
         margin: 1, 
         alignItems: 'center',
+        textAlign: 'center',
         width: 100,
         height: 115,
         borderColor: Colors.gray,
@@ -157,8 +164,9 @@ export default styles = StyleSheet.create({
     columnHo2:{
         margin: 1, 
         alignItems: 'center',
+        textAlign: 'center',
         width: 100,
-        height: 130,
+        height: 120,
         borderColor: Colors.gray,
         marginBottom: 10,
         padding: 10,
@@ -183,6 +191,7 @@ export default styles = StyleSheet.create({
         flexDirection: 'column', 
         margin: 1, 
         alignItems: 'center',
+        textAlign: 'center',
         backgroundColor: Colors.green,
         width: 100,
         height: 115,
@@ -195,9 +204,10 @@ export default styles = StyleSheet.create({
         flexDirection: 'column', 
         margin: 1, 
         alignItems: 'center',
+        textAlign: 'center',
         backgroundColor: Colors.green,
         width: 100,
-        height: 130,
+        height: 120,
         borderColor: Colors.gray,
         marginBottom: 10,
         padding: 10,

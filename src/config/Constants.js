@@ -27,9 +27,12 @@ const constants = {
         'anp',
         
     ],
+
     DEFAULT_REGION: {
-        latitude: 24.286809,
-        longitude: -102.817436,
+        //latitude: 24.286809,
+        //longitude: -102.817436,
+        latitude: 17.556474,
+        longitude: -96.808699,
         latitudeDelta: 18.612920,
         longitudeDelta: 36.986230,
     }

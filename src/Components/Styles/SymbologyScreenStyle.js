@@ -49,6 +49,9 @@ export default StyleSheet.create({
     height: 20,
     width: 20,
   },
+  iconImage:{
+    fontSize:18
+  },
   text_element:{
     fontSize: 15,
     paddingLeft: 10,

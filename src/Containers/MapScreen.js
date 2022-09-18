@@ -34,6 +34,11 @@ class MapScreen extends Component {
         this.loadgeodata = this.loadgeodata.bind(this);
         this.renderMarker = this.renderMarker.bind(this);
         this.renderCluster = this.renderCluster.bind(this);
+
+        console.log("\n\n - - constructor desde MapScreen- - \n\n");
+
+    console.log(this.props.navigation.state);
+    console.log(" - - - -- ");
     }
 
     loadgeodata = async (url, url_snib, last) => {
@@ -136,6 +141,10 @@ class MapScreen extends Component {
     }
     UNSAFE_componentWillReceiveProps = () => {
         console.log("\n\n - - UNSAFE_componentWillReceiveProps desde MapScreen- - \n\n");
+
+    console.log(this.props.navigation.state.routeName);
+    console.log(" - - - -- ");
+    
         this.fetchData(global.id_specie, global.map_id_specie);
     };
 

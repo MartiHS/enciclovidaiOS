@@ -187,7 +187,7 @@ class AboutScreen extends Component {
             textStyle={{ color: '#FFF' }}
           />
           <ScrollView style={{flex:1}}>
-            <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={{flex: 1, flexDirection: "column" }, styles.image} />
+            <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={[{flex: 1, flexDirection: "column" }, styles.image]} />
             
             <AutoHeightWebView 
               style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
