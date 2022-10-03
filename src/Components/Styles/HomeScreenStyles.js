@@ -18,6 +18,11 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+
+  contentList: {
+    backgroundColor: Colors.navBarBackground,
+    width: '100%'
+  },
   
   // Estilo para el autocompletado:
   // Vista que contiene el campo de texto (autocomplete)
@@ -28,6 +33,16 @@ export default StyleSheet.create({
     paddingRight: 20,
     height: 70,
   },
+
+  viewIn: {
+    alignItems: 'stretch',
+    flexDirection: "row",
+    paddingLeft: 0,
+    paddingRight: 0,
+    height: 400,
+    //backgroundColor: 'red'
+  },
+  
   
   // Imagen de fondo (enciclovida)
   image: {
@@ -46,7 +61,6 @@ export default StyleSheet.create({
     paddingLeft: 35,
     fontFamily: Fonts.family.base_bold,
     height: 45,
-    
   },
   
   inputContainerStyle:{
@@ -66,11 +80,14 @@ export default StyleSheet.create({
   autocompleteContainer: {
     flex: 1,
     height: 300,
+    
   },
   
   listStyle: {
     borderRadius: 10,
     height: 300,
+    marginLeft: -0,
+    marginRight: -0
   },
 
   contentItem: {
@@ -115,6 +132,15 @@ export default StyleSheet.create({
     zIndex: 2,
     top: 10,
     left: 28,
+    fontSize: 25,
+    color: Colors.navBarBackground,
+  },
+
+  customSearchIconIn: {
+    position: "absolute",
+    zIndex: 2,
+    top: 10,
+    left: 10,
     fontSize: 25,
     color: Colors.navBarBackground,
   },

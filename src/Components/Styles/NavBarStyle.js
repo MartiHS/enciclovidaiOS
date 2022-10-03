@@ -40,9 +40,14 @@ export default styles = StyleSheet.create({
         color: Colors.gray,
         paddingTop:10,
         paddingBottom:10,
-        //marginTop:-20
-        
+        //marginTop:-20  
     },
+    autocomplete: {
+        paddingLeft: 35,
+        fontFamily: Fonts.family.base_bold,
+        height: 45,
+        
+      },
     dialogButton: {
         backgroundColor: Colors.blue,
         flexDirection: "row",
@@ -70,9 +75,48 @@ export default styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding:7,
-        
         paddingRight:0,
         borderRadius: 20,
+        marginRight: 14
+    }, 
+    dialogLeft: {
+        //backgroundColor: Colors.green,
+        borderColor: Colors.green,
+        borderWidth: 1,
+        color: 'white',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding:7,
+        paddingRight:0,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
+        paddingRight: 8
+        
+    }, 
+    dialogRight: {
+        borderColor: Colors.green,
+        borderWidth: 1,
+        color: 'white',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding:7,
+        paddingRight:0,
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+        paddingRight: 10
+    }, 
+    dialogButtonInfo: {
+        backgroundColor: 'rgba(52, 52, 52, 0.4)',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding:7,
+        paddingRight:0,
+        borderRadius: 10,
+        marginTop: -25,
+        marginRight: 0
         
     }, 
     dialogButtonIcon: {
@@ -246,10 +290,19 @@ export default styles = StyleSheet.create({
         height: 2,
         margin: 10,
     },
+    tabSpace: {
+        height: 2,
+        margin: 10,
+    },
     upButtons:{
         flexDirection: "row",
         width: "100%",
         justifyContent: 'flex-start',
+    },
+    rightButtons:{
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: 'flex-end',
     },
     bottomButtons:{
         flexDirection: "row",

@@ -13,7 +13,7 @@ import stylesListEspecies from "../Components/Styles/ListSpeciesScreenStyles";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
-
+import Icon2 from 'react-native-vector-icons/Fontisto';
 
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
@@ -82,7 +82,7 @@ class HomeScreen extends Component {
 
     fetchSpeciesByLocation = async (location) => {
         console.log("------------------");
-        this.setState({ query: "text" })
+        this.setState({ query: "" })
         // Si existe una query para llamar:
         if(location != null){
             console.log(`https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region)}&region_id=${encodeURIComponent(location.region_id)}`);
@@ -133,7 +133,7 @@ class HomeScreen extends Component {
 
     fetchMunicipality = async (location) => {
         console.log("------------------");
-        this.setState({ query: "text" })
+        this.setState({ query: "" })
         // Si existe una query para llamar:
         if(location != null){ 
             fetch('https://api.enciclovida.mx/v2/municipios/ubicacion?latitud=' + location['lat'] + '&longitud=' + location['lng'])
@@ -142,7 +142,11 @@ class HomeScreen extends Component {
                 let dataLocation = {
                     region_id: json.munid,
                     nom_reg: json.nom_mun + ', ' + json.nom_ent,
-                    tipo_region: 'Municipio' 
+                    tipo_region: 'Municipio',
+                    latitud: location['lat'],
+                    logitud: location['lng'],
+                    latitudeDelta: 0,
+                    longitudeDelta: 0.05,
                 };
 
                 console.log("------------------");
@@ -159,6 +163,12 @@ class HomeScreen extends Component {
                 global.listSpecies = "SpeciesByLocation";
                 global.filtro = "";
                 global.locationData = dataLocation;
+
+                console.log(' - - - - - >>>>>>>>>>>>>>');
+                console.log(global.locationData['latitud']);
+                console.log('<<<<<<<<<<<<<<<<<<');
+                
+
                 navigation.navigate(global.listSpecies, {
                     data: { 
                         origen: 'ByLocation',
@@ -181,7 +191,7 @@ class HomeScreen extends Component {
         this.setState({ query: text })
         // Si existe una query para llamar:
         if(text != null && text.length > 1){
-           
+           console.log(`https://api.enciclovida.mx/v2/autocompleta/regiones?q=${encodeURIComponent(text)}&reg=estado&reg=municipio&reg=anp`);
             fetch(`https://api.enciclovida.mx/v2/autocompleta/regiones?q=${encodeURIComponent(text)}&reg=estado&reg=municipio&reg=anp`)
             .then(res => res.json())
             .then((json) => {
@@ -209,6 +219,10 @@ class HomeScreen extends Component {
     handlePress(item) {
        
         console.log("\n\n**Nueva seleccion\n\n");
+        this.setState({ query: "" })
+        this.setState({ data : [] });
+        console.log(item);
+        
         let dataLocation = {
             region_id: item.data.region_id,
             nom_reg: item.data.nombre_region,
@@ -223,6 +237,8 @@ class HomeScreen extends Component {
         const{navigation}=this.props;
 
         global.listSpecies = "SpeciesByLocation";
+        global.filtro = "";
+        global.locationData = dataLocation;
         navigation.navigate(global.listSpecies, {
             data: { 
                 origen: 'ByLocation',
@@ -327,8 +343,10 @@ class HomeScreen extends Component {
                                 containerStyle={styles.autocompleteContainer}
                                 listStyle={styles.listStyle}
                                 data={data}
-                                //defaultValue={query}
-                                defaultValue=""
+                                defaultValue={query}
+                                //defaultValue=""
+                                hideResults={false}
+                                ref={(component) => { this._autocompleteByL = component }}
                                 onChangeText={text => this.fetchData(text)}
                                 placeholder="Ingresa una ubicación"
                                 keyExtractor={(item, index) => item.id.toString() }
@@ -347,6 +365,8 @@ class HomeScreen extends Component {
                                     </TouchableOpacity>
                                 )}
                             />
+                            <Icon2 name="close-a" style={styles.clearInputText} />
+                            
                         </View> 
                     </View>                   
 

@@ -8,10 +8,13 @@ import Icon2 from 'react-native-vector-icons/Fontisto';
 
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import styles from "./Styles/NavBarStyle";
+import stylesAUCOM from "../Components/Styles/HomeScreenStyles";
 import config from "../Theme/Fonts/config";
 import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
+import Autocomplete from 'react-native-autocomplete-input';
 
+import Constants from '../Config/Constants';
 
 const CustomIcon = createIconSetFromFontello(config);
 
@@ -25,19 +28,19 @@ const T_DISTRIBUCION = [
 
 // Norma Oficial Mexicana (NOM-059):
 const T_NOM_059 = [
-  {id:16, name: "Probablemente extinta en el medio silvestre (E)", icon: "endemica", order: 1, selected: false},
-  {id:14, name: "En peligro de extinción (P)", icon: "endemica", order: 1, selected: false},
-  {id:15, name: "Amenazada (A)", icon: "endemica", order: 1, selected: false},
-  {id:17, name: "Sujeta a protección especial (Pr)", icon: "endemica", order: 1, selected: false},
+  {id:16, name: "Probablemente extinta en el medio silvestre (E)", icon: "probablemente-extinta-en-el-medio-silvestre-e", order: 1, selected: false},
+  {id:14, name: "En peligro de extinción (P)", icon: "en-peligro-de-extincion-p", order: 1, selected: false},
+  {id:15, name: "Amenazada (A)", icon: "amenazada-a", order: 1, selected: false},
+  {id:17, name: "Sujeta a protección especial (Pr)", icon: "sujeta-a-proteccion-especial-pr", order: 1, selected: false},
 ];
 
 // Unión Internacional para la Conservación de la Naturaleza (IUCN):
 const T_IUCN = [
-  {id:25, name: "Extinto (EX)", icon: "endemica", order: 1, selected: false},
-  {id:26, name: "Extinto en estado silvestre (EW)", icon: "endemica", order: 1, selected: false},
-  {id:27, name: "En peligro crítico (CR)", icon: "endemica", order: 1, selected: false},
-  {id:28, name: "En peligro (EN)", icon: "endemica", order: 1, selected: false},
-  {id:29, name: "Vulnerable (VU)", icon: "endemica", order: 1, selected: false},
+  {id:25, name: "Extinto (EX)", icon: "extinto-ex", order: 1, selected: false},
+  {id:26, name: "Extinto en estado silvestre (EW)", icon: "extinto-en-estado-silvestre-ew", order: 1, selected: false},
+  {id:27, name: "En peligro crítico (CR)", icon: "en-peligro-critico-cr", order: 1, selected: false},
+  {id:28, name: "En peligro (EN)", icon: "en-peligro-en", order: 1, selected: false},
+  {id:29, name: "Vulnerable (VU)", icon: "vulnerable-vu", order: 1, selected: false},
 ];
 
 // Comercio Internacional (CITES):
@@ -49,49 +52,49 @@ const T_CITES = [
 
 // Evaluación CONABIO:
 const T_EVAL_CONABIO = [
-  {id:1102, name: "En peligro de extinción (P)", icon: "endemica", order: 1, selected: false},
-  {id:1103, name: "Amenazada (A)", icon: "endemica", order: 1, selected: false},
-  {id:1104, name: "Sujetas a protección especial (Pr)", icon: "endemica", order: 1, selected: false},
+  {id:1102, name: "En peligro de extinción (P)", icon: "en-peligro-de-extincion-p-evaluacion-conabio", order: 1, selected: false},
+  {id:1103, name: "Amenazada (A)", icon: "amenazada-a-evaluacion-conabio", order: 1, selected: false},
+  {id:1104, name: "Sujetas a protección especial (Pr)", icon: "sujetas-a-proteccion-especial-pr-evaluacion-conabio", order: 1, selected: false},
 ]; 
 
 // USO
 const T_USO = [
-  {id:"11-4-0-0-0-0-0", name: "Ambiental", icon: "endemica", order: 1, selected: false},
-  {id:"11-16-0-0-0-0-0", name: "Artesanía", icon: "endemica", order: 1, selected: false},
-  {id:"11-5-0-0-0-0-0", name: "Combustible", icon: "endemica", order: 1, selected: false},
-  {id:"11-40-1-0-0-0-0", name: "Consumo animal", icon: "endemica", order: 1, selected: false},
-  {id:"11-40-2-0-0-0-0", name: "Consumo humano", icon: "endemica", order: 1, selected: false},
-  {id:"11-8-0-0-0-0-0", name: "Industrial", icon: "endemica", order: 1, selected: false},
-  {id:"11-47-0-0-0-0-0", name: "Maderable", icon: "endemica", order: 1, selected: false},
-  {id:"11-9-0-0-0-0-0", name: "Manejo de plagas", icon: "endemica", order: 1, selected: false},
-  {id:"11-10-0-0-0-0-0", name: "Materiales", icon: "endemica", order: 1, selected: false},
-  {id:"11-11-0-0-0-0-0", name: "Medicinal", icon: "endemica", order: 1, selected: false},
-  {id:"11-13-0-0-0-0-0", name: "Melífera", icon: "endemica", order: 1, selected: false},
-  {id:"11-15-0-0-0-0-0", name: "Ornamental", icon: "endemica", order: 1, selected: false},
-  {id:"11-14-0-0-0-0-0", name: "Sociales/religiosos", icon: "endemica", order: 1, selected: false},
+  {id:"11-4-0-0-0-0-0", name: "Ambiental", icon: "-", order: 1, selected: false},
+  {id:"11-16-0-0-0-0-0", name: "Artesanía", icon: "-", order: 1, selected: false},
+  {id:"11-5-0-0-0-0-0", name: "Combustible", icon: "-", order: 1, selected: false},
+  {id:"11-40-1-0-0-0-0", name: "Consumo animal", icon: "-", order: 1, selected: false},
+  {id:"11-40-2-0-0-0-0", name: "Consumo humano", icon: "-", order: 1, selected: false},
+  {id:"11-8-0-0-0-0-0", name: "Industrial", icon: "-", order: 1, selected: false},
+  {id:"11-47-0-0-0-0-0", name: "Maderable", icon: "-", order: 1, selected: false},
+  {id:"11-9-0-0-0-0-0", name: "Manejo de plagas", icon: "-", order: 1, selected: false},
+  {id:"11-10-0-0-0-0-0", name: "Materiales", icon: "-", order: 1, selected: false},
+  {id:"11-11-0-0-0-0-0", name: "Medicinal", icon: "-", order: 1, selected: false},
+  {id:"11-13-0-0-0-0-0", name: "Melífera", icon: "-", order: 1, selected: false},
+  {id:"11-15-0-0-0-0-0", name: "Ornamental", icon: "-", order: 1, selected: false},
+  {id:"11-14-0-0-0-0-0", name: "Sociales/religiosos", icon: "-", order: 1, selected: false},
 ]; 
 
 
 // Forma de crecimiento (solo plantas)
 const T_FORMA_CRECIMIENTO = [
-  {id:"18-14-0-0-0-0-0", name: "Arborescente", icon: "usos", order: 1, selected: false},
-  {id:"18-2-0-0-0-0-0", name: "Arbusto", icon: "usos", order: 1, selected: false},
-  {id:"18-15-0-0-0-0-0", name: "Bejuco", icon: "usos", order: 1, selected: false},
-  {id:"18-6-0-0-0-0-0", name: "Columnar", icon: "usos", order: 1, selected: false},
-  {id:"18-9-0-0-0-0-0", name: "Epilítica", icon: "usos", order: 1, selected: false},
-  {id:"18-7-0-0-0-0-0", name: "Epífita", icon: "usos", order: 1, selected: false},
-  {id:"18-16-0-0-0-0-0", name: "Geófita", icon: "usos", order: 1, selected: false},
-  {id:"18-3-0-0-0-0-0", name: "Hierba", icon: "usos", order: 1, selected: false},
-  {id:"18-5-0-0-0-0-0", name: "Liana", icon: "usos", order: 1, selected: false},
-  {id:"18-18-0-0-0-0-0", name: "Palma", icon: "usos", order: 1, selected: false},
-  {id:"18-10-0-0-0-0-0", name: "Parásita", icon: "usos", order: 1, selected: false},
-  {id:"18-11-0-0-0-0-0", name: "Rastrera", icon: "usos", order: 1, selected: false},
-  {id:"18-8-0-0-0-0-0", name: "Rosetófila", icon: "usos", order: 1, selected: false},
-  {id:"18-12-0-0-0-0-0", name: "Suculenta", icon: "usos", order: 1, selected: false},
-  {id:"18-4-0-0-0-0-0", name: "Sufrútice", icon: "usos", order: 1, selected: false},
-  {id:"18-13-0-0-0-0-0", name: "Taloide", icon: "usos", order: 1, selected: false},
-  {id:"18-17-0-0-0-0-0", name: "Trepadora", icon: "usos", order: 1, selected: false},
-  {id:"18-1-0-0-0-0-0", name: "Árbol", icon: "usos", order: 1, selected: false},
+  {id:"18-14-0-0-0-0-0", name: "Arborescente", icon: "-", order: 1, selected: false},
+  {id:"18-2-0-0-0-0-0", name: "Arbusto", icon: "-", order: 1, selected: false},
+  {id:"18-15-0-0-0-0-0", name: "Bejuco", icon: "-", order: 1, selected: false},
+  {id:"18-6-0-0-0-0-0", name: "Columnar", icon: "-", order: 1, selected: false},
+  {id:"18-9-0-0-0-0-0", name: "Epilítica", icon: "-", order: 1, selected: false},
+  {id:"18-7-0-0-0-0-0", name: "Epífita", icon: "-", order: 1, selected: false},
+  {id:"18-16-0-0-0-0-0", name: "Geófita", icon: "-", order: 1, selected: false},
+  {id:"18-3-0-0-0-0-0", name: "Hierba", icon: "-", order: 1, selected: false},
+  {id:"18-5-0-0-0-0-0", name: "Liana", icon: "-", order: 1, selected: false},
+  {id:"18-18-0-0-0-0-0", name: "Palma", icon: "-", order: 1, selected: false},
+  {id:"18-10-0-0-0-0-0", name: "Parásita", icon: "-", order: 1, selected: false},
+  {id:"18-11-0-0-0-0-0", name: "Rastrera", icon: "-", order: 1, selected: false},
+  {id:"18-8-0-0-0-0-0", name: "Rosetófila", icon: "-", order: 1, selected: false},
+  {id:"18-12-0-0-0-0-0", name: "Suculenta", icon: "-", order: 1, selected: false},
+  {id:"18-4-0-0-0-0-0", name: "Sufrútice", icon: "-", order: 1, selected: false},
+  {id:"18-13-0-0-0-0-0", name: "Taloide", icon: "-", order: 1, selected: false},
+  {id:"18-17-0-0-0-0-0", name: "Trepadora", icon: "-", order: 1, selected: false},
+  {id:"18-1-0-0-0-0-0", name: "Árbol", icon: "-", order: 1, selected: false},
 ]; 
 
 
@@ -101,10 +104,10 @@ const T_AMBIENTE = [
   {id:1025, name: "Dulceacuícola", icon: "dulceacuicola", order: 1, selected: false},
   {id:1026, name: "Terrestre", icon: "terrestre", order: 1, selected: false},
   {id:1027, name: "Salobre", icon: "salobre", order: 1, selected: false},
-  {id:1207, name: "Salino", icon: "salino", order: 1, selected: false},
-  {id:1208, name: "Hiposalino", icon: "hiposalino", order: 1, selected: false},
-  {id:1209, name: "Mesosalino", icon: "mesosalino", order: 1, selected: false},
-  {id:1210, name: "Hipersalino", icon: "hipersalino", order: 1, selected: false}, 
+  {id:1207, name: "Salino", icon: "-", order: 1, selected: false},
+  {id:1208, name: "Hiposalino", icon: "-", order: 1, selected: false},
+  {id:1209, name: "Mesosalino", icon: "-", order: 1, selected: false},
+  {id:1210, name: "Hipersalino", icon: "-", order: 1, selected: false}, 
 ];
 
 const InfoArray = [
@@ -158,7 +161,9 @@ class NavBar extends React.Component {
       selected_T_USO: [],
       selected_T_FORMA_CRECIMIENTO: [],
       selected_T_AMBIENTE: [],
+      filtersTypeState: "AVANZADA",
     };
+    
   }
 
   displayDrawerMenu = () => {
@@ -187,7 +192,7 @@ class NavBar extends React.Component {
       this.setState({filterByLshow: true});
   };
 
-  renderLeftButton = () => {
+  renderLeftButton = () => { 
     const { menuLightButton} = this.props;
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
     return(
@@ -403,7 +408,7 @@ class NavBar extends React.Component {
       console.log(global.title);
       
       if(global.lastLocationData != global.title){
-        global.lastLocationData = global.title;
+        global.lastLocationData = global.title; 
         console.log("Se borran filtros");
         this.clear();
      }
@@ -438,6 +443,7 @@ class NavBar extends React.Component {
     this._multiSelect_T_DISTRIBUCION._removeAllItems();
     this.clear();
     this.updateFilters();
+    this.setState({ selected_T_Group: "" });
   };
   
 
@@ -446,9 +452,18 @@ class NavBar extends React.Component {
     console.log(this.state.selected_T_Group);
     console.log(id);
 
+    // Cuando se presiona el mismo grupo, se borra la selección
     if(id == this.state.selected_T_Group) {
-      this.clear();
-      this.closeDialog();
+      //this.clear();
+      //this.closeDialog();
+      
+      this.updatevisible("");
+      this.setState({ selected_T_Group: "" });
+      setTimeout(
+        () => {
+          this.updateFilters();
+        }, 100
+      );
     } else {
       this.updatevisible(id);
       this.setState({ selected_T_Group: id });
@@ -459,6 +474,31 @@ class NavBar extends React.Component {
       );
     } 
   }
+
+  fetchData = async (text) => {
+    this.setState({ query: text })
+    // Si existe una query para llamar:
+    if(text != null && text.length > 1){
+        fetch(`${Constants.API_ENCICLOVIDA}/autocompleta/especies/${encodeURIComponent(text)}`)
+        .then(res => res.json())
+        .then((json) => {
+            arraydata = [];
+            if(!json.error){
+                Constants.RESULT_CATEGORIES.forEach( category => {
+                    Array.prototype.push.apply(
+                        arraydata, 
+                        json.results[category].filter(item=> item.data.publico)
+                    )
+                });
+            }
+            this.setState({ data: arraydata.slice() });
+        }).catch((error) => {
+
+        });
+    } else {
+        this.setState({ data : [] });
+    }
+}
 
   onSelectedT_DISTRIBUCIONChange = selected_T_DISTRIBUCION => {
     this.setState({ selected_T_DISTRIBUCION });
@@ -539,70 +579,110 @@ class NavBar extends React.Component {
     );
   };
 
+  findIconInListEsp(id){
+    console.log("BUSCAR FILTROS  . . .. . . . . . . . .. . . . . .. " + id)
+    for (const i in list) {
+      let value = list[i];
+      if(value['id'] == id){
+        return(value)
+      }
+    }
+    return {};
+  }
+
+  findIconInList(list, id){
+    console.log("BUSCAR FILTROS  . . .. . . . . . . . .. . . . . .. " + id)
+    for (const i in list) {
+      let value = list[i];
+      if(value['id'] == id){
+        return(value)
+      }
+    }
+    return {};
+  }
+  
   updateFilters = () => {
     console.log("updateFilters")
    
     let allFilters = "";
+    let allIcons = [];
 
     if((this.state.selected_T_Group) !== "" ) { 
       allFilters += '&especie_id=' + this.state.selected_T_Group;
+      if(this.state.selected_T_Group < 9) {
+        allIcons.push(this.findIconInList(global.DataFilterReinos, this.state.selected_T_Group));
+      } else if (this.state.selected_T_Group < 99999) {
+        allIcons.push(this.findIconInList(global.DataFilterAnimales, this.state.selected_T_Group));
+      } else if(this.state.selected_T_Group < 999999) {
+        allIcons.push(this.findIconInList(global.DataFilterPlantas, this.state.selected_T_Group));
+      }
     }
 
     if((this.state.selected_T_DISTRIBUCION.length) > 0) {
       for(let item in this.state.selected_T_DISTRIBUCION) {
         allFilters += "&dist=" + this.state.selected_T_DISTRIBUCION[item];
+        allIcons.push(this.findIconInList(T_DISTRIBUCION, this.state.selected_T_DISTRIBUCION[item]));
       }
     }
     // recorrer filtro:  selected_T_NOM_059,
     if((this.state.selected_T_NOM_059.length) > 0) {
       for(let item in this.state.selected_T_NOM_059) {
         allFilters += "&nom_ids=" + this.state.selected_T_NOM_059[item];
+        allIcons.push(this.findIconInList(T_NOM_059, this.state.selected_T_NOM_059[item]));
       }
     }
     // recorrer filtro:  selected_T_IUCN,
     if((this.state.selected_T_IUCN.length) > 0) {
       for(let item in this.state.selected_T_IUCN) {
         allFilters += "&iucn_ids=" + this.state.selected_T_IUCN[item];
+        allIcons.push(this.findIconInList(T_IUCN, this.state.selected_T_IUCN[item]));
       }
     }
     // recorrer filtro:  selected_T_CITES, 
     if((this.state.selected_T_CITES.length) > 0) {
       for(let item in this.state.selected_T_CITES) {
         allFilters += "&cites_ids=" + this.state.selected_T_CITES[item];
+        allIcons.push(this.findIconInList(T_CITES, this.state.selected_T_CITES[item]));
       }
-    }
+    } 
     // recorrer filtro:  selected_T_EVAL_CONABIO,
     if((this.state.selected_T_EVAL_CONABIO.length) > 0) {
       for(let item in this.state.selected_T_EVAL_CONABIO) {
         allFilters += "&ev_conabio_ids=" + this.state.selected_T_EVAL_CONABIO[item];
+        allIcons.push(this.findIconInList(T_EVAL_CONABIO, this.state.selected_T_EVAL_CONABIO[item]));
       }
     } 
     // recorrer filtro:  selected_T_USO,
     if((this.state.selected_T_USO.length) > 0) {
       for(let item in this.state.selected_T_USO) {
         allFilters += "&uso=" + this.state.selected_T_USO[item];
+        allIcons.push(this.findIconInList(T_USO, this.state.selected_T_USO[item]));
       }
     }
     // recorrer filtro:  selected_T_FORMA_CRECIMIENTO,
     if((this.state.selected_T_FORMA_CRECIMIENTO.length) > 0) {
       for(let item in this.state.selected_T_FORMA_CRECIMIENTO) {
         allFilters += "&forma=" + this.state.selected_T_FORMA_CRECIMIENTO[item];
+        allIcons.push(this.findIconInList(T_FORMA_CRECIMIENTO, this.state.selected_T_FORMA_CRECIMIENTO[item]));
       }
     }
     // recorrer filtro:  selected_T_AMBIENTE,
     if((this.state.selected_T_AMBIENTE.length) > 0) {
       for(let item in this.state.selected_T_AMBIENTE) {
         allFilters += "&ambiente=" + this.state.selected_T_AMBIENTE[item];
+        allIcons.push(this.findIconInList(T_AMBIENTE, this.state.selected_T_AMBIENTE[item]));
       }
     }
 
     console.log(allFilters);
-   
+    console.log(allIcons);
+    
     global.filtro = global.filtro + allFilters;
 
     const{navigation} = this.props;
     global.listSpecies = "SpeciesByLocation";
     global.filtro = allFilters;
+    global.filtroIcons = allIcons;
     navigation.navigate(global.listSpecies, {
       data: {},
     });
@@ -611,14 +691,63 @@ class NavBar extends React.Component {
   closeDialog = () => {
     this.setState({ filterByLshow: false });
   };
- 
   
+  changeFiltersType = (filterType) => {
+    switch(filterType) {
+      case 'XEspecie':
+        //this.setState({ filterByLshow: false });
+        //this.setState({ filterByLshowSPEC: true });
+      break;
+      case 'Avanzada':
+        //this.setState({ filterByLshow: true });
+        //this.setState({ filterByLshowSPEC: false });
+      break;
+    }
+    
+  };
 
-  render() {
-    const { transparent, white } = this.props;
-    const title= this.state.title;
-    const subtitle=this.state.subtitle;
-    const { selectedItems } = this.state;
+
+  getFilterByLSPEC = () => {
+
+    const { query } = this.state;
+    const { data } = this.state;
+     
+    return(
+      <View style={stylesAUCOM.viewIn}>
+        <Icon name="ios-search" style={stylesAUCOM.customSearchIconIn} />
+        <Autocomplete
+            style={stylesAUCOM.autocomplete}
+            autoCapitalize="none"
+            autoCorrect={false}
+            inputContainerStyle={stylesAUCOM.inputContainerStyle}
+            containerStyle={stylesAUCOM.autocompleteContainer}
+            listStyle={stylesAUCOM.listStyle}
+            data={data}
+            defaultValue={query}
+            onChangeText={text => this.fetchData(text)}
+            placeholder="Ingresa la especie"
+            keyExtractor={(item, index) => item.id.toString() }
+            renderItem={({ item }) => (
+                <TouchableOpacity 
+                    onPress={() => {
+                        this.handlePress(item.data);
+                        this.setState({ query: "" })
+                    }}>
+                    <View style={stylesAUCOM.contentItem}>
+                        <Image source={{ uri: item.data.foto ? item.data.foto : 'ic_imagen_not_found' }} style={styles.itemimage} />
+                        <View style={stylesAUCOM.text_view}>
+                            <Text style={stylesAUCOM.itemText}>{item.data.nombre_comun}</Text>
+                            <Text style={stylesAUCOM.itemTextSecond}>({item.data.nombre_cientifico})</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )}
+        />
+      </View>
+    );
+  };
+
+  getFilterAdVANCED = () => {
     const { 
       selected_T_DISTRIBUCION,
       selected_T_NOM_059,
@@ -629,7 +758,333 @@ class NavBar extends React.Component {
       selected_T_FORMA_CRECIMIENTO,
       selected_T_AMBIENTE,
     } = this.state;
- 
+
+    return(
+      <View>    
+        <Text style={styles.title_flat}>Reinos</Text>
+        <FlatList
+          data={global.ListReino}
+          renderItem={({ item }) => ( 
+            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
+              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
+                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <Text style={styles.view_text}>{item.name}</Text>
+              </TouchableOpacity>
+            </View> 
+          )}
+          horizontal={true}
+          keyExtractor={(item, index) => index}
+        />
+        <View style={styles.rightButtons}>
+            <TouchableOpacity style={styles.dialogButtonInfo} >
+                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+            </TouchableOpacity>
+        </View>
+        
+        <Text style={styles.title_flat}>Grupos de animales</Text>
+        <FlatList
+          data={global.ListAnimales}
+          renderItem={({ item }) => (
+            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
+              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
+              <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <Text style={styles.view_text}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          horizontal={true}
+          keyExtractor={(item, index) => index}
+        />
+        <View style={styles.rightButtons}>
+            <TouchableOpacity style={styles.dialogButtonInfo} >
+                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+            </TouchableOpacity>
+        </View>
+
+        <Text style={styles.title_flat}>Grupos de plantas</Text>
+        <FlatList
+          data={global.ListPlantas}
+          renderItem={({ item }) => (
+            <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
+              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
+                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <Text style={styles.view_text}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          horizontal={true}
+          keyExtractor={(item, index) => index}
+        />
+        <View style={styles.rightButtons}>
+            <TouchableOpacity style={styles.dialogButtonInfo} >
+                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+            </TouchableOpacity>
+        </View>
+        <View style={styles.tabLine}/>
+
+      <Text style={styles.dialogTitle}>Filtros adicionales</Text>
+      <Text style={styles.title_flat}>Tipo de distribución</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_DISTRIBUCION}
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_DISTRIBUCION = component }}
+          onSelectedItemsChange={this.onSelectedT_DISTRIBUCIONChange}
+          selectedItems={selected_T_DISTRIBUCION}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+      
+      <Text style={styles.title_flat}>Especies en riesgo en México (NOM 059)</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_NOM_059}
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_NOM_059 = component }}
+          onSelectedItemsChange={this.onSelectedT_NOM_059Change}
+          selectedItems={selected_T_NOM_059}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+      
+      <Text style={styles.title_flat}>Especies en riesgo a nivel mundial (IUCN)</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_IUCN}
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_IUCN = component }}
+          onSelectedItemsChange={this.onSelectedT_IUCNChange}
+          selectedItems={selected_T_IUCN}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+      
+      <Text style={styles.title_flat}>Comercio Internacional (CITES)</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_CITES}
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_CITES = component }}
+          onSelectedItemsChange={this.onSelectedT_CITESChange}
+          selectedItems={selected_T_CITES}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+          
+        />
+      </View>
+      <View style={styles.tabLine}/>
+      
+      <Text style={styles.title_flat}>Evaluación CONABIO</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_EVAL_CONABIO} 
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_EVAL_CONABIO = component }}
+          onSelectedItemsChange={this.onSelectedT_EVAL_CONABIOChange}
+          selectedItems={selected_T_EVAL_CONABIO}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+      
+      <Text style={styles.title_flat}>USO</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_USO} 
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_USO = component }}
+          onSelectedItemsChange={this.onSelectedT_USOChange}
+          selectedItems={selected_T_USO}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+
+      <Text style={styles.title_flat}>Forma de crecimiento (plantas)</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_FORMA_CRECIMIENTO} 
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_FORMA_CRECIMIENTO = component }}
+          onSelectedItemsChange={this.onSelectedT_FORMA_CRECIMIENTOChange}
+          selectedItems={selected_T_FORMA_CRECIMIENTO}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+
+      <Text style={styles.title_flat}>Ambiente</Text>
+      <View style={styles.flat_multiSelect}>
+        <MultiSelect
+          items={T_AMBIENTE}
+          uniqueKey="id"
+          ref={(component) => { this._multiSelect_T_AMBIENTE = component }}
+          onSelectedItemsChange={this.onSelectedT_AMBIENTEChange}
+          selectedItems={selected_T_AMBIENTE}
+          iconSearch="No"
+          selectText="- - Selecciona - -"
+          searchInputPlaceholderText="Buscar..."
+          onChangeInput={ (text)=> console.log(text)}
+          altFontFamily={Fonts.family.base}
+          tagRemoveIconColor={Colors.green}
+          tagBorderColor={Colors.green}
+          tagTextColor={Colors.blue}
+          selectedItemTextColor={Colors.blue}
+          selectedItemIconColor={Colors.green}
+          itemTextColor={Colors.gray}
+          displayKey="name"
+          submitButtonColor={Colors.green}
+          submitButtonText="Listo"
+          fontFamily={Fonts.family.base}
+          itemFontFamily={Fonts.family.base}
+          itemFontSize={Fonts.size.h4}
+          fontSize={Fonts.size.small}
+        />
+      </View>
+      <View style={styles.tabLine}/>
+
+      <View style={styles.bottomButtons}>
+        <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
+            <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
+            <Text style={styles.title}>Borrar Filtros</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.dialogButton2} onPress={this.closeDialog}>
+            <Icon2 name="check" color='white' style={styles.dialogButtonIcon} />
+            <Text style={styles.title}>Aplicar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>)
+  }
+  
+
+  render() {
+    const { transparent, white } = this.props;
+    const title= this.state.title;
+    const subtitle=this.state.subtitle;
+    const filtersTypeState=this.state.filtersTypeState
+
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
@@ -683,336 +1138,24 @@ class NavBar extends React.Component {
                   <TouchableOpacity style={styles.dialogButton3} onPress={this.closeDialog}>
                       <Icon2 name="close-a" color='white' style={styles.dialogButtonIcon} />
                   </TouchableOpacity>
+                  <TouchableOpacity style={[styles.dialogLeft, {backgroundColor:Colors.green}]}  onPress={()=>{filtersTypeState='AVANZADA'}}>
+                    <Icon2 name="search" color='black' style={styles.dialogButtonIcon} />
+                    <Text style={styles.title_flat}>Avanzada</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={[styles.dialogRight, {backgroundColor:Colors.white}]} onPress={()=>{filtersTypeState='XESPECIE'}}>
+                    <Icon2 name="search" color='black' style={styles.dialogButtonIcon} />
+                    <Text style={styles.title_flat}>Por especie</Text>
+                  </TouchableOpacity>
               </View>
 
-              <Text style={styles.title_flat}>Reinos</Text>
-              <FlatList
-                data={global.ListReino}
-                renderItem={({ item }) => ( 
-                  <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
-                    <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
-                      <Text style={styles.view_text}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View> 
-                )}
-                horizontal={true}
-                keyExtractor={(item, index) => index}
-              />
+              <View style={styles.tabSpace}/>
 
-              <Text style={styles.title_flat}>Grupos de animales</Text>
-              <FlatList
-                data={global.ListAnimales}
-                renderItem={({ item }) => (
-                  <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
-                    <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                    <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
-                      <Text style={styles.view_text}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-                horizontal={true}
-                keyExtractor={(item, index) => index}
-              />
+              {this.state.filtersTypeState == "AVANZADA" ? this.getFilterAdVANCED() : this.getFilterByLSPEC()} 
 
-              <Text style={styles.title_flat}>Grupos de plantas</Text>
-              <FlatList
-                data={global.ListPlantas}
-                renderItem={({ item }) => (
-                  <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
-                    <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
-                      <Text style={styles.view_text}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-                horizontal={true}
-                keyExtractor={(item, index) => index}
-              />
-              <View style={styles.tabLine}/>
-
-              <Text style={styles.dialogTitle}>Filtros adicionales</Text>
-
-
-                  <Text style={styles.title_flat}>Tipo de distribución</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_DISTRIBUCION}
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_DISTRIBUCION = component }}
-                      onSelectedItemsChange={this.onSelectedT_DISTRIBUCIONChange}
-                      selectedItems={selected_T_DISTRIBUCION}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                  
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-                  
-                  
-                  <Text style={styles.title_flat}>Norma Oficial Mexicana (NOM-059)</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_NOM_059}
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_NOM_059 = component }}
-                      onSelectedItemsChange={this.onSelectedT_NOM_059Change}
-                      selectedItems={selected_T_NOM_059}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-                  
-                  <Text style={styles.title_flat}>Unión Internacional para la Conservación de la Naturaleza (IUCN)</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_IUCN}
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_IUCN = component }}
-                      onSelectedItemsChange={this.onSelectedT_IUCNChange}
-                      selectedItems={selected_T_IUCN}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-                  
-                  <Text style={styles.title_flat}>Comercio Internacional (CITES)</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_CITES}
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_CITES = component }}
-                      onSelectedItemsChange={this.onSelectedT_CITESChange}
-                      selectedItems={selected_T_CITES}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-                  
-                  <Text style={styles.title_flat}>Evaluación CONABIO</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_EVAL_CONABIO} 
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_EVAL_CONABIO = component }}
-                      onSelectedItemsChange={this.onSelectedT_EVAL_CONABIOChange}
-                      selectedItems={selected_T_EVAL_CONABIO}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-                  
-                  <Text style={styles.title_flat}>USO</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_USO} 
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_USO = component }}
-                      onSelectedItemsChange={this.onSelectedT_USOChange}
-                      selectedItems={selected_T_USO}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-
-                  <Text style={styles.title_flat}>Forma de crecimiento (plantas)</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_FORMA_CRECIMIENTO} 
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_FORMA_CRECIMIENTO = component }}
-                      onSelectedItemsChange={this.onSelectedT_FORMA_CRECIMIENTOChange}
-                      selectedItems={selected_T_FORMA_CRECIMIENTO}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                      
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-
-                  <Text style={styles.title_flat}>Ambiente</Text>
-                  <View style={styles.flat_multiSelect}>
-                    <MultiSelect
-                      items={T_AMBIENTE}
-                      uniqueKey="id"
-                      ref={(component) => { this._multiSelect_T_AMBIENTE = component }}
-                      onSelectedItemsChange={this.onSelectedT_AMBIENTEChange}
-                      selectedItems={selected_T_AMBIENTE}
-                      iconSearch="No"
-                      //onToggleList={this.updateFilters}
-                      selectText="- - Selecciona - -"
-                      searchInputPlaceholderText="Buscar..."
-                      onChangeInput={ (text)=> console.log(text)}
-                      altFontFamily={Fonts.family.base}
-                      tagRemoveIconColor={Colors.green}
-                      tagBorderColor={Colors.green}
-                      tagTextColor={Colors.blue}
-                      selectedItemTextColor={Colors.blue}
-                      selectedItemIconColor={Colors.green}
-                      itemTextColor={Colors.gray}
-                      displayKey="name"
-                      
-                      submitButtonColor={Colors.green}
-                      submitButtonText="Listo"
-                      fontFamily={Fonts.family.base}
-                      itemFontFamily={Fonts.family.base}
-                      itemFontSize={Fonts.size.h4}
-                      fontSize={Fonts.size.small}
-                    />
-                  </View>
-                  <View style={styles.tabLine}/>
-
-                  <View style={styles.bottomButtons}>
-                    <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
-                        <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
-                        <Text style={styles.title}>Borrar Filtros</Text>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity style={styles.dialogButton2} onPress={this.closeDialog}>
-                        <Icon2 name="check" color='white' style={styles.dialogButtonIcon} />
-                        <Text style={styles.title}>Aplicar</Text>
-                    </TouchableOpacity>
-                  </View>
-
+              
               </ScrollView>
             </DialogContent>
-          </Dialog>
+        </Dialog>
 
         <Dialog
           onDismiss={() => {
@@ -1035,7 +1178,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelect : styles.column }>
                     <TouchableOpacity onPress={() => {this.handlePress(item.id, 2)}}>
-                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
+                      <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>
@@ -1050,7 +1193,7 @@ class NavBar extends React.Component {
                 renderItem={({ item }) => (
                   <View style={item.selected ? styles.columnSelect : styles.column }>
                     <TouchableOpacity onPress={() => {this.handlePress(item.id, 3)}}>
-                      <CustomIcon name={item.ev_icon} style={[styles.IconFilterHo, { color: Colors[item.ev_icon] }]}></CustomIcon>
+                      <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
                       <Text style={styles.view_text}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>

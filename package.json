@@ -28,7 +28,7 @@
     "react-native-maps": "https://github.com/react-community/react-native-maps.git",
     "react-native-maps-super-cluster": "^1.6.0",
     "react-native-multiple-select": "^0.5.11",
-    "react-native-permissions": "^3.6.0",
+    "react-native-permissions": "^3.6.1",
     "react-native-popup-dialog": "^0.18.3",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^2.0.0-alpha.19",

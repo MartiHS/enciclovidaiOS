@@ -76,6 +76,13 @@ export default StyleSheet.create({
     fontSize: 30,
     color: Colors.navBarBackground,
   },
+
+  clearInputText: {
+    fontSize: 20,
+    color: Colors.navBarBackground,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
+  },
   
   inputContainerStyle:{
     backgroundColor: 'white',

@@ -6,8 +6,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/ListSpeciesScreenStyles";
 import Constants from '../Config/Constants';
+import {Colors, Fonts} from "../Theme/";
 
-
+import { createIconSetFromFontello } from "react-native-vector-icons";
+import config from "../Theme/Fonts/config";
+const CustomIcon = createIconSetFromFontello(config);
 
 var arraydata = [];
 // create a component
@@ -15,6 +18,7 @@ class ListSpeciesScreen extends Component {
 
   constructor(props) {
     super(props);
+    global.filtroIcons = "";
     this.state = {
       data: [],
       page: 1,
@@ -27,29 +31,88 @@ class ListSpeciesScreen extends Component {
   fetchSpeciesByLocation = async (location, filtro) => { 
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
     console.log("--------- fetchSpeciesByLocation ---------");
-    this.setState({ query: "text" })
+    this.setState({ query: "" })
     // Si existe una query para llamar:
     if(location != null){
-
-        let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=50`;
+        console.log(">> location <<");
+        console.log(location);
+        let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=10`;
         console.log(query);
-        fetch(query)
+        fetch(query).then(res => {
+          this.setState({totalRes: res.headers.get('num_especies')});
+          return res;
+        })
         .then(res => res.json())
         .then((json) => {
+          
             try {
-              console.log("-----------------sss-");
+              console.log("-----------------ssmmmmmms-");
                 const result = json.map(item => {
+
+                  //const result = await this.getSpecieIconss();
+
+
+                  var resolvedFlag = true;
+
+                  let mypromise = function functionOne(testInput){
+                      console.log("Entered function");
+                      return new Promise((resolve ,reject)=>{
+                          setTimeout(
+                             ()=>{
+
+                              let resultados =  [
+                                {id:"3", name: "Endémica", icon: "endemica", order: 1, selected: false},
+                                {id:"7", name: "Nativa", icon: "nativa", order: 1, selected: false},
+                                {id:"10", name: "Exótica", icon: "exotica", order: 1, selected: false},
+                                {id:"6", name: "Exótica-Invasora", icon: "exotica-invasora", order: 1, selected: false}
+                              ];
+                            
+                            
+                              resolve(resultados);
+ 
+                              } , 10000
+                          );
+                      });
+                  };
+                  
+                  mypromise().then((res)=>{
+                      console.log(`The function recieved with value ${res}`)
+                      this.setState({
+                        iconsLoaded: true,
+                        listIcons: resultados
+                      });
+                  }).catch((error)=>{
+                      console.log(`Handling error as we received ${error}`);
+                  });
+
+
+
+
+
+
+
+
+
+
+
+                  let iconos="";
+                  if(this.state.iconsLoaded){
+                    iconos = this.setState.listIcons;
+                  }
+                  console.log("iconos:");
+                  console.log(iconos);
                   return {
                     id: item.especie.IdNombre,
                     imagen: item.especie.foto_principal,
                     title: item.especie.nombre_comun_principal,
-                    subtitle: item.especie.NombreCompleto
+                    subtitle: item.especie.NombreCompleto,
+                    icons: iconos
                   };
                 });
-
-
-                var entries = json.x_total_entries;
+                
+                var entries = this.state.totalRes;
                 var len = json.length;
+                console.log(len);
                 var totpage = 0;
                 var limit = 7;
                 if (len == limit) {
@@ -63,7 +126,7 @@ class ListSpeciesScreen extends Component {
                 }
                 //Alert.alert("Total", json.x_total_entries.toString());
                 this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
-                
+
                 console.log("------------------FIN");
               } catch (e) {
                 this.setState({ spinner: false });
@@ -72,6 +135,7 @@ class ListSpeciesScreen extends Component {
               }
 
         }).catch((error) => {
+          console.log(error);
             console.log("------------------");
         });
     } else {
@@ -79,7 +143,6 @@ class ListSpeciesScreen extends Component {
         this.setState({ data: [] });
     }
   }
-
 
   getSpeciesInfo = async (filter) => {
     console.log("--------- getSpeciesInfo ---------");
@@ -115,7 +178,7 @@ class ListSpeciesScreen extends Component {
               }
             }
             //Alert.alert("Total", json.x_total_entries.toString());
-            this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+            this.setState({ data: result, totalRes: 1000, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
           } catch (e) {
             this.setState({ spinner: false });
             Alert.alert("Error en los datos");
@@ -162,6 +225,84 @@ class ListSpeciesScreen extends Component {
         spinner: false
       });
     }
+  }
+
+
+  getSpecieIcons = async () => {
+    console.log(">>>>>>>>>>>>>s--------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ss");
+
+
+    this.setState({
+      iconsLoaded: false,
+
+    });
+
+    
+
+    let resultados =  [
+      {id:"3", name: "Endémica", icon: "endemica", order: 1, selected: false},
+      {id:"7", name: "Nativa", icon: "nativa", order: 1, selected: false},
+      {id:"10", name: "Exótica", icon: "exotica", order: 1, selected: false},
+      {id:"6", name: "Exótica-Invasora", icon: "exotica-invasora", order: 1, selected: false}
+    ];
+  
+    this.setState({
+      iconsLoaded: false,
+      listIcons: resultados
+    });
+
+      /*
+    return(
+    <View style={styles.specieIcons}>
+      <CustomIcon style={styles.specieIcon} name="nativa"></CustomIcon>
+      <CustomIcon style={styles.specieIcon} name="nativa" size={12}  /> 
+      <CustomIcon style={styles.specieIcon} name="en-peligro-de-extincion-p" size={12}  />
+      <CustomIcon style={styles.specieIcon} name="casi-amenazado-nt" size={12}  />
+      <CustomIcon style={styles.specieIcon} name="apendice-i" size={12}  />
+      <CustomIcon style={styles.specieIcon} name="alta" size={12}  /> 
+      <CustomIcon style={styles.specieIcon} name="terrestre" size={12}  />
+    </View>);*/
+  }
+
+  createHIcon(name) {
+    
+    let fName = name[0].toUpperCase() + name.substring(1, 3).toLowerCase();
+
+    return(
+    <View style={styles.customHIcon}>
+      <Text style={styles.customHIconText}>{fName}</Text>
+    </View>);
+  }
+  
+  getSpecieIconss = async () => {
+
+      this.setState({
+        iconsLoaded: false,
+      });
+      
+      fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=panthera%20onca&cat_principales=false&cat=especie`).then(res => res.json()).then((json) => {
+       
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ss");
+        
+        let lIcons = json.especie[0].data.cons_amb_dist
+
+        let listaFinalIcons = [];
+        for (let clave in lIcons){
+          listaFinalIcons.push({"name": clave});
+        }
+        console.log(listaFinalIcons);
+        console.log(">>>>>>>>>>>>>>>>>");
+        
+      
+
+        this.setState({
+          iconsLoaded: true,
+          listIcons: listaFinalIcons
+        });
+
+      }).catch(error => {
+        console.log(error)
+      });
   }
 
   loadmoreByL = async () => {
@@ -235,6 +376,7 @@ class ListSpeciesScreen extends Component {
     global.title = nombre_comun;
     global.subtitle = nombre_cientifico;
     global.classificationList = [];
+
     this.props.navigation.navigate("About", {});
   };
 
@@ -262,7 +404,7 @@ class ListSpeciesScreen extends Component {
   };
 
   _handleRefresh = () => {
-
+    console.log("_handleRefresh <<<<<<<<<<")
     this.setState({
       page: 1,
       refreshing: true
@@ -288,15 +430,22 @@ class ListSpeciesScreen extends Component {
             global.nom_reg = locationData.nom_reg;  
             global.tipo_region = locationData.tipo_region;
             // -- 
-            global.title = global.nom_reg; 
-            global.subtitle = global.tipo_region;
+            global.title = global.nom_reg + " - " + locationData.tipo_region;
+            //global.subtitle = global.tipo_region;
+            global.subtitle = "";
 
             this.fetchSpeciesByLocation(locationData, "");
 
           } else {
-            console.log("- - NEW FILTERS"); 
+            console.log("- - NEW FILTERS, SAME LOCATION"); 
+            
+
             // Sobre la misma ubicación, se hace un filtro
+
+            
+            console.log(global.locationData); 
             console.log(global.filtro); 
+
             this.fetchSpeciesByLocation(global.locationData, global.filtro);
           }
           
@@ -325,8 +474,9 @@ class ListSpeciesScreen extends Component {
     let params = this.props.navigation.state;
     if(params.routeName == "SpeciesByLocation"){
       let locationData = params.params.data.location;
-      global.title = locationData.nom_reg;  
-      global.subtitle = locationData.tipo_region;
+      global.title = locationData.nom_reg + " - " + locationData.tipo_region;
+      //global.subtitle = locationData.tipo_region;
+      global.subtitle = "";
       this.fetchSpeciesByLocation(locationData, "");
     } else { // Si no, hacer búsqueda normal
       console.log("- - NACIONAL"); 
@@ -337,6 +487,7 @@ class ListSpeciesScreen extends Component {
 
   render() {
     let params = this.props.navigation.state;
+
     let filterButton, filterButtonByL;
     if(params.routeName == "SpeciesByLocation"){
       filterButtonByL = true;
@@ -345,11 +496,30 @@ class ListSpeciesScreen extends Component {
       filterButtonByL = false;
       filterButton= true;
     }
+
     return (
       <View style={[styles.MainContainer]} >
         <NavBar menuBlackButton={true} filterButton={filterButton} filterButtonByL={filterButtonByL} />
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
+          <View style={styles.headerResults}>
+            <Text style={styles.textInHeaderResults}> {this.state.totalRes} Resultados</Text>
+            <View style={styles.iconsInHeaderResults}>
+              {
+                global.filtroIcons.length > 0 ?  <Text style={{fontFamily: Fonts.family.base_italic, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
+              }
+             
+              <FlatList
+                style = {styles.flatIconList} 
+                data={global.filtroIcons}
+                renderItem={({ item }) => (
+                    item.icon == "-" ? this.createHIcon(item.name) : <CustomIcon style={[styles.filterHIcon, { color: Colors[item.icon]}]} name={item.icon}></CustomIcon>
+                )}
+                horizontal={true}
+                keyExtractor={(item, index) => index}
+              />
+            </View>
+          </View>
           <FlatList
             style = {styles.flatList} 
             data={this.state.data}
@@ -358,13 +528,26 @@ class ListSpeciesScreen extends Component {
             ListEmptyComponent={this._listEmptyComponent}
             ListFooterComponent={this.renderFooter.bind(this)}
             renderItem={({ item, index }) => (
-
+              
               <View style={styles.listItem}>
                 <TouchableOpacity style={styles.touchableItem} onPress={() => { this.handlePress(item) }} >
+                
                   <Image source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }} style={styles.imageItem} />
                   <View style={styles.textRow}>
                     <Text style={styles.titleRow}>{item.title}</Text>
-                    <Text>{item.subtitle}</Text>
+                    <Text  style={styles.subTitleRow}>{item.subtitle}</Text>
+                    <FlatList
+                      style = {styles.flatIconList} 
+                      data={item.icons}
+                      renderItem={({ iteem }) => (
+                        <CustomIcon style={[styles.filterHIcon]} name={iteem.name}></CustomIcon>
+                        
+                      )
+                      
+                      }
+                      horizontal={true}
+                      keyExtractor={(item, index) => index}
+                    />
                   </View>
                 </TouchableOpacity>
               </View>

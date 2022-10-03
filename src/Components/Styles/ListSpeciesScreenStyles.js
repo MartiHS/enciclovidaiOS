@@ -20,10 +20,11 @@ export default StyleSheet.create({
     width: '100%',
     margin: 0,
     padding: 0,
+    //backgroundColor: 'red'
   },
   listItem: {
     margin: 5,
-    padding: 10,
+    padding: 0,
     backgroundColor: "#FFFFFF",
     width: "90%",
     flex: 1,
@@ -40,21 +41,94 @@ export default StyleSheet.create({
   imageItem: {
     width: 80,
     height: 80,
-    borderRadius: 40
+    borderBottomRightRadius: 40,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 20,
+    margin:0,
+    padding:45
+  },
+  customHIcon: {
+   backgroundColor: Colors.green,
+   padding: 4,
+   borderRadius: 4,
+   marginRight: 5,
+   height: '90%'
+  },
+  customHIconText: {
+    fontSize: 9,
+    color: Colors.white,
+    fontFamily: Fonts.family.base_bold
+  },
+  specieIcons: {
+    flexDirection: 'row',
+    width: '100%',
+    textAlign: 'right',
+    justifyContent: 'flex-end',
+  },
+  specieIcon: {
+    paddingLeft: 5,
+    fontSize: 15
+  },
+  headerResults: {
+    flexDirection: 'row',
+    width: '100%',
+    backgroundColor: 'white',
+    padding:3,
+    borderBottomEndRadius: 20,
+    borderBottomLeftRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    marginBottom: 10
+  },
+  textInHeaderResults: {
+    width: '30%',
+    paddingLeft: 10,
+    fontFamily: Fonts.family.base_italic,
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+    color: Colors.gray,
+  },
+  iconsInHeaderResults: {
+    width: '70%',
+    //backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  flatIconList: {
+   // backgroundColor: 'blue',
+  },
+  filterHIcon:{
+    paddingRight: 5,
+    color: Colors.blue,
+    fontSize: 16
   },
   textRow: {
     padding: 10,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: 'center',
     textAlign: 'center',
-    flex: 1
+    flex: 1,
   },
   titleRow: {
     textAlign: 'center',
     fontWeight: "bold",
     justifyContent: 'center',
-    paddingBottom: 8
+    paddingBottom: 3,
 
+  },
+  subTitleRow: {
+    textAlign: 'left',
+    fontWeight: 'normal',
+    justifyContent: 'flex-start',
+    fontStyle: 'italic',
+    paddingBottom: 10
   },
   btnfooter: {
     padding: 10,
