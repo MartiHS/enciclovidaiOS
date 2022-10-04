@@ -151,7 +151,7 @@ class SideMenu extends React.Component {
           <TouchableHighlight onPress = {this.goToFindByLocation} style = { [styles.menuItem] } >
             <View style = {styles.row2} >
               <CustomIcon name="region" size = {22} color = "#fff" style = {styles.favicon }></CustomIcon>
-              <Text style = {styles.title} > Busca por tu ubicación </Text>
+              <Text style = {styles.title} > Busca por ubicación </Text>
             </View>
           </TouchableHighlight>
 
