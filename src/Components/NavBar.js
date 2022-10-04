@@ -13,9 +13,9 @@ import config from "../Theme/Fonts/config";
 import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
 import Autocomplete from 'react-native-autocomplete-input';
-
 import Constants from '../Config/Constants';
 
+import Dialogs from "../Config/Helpers2"
 const CustomIcon = createIconSetFromFontello(config);
 
 // Tipo de distribución:
@@ -1065,19 +1065,44 @@ class NavBar extends React.Component {
       <View style={styles.tabLine}/>
 
       <View style={styles.bottomButtons}>
-        <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
-            <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
-            <Text style={styles.title}>Borrar Filtros</Text>
-        </TouchableOpacity>
-        
         <TouchableOpacity style={styles.dialogButton2} onPress={this.closeDialog}>
             <Icon2 name="check" color='white' style={styles.dialogButtonIcon} />
             <Text style={styles.title}>Aplicar</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
+            <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
+            <Text style={styles.title}>Borrar Filtros</Text>
+        </TouchableOpacity>
       </View>
+      <View style={styles.tabSpace}/>
+      <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={this.sendPFDTOUser}>
+          <Icon2 name="acrobat-reader" color='white' style={styles.dialogButtonIcon} />
+          <Text style={styles.title}>Guía de especies</Text>
+      </TouchableOpacity>
     </View>)
   }
   
+
+  sendPFDTOUser = () => {
+
+    console.log("sendPFDTOUser");
+    //Para la guia es necesario llenar estos campos:
+    //tipo_region, solo valores "municipio" y "anp"
+    //region_id
+    //especie_id
+    return (
+      <View>
+        <Dialog.Container visible={true}>
+          <Dialog.Title>Account delete</Dialog.Title>
+          <Dialog.Description>
+            Do you want to delete this account? You cannot undo this action.
+          </Dialog.Description>
+          <Dialog.Button label="Cancel" />
+          <Dialog.Button label="Delete" />
+        </Dialog.Container>
+      </View>
+    );
+  };
 
   render() {
     const { transparent, white } = this.props;
@@ -1152,7 +1177,8 @@ class NavBar extends React.Component {
 
               {this.state.filtersTypeState == "AVANZADA" ? this.getFilterAdVANCED() : this.getFilterByLSPEC()} 
 
-              
+             
+
               </ScrollView>
             </DialogContent>
         </Dialog>

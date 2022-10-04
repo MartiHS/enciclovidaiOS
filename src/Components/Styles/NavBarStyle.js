@@ -48,7 +48,7 @@ export default styles = StyleSheet.create({
         height: 45,
         
       },
-    dialogButton: {
+      dialogButton: {
         backgroundColor: Colors.blue,
         flexDirection: "row",
         alignItems: "center",
@@ -57,7 +57,6 @@ export default styles = StyleSheet.create({
         paddingBottom:10,
         borderRadius: 8,
         width:"48%",
-        marginRight:"4%",
     },
     dialogButton2: {
         backgroundColor: Colors.green,
@@ -68,6 +67,7 @@ export default styles = StyleSheet.create({
         paddingBottom:10,
         borderRadius: 8,
         width:"48%",
+        marginRight: "4%"
     },
     dialogButton3: {
         backgroundColor: Colors.green,
@@ -291,8 +291,7 @@ export default styles = StyleSheet.create({
         margin: 10,
     },
     tabSpace: {
-        height: 2,
-        margin: 10,
+        height: 10,
     },
     upButtons:{
         flexDirection: "row",
