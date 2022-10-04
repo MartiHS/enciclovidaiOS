@@ -32,6 +32,7 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     height: 70,
+    //backgroundColor: 'red'
   },
 
   viewIn: {
@@ -58,7 +59,7 @@ export default StyleSheet.create({
 
   // - - - autocompletado
   autocomplete: {
-    paddingLeft: 35,
+    paddingLeft: 45,
     fontFamily: Fonts.family.base_bold,
     height: 45,
   },
@@ -66,6 +67,8 @@ export default StyleSheet.create({
   inputContainerStyle:{
     backgroundColor: 'white',
     borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
     borderWidth: 0.5,
     opacity: .8,
     shadowColor: "#000",
@@ -80,7 +83,7 @@ export default StyleSheet.create({
   autocompleteContainer: {
     flex: 1,
     height: 300,
-    
+    width: '110%'
   },
   
   listStyle: {
@@ -131,9 +134,20 @@ export default StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     top: 10,
-    left: 28,
+    left: 18,
     fontSize: 25,
     color: Colors.navBarBackground,
+  },
+
+  customClearIcon: {
+    //position: "absolute",
+    //zIndex: 2,
+    //top: 10,
+    //left: 320,
+    fontSize: 25,
+    padding: 10,
+    color: Colors.gray,
+    //backgroundColor: 'red'
   },
 
   customSearchIconIn: {

@@ -364,9 +364,7 @@ class HomeScreen extends Component {
                                         </View>
                                     </TouchableOpacity>
                                 )}
-                            />
-                            <Icon2 name="close-a" style={styles.clearInputText} />
-                            
+                            />                  
                         </View> 
                     </View>                   
 

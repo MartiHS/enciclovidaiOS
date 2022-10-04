@@ -132,35 +132,42 @@ class HomeScreen extends Component {
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
                     <View style={styles.view}>
-                        <Icon name="ios-search" style={styles.customSearchIcon} />
-                        <Autocomplete
-                            style={styles.autocomplete}
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            inputContainerStyle={styles.inputContainerStyle}
-                            containerStyle={styles.autocompleteContainer}
-                            listStyle={styles.listStyle}
-                            data={data}
-                            defaultValue={query}
-                            onChangeText={text => this.fetchData(text)}
-                            placeholder="Ingresa la especie"
-                            keyExtractor={(item, index) => item.id.toString() }
-                            renderItem={({ item }) => (
-                                <TouchableOpacity 
-                                    onPress={() => {
-                                        this.handlePress(item.data);
-                                        this.setState({ query: "" })
-                                    }}>
-                                    <View style={styles.contentItem}>
-                                        <Image source={{ uri: item.data.foto ? item.data.foto : 'ic_imagen_not_found' }} style={styles.itemimage} />
-                                        <View style={styles.text_view}>
-                                            <Text style={styles.itemText}>{item.data.nombre_comun}</Text>
-                                            <Text style={styles.itemTextSecond}>({item.data.nombre_cientifico})</Text>
+                        <View style={{height:46, width: '90%'}}>
+                            <Icon name="ios-search" style={styles.customSearchIcon} />
+                            <Autocomplete
+                                style={styles.autocomplete}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                inputContainerStyle={styles.inputContainerStyle}
+                                containerStyle={styles.autocompleteContainer}
+                                listStyle={styles.listStyle}
+                                data={data}
+                                defaultValue={query}
+                                onChangeText={text => this.fetchData(text)}
+                                placeholder="Ingresa la especie"
+                                keyExtractor={(item, index) => item.id.toString() }
+                                renderItem={({ item }) => (
+                                    <TouchableOpacity 
+                                        onPress={() => {
+                                            this.handlePress(item.data);
+                                            this.setState({ query: "" })
+                                        }}>
+                                        <View style={styles.contentItem}>
+                                            <Image source={{ uri: item.data.foto ? item.data.foto : 'ic_imagen_not_found' }} style={styles.itemimage} />
+                                            <View style={styles.text_view}>
+                                                <Text style={styles.itemText}>{item.data.nombre_comun}</Text>
+                                                <Text style={styles.itemTextSecond}>({item.data.nombre_cientifico})</Text>
+                                            </View>
                                         </View>
-                                    </View>
-                                </TouchableOpacity>
-                            )}
+                                    </TouchableOpacity>
+                                )}
                             />
+                        </View>
+                        <View style={{/*borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '10%'}}>
+                            <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
+                                <Icon name="ios-close" style={styles.customClearIcon} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={[styles.view, styles.viewImage]}>
                         <Image style={styles.image}
