@@ -1,8 +1,9 @@
 const colors = {
-    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "#304E5B",
+    // Colores de elementos del sistema 
+    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "red",
+    
+    // Colores para elementos de la APP
     navBarBackground: "#304E5B",
-    black: "#000000",
-    white: "#FFFFFF",
     mainBackground: "#f7f7f7",
     backgroundTabButton: "#FFFFFF",
     backgroundTabSelect: "#8A9D46",
@@ -16,12 +17,14 @@ const colors = {
     iconMap1: "#bdd500",
     iconMap2: "#ff8421",
     // -- 
-    // Colores para el multiselect
+    // Colores básicos
+    black: "#000000",
+    white: "#FFFFFF",
     green: "#8A9D46",
     blue: "#304E5B",
     gray: 'gray',
-
     //---
+    // Colores para íconos recibidos
     animalia: "#6c3630",
     plantae: "#3f7e54",
     fungi: "#af7f45",

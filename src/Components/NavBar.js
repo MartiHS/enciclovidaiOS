@@ -14,6 +14,7 @@ import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
 import Autocomplete from 'react-native-autocomplete-input';
 import Constants from '../Config/Constants';
+import DialogInput from 'react-native-dialog-input';
 
 import Dialogs from "../Config/Helpers2"
 const CustomIcon = createIconSetFromFontello(config);
@@ -161,7 +162,9 @@ class NavBar extends React.Component {
       selected_T_USO: [],
       selected_T_FORMA_CRECIMIENTO: [],
       selected_T_AMBIENTE: [],
-      filtersTypeState: "AVANZADA",
+      filtersTypeState: "Avanzada",
+      dialogPDFContent: [false],
+      findSpecificSp: [false, "", "", ""]
     };
     
   }
@@ -334,6 +337,30 @@ class NavBar extends React.Component {
     this.props.navigation.navigate(global.listSpecies, {});
   }
 
+  handlePressONSpec(item) {
+    console.log("\n\n**Nueva seleccion\n\n");
+    console.log(item);
+    let currentSelected = [];
+    currentSelected[0] = true;
+    currentSelected[1] = item.foto ? item.foto : 'ic_imagen_not_found';
+    currentSelected[2] = item.nombre_comun;
+    currentSelected[3] = item.nombre_cientifico;
+    currentSelected[4] = item.id;
+    
+    this.setState({ 
+      query: "",
+      data : [],
+      findSpecificSp: currentSelected,
+    });
+
+    setTimeout(
+      () => {
+        this.updateFilters();
+      }, 100
+    );
+    
+  }
+
   updatevisible = (id) => {
     let reino, animal, planta;
     reino=animal=planta=[];
@@ -433,17 +460,28 @@ class NavBar extends React.Component {
   };
 
   clearSelectedCategories = () => {
-    this._multiSelect_T_AMBIENTE._removeAllItems();
-    this._multiSelect_T_FORMA_CRECIMIENTO._removeAllItems();
-    this._multiSelect_T_USO._removeAllItems();
-    this._multiSelect_T_EVAL_CONABIO._removeAllItems();
-    this._multiSelect_T_CITES._removeAllItems();
-    this._multiSelect_T_IUCN._removeAllItems();
-    this._multiSelect_T_NOM_059._removeAllItems();
-    this._multiSelect_T_DISTRIBUCION._removeAllItems();
-    this.clear();
-    this.updateFilters();
-    this.setState({ selected_T_Group: "" });
+
+    if(this.state.filtersTypeState == "Avanzada" ){
+      this._multiSelect_T_AMBIENTE._removeAllItems();
+      this._multiSelect_T_FORMA_CRECIMIENTO._removeAllItems();
+      this._multiSelect_T_USO._removeAllItems();
+      this._multiSelect_T_EVAL_CONABIO._removeAllItems();
+      this._multiSelect_T_CITES._removeAllItems();
+      this._multiSelect_T_IUCN._removeAllItems();
+      this._multiSelect_T_NOM_059._removeAllItems();
+      this._multiSelect_T_DISTRIBUCION._removeAllItems();
+      this.clear();
+      this.setState({ selected_T_Group: "" });
+      
+    } else {
+      this.setState({ findSpecificSp: [false] });  
+    }
+
+    setTimeout(
+      () => {
+        this.updateFilters();
+      }, 100
+    );
   };
   
 
@@ -618,6 +656,14 @@ class NavBar extends React.Component {
       }
     }
 
+    if(this.state.findSpecificSp[0]) {
+      allFilters += '&especie_id=' + this.state.findSpecificSp[4];
+      
+      allIcons.push({id:this.state.findSpecificSp[4], name: this.state.findSpecificSp[2], icon: "-"},);
+    }
+
+    //&especie_id=34460
+
     if((this.state.selected_T_DISTRIBUCION.length) > 0) {
       for(let item in this.state.selected_T_DISTRIBUCION) {
         allFilters += "&dist=" + this.state.selected_T_DISTRIBUCION[item];
@@ -693,17 +739,15 @@ class NavBar extends React.Component {
   };
   
   changeFiltersType = (filterType) => {
-    switch(filterType) {
-      case 'XEspecie':
-        //this.setState({ filterByLshow: false });
-        //this.setState({ filterByLshowSPEC: true });
-      break;
-      case 'Avanzada':
-        //this.setState({ filterByLshow: true });
-        //this.setState({ filterByLshowSPEC: false });
-      break;
-    }
-    
+    // Asigno el nuevo tipo de filtro
+    this.setState({ filtersTypeState: filterType });
+    // Limpio los filtros existentes
+    setTimeout(
+      () => {
+        console.log(this.state.filtersTypeState);
+        this.clearSelectedCategories();
+      }, 100
+    );
   };
 
 
@@ -711,38 +755,65 @@ class NavBar extends React.Component {
 
     const { query } = this.state;
     const { data } = this.state;
-     
+    const { findSpecificSp } = this.state;
     return(
-      <View style={stylesAUCOM.viewIn}>
-        <Icon name="ios-search" style={stylesAUCOM.customSearchIconIn} />
-        <Autocomplete
-            style={stylesAUCOM.autocomplete}
-            autoCapitalize="none"
-            autoCorrect={false}
-            inputContainerStyle={stylesAUCOM.inputContainerStyle}
-            containerStyle={stylesAUCOM.autocompleteContainer}
-            listStyle={stylesAUCOM.listStyle}
-            data={data}
-            defaultValue={query}
-            onChangeText={text => this.fetchData(text)}
-            placeholder="Ingresa la especie"
-            keyExtractor={(item, index) => item.id.toString() }
-            renderItem={({ item }) => (
-                <TouchableOpacity 
-                    onPress={() => {
-                        this.handlePress(item.data);
-                        this.setState({ query: "" })
-                    }}>
-                    <View style={stylesAUCOM.contentItem}>
-                        <Image source={{ uri: item.data.foto ? item.data.foto : 'ic_imagen_not_found' }} style={styles.itemimage} />
-                        <View style={stylesAUCOM.text_view}>
-                            <Text style={stylesAUCOM.itemText}>{item.data.nombre_comun}</Text>
-                            <Text style={stylesAUCOM.itemTextSecond}>({item.data.nombre_cientifico})</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            )}
-        />
+      <View>
+        <View style={stylesAUCOM.viewIn}>
+          <View style={{height:46, width: '90%'}}>
+              <Icon name="ios-search" style={stylesAUCOM.customSearchIcon} />
+              <Autocomplete
+                  style={stylesAUCOM.autocomplete}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  inputContainerStyle={stylesAUCOM.inputContainerStyle}
+                  containerStyle={stylesAUCOM.autocompleteContainerIn}
+                  listStyle={stylesAUCOM.listStyle}
+                  data={data}
+                  defaultValue={query}
+                  onChangeText={text => this.fetchData(text)}
+                  placeholder="Ingresa la especie"
+                  keyExtractor={(item, index) => item.id.toString() }
+                  renderItem={({ item }) => (
+                      <TouchableOpacity 
+                          onPress={() => {
+                              this.handlePressONSpec(item.data);
+                              this.setState({ query: "" })
+                          }}>
+                          <View style={stylesAUCOM.contentItem}>
+                              <Image source={{ uri: item.data.foto ? item.data.foto : 'ic_imagen_not_found' }} style={stylesAUCOM.itemimage} />
+                              <View style={stylesAUCOM.text_view}>
+                                  <Text style={stylesAUCOM.itemText}>{item.data.nombre_comun}</Text>
+                                  <Text style={stylesAUCOM.itemTextSecond}>({item.data.nombre_cientifico})</Text>
+                              </View>
+                          </View>
+                      </TouchableOpacity>
+                  )}
+              />
+          </View> 
+          <View style={{/* borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '15%'}}>
+              <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
+                  <Icon name="ios-close" style={stylesAUCOM.customClearIcon} />
+              </TouchableOpacity>
+          </View>
+        </View>
+        <View style={stylesAUCOM.especieSeleccionada}>
+          {
+            this.state.findSpecificSp[1] ? 
+            <View>
+              <Text style={[styles.title_flat, {textAlign: 'left'}]}>Filtro de especie:</Text>
+              <View style={stylesAUCOM.contentItem}>
+                <Image source={{ uri: this.state.findSpecificSp[1]}} style={stylesAUCOM.itemimage} />
+                <View style={stylesAUCOM.text_view}>
+                  <Text style={stylesAUCOM.itemText}>{findSpecificSp[2]}</Text>
+                  <Text style={stylesAUCOM.itemTextSecond}>({findSpecificSp[3]})</Text>
+                </View>
+              </View>
+            </View>
+            :
+            <View></View>
+          }
+          
+        </View>
       </View>
     );
   };
@@ -760,7 +831,7 @@ class NavBar extends React.Component {
     } = this.state;
 
     return(
-      <View>    
+      <View style={{paddingTop: 15}}>    
         <Text style={styles.title_flat}>Reinos</Text>
         <FlatList
           data={global.ListReino}
@@ -1062,54 +1133,109 @@ class NavBar extends React.Component {
           fontSize={Fonts.size.small}
         />
       </View>
-      <View style={styles.tabLine}/>
-
-      <View style={styles.bottomButtons}>
-        <TouchableOpacity style={styles.dialogButton2} onPress={this.closeDialog}>
-            <Icon2 name="check" color='white' style={styles.dialogButtonIcon} />
-            <Text style={styles.title}>Aplicar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
-            <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
-            <Text style={styles.title}>Borrar Filtros</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.tabSpace}/>
-      <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={this.sendPFDTOUser}>
-          <Icon2 name="acrobat-reader" color='white' style={styles.dialogButtonIcon} />
-          <Text style={styles.title}>Guía de especies</Text>
-      </TouchableOpacity>
+      
     </View>)
   }
   
 
-  sendPFDTOUser = () => {
+  sendPFDTOUser = (tipoReq) => {
 
     console.log("sendPFDTOUser");
-    //Para la guia es necesario llenar estos campos:
-    //tipo_region, solo valores "municipio" y "anp"
-    //region_id
-    //especie_id
-    return (
-      <View>
-        <Dialog.Container visible={true}>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Description>
-            Do you want to delete this account? You cannot undo this action.
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" />
-          <Dialog.Button label="Delete" />
-        </Dialog.Container>
-      </View>
-    );
+    
+    let contentDialog = [false];
+    
+    // Pos ahora siempre entrará aquí
+    if(tipoReq == "Guia") {
+
+      // 1. Verificar que sea un Municipio / ANP
+      if((global.title).includes("Municipio") || (global.title).includes("ANP")) {
+        // 2. Tener al menos un grupo seleccionado 
+        if((this.state.selected_T_Group) !== "" ) { 
+
+          contentDialog[0] = true;
+          contentDialog[1] = "Descarga la guía en PDF";
+          //contentDialog[2] = "Hay que seleccionar al menos un filtro";
+          contentDialog[2] = "Toma en cuenta que entre más especies sean podría tardar más en generarlo, se te enviará un correo cuando se genere el PDF.";
+ 
+        } else {
+          contentDialog[0] = false;
+          contentDialog[2] = "Se requiere seleccionar al menos un filtro";
+        }
+      } else {
+        contentDialog[0] = false;
+        contentDialog[2] = "No válido para Estado";
+      }
+    } 
+
+    // Verificar si cumple con los requisitos, si si, mostrar el acceso a ingresar correo:
+    if(contentDialog[0]) {
+      this.setState({ dialogPDFContent: contentDialog });
+    } else {
+      Alert.alert(contentDialog[2]);
+    }
   };
+
+  closeDialog = (action) => {
+    const contentDialog = [action];
+    this.setState({ dialogPDFContent: contentDialog });
+  };
+
+  sendInputTOPDF = async (email) => {
+    // Ocultamos el dialogo
+    this.setState({ dialogPDFContent: [false] });
+    const ccEmail = email.replace(" ", "");
+    // Verificamos que el correo sea correcto:
+
+    const validateEmail = (email) => {
+      return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+    };
+
+    if(!validateEmail(ccEmail)) {
+      
+      Alert.alert("Asegurate de ingresar un correo válido");
+
+    } else {
+
+      const location = global.locationData;
+
+      console.log("Location data");
+      console.log(location);
+      console.log("Filtros:");
+      console.log(global.filtro);
+      
+      const URLFINAL = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${global.filtro}&guia=true&correo=${encodeURIComponent(ccEmail)}&pagina=1&por_pagina=50`
+      
+      console.log(URLFINAL);
+  
+      fetch(URLFINAL).then(res => res.json()).then((json) => {
+  
+        try {
+          const res = json;
+          console.log("RESPUESTA:");
+          console.log(res);
+          if(res.estatus == true) {
+            Alert.alert("¡La petición se envió correctamente!.");
+          } else {
+            Alert.alert(res.msg);
+          }
+        } catch(e) {
+  
+        }
+
+      }).catch(error => {
+  
+      });
+    }
+  }
 
   render() {
     const { transparent, white } = this.props;
     const title= this.state.title;
     const subtitle=this.state.subtitle;
     const filtersTypeState=this.state.filtersTypeState
-
+    const dialogPDFContent = this.state.dialogPDFContent
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
@@ -1160,28 +1286,63 @@ class NavBar extends React.Component {
               <ScrollView>
 
               <View style={styles.upButtons}>
-                  <TouchableOpacity style={styles.dialogButton3} onPress={this.closeDialog}>
-                      <Icon2 name="close-a" color='white' style={styles.dialogButtonIcon} />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={[styles.dialogLeft, {backgroundColor:Colors.green}]}  onPress={()=>{filtersTypeState='AVANZADA'}}>
-                    <Icon2 name="search" color='black' style={styles.dialogButtonIcon} />
-                    <Text style={styles.title_flat}>Avanzada</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={[styles.dialogRight, {backgroundColor:Colors.white}]} onPress={()=>{filtersTypeState='XESPECIE'}}>
-                    <Icon2 name="search" color='black' style={styles.dialogButtonIcon} />
-                    <Text style={styles.title_flat}>Por especie</Text>
-                  </TouchableOpacity>
+                  <View>
+                    <TouchableOpacity style={styles.dialogButton3} onPress={this.closeDialog}>
+                        <Icon2 name="close-a" color='white' style={styles.dialogButtonIcon} />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection: "row", width: "100%", paddingLeft: 10, justifyContent: 'flex-start',}}>
+                    <TouchableOpacity style={[styles.dialogLeft, {backgroundColor:Colors.green}]}  onPress={()=>{this.changeFiltersType('Avanzada')}}>
+                      <Icon2 name="search" color='white' style={styles.dialogButtonIcon} />
+                      <Text style={[styles.title_flat, {color: 'white'}]}>Avanzada</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.dialogRight, {backgroundColor:Colors.blue}]} onPress={()=>{this.changeFiltersType('XEspecie')}}>
+                      <CustomIcon name="animalia" color='white' style={styles.dialogButtonIcon} />
+                      <Text style={[styles.title_flat, {color: 'white'}]}>Por especie</Text>
+                    </TouchableOpacity>
+                  </View>
               </View>
 
               <View style={styles.tabSpace}/>
 
-              {this.state.filtersTypeState == "AVANZADA" ? this.getFilterAdVANCED() : this.getFilterByLSPEC()} 
+              {
+                filtersTypeState == "Avanzada" ? this.getFilterAdVANCED() : this.getFilterByLSPEC()
+              } 
 
-             
+              <View style={styles.tabLine}/>
+
+              <View style={styles.bottomButtons}>
+                <TouchableOpacity style={styles.dialogButton2} onPress={this.closeDialog}>
+                    <Icon2 name="check" color='white' style={styles.dialogButtonIcon} />
+                    <Text style={styles.title}>Aplicar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.dialogButton} onPress={this.clearSelectedCategories}>
+                    <Icon2 name="trash" color='white' style={styles.dialogButtonIcon} />
+                    <Text style={styles.title}>Borrar Filtros</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.tabSpace}/>
+              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
+                  <Icon2 name="acrobat-reader" color='white' style={styles.dialogButtonIcon} />
+                  <Text style={styles.title}>Guía de especies</Text>
+              </TouchableOpacity>
 
               </ScrollView>
             </DialogContent>
         </Dialog>
+        
+        <DialogInput isDialogVisible={dialogPDFContent[0]}
+          title={dialogPDFContent[1]}
+          message={dialogPDFContent[2]}
+          dialogStyle={{backgroundColor: Colors.white, width: "90%", height: 270}}
+          hintInput ={"Ingresa tu correo electrónico"}
+          submitInput={ (inputText) => {this.sendInputTOPDF(inputText)} }
+          closeDialog={ () => {this.closeDialog(false)}}
+          submitText="Enviar!"
+          cancelText="Cerrar"
+        >
+        </DialogInput>
+        
 
         <Dialog
           onDismiss={() => {
@@ -1231,7 +1392,7 @@ class NavBar extends React.Component {
             </ScrollView>
           </DialogContent>
         </Dialog>
-                  
+          
         </View>
       );
   }

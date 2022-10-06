@@ -13,6 +13,8 @@ import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
 
 
+
+
 var arraydata = [];
 
 /* HOMESCREEN: pantalla en la que se muestra el buscador de especies junto al menú  izquierdo */
@@ -169,6 +171,7 @@ class HomeScreen extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
+
                     <View style={[styles.view, styles.viewImage]}>
                         <Image style={styles.image}
                             source={{uri: 'ic_top_home'}}/>

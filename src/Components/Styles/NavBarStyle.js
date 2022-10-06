@@ -70,7 +70,7 @@ export default styles = StyleSheet.create({
         marginRight: "4%"
     },
     dialogButton3: {
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
@@ -105,7 +105,9 @@ export default styles = StyleSheet.create({
         paddingRight:0,
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
-        paddingRight: 10
+        paddingRight: 10,
+        //borderLeftColor: 'red',
+        //borderLeftWidth: 30,
     }, 
     dialogButtonInfo: {
         backgroundColor: 'rgba(52, 52, 52, 0.4)',
@@ -115,10 +117,11 @@ export default styles = StyleSheet.create({
         padding:7,
         paddingRight:0,
         borderRadius: 10,
-        marginTop: -25,
-        marginRight: 0
+        marginRight: 0, 
+        paddingTop: 10,
+        paddingBottom: 10
         
-    }, 
+    },
     dialogButtonIcon: {
        paddingRight: 8
     },
@@ -302,6 +305,9 @@ export default styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         justifyContent: 'flex-end',
+        marginTop: -85,
+        marginBottom: 58,
+        //backgroundColor: 'red'
     },
     bottomButtons:{
         flexDirection: "row",

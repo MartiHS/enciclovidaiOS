@@ -34,7 +34,10 @@ class HomeScreen extends Component {
         global.locationData = {nom_reg: ""}
         global.taxonPhotos = [];
         global.taxonPhotos_BDI_source = false;
-        global.filtro = "";
+        
+        //global.filtro = "";
+        //global.filtroIcons = "";
+
         global.listSpecies = "";
         global.LastlistSpecies = "";
         global.lastLocationData = ""
@@ -161,7 +164,7 @@ class HomeScreen extends Component {
 
                 const{navigation}=this.props;
                 global.listSpecies = "SpeciesByLocation";
-                global.filtro = "";
+                //global.filtro = "";
                 global.locationData = dataLocation;
 
                 console.log(' - - - - - >>>>>>>>>>>>>>');
@@ -237,7 +240,7 @@ class HomeScreen extends Component {
         const{navigation}=this.props;
 
         global.listSpecies = "SpeciesByLocation";
-        global.filtro = "";
+        //global.filtro = "";
         global.locationData = dataLocation;
         navigation.navigate(global.listSpecies, {
             data: { 

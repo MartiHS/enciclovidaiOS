@@ -36,11 +36,12 @@ export default StyleSheet.create({
   },
 
   viewIn: {
+    paddingTop: 15,
     alignItems: 'stretch',
     flexDirection: "row",
-    paddingLeft: 0,
-    paddingRight: 0,
-    height: 400,
+    paddingLeft: 1,
+    paddingRight: 1,
+    height: 100,
     //backgroundColor: 'red'
   },
   
@@ -85,12 +86,19 @@ export default StyleSheet.create({
     height: 300,
     width: '110%'
   },
+
+  autocompleteContainerIn: {
+    flex: 1,
+    height: 300,
+    width: '100%'
+  },
   
   listStyle: {
     borderRadius: 10,
     height: 300,
     marginLeft: -0,
-    marginRight: -0
+    marginRight: -0,
+    zIndex: 5
   },
 
   contentItem: {
@@ -128,6 +136,13 @@ export default StyleSheet.create({
     top: 10,
     left: 25,
     
+  },
+
+  especieSeleccionada:{
+    //marginTop: -100,
+    paddingBottom: 160,
+    zIndex: -1,
+    //backgroundColor: 'red'
   },
   
   customSearchIcon: {
