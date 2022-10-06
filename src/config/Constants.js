@@ -24,7 +24,7 @@ const constants = {
     RESULT_LOCATIONS:[
         'municipio',
         'estado',
-        'anp',
+        'anp', 
         
     ],
 

@@ -15,11 +15,11 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* EnciclovidaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EnciclovidaTests.m */; };
-		60AC952124284659982CDCCC /* enciclovida_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16A79A30DED649AAB233D70D /* enciclovida_icons.ttf */; };
 		6F1C0F3EBD0CFB44B9FA7A62 /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF8E8C2FBD3AC22A247EBF8 /* libPods-EnciclovidaTests.a */; };
 		7396B1539674BB6EC2BBE05D /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250B1D826B061FA948B38A36 /* libPods-Enciclovida-tvOS.a */; };
 		7DFF4F1A647D1732A12E044E /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCBD47CE6119132AA35C82B /* libPods-Enciclovida.a */; };
 		B8CEB1C519AACF0ACB0044A1 /* libPods-Enciclovida-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCD7F1FBDD01C93FEAF43FE /* libPods-Enciclovida-tvOSTests.a */; };
+		CB7B0E7F28EF45110071343A /* enciclovida_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB7B0E7E28EF44F10071343A /* enciclovida_icons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,6 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Enciclovida/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Enciclovida/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Enciclovida/main.m; sourceTree = "<group>"; };
-		16A79A30DED649AAB233D70D /* enciclovida_icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = enciclovida_icons.ttf; path = ../assets/fonts/enciclovida_icons.ttf; sourceTree = "<group>"; };
 		21FD098EA3A5C380AD560F63 /* Pods-Enciclovida-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOS/Pods-Enciclovida-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		250B1D826B061FA948B38A36 /* libPods-Enciclovida-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* Enciclovida-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Enciclovida-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +79,7 @@
 		BAE2938864A94DACAA062681 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		C21E449F4A024F7DB13ACCBA /* Pods-EnciclovidaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.release.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.release.xcconfig"; sourceTree = "<group>"; };
 		C756F886104D4088A37E03DC /* Sriracha-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Sriracha-Regular.ttf"; path = "../assets/fonts/Sriracha-Regular.ttf"; sourceTree = "<group>"; };
+		CB7B0E7E28EF44F10071343A /* enciclovida_icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = enciclovida_icons.ttf; path = ../../resources/fonts/enciclovida_icons.ttf; sourceTree = "<group>"; };
 		D456001F93EB4848AFB65413 /* CaviarDreams.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = CaviarDreams.ttf; path = ../assets/fonts/CaviarDreams.ttf; sourceTree = "<group>"; };
 		D75756A6B1BA7EFAAEC9BB65 /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E22C13976D3D4FD4ADB98841 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -171,6 +171,7 @@
 		4185F13E23AF3DCC00B93080 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB7B0E7E28EF44F10071343A /* enciclovida_icons.ttf */,
 				9A7F64FBB443492096E694D4 /* AntDesign.ttf */,
 				0F867DBA8E4F4996B22808F6 /* Entypo.ttf */,
 				3A59A3F6D2C64F4D9624F5A5 /* EvilIcons.ttf */,
@@ -189,7 +190,6 @@
 				76946D767E904EA7ABC14114 /* Zocial.ttf */,
 				D456001F93EB4848AFB65413 /* CaviarDreams.ttf */,
 				C756F886104D4088A37E03DC /* Sriracha-Regular.ttf */,
-				16A79A30DED649AAB233D70D /* enciclovida_icons.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -385,9 +385,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB7B0E7F28EF45110071343A /* enciclovida_icons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				60AC952124284659982CDCCC /* enciclovida_icons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
