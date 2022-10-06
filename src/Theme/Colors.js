@@ -1,10 +1,10 @@
 const colors = {
     // Colores de elementos del sistema 
-    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "red",
+    statusBarBackground: (Platform.OS === 'android') ?  "#223740" : "#304E5B",
     
     // Colores para elementos de la APP
     navBarBackground: "#304E5B",
-    mainBackground: "#f7f7f7",
+    mainBackground: "#f7f7f7", 
     backgroundTabButton: "#FFFFFF",
     backgroundTabSelect: "#8A9D46",
     backgroundTabUnSelect: "#FFFFFF",

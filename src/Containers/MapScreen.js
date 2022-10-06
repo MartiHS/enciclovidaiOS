@@ -195,7 +195,7 @@ class MapScreen extends Component {
                             mapType = {"hybrid"}
                             //initialRegion={this.state.region}
                             region = {this.state.region}
-                            animateClusters={false}
+                            //animateClusters={false}
                         >
                             {}
                         </ClusteredMapView>
