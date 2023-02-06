@@ -1,4 +1,4 @@
-import Constants from '../Config/Constants';
+import Constants from './Constants';
 
 export default class Helper {
   

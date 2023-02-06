@@ -1367,36 +1367,51 @@ class NavBar extends React.Component {
         >
           <DialogContent style={styles.content}>
             <ScrollView>
-              <Text style={styles.title_flat}>Grupos de animales</Text>
-              <FlatList
-                data={global.ListAnimales}
-                renderItem={({ item }) => (
-                  <View style={item.selected ? styles.columnSelect : styles.column }>
-                    <TouchableOpacity onPress={() => {this.handlePress(item.id, 2)}}>
-                      <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
-                      <Text style={styles.view_text}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-                numColumns={4}
-                keyExtractor={(item, index) => index}
-              />
-              <View style={styles.tabLine} />
-              <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
-              <FlatList
-                data={global.ListPlantas}
-                renderItem={({ item }) => (
-                  <View style={item.selected ? styles.columnSelect : styles.column }>
-                    <TouchableOpacity onPress={() => {this.handlePress(item.id, 3)}}>
-                      <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
-                      <Text style={styles.view_text}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-                numColumns={4}
-                keyExtractor={(item, index) => index}
-              />
-              <View style={styles.tabLine}/>
+
+            
+            <Text style={styles.title_flat}>Grupos de animales</Text>
+        <FlatList
+          data={global.ListAnimales}
+          renderItem={({ item }) => (
+            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
+              <TouchableOpacity onPress={() => {this.handlePress(item.id, 2)}}>
+              
+              <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <Text style={styles.view_text}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          horizontal={true}
+          keyExtractor={(item, index) => index}
+        />
+        <View style={styles.rightButtons}>
+            <TouchableOpacity style={styles.dialogButtonInfo} >
+                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+            </TouchableOpacity>
+        </View>
+
+        <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
+        <FlatList
+          data={global.ListPlantas}
+          renderItem={({ item }) => (
+            <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
+              <TouchableOpacity onPress={() => {this.handlePress(item.id, 3)}}>
+                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <Text style={styles.view_text}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          horizontal={true}
+          keyExtractor={(item, index) => index}
+        />
+        <View style={styles.rightButtons}>
+            <TouchableOpacity style={styles.dialogButtonInfo} >
+                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+            </TouchableOpacity>
+        </View>
+        <View style={styles.tabLine}/>
+
+
             </ScrollView>
           </DialogContent>
         </Dialog>

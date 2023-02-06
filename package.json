@@ -12,6 +12,7 @@
   "dependencies": {
     "apisauce": "^1.1.1",
     "i18n-js": "^3.5.0",
+    "jetifier": "^2.0.0",
     "lodash.memoize": "^4.1.2",
     "react": "16.9.0",
     "react-native": "^0.62.3",
