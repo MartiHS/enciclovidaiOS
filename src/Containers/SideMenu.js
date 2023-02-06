@@ -38,13 +38,14 @@ global.DataFilterAnimales = [
 ];
 
 global.DataFilterPlantas = [
-  {id: 135296,name: "Musgos, hepáticas y parientes", img_icon: "ic_gp_musgos", icon: 'bryophyta',  order: 1, selected: false},
-  {id: 135299, name: "Antoceros", img_icon: "ic_gp_antoceros", icon: 'anthocerotophyta',  order: 2, selected: false },
-  {id: 135313, name: "Helechos y parientes", img_icon: "ic_gp_helechos", icon: 'polypodiidae',  order: 3,selected: false},
-  {id: 135316,name: "Coníferas y parientes",img_icon: "ic_gp_coniferas",icon: 'pinidae',  order: 4,selected: false},
-  {id: 135314,name: "Cícadas",icon: "ic_gp_cicadas",img_icon: 'cycadidae',  order: 5,selected: false},
-  {id: 135324,name: "Pastos, palmeras y parientes",img_icon: "ic_gp_pastos",icon: 'lilianae',  order: 6,selected: false},
+  {id: 4, name: "Hongos", img_icon: "ic_re_hongos", icon: 'fungi',  order: 2, selected: false },
   {id: 135306,name: "Magnolias, margaritas y parientes",img_icon: "ic_gp_magnolias",icon: 'magnoliidae',  order: 7,selected: false},
+  {id: 135324,name: "Pastos, palmeras y parientes",img_icon: "ic_gp_pastos",icon: 'lilianae',  order: 6,selected: false},
+  {id: 135314,name: "Cícadas",img_icon: 'ic_gp_cycadidae', icon: "cycadidae", order: 5,selected: false},
+  {id: 135316,name: "Coníferas y parientes",img_icon: "ic_gp_coniferas",icon: 'pinidae',  order: 4,selected: false},
+  {id: 135313, name: "Helechos y parientes", img_icon: "ic_gp_helechos", icon: 'polypodiidae',  order: 3,selected: false},
+  {id: 135299, name: "Antoceros", img_icon: "ic_gp_antoceros", icon: 'anthocerotophyta',  order: 2, selected: false },
+  {id: 135296,name: "Musgos, hepáticas y parientes", img_icon: "ic_gp_musgos", icon: 'bryophyta',  order: 1, selected: false},
 ];
 
 var nav_dispatch = null;

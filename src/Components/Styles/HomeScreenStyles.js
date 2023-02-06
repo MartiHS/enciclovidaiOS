@@ -105,6 +105,15 @@ export default StyleSheet.create({
     flexDirection: "row",
     margin: 10,
   },
+
+  finSpeciesText: {
+    paddingLeft: 20,
+    flexDirection: "row",
+    color: '#575659',
+    fontSize: 15,
+    margin: 5,
+    fontFamily: Fonts.family.base_italic,
+  },
   
   text_view:{
     paddingLeft: 10,

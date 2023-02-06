@@ -133,6 +133,7 @@ class HomeScreen extends Component {
             <View style={[styles.mainScreen]}>
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
+                <Text style={styles.finSpeciesText}>Busca entre más de 112 mil especies</Text>
                     <View style={styles.view}>
                         <View style={{height:46, width: '90%'}}>
                             <Icon name="ios-search" style={styles.customSearchIcon} />
@@ -173,6 +174,7 @@ class HomeScreen extends Component {
                     </View>
 
                     <View style={[styles.view, styles.viewImage]}>
+                       
                         <Image style={styles.image}
                             source={{uri: 'ic_top_home'}}/>
                     </View>

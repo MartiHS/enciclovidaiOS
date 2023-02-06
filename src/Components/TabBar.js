@@ -42,16 +42,7 @@ class TabBar extends React.Component {
     else{
       return (
         <View>
-            <View style={styles.containerButton}> 
-            <TouchableHighlight style={styles.image} onPress={() => Linking.openURL('https://www.biodiversidad.gob.mx/')}>
-              <Image style={styles.image}
-                        source={{uri:'ic_footer_bio'}}/>
-            </TouchableHighlight >
-            <TouchableHighlight style={styles.image} onPress={() => Linking.openURL('https://www.naturalista.mx')}>
-              <Image style={styles.image}
-                        source={{uri:'ic_footer_natu'}}/>
-            </TouchableHighlight >
-            </View>
+           
         </View>
     );
     }

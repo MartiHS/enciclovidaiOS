@@ -19,7 +19,7 @@ class ListSpeciesScreen extends Component {
   constructor(props) {
     super(props);
     global.filtroIcons = "";
-    global.filtro = "";
+    //global.filtro = "";
     this.state = {
       data: [],
       page: 1,
@@ -28,122 +28,114 @@ class ListSpeciesScreen extends Component {
       refreshing: false,
     };
   }
-
-
-  getSpecieIcons = async (nameSpecie) => {
-    
-    return new Promise((resolve, reject) => { 
-      
-      const queryIcon = `https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(nameSpecie)}&cat_principales=false&cat=especie`;
-      
-      console.log("\n\n:::: > > GET ICONS < < ::::");
-      console.log("\n\n:::: > > SE LLAMARÁ A QUERY: " + queryIcon);
-      fetch(queryIcon).then(res => res.json()).then((json) => {
-        console.log("Entro a RESPUESTA para hacer cosas");
-        let lIcons = json.especie[0].data.cons_amb_dist
-        let listaFinalIcons = [];
-
-        for (let clave in lIcons){
-          listaFinalIcons.push({"name": clave});
-        }
-        
-        //console.log(listaFinalIcons);
-        console.log(": : : : > > > >  FIN GET ICONS < < < < : : : :\n\n");
-        resolve(listaFinalIcons);
-        
-      }).catch(error => {
-        console.log(error)
-        console.log(": : : : > > > >  FIN GET ICONS < < < < : : : :");
-        resolve([]);
-      });
-    });
-  };
   
-  fetchSpeciesByLocation = async (location, filtro) => { 
+  fetchSpeciesByLocation = async () => { 
     
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
     console.log(":::: > > fetchSpeciesByLocation < < ::::");
     
+    const location = global.locationData;
+    const filtro = global.filtro == undefined ? "" : global.filtro;
+
     // SI existe una loclización activa:
     if(location != null){
-        let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=10`;
+        let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=50`;
         console.log(query);
         fetch(query).then(res => { // Recuperar el # de especies
           this.setState({totalRes: res.headers.get('num_especies')});
           return res;
         }).then(res => res.json()).then(json => {
 
-/*
-
-          return fetch(`${url}/rockets/${rocketId}`);
-        })
-        .then(response => response.json())
-        .catch(err => {
-          console.error('Request failed', err)
-        })
-*/ 
-
-          
             // Intentar el manejo de resultados: 
             try {
               
-                console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
-                const result = json.map(item => {
-                  
-                  /*
-                  this.getSpecieIcons(item.especie.nombre_comun_principal).then((res)=>{
-                    console.log("Recibo la respuesta de la especie: " + item.especie.nombre_comun_principal);
+              console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
+              const result = json.map(item => {
+                return {
+                  id: item.especie.IdNombre,
+                  imagen: item.especie.foto_principal,
+                  title: item.especie.nombre_comun_principal,
+                  subtitle: item.especie.NombreCompleto,
+                  icons: []
+                };
+              });
 
-                      console.log("LISTO:");
-                      console.log(res);    
-                                        
-                    }).catch((error)=>{
-                        console.log(`HUBO UN ERROR ${error}`);
-                    });
-                  */
-                  return {
-                    id: item.especie.IdNombre,
-                    imagen: item.especie.foto_principal,
-                    title: item.especie.nombre_comun_principal,
-                    subtitle: item.especie.NombreCompleto,
-                    //icons: res
-                  };
-
-                });
-                
-                var entries = this.state.totalRes;
-                var len = json.length;
-                console.log(len);
-                var totpage = 0;
-                var limit = 7;
-                if (len == limit) {
-                  totpage = entries / len | 0;
-                  var exact = json.x_total_entries % json.length;
-                  if (exact != 0) {
-                    totpage = totpage;
-                  } else {
-                    totpage = totpage + 1;
-                  }
+              function checkStatus(sresponse) {
+                if (sresponse.ok) {
+                  console.log("S");
+                    return Promise.resolve(sresponse);
+                } else {
+                  console.log("N");
+                    return Promise.reject(new Error(sresponse.statusText));
                 }
-
-                console.log("------------------FIN");
-                //Alert.alert("Total", json.x_total_entries.toString());
-                this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
-
-                console.log("------------------FIN");
-              } catch (e) {
-                this.setState({ spinner: false });
-                console.log(e);
-                Alert.alert("Error en los datos");
+              }
+          
+              function parseJSON(sresponse) {
+                return sresponse.json();
               }
 
-        }).catch((error) => {
+              Promise.all(result.map(item =>
+                fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+                    .then(checkStatus)
+                    .then(parseJSON)
+                    .then(data => {
+
+                      try {
+                        let lIcons = data.especie[0].data.cons_amb_dist
+                        let listFinalIcons = [];
+              
+                        for (let clave in lIcons){
+                          listFinalIcons.push({"name": clave});
+                        }
+
+                        //console.log("Continuo ");
+                        item.icons = listFinalIcons;
+
+                      } catch (e){
+                        console.log(e);
+                      }
+
+                      return item;
+                }).catch(error => console.log('There was a problem!', error))
+              ))
+              .then(data => {
+                    console.log("Continuo con mi desmadre");
+                    console.log(data);
+
+                    console.log("cargar paginado: ");
+                    var entries = this.state.totalRes;
+                    var len = json.length;
+                    console.log(len);
+                    var totpage = 0;
+                    var limit = 50;
+                    if (len == limit) {
+                      totpage = entries / len | 0;
+                      var exact = entries % json.length;
+                      if (exact != 0) {
+                        totpage = totpage;
+                      } else {
+                        totpage = totpage + 1;
+                      }
+                    }
+                    console.log("Total: ", entries);
+                    console.log("Páginas: ", totpage);
+                    console.log("limit: ", limit);
+                    
+                    console.log("------------------FIN");
+                    this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+              })
+   
+            } catch (e) {
+              this.setState({ spinner: false });
+              console.log(e);
+              Alert.alert("Error en los datos");
+            }
+        })
+        .catch((error) => {
           console.log(error);
-            console.log("------------------");
         });
     } else {
-      console.log("------------------ NOOO");
-        this.setState({ data: [] });
+      this.setState({ data: [] });
     }
   }
 
@@ -181,7 +173,7 @@ class ListSpeciesScreen extends Component {
               }
             }
             //Alert.alert("Total", json.x_total_entries.toString());
-            this.setState({ data: result, totalRes: 1000, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+            this.setState({ data: result, totalRes: json.x_total_entries, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
           } catch (e) {
             this.setState({ spinner: false });
             Alert.alert("Error en los datos");
@@ -230,75 +222,81 @@ class ListSpeciesScreen extends Component {
     }
   }
 
-
-
-  createHIcon(name) {
-    
-    let fName = name[0].toUpperCase() + name.substring(1, 3).toLowerCase();
-
-    return(
-    <View style={styles.customHIcon}>
-      <Text style={styles.customHIconText}>{fName}</Text>
-    </View>);
-  }
-  
-  getSpecieIconss = async (nameSpecie) => {
-
-      this.setState({
-        iconsLoaded: false,
-      });
-      
-      fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(nameSpecie)}&cat_principales=false&cat=especie`).then(res => res.json()).then((json) => {
-       
-        console.log("\n\n\n\n\n\n\n\n GET ICONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ss");
-        
-        let lIcons = json.especie[0].data.cons_amb_dist
-
-        let listaFinalIcons = [];
-        for (let clave in lIcons){
-          listaFinalIcons.push({"name": clave});
-        }
-        console.log(listaFinalIcons);
-        console.log(">>>>>>>>>>>>>>>>>");
-        
-      
-
-        this.setState({
-          iconsLoaded: true,
-          listIcons: listaFinalIcons
-        });
-
-      }).catch(error => {
-        console.log(error)
-      });
-  }
-
   loadmoreByL = async () => {
+
     this.setState({
       spinner: true
     });
-    const filter = global.filtro;
 
-    //let locationData = params.params.data.location;
-    //global.title = locationData.nom_reg;  
-    //global.subtitle = locationData.tipo_region;
-    //this.fetchSpeciesByLocation(locationData);
+    const location = global.locationData;
+    const filtro = global.filtro == undefined ? "" : global.filtro;
+    const page = this.state.page;  
+    let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=${page}&por_pagina=50`;
+       
+      fetch(query).then(res => res.json()).then((json) => {
+       
+              console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
+              const result = json.map(item => {
+                return {
+                  id: item.especie.IdNombre,
+                  imagen: item.especie.foto_principal,
+                  title: item.especie.nombre_comun_principal,
+                  subtitle: item.especie.NombreCompleto,
+                  icons: []
+                };
+              });
 
-    const page = this.state.page;
-    //console.log("Se cargarán más...");
-    if (filter != "") { 
-      fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}&pagina=${page}`).then(res => res.json()).then((json) => {
-        arraydata = [];
-        const result = json.taxa.map(data => {
-          return {
-            id: data.IdNombre,
-            imagen: data.foto_principal,
-            title: data.nombre_comun_principal,
-            subtitle: data.NombreCompleto
-          };
-        });
-        Array.prototype.push.apply(arraydata, this.state.data);
-        Array.prototype.push.apply(arraydata, result);
+              function checkStatus(sresponse) {
+                if (sresponse.ok) {
+                  console.log("S");
+                    return Promise.resolve(sresponse);
+                } else {
+                  console.log("N");
+                    return Promise.reject(new Error(sresponse.statusText));
+                }
+              }
+          
+              function parseJSON(sresponse) {
+                return sresponse.json();
+              }
+
+              Promise.all(result.map(item =>
+                fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+                    .then(checkStatus)
+                    .then(parseJSON)
+                    .then(data => {
+
+                      try {
+                        let lIcons = data.especie[0].data.cons_amb_dist
+                        let listFinalIcons = [];
+              
+                        for (let clave in lIcons){
+                          listFinalIcons.push({"name": clave});
+                        }
+
+                        //console.log("Continuo ");
+                        item.icons = listFinalIcons;
+
+                      } catch (e){
+                        console.log(e);
+                      }
+
+                      return item;
+                }).catch(error => console.log('There was a problem!', error))
+              ))
+              .then(data => {
+                    console.log("Continuo con mi desmadre");
+                    console.log(data);
+
+                    arraydata = [];
+                    Array.prototype.push.apply(arraydata, this.state.data);
+                    Array.prototype.push.apply(arraydata, data);
+                    
+                    console.log("------------------FIN");
+                    this.setState({ data: arraydata, spinner: false});
+              })
+        
+        
         this.setState({
           data: arraydata,
           spinner: false
@@ -308,11 +306,7 @@ class ListSpeciesScreen extends Component {
           spinner: false
         });
       });
-    } else {
-      this.setState({
-        spinner: false
-      });
-    }
+
   }
 
   renderFooter() {
@@ -355,75 +349,61 @@ class ListSpeciesScreen extends Component {
   }
 
   _handleLoadMore = () => {
-    console.log("LOAD MORE");
-    if (this.state.page <= this.state.total && !this.state.spinner) {
-      this.setState(
-        (prevState, nextProps) => ({
-          page: this.state.page + 1,
-          loadingMore: this.state.page < this.state.total ? true : false
-        }),
-        () => {
-          this.loadmore();
-        }
-      );
+
+    let params = this.props.navigation.state;
+    if(params.routeName == "SpeciesByLocation"){
+      console.log("LOAD MORE BYL");
+      if (this.state.page <= this.state.total && !this.state.spinner) {
+        this.setState(
+          (prevState, nextProps) => ({
+            page: this.state.page + 1,
+            loadingMore: this.state.page < this.state.total ? true : false
+          }),
+          () => {
+            this.loadmoreByL();
+          }
+        );
+      } else {
+        console.log("NO HAY MAS"); 
+      }
+
     } else {
-      console.log("NO HAY MAS"); 
+
+      console.log("LOAD MORE");
+      if (this.state.page <= this.state.total && !this.state.spinner) {
+        this.setState(
+          (prevState, nextProps) => ({
+            page: this.state.page + 1,
+            loadingMore: this.state.page < this.state.total ? true : false
+          }),
+          () => {
+            this.loadmore();
+          }
+        );
+      } else {
+        console.log("NO HAY MAS"); 
+      }
     }
+    
   };
 
   _handleRefresh = () => {
-    console.log("_handleRefresh <<<<<<<<<<")
-    this.setState({
-      page: 1,
-      refreshing: true
-    },
+    console.log(">> _handleRefresh ")
+    this.setState( { page: 1, refreshing: true },
       () => {
         this.setState({
           data: []
         });
-        
+  
         let params = this.props.navigation.state;
-    
-        console.log(params); 
-        
-        let origen = params.data;
         if(params.routeName == "SpeciesByLocation"){
-          console.log("- - BY LOCATION"); 
+          console.log("vengo de BY LOCATION"); 
+          this.fetchSpeciesByLocation();
 
-          // Si existe la propiedad de ubicación. actualizar el título
-          if(params.params.hasOwnProperty('data') && params.params.data.hasOwnProperty('location')){
-            console.log("- - NEW LOCATION"); 
-            let locationData = params.params.data.location;
-            global.locationData = locationData;
-            global.nom_reg = locationData.nom_reg;  
-            global.tipo_region = locationData.tipo_region;
-            // -- 
-            global.title = global.nom_reg + " - " + locationData.tipo_region;
-            //global.subtitle = global.tipo_region;
-            global.subtitle = "";
-
-            console.log("- - FILTERS: "); 
-            console.log(global.filtro); 
-            this.fetchSpeciesByLocation(locationData, global.filtro);
-
-          } else {
-            console.log("- - NEW FILTERS, SAME LOCATION"); 
-            
-
-            // Sobre la misma ubicación, se hace un filtro
-
-            
-            console.log(global.locationData); 
-            console.log(global.filtro); 
-
-            this.fetchSpeciesByLocation(global.locationData, global.filtro);
-          }
-          
-        } else {
-            console.log("- - NACIONAL"); 
-            this.getSpeciesInfo(global.filtro);
+        } else { // Si no, hacer búsqueda normal
+          console.log("Vengo de NACIONAL"); 
+          this.getSpeciesInfo(global.filtro);
         }
-        
       }
     );
   };
@@ -435,25 +415,30 @@ class ListSpeciesScreen extends Component {
   };
 
   componentDidMount = () => {
-    console.log("- - componentDidMount"); 
-    this.setState({
-      data: []
-    });
+
+    console.log("\n\n>> componentDidMount"); 
+    this.setState({data: []});
 
     // -- Inicio de la vista, leer el origen si viene desde la ubicación: realizar busquedas por ubicación
     let params = this.props.navigation.state;
     if(params.routeName == "SpeciesByLocation"){
-      let locationData = params.params.data.location;
-      global.title = locationData.nom_reg + " - " + locationData.tipo_region;
-      //global.subtitle = locationData.tipo_region;
-      global.subtitle = "";
-      this.fetchSpeciesByLocation(locationData, "");
+      console.log("Vengo de ByLocation"); 
+      this.fetchSpeciesByLocation();
     } else { // Si no, hacer búsqueda normal
-      console.log("- - NACIONAL"); 
+      console.log("Vengo de NACIONAL"); 
       this.getSpeciesInfo(global.filtro);
     }
-    
   };
+
+  createHIcon(name) {
+    
+    let fName = name[0].toUpperCase() + name.substring(1, 3).toLowerCase();
+
+    return(
+    <View style={styles.customHIcon}>
+      <Text style={styles.customHIconText}>{fName}</Text>
+    </View>);
+  }
 
   render() {
     let params = this.props.navigation.state;
@@ -473,12 +458,11 @@ class ListSpeciesScreen extends Component {
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
           <View style={styles.headerResults}>
-            <Text style={styles.textInHeaderResults}> {this.state.totalRes} Resultados</Text>
+            <Text style={styles.textInHeaderResults}> {this.state.totalRes} Especies</Text>
             <View style={styles.iconsInHeaderResults}>
               {
-                global.filtroIcons.length > 0 ?  <Text style={{fontFamily: Fonts.family.base_italic, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
+                global.filtroIcons.length > 0 ?  <Text style={{fontFamily: Fonts.family.base_bold, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
               }
-             
               <FlatList
                 style = {styles.flatIconList} 
                 data={global.filtroIcons}
@@ -506,7 +490,15 @@ class ListSpeciesScreen extends Component {
                   <View style={styles.textRow}>
                     <Text style={styles.titleRow}>{item.title}</Text>
                     <Text  style={styles.subTitleRow}>{item.subtitle}</Text>
-                    
+                    <FlatList
+                      style = {styles.flatIconList} 
+                      data={item.icons}
+                      renderItem={({ item }) => (
+                        <CustomIcon style={[styles.filterHIcon, { color: Colors[item.name]}]} name={item.name}></CustomIcon>
+                      )}
+                      horizontal={true}
+                      keyExtractor={(item, index) => index}
+                    />
                   </View>
                 </TouchableOpacity>
               </View>

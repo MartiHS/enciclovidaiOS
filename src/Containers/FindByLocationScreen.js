@@ -10,10 +10,7 @@ import Constants from '../Config/Constants';
 
 import stylesListEspecies from "../Components/Styles/ListSpeciesScreenStyles";
 
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config.json"
-const CustomIcon = createIconSetFromFontello(config);
-import Icon2 from 'react-native-vector-icons/Fontisto';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
@@ -84,7 +81,7 @@ class HomeScreen extends Component {
 
 
     fetchSpeciesByLocation = async (location) => {
-        console.log("------------------");
+        console.log(">> fetchSpeciesByLocation");
         this.setState({ query: "" })
         // Si existe una query para llamar:
         if(location != null){
@@ -133,9 +130,9 @@ class HomeScreen extends Component {
         }
     }
 
-
+    // Obtener el minicipio a partir de la ubicación
     fetchMunicipality = async (location) => {
-        console.log("------------------");
+        console.log(">> fetchMunicipality");
         this.setState({ query: "" })
         // Si existe una query para llamar:
         if(location != null){ 
@@ -148,38 +145,22 @@ class HomeScreen extends Component {
                     tipo_region: 'Municipio',
                     latitud: location['lat'],
                     logitud: location['lng'],
-                    latitudeDelta: 0,
-                    longitudeDelta: 0.05,
                 };
-
-                console.log("------------------");
+                console.log(">> LOCATION INFO");
                 console.log(dataLocation);
                 this.setState({ dataLoc: dataLocation});
                 
-                console.log("------------------");
-                console.log("------------------");
-                console.log("------------------");
-
-                //this.fetchSpeciesByLocation(dataLocation);
-
-                const{navigation}=this.props;
+                const{ navigation } = this.props;
                 global.listSpecies = "SpeciesByLocation";
-                //global.filtro = "";
                 global.locationData = dataLocation;
-
-                console.log(' - - - - - >>>>>>>>>>>>>>');
-                console.log(global.locationData['latitud']);
-                console.log('<<<<<<<<<<<<<<<<<<');
-                
-
+                global.title = global.locationData.nom_reg + " - " + global.locationData.tipo_region;
+                global.subtitle = "";
+          
                 navigation.navigate(global.listSpecies, {
                     data: { 
                         origen: 'ByLocation',
-                        location: dataLocation
                     },
                 });
-
-                    
 
             }).catch((error) => {
 
@@ -188,7 +169,6 @@ class HomeScreen extends Component {
             this.setState({ dataLoc : [] });
         }
     }
-
 
     fetchData = async (text) => {
         this.setState({ query: text })
@@ -218,13 +198,12 @@ class HomeScreen extends Component {
         }
     }
 
-    // Función encargada de la acción al presionar una sugerencia:
+    // Función encargada de la acción al presionar una ubicación
     handlePress(item) {
        
-        console.log("\n\n**Nueva seleccion\n\n");
+        console.log("\n\n>> handlePress");
         this.setState({ query: "" })
         this.setState({ data : [] });
-        console.log(item);
         
         let dataLocation = {
             region_id: item.data.region_id,
@@ -232,38 +211,19 @@ class HomeScreen extends Component {
             tipo_region: item.data.geojson.properties.tipo_region,
         };
 
-
-        console.log(item.data.nombre_region);
-        console.log(item.data.region_id);
-        console.log(item.data.geojson.properties.tipo_region);
-
-        const{navigation}=this.props;
-
+        const{ navigation } = this.props;
         global.listSpecies = "SpeciesByLocation";
-        //global.filtro = "";
         global.locationData = dataLocation;
+        global.title = global.locationData.nom_reg + " - " + global.locationData.tipo_region;
+        global.subtitle = "";
+  
         navigation.navigate(global.listSpecies, {
             data: { 
                 origen: 'ByLocation',
-                location: dataLocation
             },
         });
-        navigation.closeDrawer();
-        
 
-        //this.fetchSpeciesByLocation(dataLocation);
-       
-       /*
-        console.log("\n\n**Nueva seleccion\n\n");
-        this.setState({ query: "" })
-        this.setState({ data : [] });
-        //TODO Validar 
-        global.id_specie = item.id;
-        global.title = item.nombre_comun;
-        global.subtitle = item.nombre_cientifico;
-        global.classificationList = [];
-        // Ir a "Acerca de"
-        this.props.navigation.navigate("About", {});*/
+        navigation.closeDrawer();
     }
 
     renderFooter() {
@@ -335,7 +295,8 @@ class HomeScreen extends Component {
                                 }
                             }}
                         >
-                            <CustomIcon name="distribucion" style={styles.customLocationIcon}></CustomIcon>
+                         
+                            <Icon2 name="crosshairs-gps" style={styles.customLocationIcon}></Icon2>
                         </TouchableOpacity>
                         <View style={styles.view}>
                             <Autocomplete

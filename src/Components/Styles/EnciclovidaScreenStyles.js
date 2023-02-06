@@ -41,7 +41,8 @@ export default StyleSheet.create({
   },
   rigth: {
     //fontWeight: "bold",
-    textAlign: "right"
+    textAlign: "right",
+    fontFamily: Fonts.family.base
   },
   link: {
     color: colors.link,

@@ -13,8 +13,7 @@ class EnciclovidaScreen extends Component {
     render() {
         return (
             <View style={[styles.mainScreen]}>
-                <NavBar imageButton={true}
-                    menuBlackButton={true}/>
+                <NavBar imageButton={false} menuBlackButton={true}/>
                 <ScrollView>
                     <View style={[styles.container, styles.info]}>
                         <Text style={styles.text}>
@@ -29,6 +28,12 @@ class EnciclovidaScreen extends Component {
                         {'\n'}
                         Consulta: utiliza EncicloVida{'\n'}
                         </Text>
+
+
+                        <Text style={styles.text}><Text style={styles.bold}>Ciencia ciudadana: </Text>
+                            Incluye tus propias observaciones. Utiliza la app Naturalista para capturar tus observaciones de plantas, hongos y animales en cualquier lugar. Cada una de tus observaciones contribuye a nuestro conocimiento de la naturaleza.  {'\n'}
+                        </Text>
+
 
                         <Text style={styles.text}><Text style={styles.bold}>Nombres: </Text>
                         Nombres científicos, nombres comunes, sinonimias, estatus taxonómicos siguiendo los catálogos de autoridades de CONABIO.{'\n'}

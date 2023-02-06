@@ -5,6 +5,7 @@ import { createIconSetFromFontello } from "react-native-vector-icons";
 import { withNavigation } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import styles from "./Styles/NavBarStyle";
@@ -226,7 +227,7 @@ class NavBar extends React.Component {
     else if(filterButton){
       return(
         <TouchableOpacity onPress={this.showFilterDialog} >
-          <Icon2 name="filter" color={iconColor} style={styles.favIcon} />
+          <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
         </TouchableOpacity>
       )
     }
@@ -832,7 +833,10 @@ class NavBar extends React.Component {
 
     return(
       <View style={{paddingTop: 15}}>    
-        <Text style={styles.title_flat}>Reinos</Text>
+        
+        {
+          /**
+         <Text style={styles.title_flat}>Reinos</Text>
         <FlatList
           data={global.ListReino}
           renderItem={({ item }) => ( 
@@ -850,8 +854,12 @@ class NavBar extends React.Component {
             <TouchableOpacity style={styles.dialogButtonInfo} >
                 <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
             </TouchableOpacity>
-        </View>
-        
+        </View> 
+          
+          
+           */
+        }
+
         <Text style={styles.title_flat}>Grupos de animales</Text>
         <FlatList
           data={global.ListAnimales}
@@ -872,7 +880,7 @@ class NavBar extends React.Component {
             </TouchableOpacity>
         </View>
 
-        <Text style={styles.title_flat}>Grupos de plantas</Text>
+        <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
         <FlatList
           data={global.ListPlantas}
           renderItem={({ item }) => (
@@ -1323,7 +1331,7 @@ class NavBar extends React.Component {
               </View>
               <View style={styles.tabSpace}/>
               <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
-                  <Icon2 name="acrobat-reader" color='white' style={styles.dialogButtonIcon} />
+                  <Icon3 name="file-pdf-o" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
                   <Text style={styles.title}>Guía de especies</Text>
               </TouchableOpacity>
 
@@ -1334,7 +1342,7 @@ class NavBar extends React.Component {
         <DialogInput isDialogVisible={dialogPDFContent[0]}
           title={dialogPDFContent[1]}
           message={dialogPDFContent[2]}
-          dialogStyle={{backgroundColor: Colors.white, width: "90%", height: 270}}
+          dialogStyle={{backgroundColor: Colors.white}}
           hintInput ={"Ingresa tu correo electrónico"}
           submitInput={ (inputText) => {this.sendInputTOPDF(inputText)} }
           closeDialog={ () => {this.closeDialog(false)}}
@@ -1374,7 +1382,7 @@ class NavBar extends React.Component {
                 keyExtractor={(item, index) => index}
               />
               <View style={styles.tabLine} />
-              <Text style={styles.title_flat}>Grupos de plantas</Text>
+              <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
               <FlatList
                 data={global.ListPlantas}
                 renderItem={({ item }) => (

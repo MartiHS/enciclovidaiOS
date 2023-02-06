@@ -90,7 +90,7 @@ export default StyleSheet.create({
   textInHeaderResults: {
     width: '30%',
     paddingLeft: 10,
-    fontFamily: Fonts.family.base_italic,
+    fontFamily: Fonts.family.base_bold,
     textAlign: 'left',
     justifyContent: 'flex-start',
     color: Colors.gray,
@@ -107,7 +107,7 @@ export default StyleSheet.create({
   filterHIcon:{
     paddingRight: 5,
     color: Colors.blue,
-    fontSize: 16
+    fontSize: 20
   },
   textRow: {
     padding: 10,
@@ -121,7 +121,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     justifyContent: 'center',
     paddingBottom: 3,
-
+    color: Colors.black,
   },
   subTitleRow: {
     textAlign: 'left',
