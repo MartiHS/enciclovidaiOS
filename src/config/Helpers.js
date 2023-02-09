@@ -8,7 +8,6 @@ export default class Helper {
       var listImages = [];
       for(var i = 0; i< JSONImages.length; i++) {    
           var image = {
-            id: JSONImages[i]['id'],
             source: {
               uri: JSONImages[i]['imagen']
             },
@@ -25,16 +24,30 @@ export default class Helper {
 
 
   // Obtener imágenes de Naturalista
-  static fetchDataFromNaturalista(id_especie) {
-    var linkToCall = `${Constants.API_ENCICLOVIDA_ESPECIES}${id_especie}/${Constants.NATURALISTA_ENDPOINT}`;
+  static fetchAllMedia(id_especie) {
+
+    let linkToCall = `${Constants.API_ENCICLOVIDA}v2/especies/${id_especie}/media`;
+
     return fetch(linkToCall).then(res => res.json()).then((json) => {
       console.log("Se realizó una llamada a: " + linkToCall);
-      if(json.estatus) {
-        //console.log(json.fotos)
-        return json.fotos;
-      } else {
-        return [];
-      }
+        let allMedia = {
+          fotos: [],
+          videos: [],
+          audio: []
+        }
+
+        if( json.fotos ) {
+          allMedia.fotos = json.fotos;
+        }
+        if( json.videos ) {
+          allMedia.videos = json.videos;
+        }
+        if( json.audios ) {
+          allMedia.audios = json.audios;
+        }
+
+        return allMedia;
+    
     }).catch(error => {
       // En el caso de que el servicio fotos-naturalista no devuelva fotos, regresar un arreglo vacío
       return [];
@@ -58,36 +71,28 @@ export default class Helper {
   }
 
   // Función para regresar una imágen aleatoria en la presentación del "About"
-  static getRandomImage(images, bdi) {
+  static getRandomImage(images) {
       var randomImage = 0;
       if(images.length > 0) {
         var maxValue  = images.length;
         randomImage = Math.floor(Math.random() * maxValue);
-        if(bdi)
-          return images[randomImage].medium_url;
-        else
-          return images[randomImage].photo.medium_url;
+        return images[randomImage].large_url;
       } else {
         return "";
       }
   }
 
   // Obtener el Data de images para usar en FlatList
-  static getDataImages(images, bdi) {
+  static getDataImages(images) {
     result = images.map(data => {
-      if(bdi) {
-        return {
-          id: 0,
-          imagen: data.medium_url,
-          text: data.attribution,
-        };
-      } else {
-        return {
-          id: data.photo.id,
-          imagen: data.photo.medium_url,
-          text: data.photo.attribution,
-        };
-      }
+      
+      return {
+        //id: data.photo.id,
+        thumb: data.thumb_url,
+        imagen: data.large_url,
+        text: data.atribucion,
+      };
+    
     });
 
     return result;

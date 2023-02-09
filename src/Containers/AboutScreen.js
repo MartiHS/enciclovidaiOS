@@ -91,22 +91,17 @@ class AboutScreen extends Component {
         console.log("FETCH - LLAMADA A FOTOS Y RESUMEN");
         var defaultPhoto = "";
         // Obtener las fotos: desde el servicio NaturaLista
-        const response = await Helper.fetchDataFromNaturalista(id_specie);
-        const fotos = await response;
-        // Si el servicio devolvió {}, llamar a BDI
-        if(fotos.length == 0) {
-          //console.log("No hubo fotos en NaturaLista");
-          const response2 = await Helper.fetchDataFromBDI(id_specie);
-          const fotos2 = response2;
-          global.taxonPhotos = fotos2;
-          global.taxonPhotos_BDI_source = true;
-          defaultPhoto = Helper.getRandomImage(fotos2, true);
-        } else {
-          global.taxonPhotos = fotos;
-          global.taxonPhotos_BDI_source = false;
-          defaultPhoto = Helper.getRandomImage(fotos, false);
-        }
-        
+        const response = await Helper.fetchAllMedia(id_specie);
+        const fotos = await response.fotos;
+        const videos = await response.videos;
+        const audios = await response.audios;
+
+        global.taxonPhotos = fotos;
+        global.taxonVideos = videos;
+        global.taxonAudios = audios;
+
+        defaultPhoto = Helper.getRandomImage(fotos);
+
         this.setState({ imagen: defaultPhoto });
         await this.getHTMLSpecieResume(id_specie);
 

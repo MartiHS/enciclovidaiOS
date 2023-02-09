@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, FlatList, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
+import { View, Image, FlatList, TouchableOpacity, Text, Keyboard, Alert, TouchableHighlight, ImageBackground} from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
 
@@ -15,7 +15,32 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
+import { createIconSetFromFontello } from "react-native-vector-icons";
+import config from "../Theme/Fonts/config.json"
+import { Fonts } from '../Theme';
+const CustomIcon = createIconSetFromFontello(config);
+
 var arraydata = []; 
+
+
+const listsParams = {
+    SpeciesRisk: {
+      filter: "&edo_cons=%5B17%2C15%2C14%2C16%2C29%2C28%2C27%2C26%2C25%5D",
+      title: "Especies en riesgo"
+    },
+    SpeciesExotic: {
+      filter: "&dist=%5B10%2C6%5D",
+      title: "Especies exóticas"
+    },
+    SpeciesEndemic: {
+      filter: "&dist=%5B3%5D",
+      title: "Especies endémicas",
+    },
+    SpeciesByLocation: {
+      filter: "",
+      title: "BY L",
+    }
+  };
 
 /* HOMESCREEN: pantalla en la que se muestra el buscador de especies junto al menú  izquierdo */
 class HomeScreen extends Component {
@@ -130,6 +155,28 @@ class HomeScreen extends Component {
         }
     }
 
+
+    setFilterProperties = (speciesClass) => {
+        global.filtro = listsParams[speciesClass].filter;
+        global.title = listsParams[speciesClass].title;
+        global.listSpecies = speciesClass;
+        global.subtitle = "";
+        global.ListReino = global.DataFilterReinos;
+        global.ListAnimales = global.DataFilterAnimales;
+        global.ListPlantas = global.DataFilterPlantas;
+        global.id_specie = 0;
+      };
+
+
+    goToSpeciesList = (listName) => {
+        if (listsParams[listName] !== undefined) {
+          const{navigation}=this.props;
+          this.setFilterProperties(listName);
+          navigation.navigate(listName, {});
+          navigation.closeDrawer();
+        }
+      };
+
     // Obtener el minicipio a partir de la ubicación
     fetchMunicipality = async (location) => {
         console.log(">> fetchMunicipality");
@@ -241,12 +288,26 @@ class HomeScreen extends Component {
           );
         }
       }
+    
+    goToFind = () => {
+        const {navigation} = this.props;
+        navigation.navigate("Find");
+        navigation.closeDrawer();
+    };
 
     footer = () => {
         if(this.state.show){
             return(
-                <Image style={styles.footerImage}
-                    source={{uri: 'ic_footer_home'}}/>
+                <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:30, padding: 10, width: '100%', }}> 
+
+                    <View>
+                        <CustomIcon style={{fontSize:40, marginBottom:-48, color: 'white', width: 150}} name='enciclo'></CustomIcon>
+                        <CustomIcon style={{fontSize:40, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
+                    </View>
+
+                    <CustomIcon style={{fontSize:40, color: 'white', width: 150}} name='conabio_completo'></CustomIcon>
+                     
+                </View>
             )
         }
         else { 
@@ -264,6 +325,9 @@ class HomeScreen extends Component {
             <View style={[styles.mainScreen]}>
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
+                <ImageBackground source={{uri: 'https://enciclovida.mx/assets/portada/en-riesgo.jpg'}} resizeMode="cover" style={{backgroundColor:'rgba(50, 50, 50, 0.9)'}} imageStyle={{opacity:0.1}}> 
+                
+
                     <View style={styles.searchBar}>
                         <TouchableOpacity
                             style={styles.customLocationIconTouch}
@@ -330,14 +394,127 @@ class HomeScreen extends Component {
                                 )}
                             />                  
                         </View> 
-                    </View>                   
+                    </View>   
 
-                    <View style={[styles.view, styles.viewImage]}>
-                        <Image style={styles.image}
-                            source={{uri: 'ic_top_home'}}/>
+                    <View style={{flexDirection:'row', justifyContent: 'center', width: '100%'}}>
+                        <Text style={{color: 'white', fontFamily: Fonts.family.base_bold, fontSize: 15}}>
+                            Prueba nuestras diferentes 
+                        </Text>
+                        <Text style={{paddingLeft: 3, color: 'yellow', fontFamily: Fonts.family.base_bold, fontSize: 15}}>
+                            herramientas de búsqueda:
+                        </Text>
+                    </View>
+                    
+                    
+                    
+                    <View style={[{flexDirection:'row', padding: 10,  justifyContent: "center", alignItems: "center",  width:'100%'}]}>
+                      
+                        <TouchableHighlight onPress = {this.goToFind} style={styles.fHOMEButtonContainer} >
+                            <View>
+                                <View style={styles.imageHOMEButtonContainer}>
+                                    <Image
+                                        style={styles.imageHOMEButton}
+                                        source={{ uri: "https://enciclovida.mx/assets/portada/clasificacion.jpg" }}
+                                    />
+                                </View>
+
+                                <View style={styles.textHOMEButtonContainer}>
+                                    <CustomIcon style={styles.textHOMEButtonIcon} name='grupo-iconico'></CustomIcon>
+                                    <Text style={styles.textHOMEButton}>Especies</Text>
+                                </View>
+                            </View>
+                        </TouchableHighlight>
+
+                        <View style={styles.fHOMEButtonContainer}>
+                            <View style={styles.imageHOMEButtonContainer}>
+                                <Image
+                                    style={styles.imageHOMEButton}
+                                    source={{ uri: "https://enciclovida.mx//assets/portada/region.jpg" }}
+                                />
+                            </View>
+
+                            <View style={styles.textHOMEButtonContainer}>
+                                <Icon2 name="crosshairs-gps" style={styles.textHOMEButtonIcon}></Icon2>
+                                <Text style={styles.textHOMEButton}>Por tu ubicación</Text>
+                            </View>
+                        </View>
+                        
+                    </View>
+
+
+                    <View style={[{flexDirection:'row', padding: 10, justifyContent: "center", alignItems: "center",  width:'100%'}]}>
+
+                        <TouchableHighlight onPress = {() => { this.goToSpeciesList("SpeciesEndemic")}} style={styles.fHOMEButtonContainer}>
+                            <View>
+                                <View style={styles.imageHOMEButtonContainer}>
+                                    <Image
+                                        style={styles.imageHOMEButton}
+                                        source={{ uri: "https://enciclovida.mx//assets/portada/distribucion.jpg" }}
+                                    />
+                                </View>
+                                <View style={styles.textHOMEButtonContainer}>
+                                    <CustomIcon style={styles.textHOMEButtonIcon} name='endemica'></CustomIcon>
+                                    <Text style={styles.textHOMEButton}>Endémicas</Text>
+                                </View>
+                            </View>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight onPress = {() => { this.goToSpeciesList("SpeciesExotic")}} style={styles.fHOMEButtonContainer} >
+                            <View>
+                                <View style={styles.imageHOMEButtonContainer}>
+                                    <Image
+                                        style={styles.imageHOMEButton}
+                                        source={{ uri: "https://enciclovida.mx//assets/portada/exotica-invasora.jpg" }}
+                                    />
+                                </View>
+
+                                <View style={styles.textHOMEButtonContainer}>
+                                    <CustomIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomIcon>
+                                    <Text style={styles.textHOMEButton}>Exóticas invasoras</Text>
+                                </View>
+                            </View>
+                        </TouchableHighlight>
+
+                    </View>
+                    
+
+                    <View style={[{flexDirection:'row', padding: 10, justifyContent: "center", alignItems: "center",  width:'100%'}]}>
+                        
+                        <TouchableHighlight onPress = {() => { this.goToSpeciesList("SpeciesRisk")}} style={styles.fHOMEButtonContainer} >
+                            <View>
+                                <View style={styles.imageHOMEButtonContainer}>
+                                    <Image
+                                        style={styles.imageHOMEButton}
+                                        source={{ uri: "https://enciclovida.mx/assets/portada/en-riesgo.jpg" }}
+                                    />
+                                </View>
+
+                                <View style={styles.textHOMEButtonContainer}>
+                                    <CustomIcon style={styles.textHOMEButtonIcon} name='en-riesgo'></CustomIcon>
+                                    <Text style={styles.textHOMEButton}>En riesgo</Text>
+                                </View>
+                            </View>
+                        </TouchableHighlight>
+
+
+                        <View style={styles.fHOMEButtonContainer}>
+                            <View style={styles.imageHOMEButtonContainer}>
+                                <Image
+                                    style={styles.imageHOMEButton}
+                                    source={{ uri: "https://enciclovida.mx/assets/portada/usos.jpg" }}
+                                />
+                            </View>
+
+                            <View style={styles.textHOMEButtonContainer}>
+                                <CustomIcon style={styles.textHOMEButtonIcon} name='usos'></CustomIcon>
+                                <Text style={styles.textHOMEButton}>Usos y agrobiodiversidad</Text>
+                            </View>
+                        </View>
+
                     </View>
 
                     {this.footer()}
+                    </ImageBackground>
                 </View>
             </View>
         );

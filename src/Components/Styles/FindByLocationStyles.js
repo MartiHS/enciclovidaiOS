@@ -8,7 +8,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'rgba(48, 50, 44, 0.8)'
   },
 
   // Estilo para la barra de navegación
@@ -172,4 +173,52 @@ export default StyleSheet.create({
     //height: '100%',
     resizeMode: 'cover'
   },
+
+
+  // Estilos para los botones de imagenes
+
+  fHOMEButtonContainer: {
+    margin: 5, 
+    borderRadius:10, 
+    width: "50%"
+  },
+
+  imageHOMEButtonContainer: {
+    padding: 0, 
+    margin: 0, 
+    width:"100%"
+  },
+
+  imageHOMEButton: {
+    width: '100%', 
+    height: 125, 
+    borderRadius:10,
+  },
+
+  textHOMEButtonContainer: {
+    backgroundColor: 'rgba(200, 200, 200, 0.8)',  
+    marginTop:-24, 
+    height:24, 
+    paddingTop:2, 
+    paddingLeft: 5, 
+    margin: 0, 
+    width:"100%", 
+    flexDirection:'row', 
+    borderBottomLeftRadius:10, 
+    borderBottomRightRadius:10
+  },
+
+  textHOMEButtonIcon: {
+    fontSize: 17, 
+    color: 'black' 
+  },
+
+  textHOMEButton: {
+    marginLeft: 5,
+    fontSize: 13, 
+    color: 'black' 
+  },
+
 });
+
+

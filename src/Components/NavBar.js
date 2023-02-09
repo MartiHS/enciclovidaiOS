@@ -1053,7 +1053,7 @@ class NavBar extends React.Component {
       </View>
       <View style={styles.tabLine}/>
       
-      <Text style={styles.title_flat}>USO</Text>
+      <Text style={styles.title_flat}>Uso y agrobiodiversidad</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
           items={T_USO} 

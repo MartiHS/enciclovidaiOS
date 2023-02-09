@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
-import { createIconSetFromFontello } from "react-native-vector-icons";
+
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -9,6 +9,7 @@ import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/HomeScreenStyles";
 import Constants from '../Config/Constants';
 
+import { createIconSetFromFontello } from "react-native-vector-icons";
 import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
 
@@ -133,7 +134,9 @@ class HomeScreen extends Component {
             <View style={[styles.mainScreen]}>
                 <NavBar white={true} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
-                <Text style={styles.finSpeciesText}>Busca entre más de 112 mil especies</Text>
+                    <View style={{justifyContent: "center", alignItems: "center",  width:'100%'}}>
+                        <Text style={styles.finSpeciesText}>Busca entre más de 113 mil especies</Text>
+                    </View>
                     <View style={styles.view}>
                         <View style={{height:46, width: '90%'}}>
                             <Icon name="ios-search" style={styles.customSearchIcon} />
@@ -173,7 +176,7 @@ class HomeScreen extends Component {
                         </View>
                     </View>
 
-                    <View style={[styles.view, styles.viewImage]}>
+                    <View style={[styles.view, styles.viewImage, {marginTop: 90}]}>
                        
                         <Image style={styles.image}
                             source={{uri: 'ic_top_home'}}/>

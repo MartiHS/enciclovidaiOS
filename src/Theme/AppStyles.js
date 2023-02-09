@@ -9,7 +9,9 @@ const AppStyles = {
   screen: {
     mainScreen: {
       flex: 1,
-      backgroundColor: Colors.mainBackground
+      backgroundColor: Colors.mainBackground,
+      //backgroundColor: 'red',
+      
     },
     button: {
       margin: 10,

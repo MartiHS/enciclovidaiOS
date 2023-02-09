@@ -151,40 +151,13 @@ class SideMenu extends React.Component {
 
           <TouchableHighlight onPress = {this.goToFindByLocation} style = { [styles.menuItem] } >
             <View style = {styles.row2} >
-              <CustomIcon name="region" size = {22} color = "#fff" style = {styles.favicon }></CustomIcon>
-              <Text style = {styles.title} > Busca por ubicación </Text>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight onPress = {this.goToFind} style = { [styles.menuItem] } >
-            <View style = {styles.row2} >
-              <Icon name="ios-search"  size = {25} color = "#fff" style = {styles.favicon } />
-              <Text style = {styles.title} > Busca una especie </Text>
+              <Icon name="ios-home" size = {22} color = "#fff" style = {styles.favicon }></Icon>
+              <Text style = {styles.title} > Inicio </Text>
             </View>
           </TouchableHighlight>
          
-          <Text style = {styles.titleHeader } > A NIVEL NACIONAL: </Text>
-          
-          <TouchableHighlight onPress = {() => { this.goToSpeciesList("SpeciesRisk")}} style = {[styles.subMenuItem]} underlayColor = {itemUnderlaycolor} >
-            <View style = {styles.row} >
-              <Text style = {styles.title} > En riesgo </Text>
-            </View>
-          </TouchableHighlight>
-          
-          <TouchableHighlight onPress = {() => {this.goToSpeciesList("SpeciesEndemic")}} style = {[styles.subMenuItem]} underlayColor = {itemUnderlaycolor} >
-            <View style = {styles.row} >
-              <Text style = {styles.title} > Endémicas </Text>
-            </View>
-          </TouchableHighlight>
-          
-          <TouchableHighlight onPress = {() => {this.goToSpeciesList("SpeciesExotic")}} style = {[styles.subMenuItem]} underlayColor = {itemUnderlaycolor} >
-            <View style = {styles.row} >
-              <Text style = {styles.title} > Exóticas </Text>
-            </View>
-          </TouchableHighlight>
-          
           <View style = {styles.tabLine}/>
-          
+                   
           <TouchableHighlight onPress = {this.goToInfo} style = {[styles.menuItem]} underlayColor = {itemUnderlaycolor} >
             <View style = {styles.row} >
               <Text style = {styles.title} > ¿Qué es Enciclovida ? </Text>
@@ -194,10 +167,34 @@ class SideMenu extends React.Component {
           <TouchableHighlight onPress = {this.goToSymbology} style = {[styles.menuItem]}underlayColor = {itemUnderlaycolor} >
             <View style = {styles.row} >
               <Text style = {styles.title} > Simbología </Text>
+            </View>
+          </TouchableHighlight>
+          <View style = {styles.tabLine}/>
+
+          <TouchableHighlight onPress = {() => {this.goToSpeciesList("SpeciesExotic")}} underlayColor = {itemUnderlaycolor} >
+            <View style = {styles.row} >
+              <CustomIcon style={{fontSize: 30, color: 'white', width: '100%' }} name='biomex'></CustomIcon>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress = {() => {this.goToSpeciesList("SpeciesExotic")}} underlayColor = {itemUnderlaycolor} >
+            <View style = {styles.row} >
+              <View style={{flexDirection: 'row'}}>
+                <CustomIcon style={{fontSize: 30, color: 'white' }} name='naturalista'></CustomIcon>
+                <Text> </Text>
+                <CustomIcon style={{fontSize: 40, color: 'white', top:-6}} name='naturalista-3'></CustomIcon>
+                <CustomIcon style={{fontSize: 30, color: 'white' }} name='naturalista-4'></CustomIcon>
               </View>
-            </TouchableHighlight>
+            </View>
+          </TouchableHighlight>
+          
           </ScrollView>
         
+        
+
+         
+
+
         <View style = {styles.image_container} >
           <Image style = {styles.image} source = {{uri: 'ic_footer_menu'}} resizeMode = "contain" />
         </View>

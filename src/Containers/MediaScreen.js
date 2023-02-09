@@ -40,21 +40,22 @@ class MediaScreen extends Component {
         // Si hay algo en taxonPhotos, quiere decir que se guardaron ya las fotos desde About (Que siempre debería ser así)
         if(global.taxonPhotos !== [] ) {
           console.log("No fué necesario llamar al servicio de nuevo!! :D");
-          result = Helper.getDataImages(global.taxonPhotos, global.taxonPhotos_BDI_source);
+          result = Helper.getDataImages(global.taxonPhotos);
         } else {
             // Si no se guardaron o se perdieron (Extrañamente debería pasar aquí)
-            // Obtener las fotos: desde el servicio NaturaLista
-            const response = await Helper.fetchDataFromNaturalista(id_specie);
-            const fotos = await response;
-            // Si el servicio devolvió {}, llamar a BDI
-            if(fotos.length == 0) {
-              //console.log("No hubo fotos en NaturaLista");
-              const response2 = await Helper.fetchDataFromBDI(id_specie);
-              const fotos2 = response2;
-              result = Helper.getDataImages(fotos2, true);
-            } else {
-              result = Helper.getDataImages(fotos, false);
-            }
+
+            // Obtener la media
+            let response = await Helper.fetchAllMedia(id_specie);
+            let fotos = await response.fotos;
+            let videos = await response.videos;
+            let audios = await response.audios;
+
+            global.taxonPhotos = fotos;
+            global.taxonVideos = videos;
+            global.taxonAudios = audios;
+            
+            result = Helper.getDataImages(fotos2, false);
+            
         }
         
         this.setMediaIdSpecie(specie_id);
@@ -128,7 +129,7 @@ class MediaScreen extends Component {
             style={styles.flatList}
             data={this.state.data}
             extraData={this.state}
-            keyExtractor={item => item.id.toString()}
+            
             renderItem={({ item, index }) => (
 
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
@@ -139,8 +140,8 @@ class MediaScreen extends Component {
                       }}
                   >
                       <Image
-                        source={{ uri: item.imagen ? item.imagen : 'ic_imagen_not_found_small' }}
-                        style={item.imagen ? styles.imageThumbnail : styles.imageempty}
+                        source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
+                        style={item.thumb ? styles.imageThumbnail : styles.imageempty}
                       />
                   </TouchableOpacity>
               </View>
