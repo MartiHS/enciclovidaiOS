@@ -9,7 +9,7 @@ export default class Helper {
       for(var i = 0; i< JSONImages.length; i++) {    
           var image = {
             source: {
-              uri: JSONImages[i]['imagen']
+              uri: JSONImages[i]['content']
             },
             title: JSONImages[i]['text']
           }
@@ -83,19 +83,62 @@ export default class Helper {
   }
 
   // Obtener el Data de images para usar en FlatList
-  static getDataImages(images) {
-    result = images.map(data => {
-      
-      return {
-        //id: data.photo.id,
-        thumb: data.thumb_url,
-        imagen: data.large_url,
-        text: data.atribucion,
-      };
-    
-    });
+  static getDataImages(images, videos, audios) {
 
-    return result;
+    let resultPhotos = [];
+    try {
+
+      resultPhotos = images.map(data => {
+      
+        return {
+          //id: data.photo.id,
+          thumb: data.thumb_url,
+          content: data.large_url,
+          text: data.atribucion,
+        };
+      });
+      
+    } catch(e) {
+      resultPhotos = [];
+    }
+
+
+    let resultVideos = [];
+    try {
+
+      resultVideos = videos.map(data => {
+      
+        return {
+          //id: data.photo.id,
+          thumb: data.thumb_url,
+          content: data.video_url,
+          text: data.atribucion,
+        };
+      });
+      
+    } catch(e) {
+      resultVideos = [];
+    }
+
+ 
+    let resultAudios = [];
+    try {
+
+      resultAudios = audios.map(data => {
+      
+        return {
+          //id: data.photo.id,
+          thumb: data.thumb_url,
+          content: data.audio_url,
+          text: data.atribucion,
+        };
+      });
+
+    } catch(e) {
+      resultAudios = [];
+    }
+
+    return [resultPhotos, resultVideos, resultAudios];
   }
 
 }

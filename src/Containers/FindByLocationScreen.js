@@ -323,7 +323,7 @@ class HomeScreen extends Component {
         return (
             /* Barra de navegación */
             <View style={[styles.mainScreen]}>
-                <NavBar white={true} title = ""  menuLightButton={true}/> 
+                <NavBar white={false} title = ""  menuLightButton={true}/> 
                 <View style={styles.container}>
                 <ImageBackground source={{uri: 'https://enciclovida.mx/assets/portada/en-riesgo.jpg'}} resizeMode="cover" style={{backgroundColor:'rgba(50, 50, 50, 0.9)'}} imageStyle={{opacity:0.1}}> 
                 
