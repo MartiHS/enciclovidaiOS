@@ -101,18 +101,6 @@ class MediaScreen extends Component {
     });
   }
 
-  WrapperComponent() {
-    return (
-      <View>
-        <Modal isVisible={true}>
-          <View style={{ flex: 1}}>
-            <Text style={{color: 'white' }}>I am the modal content!I am the modal content!I am the modal content!I am the modal content!I am the modal content!I am the modal content!</Text>
-          </View>
-        </Modal>
-      </View>
-    );
-  }
-
   renderFooter({title}) {
     return (
       <View style={styles.view_text_image}>
@@ -185,7 +173,7 @@ class MediaScreen extends Component {
         hasBackdrop={true}
         backdropColor={'black'}
         backdropOpacity={0.7}
-
+        deviceHeight={300}
         // Caundo presionamos fuera
         onBackdropPress={() => {
             this.setState({modalVisible: !modalVisible});

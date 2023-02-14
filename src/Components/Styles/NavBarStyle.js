@@ -8,7 +8,6 @@ export default styles = StyleSheet.create({
         paddingTop: (Platform.OS === 'android') ? getStatusBarHeight() : 0,
         top: 0,
         height: (Platform.OS === 'android') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
-        backgroundColor: Colors.navBarBackground, 
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start"

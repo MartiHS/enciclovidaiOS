@@ -1239,13 +1239,13 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { transparent, white } = this.props;
+    const { transparent, white, color, theColor } = this.props;
     const title= this.state.title;
     const subtitle=this.state.subtitle;
     const filtersTypeState=this.state.filtersTypeState
     const dialogPDFContent = this.state.dialogPDFContent
     return (
-      <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
+      <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null, color ? {backgroundColor: theColor } : {backgroundColor: Colors.navBarBackground} ]}>
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
         <View style={styles.titleWrapper}>
           <Text style={[styles.title, title != null && title.length > 40 ? styles.title_small : null]}>{title}</Text>
