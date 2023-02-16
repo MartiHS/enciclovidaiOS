@@ -41,6 +41,8 @@ target 'Enciclovida' do
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
 
 
+  pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
+
   target 'EnciclovidaTests' do
     inherit! :search_paths
     # Pods for testing

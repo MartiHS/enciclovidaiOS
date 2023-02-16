@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler, Button } from 'react-native';
+import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler, Button, TouchableHighlight, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ImageView from 'react-native-image-view';
@@ -8,8 +8,11 @@ import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
+import SoundPlayer from 'react-native-sound-player'
 
 import { TabbedPager } from 'react-native-viewpager-carousel'
+
+import { WebView } from 'react-native-webview';
 
 //import Video from 'react-native-video';
 
@@ -33,7 +36,14 @@ class MediaScreen extends Component {
       showimage: false,
       image_tmp: '',
       spinner: true,
-      modalVisible: true,
+      
+      modalAudioVisible: false,
+      audioOnModal: '',
+      audioOnModalDesc: '',
+
+      modalVisible: false,
+      videoOnModal: '',
+      videoOnModalDesc: '',
       mediaOptions: [{"title": "-"}, {"title": "-"},{"title": "-"}]
   };
     
@@ -124,6 +134,20 @@ class MediaScreen extends Component {
     );
   }
 
+  playASound(sound) {
+
+    console.log("Se intentarà con: " + sound)
+    try {
+        // play the file tone.mp3
+        //SoundPlayer.playSoundFile(sound, 'mp3')
+        // or play from url
+        SoundPlayer.playUrl(sound)
+    } catch (e) {
+        console.log(`cannot play the sound file`, e)
+    }
+  }
+
+
   _renderTab = ({data}) => {
 
     let contentType = data.title;
@@ -197,7 +221,7 @@ class MediaScreen extends Component {
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <TouchableOpacity
                       onPress={() => {
-                        this.setState({ modalVisible: true});
+                        this.setState({ modalVisible: true, videoOnModal: item.content, videoOnModalDesc: item.text});
                       }}
                   >
                       <Image
@@ -222,8 +246,9 @@ class MediaScreen extends Component {
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <TouchableOpacity
                       onPress={() => {
+                        this.setState({ modalAudioVisible: true, audioOnModal: item.content, audioOnModalDesc: item.text});
                         //console.log("\n\n\n item : " + JSON.stringify(index));
-                        this.handlePress(item.content, index);
+                        this.playASound(item.content);
                       }}
                   >
                       <Image
@@ -258,8 +283,7 @@ class MediaScreen extends Component {
 
 
   render() {
-    
-    const {mediaOptions, modalVisible} = this.state;
+    const {mediaOptions, modalVisible, videoOnModal, videoOnModalDesc, modalAudioVisible, audioOnModal, audioOnModalDesc} = this.state;
     
     return (
       <View style={[styles.mainScreen]}>
@@ -285,12 +309,12 @@ class MediaScreen extends Component {
           />
           <Modal 
             animationInTiming={400} 
-            coverScreen={true}
+            coverScreen={false}
             isVisible={modalVisible} 
             hasBackdrop={true}
             backdropColor={'black'}
             backdropOpacity={0.7}
-            deviceHeight={300}
+            //deviceHeight={300}
             // Caundo presionamos fuera
             onBackdropPress={() => {
                 this.setState({modalVisible: !modalVisible});
@@ -306,20 +330,138 @@ class MediaScreen extends Component {
                   <TouchableOpacity style={{ }} onPress={() => { this.setState({modalVisible: !modalVisible}) }} >
                     <Icon2 name="close-a" color={Colors.blue} style={{fontSize: Fonts.size.h2, padding: 10, paddingTop: 15}} />
                   </TouchableOpacity>
+                </View> 
+              </View>
+              
+              <View style = {{flex: 1}}>  
+                <WebView source={{ uri: videoOnModal }} />
+              </View>
+
+              <View  style={{ width: '100%'}}>
+                <Text style={{fontFamily: Fonts.family.base, fontSize: Fonts.size.small,  color:Colors.blue, padding: 10}}>{videoOnModalDesc}</Text>
+              </View>
+                
+            </View>
+          </Modal>
+
+
+          <Modal 
+            animationInTiming={400} 
+            coverScreen={false}
+            isVisible={modalAudioVisible} 
+            hasBackdrop={true}
+            //deviceHeight={10000}
+            animationIn={'zoomInUp'}
+            backdropColor={'black'}
+            backdropOpacity={0.7}
+            //deviceHeight={10}
+            // Caundo presionamos fuera
+            onBackdropPress={() => {
+                this.setState({modalAudioVisible: !modalAudioVisible});
+                try {
+                    SoundPlayer.stop();
+                } catch (e) {
+                    console.log(`cannot play the sound file`, e)
+                }
+            }}
+            style={{ flex: 1, backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10  }}
+          >
+            <View style={{ flex: 1 }}>
+              <View style={{flexDirection:'row', height: '10%'}}>
+                <View  style={{ width: '70%'}}>
+                <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>Audio</Text>
                 </View>
+                <View  style={{ width: '30%', alignContent:'flex-end', alignItems:'flex-end'}}>
+                  <TouchableOpacity style={{ }} onPress={
+                    () => {
+                        this.setState({modalAudioVisible: !modalAudioVisible});
+                        try {
+                            SoundPlayer.stop();
+                        } catch (e) {
+                            console.log(`cannot play the sound file`, e)
+                        }
+                    }
+                  } >
+                    <Icon2 name="close-a" color={Colors.blue} style={{fontSize: Fonts.size.h2, padding: 10, paddingTop: 15}} />
+                  </TouchableOpacity>
+                </View> 
+              </View>
+              
+              <View style={{flexDirection:'row', justifyContent: 'center', backgroundColor: Colors.gray, alignItems: 'center', height: '80%'}}>
+
+                <TouchableHighlight
+                  style = {{
+                    borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
+                    width: Dimensions.get('window').width * 0.18,
+                    height: Dimensions.get('window').width * 0.18,
+                    backgroundColor:Colors.green,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: 10,
+                    marginTop: 5
+                  }}
+                  underlayColor = '#ccc'
+                  onPress = { () => {
+                    try {
+                        SoundPlayer.stop();
+                    } catch (e) {
+                        console.log(`cannot play the sound file`, e)
+                    }
+                  } }
+                >
+                  <Icon2 name="stop" color={Colors.white} style={{fontSize: Fonts.size.h2}} />
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                  style = {{
+                    borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
+                    width: Dimensions.get('window').width * 0.2,
+                    height: Dimensions.get('window').width * 0.2,
+                    backgroundColor:Colors.green,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: 10
+                  }}
+                  underlayColor = '#ccc'
+                  onPress = { () => {
+                    try {
+                        SoundPlayer.resume();
+                    } catch (e) {
+                        console.log(`cannot play the sound file`, e)
+                    }
+                  } }
+                >
+                  <Icon2 name="play" color={Colors.white} style={{fontSize: Fonts.size.h2}} />
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                  style = {{
+                    borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
+                    width: Dimensions.get('window').width * 0.18,
+                    height: Dimensions.get('window').width * 0.18,
+                    backgroundColor:Colors.green,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: 10,
+                    marginTop: 5
+                  }}
+                  underlayColor = '#ccc'
+                  onPress = { () => {
+                    try {
+                        SoundPlayer.pause();
+                    } catch (e) {
+                        console.log(`cannot play the sound file`, e)
+                    }
+                  } }
+                >
+                  <Icon2 name="pause" color={Colors.white} style={{fontSize: Fonts.size.h2}} />
+                </TouchableHighlight>
 
               </View>
               
-
-              <Video source={{uri: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/440240771/video"}}   // Can be a URL or a localfile.
-                ref={(ref) => {
-                  this.player = ref
-                }}                                      // Store reference
-                onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                onEnd={this.onEnd}                      // Callback when playback finishes
-                onError={this.videoError}               // Callback when video cannot be loaded
-                style={styles.backgroundVideo} />
-
+              <View style={{ width: '100%', height: '10%'}}>
+                <Text style={{fontFamily: Fonts.family.base, fontSize: Fonts.size.small,  color:Colors.blue, padding: 10}}>{audioOnModalDesc}</Text>
+              </View>
                 
             </View>
           </Modal>
