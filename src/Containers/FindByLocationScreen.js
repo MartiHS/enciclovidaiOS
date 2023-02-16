@@ -7,7 +7,6 @@ import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/FindByLocationStyles";
 import Constants from '../Config/Constants';
 
-
 import stylesListEspecies from "../Components/Styles/ListSpeciesScreenStyles";
 
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';

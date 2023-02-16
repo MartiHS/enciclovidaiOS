@@ -36,6 +36,16 @@ export default StyleSheet.create({
   imageThumbnail: {
     justifyContent: 'center',
     alignItems: 'center',
+    height: 120,
+  },
+  videoThumbnail: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 200,
+  },
+  audioThumbnail: {
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 100,
   },
 

@@ -33,7 +33,7 @@ class TabBar extends React.Component {
             <View style={styles.container}>
                 {this.renderTab({ route: "About", text: "Acerca" })}
                 {this.renderTab({ route: "Map", text: "Mapa" })}
-                {this.renderTab({ route: "Media", text: "Fotos" })}
+                {this.renderTab({ route: "Media", text: "Multimedia" })}
                 {this.renderTab({ route: "Classification", text: "Grupo" })}
             </View>
         </View>

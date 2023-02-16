@@ -15,6 +15,9 @@ import styles from "../Components/Styles/AboutScreenStyles";
 import Constants from '../Config/Constants';
 import Helper from '../Config/Helpers';
 
+import { TabbedPager } from 'react-native-viewpager-carousel'
+import { Colors, Fonts } from '../Theme';
+
 const CustomIcon = createIconSetFromFontello(config);
 
 // Esta pantalla será la primera que se ejecute al seleccionar una especie: lo ideal es que, como ya manda a llamar la galería de la especie, la almacene para que 
@@ -33,6 +36,14 @@ class AboutScreen extends Component {
       contenido_render_array: [],
       spinner: false
     };
+    
+    this.aboutOptions = [
+      { title: 'Descripción completa de CONABIO', value: 'conabio' },
+      { title: 'Wikipedia en español', value: 'wikipedia_es' },
+      { title: 'Descripción de IUCN', value: 'iucn' },
+      { title: 'Wikipedia en inglés', value: 'wikipedia_en' },
+      { title: 'Metadatos de CONABIO', value: 'conabio_tecnico' },
+    ];
 
     this.fetchData = this.fetchData.bind(this);
     this.UNSAFE_componentWillReceiveProps = this.UNSAFE_componentWillReceiveProps.bind(this);
@@ -56,8 +67,13 @@ class AboutScreen extends Component {
     return original;
   }
   
-  getHTMLSpecieResume(id_specie) {
-    var urlToGetSpecieInfo = `${Constants.API_ENCICLOVIDA_ESPECIES}${id_specie}${Constants.SPECIE_INFO_HTML}`;
+  getHTMLSpecieResume(id_specie, fuente='') {
+
+    //'https://api.enciclovida.mx/v2/especies/1/descripcion?fuente=conabio'
+
+    let fuenteFin = fuente != '' ? ('?fuente=' + fuente) : '';
+
+    var urlToGetSpecieInfo = `${Constants.API_ENCICLOVIDA}v2/especies/${id_specie}${Constants.SPECIE_INFO_HTMLV2}${fuenteFin}`;
     console.log(urlToGetSpecieInfo);
     fetch(urlToGetSpecieInfo).then((response) => {
       return response.text();
@@ -170,8 +186,34 @@ class AboutScreen extends Component {
     )
   };
 
+  _renderTab = ({data}) => {
+    return (  
+      <View style={[ {backgroundColor: 'tramsparent'}]}>
+        <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+      </View>
+    )
+  }
+
+  _renderPage = ({data}) => {
+    return (  
+      <View style={[ {backgroundColor: 'tramsparent'}]}>
+      <AutoHeightWebView 
+              style={{ width: Dimensions.get('window').width - 15, marginTop: 35, marginButton: 40}}
+              //style={styles.textcontent, { width: Dimensions.get('window').width, marginTop: 0 }}
+              customScript={`document.body.style.background = 'transparent';`}
+              customStyle={styles.customStyleView}
+              source={ { html: this.state.resumen_HTML} } 
+              scalesPageToFit={true}
+              viewportContent={'width=device-width, user-scalable=no'}
+              showsVerticalScrollIndicator={true}
+            />
+     </View>
+    )
+  }
   render() {
+    
     const defaultimage = this.state.imagen == '' ? 'ic_imagen_not_found' : this.state.imagen;
+
     return (
       <View style={[styles.mainScreen]}>
         <NavBar menuBlackButton={true} infoButton={true} />
@@ -184,16 +226,32 @@ class AboutScreen extends Component {
           <ScrollView style={{flex:1}}>
             <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={[{flex: 1, flexDirection: "column" }, styles.image]} />
             
-            <AutoHeightWebView 
-              style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}
-              //style={styles.textcontent, { width: Dimensions.get('window').width, marginTop: 0 }}
-              customScript={`document.body.style.background = 'transparent';`}
-              customStyle={styles.customStyleView}
-              source={ { html: this.state.resumen_HTML} } 
-              scalesPageToFit={true}
-              viewportContent={'width=device-width, user-scalable=no'}
-              showsVerticalScrollIndicator={true}
+            <View>
+
+
+           
+              <TabbedPager
+              //data={this.mediaOptions}
+              data={this.aboutOptions}
+              renderPage={this._renderPage}
+              renderTab={this._renderTab}
+              //dev={true}
+              //lazyrender={true}
+              //lazyrenderThreshold={3}
+              //renderAsCarousel={true}
+              scrollEnabled={true}
+              firePageChangeIfPassedScreenCenter={true}
+              showNativeScrollIndicator={true}
+              style={
+                {
+                  //height:'100%',
+                  backdropColor: 'red'
+                }
+              }
             />
+
+</View>
+          
           </ScrollView>
         </View>
         <TabBar shownav={true} selected="About" />

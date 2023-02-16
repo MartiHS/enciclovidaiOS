@@ -33,7 +33,7 @@ export default class Helper {
         let allMedia = {
           fotos: [],
           videos: [],
-          audio: []
+          audios: []
         }
 
         if( json.fotos ) {
@@ -46,6 +46,7 @@ export default class Helper {
           allMedia.audios = json.audios;
         }
 
+        
         return allMedia;
     
     }).catch(error => {
@@ -85,60 +86,71 @@ export default class Helper {
   // Obtener el Data de images para usar en FlatList
   static getDataImages(images, videos, audios) {
 
-    let resultPhotos = [];
+    let allMedia = []
+    let media = {}
+
     try {
-
-      resultPhotos = images.map(data => {
-      
-        return {
-          //id: data.photo.id,
-          thumb: data.thumb_url,
-          content: data.large_url,
-          text: data.atribucion,
-        };
-      });
-      
-    } catch(e) {
-      resultPhotos = [];
-    }
+      if (images.length >= 0){
+        media = { title: 'Fotos', content: images.map(data => {
+          return {
+            thumb: data.thumb_url,
+            content: data.large_url,
+            text: data.atribucion
+          };
+        })};
+        allMedia.push(media)
+      }
+       
+    } catch(e) { }
 
 
-    let resultVideos = [];
     try {
-
-      resultVideos = videos.map(data => {
       
-        return {
-          //id: data.photo.id,
-          thumb: data.thumb_url,
-          content: data.video_url,
-          text: data.atribucion,
-        };
-      });
-      
-    } catch(e) {
-      resultVideos = [];
-    }
-
+      if (videos.length >= 0){
+        media = { title: 'Videos', content: videos.map(data => {
+          return {
+            thumb: data.thumb_url,
+            content: data.video_url,
+            text: data.atribucion
+          };
+        })};
+  
+        allMedia.push(media)
+      }
  
-    let resultAudios = [];
+    } catch(e) { }
+
     try {
 
-      resultAudios = audios.map(data => {
-      
-        return {
-          //id: data.photo.id,
-          thumb: data.thumb_url,
-          content: data.audio_url,
-          text: data.atribucion,
-        };
-      });
+      if (audios.length >= 0){
+        media = { title: 'Audios', content: audios.map(data => {
+          
+          let losAudios = "";
+          
+         
+          if( data.audio ) {
+            losAudios = data.audio
+           }
 
-    } catch(e) {
-      resultAudios = [];
+          if( data.audio_url ) {
+            losAudios = data.audio_url
+          }
+
+          return {
+            thumb: data.thumb_url,
+            content: losAudios,
+            text: data.atribucion
+          };
+        })};
+  
+        allMedia.push(media)
+      }
+
+    } catch(e) { 
+      console.log(e)
     }
 
-    return [resultPhotos, resultVideos, resultAudios];
+    return allMedia;
   }
 
 }

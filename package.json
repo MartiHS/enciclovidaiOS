@@ -39,6 +39,7 @@
     "react-native-screens": "^2.0.0-alpha.19",
     "react-native-status-bar-height": "^2.5.0",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-viewpager-carousel": "^0.3.2",
     "react-native-webview": "^8.2.1",
     "react-navigation": "^4.0.10",
     "react-navigation-drawer": "^2.3.3",

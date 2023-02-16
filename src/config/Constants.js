@@ -5,6 +5,7 @@ const constants = {
     BDI_ENDPOINT: 'fotos-bdi.json',
     SPECIE_INFO_ENDPOINT: 'https://api.enciclovida.mx/especie/descripcion/',
     SPECIE_INFO_HTML: '/descripcion-app',
+    SPECIE_INFO_HTMLV2: '/descripcion',
     RESULT_CATEGORIES:[
         'especie', 'subespecie', 
         'variedad', 'subvariedad', 

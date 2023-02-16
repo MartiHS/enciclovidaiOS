@@ -8,6 +8,11 @@ import NavBar from '../Components/NavBar';
 import TabBar from '../Components/TabBar';
 import styles from '../Components/Styles/MediaScreenStyles';
 
+
+import { TabbedPager } from 'react-native-viewpager-carousel'
+
+//import Video from 'react-native-video';
+
 import RNImageVideoGridViewer from "@leafletui/rn-image-video-grid-viewer";
 
 import Modal from "react-native-modal";
@@ -24,28 +29,27 @@ class MediaScreen extends Component {
     console.log("\n\n\nLlamada a MediaScreen desde constructor \n---------------------------------\n" );
     super(props);
     this.state = {
-      data: [],
       listImages: [],
       showimage: false,
       image_tmp: '',
-      spinner: false,
+      spinner: true,
       modalVisible: true,
-    };
+      mediaOptions: [{"title": "-"}, {"title": "-"},{"title": "-"}]
+  };
+    
     this.fetchData = this.fetchData.bind(this);
   }
-
 
   setMediaIdSpecie = (id_specie) => {
     global.media_id_specie = id_specie;
   }
 
   async fetchData(specie_id, media_specie_id) {
+    // Si la especie en cuestión es diferente a la búsqueda anterior
     if (specie_id !== media_specie_id) {
-      let result = [];
-      this.setState({ spinner: true, data: [] });
+      let result = {};
+      this.setState({ spinner: true, mediaOptions: [] });
       if (specie_id !== 0) {
-
-        
         // Si hay algo en taxonPhotos, quiere decir que se guardaron ya las fotos desde About (Que siempre debería ser así)
         if(global.taxonPhotos !== [] ) {
           console.log("No fué necesario llamar al servicio de nuevo!! :D");
@@ -61,18 +65,26 @@ class MediaScreen extends Component {
 
             global.taxonPhotos = fotos;
             global.taxonVideos = videos;
-            global.taxonAudios = audios;
+            global.taxonAudios = audios; 
             
-            result = Helper.getDataImages(fotos2, false);
+            result = Helper.getDataImages(global.taxonPhotos, global.taxonVideos, global.taxonAudios);
             
         }
         
         this.setMediaIdSpecie(specie_id);
-        this.setState({ data: result, spinner: false, listImages: Helper.createJSONImagesFor_image_view(result[0])});
-
+        let imagesCatalog = Helper.createJSONImagesFor_image_view(result[0].content);
+        this.setState({ mediaOptions: result, spinner: false, listImages: imagesCatalog});
+        
       } else {
         this.setState({ spinner: false });
       }
+    } else {
+      // DEV: la especie es la misma
+      console.log("Misma especie");
+      this.setState({ spinner: true, mediaOptions: []});
+      let result = Helper.getDataImages(global.taxonPhotos, global.taxonVideos, global.taxonAudios);
+      let imagesCatalog = Helper.createJSONImagesFor_image_view(result[0].content);
+      this.setState({ mediaOptions: result, spinner: false, listImages: imagesCatalog});
     }
   }
 
@@ -85,6 +97,9 @@ class MediaScreen extends Component {
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     this.fetchData(global.id_specie, global.media_id_specie);
+    console.log(global.id_specie);
+    console.log(global.media_id_specie);
+    //this.setState({ spinner: false });
 
   }
 
@@ -109,11 +124,143 @@ class MediaScreen extends Component {
     );
   }
 
+  _renderTab = ({data}) => {
+
+    let contentType = data.title;
+    if(contentType === "Fotos"){
+      return (  
+        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
+            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+        </View>
+      )
+    }
+
+    if(contentType === "Videos"){
+      return (  
+        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
+            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+        </View>
+      )
+    }
+
+    if(contentType === "Audios"){
+      return (  
+        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
+            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+        </View>
+      )
+    }
+
+  }
+
+  _renderPage = ({data}) => {
+    console.log("CONTENIDO A ITERAR")
+
+    let contentType = data.title;
+    console.log(contentType)
+    console.log(data)
+
+    if(contentType === "Fotos"){
+      return ( 
+        <FlatList
+          style={[styles.flatList, {backgroundColor: 'white', marginTop: -2}]}
+          data={data.content}
+          extraData={this.state}
+          renderItem={({ item, index }) => (
+            <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                <TouchableOpacity
+                    style={{  }}
+                    onPress={() => {
+                      //console.log("\n\n\n item : " + JSON.stringify(index));
+                      this.handlePress(item.content, index);
+                    }}
+                >
+                    <Image
+                      source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
+                      style={item.thumb ? styles.imageThumbnail : styles.imageempty}
+                    />
+                </TouchableOpacity>
+            </View>
+          )}
+          numColumns={3}
+        />
+      )
+    }
+
+    if(contentType === "Videos"){
+      return ( 
+        <FlatList
+          style={[styles.flatList, {backgroundColor: 'white'}]}
+          data={data.content}
+          extraData={this.state}
+            renderItem={({ item, index }) => (
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                  <TouchableOpacity
+                      onPress={() => {
+                        this.setState({ modalVisible: true});
+                      }}
+                  >
+                      <Image
+                        source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
+                        style={item.thumb ? styles.videoThumbnail : styles.imageempty}
+                      />
+                  </TouchableOpacity>
+              </View>
+            )}
+          numColumns={3}
+        />
+      )
+    }
+
+    if(contentType === "Audios"){
+      return ( 
+        <FlatList
+          style={[styles.flatList, {backgroundColor: 'black', height: 100}]}
+          data={data.content}
+          extraData={this.state}
+            renderItem={({ item, index }) => (
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                  <TouchableOpacity
+                      onPress={() => {
+                        //console.log("\n\n\n item : " + JSON.stringify(index));
+                        this.handlePress(item.content, index);
+                      }}
+                  >
+                      <Image
+                        source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
+                        style={item.thumb ? styles.audioThumbnail : styles.imageempty}
+                      />
+                  </TouchableOpacity>
+              </View>
+            )}
+          numColumns={2}
+        />
+      )
+    }
+  }
+
+  _showLoading(){
+    return(
+      <Spinner
+        visible={true}
+        textContent="Cargando..."
+        textStyle={{ color: 'black' }}
+      />
+    )
+  }
+
+  _renderTitleChange= (data) => {
+    console.log("cambiaaaa")
+    console.log(data)
+    
+    
+  }
+
 
   render() {
     
-    const {modalVisible} = this.state;
-
+    const {mediaOptions, modalVisible} = this.state;
+    
     return (
       <View style={[styles.mainScreen]}>
         <NavBar menuBlackButton={true} infoButton={true} />
@@ -123,21 +270,100 @@ class MediaScreen extends Component {
             textContent="Cargando..."
             textStyle={{ color: 'black' }}
           />
-
           <ImageView
-            glideAlways
-            images={this.state.listImages}
-            imageIndex={this.state.currentIndex}
-            animationType="slide"
-            //animationType="fade"
-            isVisible={this.state.showimage}
-            renderFooter={this.renderFooter}
-            onClose={() => this.setState({ showimage: false })} 
-            onImageChange={index => {
-                //console.log(index);
+              glideAlways
+              images={this.state.listImages}
+              imageIndex={this.state.currentIndex}
+              animationType="slide"
+              //animationType="fade"
+              isVisible={this.state.showimage}
+              renderFooter={this.renderFooter}
+              onClose={() => this.setState({ showimage: false })} 
+              onImageChange={index => {
+                  //console.log(index);
+              }}
+          />
+          <Modal 
+            animationInTiming={400} 
+            coverScreen={true}
+            isVisible={modalVisible} 
+            hasBackdrop={true}
+            backdropColor={'black'}
+            backdropOpacity={0.7}
+            deviceHeight={300}
+            // Caundo presionamos fuera
+            onBackdropPress={() => {
+                this.setState({modalVisible: !modalVisible});
             }}
-          /> 
+            style={{ flex: 1, backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10  }}
+          >
+            <View style={{ flex: 1 }}>
+              <View style={{flexDirection:'row'}}>
+                <View  style={{ width: '70%'}}>
+                <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>Video</Text>
+                </View>
+                <View  style={{ width: '30%', alignContent:'flex-end', alignItems:'flex-end'}}>
+                  <TouchableOpacity style={{ }} onPress={() => { this.setState({modalVisible: !modalVisible}) }} >
+                    <Icon2 name="close-a" color={Colors.blue} style={{fontSize: Fonts.size.h2, padding: 10, paddingTop: 15}} />
+                  </TouchableOpacity>
+                </View>
 
+              </View>
+              
+
+              <Video source={{uri: "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/440240771/video"}}   // Can be a URL or a localfile.
+                ref={(ref) => {
+                  this.player = ref
+                }}                                      // Store reference
+                onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                onEnd={this.onEnd}                      // Callback when playback finishes
+                onError={this.videoError}               // Callback when video cannot be loaded
+                style={styles.backgroundVideo} />
+
+                
+            </View>
+          </Modal>
+
+          <TabbedPager
+            data={mediaOptions}
+            //data={data}
+            renderPage={this._renderPage}
+            renderTab={this._renderTab}
+            onPageChange={this._renderTitleChange}
+            //dev={true}
+            lazyrender={true}
+            lazyrenderThreshold={0}
+            renderAsCarousel={true}
+            //pageWidth={10}
+            //initialPage={}
+            //thresholdPages={0}
+            scrollEnabled={true}
+            //firePageChangeIfPassedScreenCenter={true} 
+            //showNativeScrollIndicator={true}
+            //pagingEnabled={false}
+            style={
+              {
+                //height:'100%',
+                backdropColor: 'red'
+              }
+            }
+          />
+          
+        </View>
+        <TabBar shownav selected="Media" />
+      </View>
+    );
+  }
+}
+
+export default withNavigation(MediaScreen);
+
+/*
+    componentWillMount (){
+        this.setState({ data : [] });
+        //Alert.alert("idMount", this.state.load.toString());
+        this.fetchData(global.id_specie);
+    }
 
 
           <View>
@@ -157,6 +383,33 @@ class MediaScreen extends Component {
         />
       </View>
 
+
+
+      <FlatList
+            style={styles.flatList}
+            data={this.state.data[0]['content']}
+            extraData={this.state}
+            
+            renderItem={({ item, index }) => (
+
+              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
+                  <TouchableOpacity
+                      onPress={() => {
+                        //console.log("\n\n\n item : " + JSON.stringify(index));
+                        this.handlePress(item.content, index);
+                      }}
+                  >
+                      <Image
+                        source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
+                        style={item.thumb ? styles.imageThumbnail : styles.imageempty}
+                      />
+                  </TouchableOpacity>
+              </View>
+            )}
+            numColumns={3}
+          />
+
+ 
 
 
 
@@ -183,7 +436,7 @@ class MediaScreen extends Component {
         <View style={{ flex: 1 }}>
           <View style={{flexDirection:'row'}}>
             <View  style={{ width: '70%'}}>
-              <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>Fotos</Text>
+            <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>Fotos</Text>
             </View>
             <View  style={{ width: '30%', alignContent:'flex-end', alignItems:'flex-end'}}>
               <TouchableOpacity style={{ }} onPress={() => { this.setState({modalVisible: !modalVisible}) }} >
@@ -193,52 +446,14 @@ class MediaScreen extends Component {
 
           </View>
           
-          <FlatList
-            style={styles.flatList}
-            data={this.state.data[0]}
-            extraData={this.state}
-            
-            renderItem={({ item, index }) => (
-
-              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                  <TouchableOpacity
-                      onPress={() => {
-                        //console.log("\n\n\n item : " + JSON.stringify(index));
-                        this.handlePress(item.content, index);
-                      }}
-                  >
-                      <Image
-                        source={{ uri: item.thumb ? item.thumb : 'ic_imagen_not_found_small' }}
-                        style={item.thumb ? styles.imageThumbnail : styles.imageempty}
-                      />
-                  </TouchableOpacity>
-              </View>
-            )}
-            numColumns={3}
-          />
+          
            
         </View>
       </Modal>
     </View>
-                    
+             
+
+
+
           
-        </View>
-        <TabBar shownav selected="Media" />
-      </View>
-    );
-  }
-}
-
-export default withNavigation(MediaScreen);
-
-/*
-    componentWillMount (){
-        this.setState({ data : [] });
-        //Alert.alert("idMount", this.state.load.toString());
-        this.fetchData(global.id_specie);
-    }
-
-
-
- 
 */
