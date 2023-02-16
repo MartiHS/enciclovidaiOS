@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Image, Text, TouchableOpacity, BackHandler, Button, TouchableHighlight, Dimensions } from 'react-native';
+import { ImageBackground, View, FlatList, Image, Text, TouchableOpacity, BackHandler, Button, TouchableHighlight, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ImageView from 'react-native-image-view';
@@ -13,10 +13,6 @@ import SoundPlayer from 'react-native-sound-player'
 import { TabbedPager } from 'react-native-viewpager-carousel'
 
 import { WebView } from 'react-native-webview';
-
-//import Video from 'react-native-video';
-
-import RNImageVideoGridViewer from "@leafletui/rn-image-video-grid-viewer";
 
 import Modal from "react-native-modal";
 
@@ -149,32 +145,11 @@ class MediaScreen extends Component {
 
 
   _renderTab = ({data}) => {
-
-    let contentType = data.title;
-    if(contentType === "Fotos"){
-      return (  
-        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
-            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
-        </View>
-      )
-    }
-
-    if(contentType === "Videos"){
-      return (  
-        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
-            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
-        </View>
-      )
-    }
-
-    if(contentType === "Audios"){
-      return (  
-        <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
-            <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
-        </View>
-      )
-    }
-
+    return (  
+      <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
+          <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.white, padding: 10}}>{data.title}</Text>
+      </View>
+    )
   }
 
   _renderPage = ({data}) => {
@@ -239,7 +214,7 @@ class MediaScreen extends Component {
     if(contentType === "Audios"){
       return ( 
         <FlatList
-          style={[styles.flatList, {backgroundColor: 'black', height: 100}]}
+          style={[styles.flatList, {backgroundColor: 'white', height: 100}]}
           data={data.content}
           extraData={this.state}
             renderItem={({ item, index }) => (
@@ -309,7 +284,7 @@ class MediaScreen extends Component {
           />
           <Modal 
             animationInTiming={400} 
-            coverScreen={false}
+            coverScreen={true}
             isVisible={modalVisible} 
             hasBackdrop={true}
             backdropColor={'black'}
@@ -364,10 +339,10 @@ class MediaScreen extends Component {
                     console.log(`cannot play the sound file`, e)
                 }
             }}
-            style={{ flex: 1, backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10  }}
+            style={{ flex: 1, backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomEndRadius: 10, borderBottomLeftRadius: 10  }}
           >
             <View style={{ flex: 1 }}>
-              <View style={{flexDirection:'row', height: '10%'}}>
+              <View style={{flexDirection:'row', height: '7.5%'}}>
                 <View  style={{ width: '70%'}}>
                 <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>Audio</Text>
                 </View>
@@ -387,7 +362,10 @@ class MediaScreen extends Component {
                 </View> 
               </View>
               
-              <View style={{flexDirection:'row', justifyContent: 'center', backgroundColor: Colors.gray, alignItems: 'center', height: '80%'}}>
+              <ImageBackground source={{uri: global.defaultPhoto}} imageStyle= {{opacity:0.3}} resizeMode='cover' style={{backgroundColor: 'rgb(55,55,55)', width: '100%'}} >
+              
+
+              <View style={{flexDirection:'row', justifyContent: 'center', alignItems: 'center', height: '85%'}}>
 
                 <TouchableHighlight
                   style = {{
@@ -458,8 +436,9 @@ class MediaScreen extends Component {
                 </TouchableHighlight>
 
               </View>
+              </ImageBackground>
               
-              <View style={{ width: '100%', height: '10%'}}>
+              <View style={{ width: '100%', height: '7.5%'}}>
                 <Text style={{fontFamily: Fonts.family.base, fontSize: Fonts.size.small,  color:Colors.blue, padding: 10}}>{audioOnModalDesc}</Text>
               </View>
                 
@@ -468,7 +447,6 @@ class MediaScreen extends Component {
 
           <TabbedPager
             data={mediaOptions}
-            //data={data}
             renderPage={this._renderPage}
             renderTab={this._renderTab}
             onPageChange={this._renderTitleChange}

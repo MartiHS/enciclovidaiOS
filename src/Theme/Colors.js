@@ -23,6 +23,7 @@ const colors = {
     green: "#8A9D46",
     blue: "#304E5B",
     gray: 'gray',
+    grayTransparent: 'rgba(50, 50, 50, 0.6)',
     //---
     // Colores para íconos recibidos
     animalia: "#6c3630",
