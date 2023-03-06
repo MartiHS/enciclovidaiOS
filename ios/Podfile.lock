@@ -194,8 +194,8 @@ PODS:
     - React
   - react-native-maps (0.26.1):
     - React
-  - react-native-webview (8.2.1):
-    - React
+  - react-native-webview (11.26.1):
+    - React-Core
   - React-RCTActionSheet (0.62.3):
     - React-Core/RCTActionSheetHeaders (= 0.62.3)
   - React-RCTAnimation (0.62.3):
@@ -265,6 +265,8 @@ PODS:
     - React
   - RNScreens (2.0.0-alpha.22):
     - React
+  - RNSoundPlayer (0.13.2):
+    - React-Core
   - RNVectorIcons (6.6.0):
     - React
   - Yoga (1.14.0)
@@ -309,6 +311,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSoundPlayer (from `../node_modules/react-native-sound-player`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -389,6 +392,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSoundPlayer:
+    :path: "../node_modules/react-native-sound-player"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -416,7 +421,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 74f6ea8f9d38ff44cc8f9867b2ecc9130d6cc2e5
   react-native-geolocation-service: f32ef48fa665bd710207a3ac39bc127cac9cb993
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
-  react-native-webview: 160ac8d6bb974e2933f2de6bb7464a8e934ff31d
+  react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-RCTActionSheet: abb6e20cdc3710d3442d735cdb2c641a5597f35d
   React-RCTAnimation: cacf34437277ae266c95896f40eb4e7604017132
   React-RCTBlob: ab3a193130b61816f8f3807941087873bfd5e8a4
@@ -432,9 +437,10 @@ SPEC CHECKSUMS:
   RNPermissions: dcdb7b99796bbeda6975a6e79ad519c41b251b1c
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: 6adf01eb4080f44af6cca551207c6b0505066857
+  RNSoundPlayer: 369105c565b8fe6ea0a43fc882dc81eba444e842
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: b5db822228963b87948afa7a5a531088607151dc
 
-PODFILE CHECKSUM: 6769a5489a271374294f3a02bcc0f5c209005369
+PODFILE CHECKSUM: 01fa049505b33180157f9413e6c1f3251f865e92
 
 COCOAPODS: 1.11.2

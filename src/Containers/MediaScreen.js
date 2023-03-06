@@ -94,6 +94,17 @@ class MediaScreen extends Component {
     }
   }
 
+  _listEmptyComponent = () => {
+    return (
+      <View style={{flex: 1,
+        height: 500,
+        justifyContent: 'center', 
+        alignItems: 'center'}} >
+        <Text > No hay resultados </Text>
+      </View>
+    )
+  }
+
   UNSAFE_componentWillReceiveProps() {
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.media_id_specie);
@@ -165,6 +176,7 @@ class MediaScreen extends Component {
           style={[styles.flatList, {backgroundColor: 'white', marginTop: -2}]}
           data={data.content}
           extraData={this.state}
+          ListEmptyComponent={this._listEmptyComponent}
           renderItem={({ item, index }) => (
             <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                 <TouchableOpacity
@@ -192,6 +204,7 @@ class MediaScreen extends Component {
           style={[styles.flatList, {backgroundColor: 'white'}]}
           data={data.content}
           extraData={this.state}
+          ListEmptyComponent={this._listEmptyComponent}
             renderItem={({ item, index }) => (
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <TouchableOpacity
@@ -217,6 +230,7 @@ class MediaScreen extends Component {
           style={[styles.flatList, {backgroundColor: 'white', height: 100}]}
           data={data.content}
           extraData={this.state}
+          ListEmptyComponent={this._listEmptyComponent}
             renderItem={({ item, index }) => (
               <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                   <TouchableOpacity

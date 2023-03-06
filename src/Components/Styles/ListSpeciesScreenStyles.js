@@ -110,16 +110,16 @@ export default StyleSheet.create({
     fontSize: 20
   },
   textRow: {
-    padding: 10,
+    padding: 8,
     alignItems: "flex-start",
     justifyContent: 'center',
     textAlign: 'center',
     flex: 1,
   },
   titleRow: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: "bold",
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingBottom: 3,
     color: Colors.black,
   },

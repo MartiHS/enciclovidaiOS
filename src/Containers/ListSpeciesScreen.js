@@ -312,9 +312,9 @@ class ListSpeciesScreen extends Component {
   renderFooter() {
     if (this.state.loadingMore) {
       return (
-        <View style={styles.footer} >
-          <TouchableOpacity activeOpacity={0.9} style={styles.btnfooter} >
-            <Text style={styles.textfooter} > Cargar Pagina {this.state.page} de {this.state.total} </Text>
+        <View style={styles.footer}>
+          <TouchableOpacity activeOpacity={0.9} style={styles.btnfooter}>
+            <Text style={styles.textfooter}> Cargar Pagina {this.state.page} de {this.state.total} </Text>
           </TouchableOpacity>
         </View>
       );
@@ -327,8 +327,8 @@ class ListSpeciesScreen extends Component {
 
   _listEmptyComponent = () => {
     return (
-      <View style={styles.empty_text} >
-        <Text > No hay resultados </Text>
+      <View style={styles.empty_text}>
+        <Text> No hay resultados </Text>
       </View>
     )
   }
