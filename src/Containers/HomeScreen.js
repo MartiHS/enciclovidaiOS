@@ -13,7 +13,7 @@ import { createIconSetFromFontello } from "react-native-vector-icons";
 import config from "../Theme/Fonts/config.json"
 const CustomIcon = createIconSetFromFontello(config);
 
-
+import { Fonts, Colors } from '../Theme';
 
 
 var arraydata = [];
@@ -176,11 +176,13 @@ class HomeScreen extends Component {
                         </View>
                     </View>
 
-                    <View style={[styles.view, styles.viewImage, {marginTop: 90}]}>
-                       
-                        <Image style={styles.image}
-                            source={{uri: 'ic_top_home'}}/>
+                    <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:60, zIndex: -10, padding: 10, width: '100%', }}> 
+                        <View>
+                            <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
+                            <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
+                        </View>
                     </View>
+
                     {this.footer()}
                 </View>
             </View>

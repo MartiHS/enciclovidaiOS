@@ -8,8 +8,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    //backgroundColor: Colors.white,
-    backgroundColor: 'rgba(48, 50, 44, 0.8)'
+    backgroundColor: Colors.white,
+    //backgroundColor: 'rgba(48, 50, 44, 0.8)'
   },
 
   // Estilo para la barra de navegación
@@ -49,7 +49,8 @@ export default StyleSheet.create({
 
   searchBar:{
     flexDirection: "row",
-    width:"100%"
+    width:"100%",
+    //paddingTop: 30,
   },
   // - - - autocompletado
   autocomplete: {
@@ -112,6 +113,8 @@ export default StyleSheet.create({
   contentItem: {
     flexDirection: "row",
     margin: 10,
+    //backgroundColor: '',
+    zIndex: 10,
   },
   
   text_view:{
@@ -191,12 +194,12 @@ export default StyleSheet.create({
 
   imageHOMEButton: {
     width: '100%', 
-    height: 125, 
+    height: 150, 
     borderRadius:10,
   },
 
   textHOMEButtonContainer: {
-    backgroundColor: 'rgba(200, 200, 200, 0.8)',  
+    backgroundColor: 'rgba(250, 250, 250, 0.9)',  
     marginTop:-24, 
     height:24, 
     paddingTop:2, 
@@ -205,18 +208,37 @@ export default StyleSheet.create({
     width:"100%", 
     flexDirection:'row', 
     borderBottomLeftRadius:10, 
-    borderBottomRightRadius:10
+    borderBottomRightRadius:10,
+
+    // Sombra
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 
   textHOMEButtonIcon: {
     fontSize: 17, 
-    color: 'black' 
+    color: Colors.green,
+    //textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    //textShadowOffset: {width: -0.6, height: 0.6},
+    textShadowRadius: 0.2,
   },
 
   textHOMEButton: {
     marginLeft: 5,
-    fontSize: 13, 
-    color: 'black' 
+    fontSize: 14, 
+    fontWeight: '600',
+    top: 0,
+    //textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    //textShadowOffset: {width: -0.6, height: 0.6},
+    textShadowRadius: 0.2,
+    color: Colors.green,
+    fontFamily: Fonts.family.base_bold
   },
 
 });

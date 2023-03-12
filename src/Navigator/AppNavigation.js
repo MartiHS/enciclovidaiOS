@@ -14,6 +14,7 @@ import AboutScreen from "../Containers/AboutScreen";
 import MapScreen from "../Containers/MapScreen"; 
 import MediaScreen from "../Containers/MediaScreen";
 import ClassificationScreen from "../Containers/ClassificationScreen";
+import TheHOME from "../Containers/TheHOME";
 
 
 const TabNav = createBottomTabNavigator({
@@ -36,16 +37,18 @@ const Drawer = createDrawerNavigator(
   {
     Find: { screen: HomeScreen },
     FindByLocation: { screen: FindByLocation },
+    TheHOME: { screen: TheHOME },
     SpeciesByLocation: { screen: ListSpeciesScreen },
     SpeciesRisk: { screen: ListSpeciesScreen },
     SpeciesExotic: { screen: ListSpeciesScreen },
     SpeciesEndemic: { screen: ListSpeciesScreen },
+    SpeciesUses: { screen: ListSpeciesScreen },
     Info: { screen: EnciclovidaScreen },
     Symbology: { screen: SymbologyScreen },
     Tabs: { screen: TabNav }
   },
   {
-    initialRouteName: "FindByLocation",
+    initialRouteName: "TheHOME",
     contentComponent: SlideMenu,
     backBehavior: "history"
   }

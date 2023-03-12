@@ -8,6 +8,7 @@ export default styles = StyleSheet.create({
         paddingTop: (Platform.OS === 'android') ? getStatusBarHeight() : 0,
         top: 0,
         height: (Platform.OS === 'android') ? Metrics.navBarHeight + getStatusBarHeight() : Metrics.navBarHeight,
+        backgroundColor: Colors.navBarBackground,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start"
@@ -150,7 +151,9 @@ export default styles = StyleSheet.create({
     faviconmenu:{
     },
     touchmenu:{
-        //backgroundColor: "#0f0f0f",
+        //backgroundColor: 'rgba(250, 250, 250, 0.5)',
+        paddingEnd: 0,
+        right: 0,
         width:80,
         height:50,
         alignItems: 'center',
@@ -261,7 +264,8 @@ export default styles = StyleSheet.create({
     view_text:{
         ...Fonts.style.textsmall,
         textAlign: 'center',
-        fontFamily: Fonts.family.base,
+        fontFamily: Fonts.family.base_bold,
+        lineHeight: 15,
     },
     transparent: {
         position: "absolute",

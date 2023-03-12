@@ -19,7 +19,6 @@ class ListSpeciesScreen extends Component {
   constructor(props) {
     super(props);
     global.filtroIcons = "";
-    //global.filtro = "";
     this.state = {
       data: [],
       page: 1,
@@ -29,6 +28,7 @@ class ListSpeciesScreen extends Component {
     };
   }
   
+  // Buscador por localización
   fetchSpeciesByLocation = async () => { 
     
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
@@ -36,7 +36,7 @@ class ListSpeciesScreen extends Component {
     
     const location = global.locationData;
     const filtro = global.filtro == undefined ? "" : global.filtro;
-
+    console.log(global.filtroIcons);
     // SI existe una loclización activa:
     if(location != null){
         let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=50`;
@@ -88,7 +88,6 @@ class ListSpeciesScreen extends Component {
                           listFinalIcons.push({"name": clave});
                         }
 
-                        //console.log("Continuo ");
                         item.icons = listFinalIcons;
 
                       } catch (e){
@@ -138,49 +137,114 @@ class ListSpeciesScreen extends Component {
       this.setState({ data: [] });
     }
   }
+  
 
-  getSpeciesInfo = async (filter) => {
-    console.log("--------- getSpeciesInfo ---------");
+  getSpeciesInfo = async (filtro) => {
+    console.log("--------- getSpeciesInfo HABLANDO DE NIVEL NACIONAL ---------");
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
+    
+    if (filtro != "") {
+      console.log(global.filtroIcons);
+      let query = `${Constants.API_ENCICLOVIDA}v2/especies/${filtro}&pagina=1&por_pagina=50`;
 
-    if (filter != "") {
-      console.log("ListSpeciesScreen:", `${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}`);
-      fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}`)
-        .then(res => res.json())
-        .then((json) => {
+      console.log(query);
+      fetch(query).then(res => { // Recuperar el # de especies
+        this.setState({totalRes: res.headers.get('num_especies')});
+        return res;
+      }).then(res => res.json()).then(json => {
+
+          // Intentar el manejo de resultados: 
           try {
-            const result = json.taxa.map(item => {
+            
+            console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
+            const result = json.map(item => {
               return {
                 id: item.IdNombre,
                 imagen: item.foto_principal,
                 title: item.nombre_comun_principal,
-                subtitle: item.NombreCompleto
+                subtitle: item.NombreCompleto,
+                icons: []
               };
-            }); 
+            });
 
-            var entries = json.x_total_entries;
-            console.log(entries);
-            var len = json.taxa.length;
-            var totpage = 0;
-            var limit = 50;
-            if (len == limit) {
-              totpage = entries / len | 0;
-              var exact = json.x_total_entries % json.taxa.length;
-              if (exact != 0) {
-                totpage = totpage;
+            function checkStatus(sresponse) {
+              if (sresponse.ok) {
+                console.log("S");
+                  return Promise.resolve(sresponse);
               } else {
-                totpage = totpage + 1;
+                console.log("N");
+                  return Promise.reject(new Error(sresponse.statusText));
               }
             }
-            //Alert.alert("Total", json.x_total_entries.toString());
-            this.setState({ data: result, totalRes: json.x_total_entries, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+        
+            function parseJSON(sresponse) {
+              return sresponse.json();
+            }
+            
+            Promise.all(result.map(item =>
+              fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+                  .then(checkStatus)
+                  .then(parseJSON)
+                  .then(data => {
+                    console.log(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+              
+                    try {
+                      console.log(data);
+                      let lIcons = data.especie[0].data.cons_amb_dist
+                      let listFinalIcons = [];
+            
+                      for (let clave in lIcons){
+                        listFinalIcons.push({"name": clave});
+                      }
+
+                      //console.log("Continuo ");
+                      item.icons = listFinalIcons;
+
+                    } catch (e){
+                      console.log(e);
+                    }
+
+                    return item;
+              }).catch(error => console.log('There was a problem!', error))
+            ))
+            .then(data => {
+                  console.log("Continuo con mi desmadre");
+                  console.log(data);
+
+                  console.log("cargar paginado: ");
+                  var entries = this.state.totalRes;
+                  var len = json.length;
+                  console.log(len);
+                  var totpage = 0;
+                  var limit = 50;
+                  if (len == limit) {
+                    totpage = entries / len | 0;
+                    var exact = entries % json.length;
+                    if (exact != 0) {
+                      totpage = totpage;
+                    } else {
+                      totpage = totpage + 1;
+                    }
+                  }
+                  console.log("Total: ", entries);
+                  console.log("Páginas: ", totpage);
+                  console.log("limit: ", limit);
+                  
+                  console.log("------------------FIN");
+                  this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
+            })
+ 
           } catch (e) {
             this.setState({ spinner: false });
+            console.log(e);
             Alert.alert("Error en los datos");
           }
-        }).catch(error => {
-          this.setState({ spinner: false });
-        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
     } else {
       this.setState({ spinner: false });
     }

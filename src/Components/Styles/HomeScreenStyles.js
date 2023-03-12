@@ -6,6 +6,7 @@ export default StyleSheet.create({
   ...AppStyles.screen,
   container: {
     flex: 1,
+    paddingTop: 0,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     backgroundColor: Colors.white,

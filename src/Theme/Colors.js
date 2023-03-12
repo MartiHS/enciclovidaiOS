@@ -10,7 +10,7 @@ const colors = {
     backgroundTabUnSelect: "#FFFFFF",
     TabSelect: "#FFFFFF",
     TabUnSelect: "#5D5D5D",
-    backgroundSlide: "#8A9D46",
+    backgroundSlide: "#B0BB53",  
     backgroundSlideItem: "#8A9D46",
     textdialog: "#5D5D5D",
     link: "#3B3BFF",

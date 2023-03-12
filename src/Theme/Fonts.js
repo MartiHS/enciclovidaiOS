@@ -1,12 +1,12 @@
 import colors from "./Colors";
 
 const family = {
-    base: Platform.OS === "ios" ? "Avenir Next" : "TitilliumWeb-Regular",
-    base_bold: Platform.OS === "ios" ? "AvenirNext-Bold" : "TitilliumWeb-Bold",
-    base_italic: Platform.OS === "ios" ? "AvenirNext-Italic" : "TitilliumWeb-Italic",
-    base_bold_italic: Platform.OS === "ios" ? "AvenirNext-BoldItalic" : "TitilliumWeb-BoldItalic",
-    base_semibold: Platform.OS === "ios" ? "AvenirNext-Medium" : "TitilliumWeb-SemiBold",
-    base_semibold_italic: Platform.OS === "ios" ? "AvenirNext-MediumItalic" : "TitilliumWeb-SemiBoldItalic"
+    base: "TitilliumWeb-Regular",
+    base_bold: "TitilliumWeb-Bold",
+    base_italic: "TitilliumWeb-Italic",
+    base_bold_italic: "TitilliumWeb-BoldItalic",
+    base_semibold: "TitilliumWeb-SemiBold",
+    base_semibold_italic: "TitilliumWeb-SemiBoldItalic"
 }
 
 const size = {

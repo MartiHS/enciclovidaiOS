@@ -10,7 +10,7 @@ import styles from '../Components/Styles/MediaScreenStyles';
 
 import SoundPlayer from 'react-native-sound-player'
 
-import { TabbedPager } from 'react-native-viewpager-carousel'
+import { ViewPager, TabbedPager } from 'react-native-viewpager-carousel'
 
 import { WebView } from 'react-native-webview';
 
@@ -157,9 +157,7 @@ class MediaScreen extends Component {
 
   _renderTab = ({data}) => {
     return (  
-      <View style={[ {backgroundColor: Colors.backgroundTabSelect, }]}>
-          <Text style={{textAlign: 'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.white, padding: 10}}>{data.title}</Text>
-      </View>
+      <></>
     )
   }
 
@@ -169,9 +167,9 @@ class MediaScreen extends Component {
     let contentType = data.title;
     console.log(contentType)
     console.log(data)
-
+    let mediaContent;
     if(contentType === "Fotos"){
-      return ( 
+      mediaContent = ( 
         <FlatList
           style={[styles.flatList, {backgroundColor: 'white', marginTop: -2}]}
           data={data.content}
@@ -199,7 +197,7 @@ class MediaScreen extends Component {
     }
 
     if(contentType === "Videos"){
-      return ( 
+      mediaContent = ( 
         <FlatList
           style={[styles.flatList, {backgroundColor: 'white'}]}
           data={data.content}
@@ -225,7 +223,7 @@ class MediaScreen extends Component {
     }
 
     if(contentType === "Audios"){
-      return ( 
+      mediaContent = ( 
         <FlatList
           style={[styles.flatList, {backgroundColor: 'white', height: 100}]}
           data={data.content}
@@ -251,6 +249,17 @@ class MediaScreen extends Component {
         />
       )
     }
+
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flexDirection: 'row', paddingTop: 10 }}>
+          <Icon2 name="angle-left" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding:10}} />         
+          <Text style={{width:'80%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+          <Icon2 name="angle-right" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding: 10, padding: 10}} />   
+        </View>
+        {mediaContent}
+      </View>
+    )
   }
 
   _showLoading(){
@@ -464,23 +473,10 @@ class MediaScreen extends Component {
             renderPage={this._renderPage}
             renderTab={this._renderTab}
             onPageChange={this._renderTitleChange}
-            //dev={true}
             lazyrender={true}
             lazyrenderThreshold={0}
             renderAsCarousel={true}
-            //pageWidth={10}
-            //initialPage={}
-            //thresholdPages={0}
             scrollEnabled={true}
-            //firePageChangeIfPassedScreenCenter={true} 
-            //showNativeScrollIndicator={true}
-            //pagingEnabled={false}
-            style={
-              {
-                //height:'100%',
-                backdropColor: 'red'
-              }
-            }
           />
           
         </View>

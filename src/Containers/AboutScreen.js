@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Alert, ScrollView, BackHandler } from 'react-native';
+import { View, Text, Image, Alert, ScrollView, BackHandler, Dimensions, findNodeHandle, ImageBackground } from 'react-native';
 import { withNavigation } from "react-navigation";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import AutoHeightWebView from 'react-native-autoheight-webview'
-import { Dimensions } from 'react-native'
 
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
@@ -49,24 +48,26 @@ class AboutScreen extends Component {
     };
     
     this.aboutOptions = [
-      { title: 'Descripción completa de CONABIO', value: 'conabio', content: '', loaded: false },
+      { title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
+      { title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
       { title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
       { title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
       { title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
-      { title: 'Metadatos de CONABIO', value: 'conabio_tecnico', content: '', loaded: false },
     ];
 
     this.fetchData = this.fetchData.bind(this);
     this.UNSAFE_componentWillReceiveProps = this.UNSAFE_componentWillReceiveProps.bind(this);
+
+    this._nodes = new Map();
   }
 
   restartAboutOptions() {
     this.aboutOptions = [
-      { title: 'Descripción completa de CONABIO', value: 'conabio', content: '', loaded: false },
+      { title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
+      { title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
       { title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
       { title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
       { title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
-      { title: 'Metadatos de CONABIO', value: 'conabio_tecnico', content: '', loaded: false },
     ];
   }
 
@@ -98,8 +99,12 @@ class AboutScreen extends Component {
       if (this.aboutOptions[option].value == fuente){
         // Si el contenido aun no está cargado, cargarlo
         if(this.aboutOptions[option].loaded == false) {
+
           var urlToGetSpecieInfo = `${Constants.API_ENCICLOVIDA}v2/especies/${id_specie}${Constants.SPECIE_INFO_HTMLV2}${fuenteFin}`;
           console.log(urlToGetSpecieInfo);
+          console.log(urlToGetSpecieInfo);
+          console.log(urlToGetSpecieInfo);
+          
           fetch(urlToGetSpecieInfo).then((response) => {
             return response.text();
           }).then((html) => {
@@ -142,15 +147,29 @@ class AboutScreen extends Component {
         const audios = await response.audios;
 
         defaultPhoto = Helper.getRandomImage(fotos);
+        defaultPhoto2 = global.defaultPhoto2;
 
         global.taxonPhotos = fotos;
         global.taxonVideos = videos;
         global.taxonAudios = audios;
         global.defaultPhoto = defaultPhoto;
         
+        if (defaultPhoto2 == "")
+          defaultPhoto2 = defaultPhoto
 
-        this.setState({ imagen: defaultPhoto });
-        await this.getHTMLSpecieResume(id_specie, 'conabio');
+        this.setState({ imagen: defaultPhoto2 });
+        //this.scrollToElement(0);
+        console.log(this.myScroll);
+        console.log("------");
+        console.log(this.myScroll.state);
+        console.log("------");
+        console.log(this.myScroll.state);
+        console.log("------");
+        console.log(this.myScroll.state);
+
+        //this.myScroll.scrollTo({x: 0, y: 0, animated: true});
+
+        await this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
 
       } else {
         this.setState({ spinner: false, pins: [] });
@@ -177,6 +196,14 @@ class AboutScreen extends Component {
     console.log("id_specie: " + global.id_specie + "  -  about_id_specie: " + global.about_id_specie);
 
     this.fetchData(global.id_specie, global.about_id_specie);
+
+    const data = ['First Element', 'Second Element' ];
+    data.filter((el, idx) => {
+      if(el===this.props.id){
+        this.scrollToElement(idx);
+      }
+    })
+    
     /*this.backHandler = BackHandler.addEventListener('hardwareBackPress', ()=>{
         console.log("back_about");
         global.navigation.navigate(global.listSpecies);
@@ -186,6 +213,13 @@ class AboutScreen extends Component {
     // this.s2! = this.props.navigation.addListener('willBlur', this.onEvent);
     // this.s3! = this.props.navigation.addListener('didBlur', this.onEvent);
   }
+
+  scrollToElement =(indexOf)=>{
+    const node = this._nodes.get(indexOf);
+    const position = findNodeHandle(node);
+    this.myScroll.scrollTo({ x: 0, y: position, animated: true });
+  }
+
   
   // Se invoca inmediatamente antes de desmontar y destruir un componente
   componentWillUnmount() {
@@ -260,19 +294,19 @@ class AboutScreen extends Component {
 
     switch(index) {
       case 1:
-        this.getHTMLSpecieResume(id_specie, 'conabio');
+        this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
         break;
       case 2:
-        this.getHTMLSpecieResume(id_specie, 'wikipedia_es');
+        this.getHTMLSpecieResume(id_specie, 'conabio');
         break;
       case 3:
-        this.getHTMLSpecieResume(id_specie, 'iucn');
+        this.getHTMLSpecieResume(id_specie, 'wikipedia_es');
         break;
       case 4:
-        this.getHTMLSpecieResume(id_specie, 'wikipedia_en');
+        this.getHTMLSpecieResume(id_specie, 'iucn');
         break;
       case 5:
-        this.getHTMLSpecieResume(id_specie, 'conabio_tecnico');
+        this.getHTMLSpecieResume(id_specie, 'wikipedia_en');
         break;
       default:
         this.getHTMLSpecieResume(id_specie);
@@ -280,10 +314,22 @@ class AboutScreen extends Component {
     }
   }
 
+  getImagen_not_found = () => {
+    return(
+      <ImageBackground 
+        source={{uri: 'ic_imagen_not_found'}} 
+        resizeMode='contain'
+        style={[{flex: 1, flexDirection: "column" }, styles.image]} 
+        imageStyle={{opacity:0.7}} > 
+      </ImageBackground>
+    );
+  }
+
   render() {
     
     const defaultimage = this.state.imagen == '' ? 'ic_imagen_not_found' : this.state.imagen;
-    
+    const data = ['First Element', 'Second Element'];
+ 
     return (
       <View style={[styles.mainScreen]}>
         <NavBar menuBlackButton={true} infoButton={true} />
@@ -299,18 +345,31 @@ class AboutScreen extends Component {
             <ParallaxScrollView
               backgroundColor="trasparent"
               contentBackgroundColor="white"
-              parallaxHeaderHeight={500}
+              parallaxHeaderHeight={400}
               stickyHeaderHeight={5}
               backgroundScrollSpeed={1}
               fadeOutForeground={true}
               outputScaleValue={70}
               overScrollMode="never"
+              
+              ref={(ref) => this.myScroll = ref}
+
               renderForeground={() => (
-              <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                  <Image source={{ uri: defaultimage }} pointerEvents={"none"} style={[{flex: 1, flexDirection: "column" }, styles.image]} />
+                <View ref={ref => this._nodes.set('First Element', 0)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                 
+                 { 
+                  defaultimage == 'ic_imagen_not_found' 
+                    ? this.getImagen_not_found() 
+                    : <ImageBackground 
+                        source={{uri: defaultimage}} 
+                        resizeMode='cover'
+                        style={[{flex: 1, flexDirection: "column" }, styles.image]} 
+                        imageStyle={{opacity:1}} > 
+                      </ImageBackground>
+                 }
+
                   <View style={{flexDirection:'row', marginTop: 0, backgroundColor: Colors.blue, width: '100%'}}>
-                    <Text style={{ padding:10, fontFamily: Fonts.family.base_bold, fontSize:Fonts.size.h2, textAlign:'center', color:'white', backgroundColor: Colors.green, width: '90%'}}>{global.title}</Text>
-                    <Icon2 name="angle-up" color={Colors.white} style={{width:'100%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding: 10, padding: 10}} />
+                    <Text style={{ padding:0, fontFamily: Fonts.family.base_bold, fontSize:Fonts.size.h2, textAlign:'center', color:'white', backgroundColor: Colors.green, width: '100%'}}>{}</Text>
                   </View>
                  
                 </View>

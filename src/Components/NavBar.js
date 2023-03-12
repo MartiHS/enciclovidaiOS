@@ -301,6 +301,8 @@ class NavBar extends React.Component {
 
         arraydata[arraydata.length-1].isLast = true;
 
+        global.defaultPhoto2 = json.e_foto_principal;
+
         console.log(arraydata);
 
         this.setState({ data: arraydata });
@@ -493,9 +495,7 @@ class NavBar extends React.Component {
 
     // Cuando se presiona el mismo grupo, se borra la selección
     if(id == this.state.selected_T_Group) {
-      //this.clear();
-      //this.closeDialog();
-      
+
       this.updatevisible("");
       this.setState({ selected_T_Group: "" });
       setTimeout(
@@ -537,7 +537,7 @@ class NavBar extends React.Component {
     } else {
         this.setState({ data : [] });
     }
-}
+  }
 
   onSelectedT_DISTRIBUCIONChange = selected_T_DISTRIBUCION => {
     this.setState({ selected_T_DISTRIBUCION });
@@ -1183,7 +1183,7 @@ class NavBar extends React.Component {
     }
   };
 
-  closeDialog = (action) => {
+  closeDialogPDF = (action) => {
     const contentDialog = [action];
     this.setState({ dialogPDFContent: contentDialog });
   };
@@ -1245,7 +1245,7 @@ class NavBar extends React.Component {
     const filtersTypeState=this.state.filtersTypeState
     const dialogPDFContent = this.state.dialogPDFContent
     return (
-      <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null, color ? {backgroundColor: theColor } : {backgroundColor: Colors.navBarBackground} ]}>
+      <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
         <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
         <View style={styles.titleWrapper}>
           <Text style={[styles.title, title != null && title.length > 40 ? styles.title_small : null]}>{title}</Text>
@@ -1345,7 +1345,7 @@ class NavBar extends React.Component {
           dialogStyle={{backgroundColor: Colors.white}}
           hintInput ={"Ingresa tu correo electrónico"}
           submitInput={ (inputText) => {this.sendInputTOPDF(inputText)} }
-          closeDialog={ () => {this.closeDialog(false)}}
+          closeDialog={ () => {this.closeDialogPDF(false)}}
           submitText="Enviar!"
           cancelText="Cerrar"
         >
