@@ -33,7 +33,6 @@ class HomeScreen extends Component {
         global.listSpecies = "";
         global.LastlistSpecies = "";
         global.classificationList = [];
-        global.ListReino = [];
         global.ListAnimales = [];
         global.ListPlantas = [];
 
