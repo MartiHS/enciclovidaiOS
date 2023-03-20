@@ -223,7 +223,7 @@ export default StyleSheet.create({
 
   textHOMEButtonIcon: {
     fontSize: 17, 
-    color: Colors.green,
+    color: Colors.blue,
     //textShadowColor: 'rgba(0, 0, 0, 0.3)',
     //textShadowOffset: {width: -0.6, height: 0.6},
     textShadowRadius: 0.2,
@@ -237,7 +237,7 @@ export default StyleSheet.create({
     //textShadowColor: 'rgba(0, 0, 0, 0.3)',
     //textShadowOffset: {width: -0.6, height: 0.6},
     textShadowRadius: 0.2,
-    color: Colors.green,
+    color: Colors.blue,
     fontFamily: Fonts.family.base_bold
   },
 

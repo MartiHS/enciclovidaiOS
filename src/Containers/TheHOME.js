@@ -13,32 +13,50 @@ import config from "../Theme/Fonts/config.json"
 import { Fonts, Colors } from '../Theme';
 const CustomIcon = createIconSetFromFontello(config);
 
+import Listas from '../Config/Listas';
+import Helper from '../Config/Helpers';
+
 const listsParams = {
     SpeciesRisk: {
-      filter: "?iucn_ids=25&iucn_ids=26&iucn_ids=27&iucn_ids=28&iucn_ids=29",
+      filter: "?nom_ids=14&nom_ids=15&nom_ids=16&nom_ids=17",
       title: "Especies en riesgo", 
       icon: [
-        {id:25, name: "Extinto (EX)", icon: "extinto-ex"},
-        {id:26, name: "Extinto en estado silvestre (EW)", icon: "extinto-en-estado-silvestre-ew"},
-        {id:27, name: "En peligro crítico (CR)", icon: "en-peligro-critico-cr"},
-        {id:28, name: "En peligro (EN)", icon: "en-peligro-en"},
-        {id:29, name: "Vulnerable (VU)", icon: "vulnerable-vu"},
+        {id:16, name: "Probablemente extinta en el medio silvestre (E)", icon: "probablemente-extinta-en-el-medio-silvestre-e", order: 1, selected: false},
+        {id:14, name: "En peligro de extinción (P)", icon: "en-peligro-de-extincion-p", order: 1, selected: false},
+        {id:15, name: "Amenazada (A)", icon: "amenazada-a", order: 1, selected: false},
+        {id:17, name: "Sujeta a protección especial (Pr)", icon: "sujeta-a-proteccion-especial-pr", order: 1, selected: false},
       ]
     },
     SpeciesExotic: {
-      filter: "?dist=10",
-      title: "Especies exóticas",
-      icon: {id:"6", name: "Exótica-Invasora", icon: "exotica-invasora"}
+      filter: "?dist=6",
+      title: "Exóticas invasoras",
+      icon: [
+        {name: "Exótica-Invasora", icon: "exotica-invasora"}
+      ]
     },
     SpeciesEndemic: {
       filter: "?dist=3",
       title: "Especies endémicas",
-      icon: {id:"3", name: "Endémica", icon: "endemica"}
+      icon: [{name: "Endémica", icon: "endemica"}]
     },
     SpeciesUses: {
         filter: "?uso=11-4-0-0-0-0-0&uso=11-16-0-0-0-0-0&uso=11-5-0-0-0-0-0&uso=11-40-1-0-0-0-0&uso=11-40-2-0-0-0-0&uso=11-8-0-0-0-0-0&uso=11-47-0-0-0-0-0&uso=11-9-0-0-0-0-0&uso=11-10-0-0-0-0-0&uso=11-11-0-0-0-0-0&uso=11-13-0-0-0-0-0&uso=11-15-0-0-0-0-0&uso=11-14-0-0-0-0-0",
         title: "Usos y agrobiodiversidad",
-        icon: {id:"3", name: "Endémica", icon: "endemica"}
+        icon: [
+            {name: "Ambiental", icon: "-"},
+            {name: "Artesanía", icon: "-"},
+            {name: "Combustible", icon: "-"},
+            {name: "Consumo animal", icon: "-"},
+            {name: "Consumo humano", icon: "-"},
+            {name: "Industrial", icon: "-"},
+            {name: "Maderable", icon: "-"},
+            {name: "Manejo de plagas", icon: "-"},
+            {name: "Materiales", icon: "-"},
+            {name: "Medicinal", icon: "-"},
+            {name: "Melífera", icon: "-"},
+            {name: "Ornamental", icon: "-"},
+            {name: "Sociales/religiosos", icon: "-"},
+        ]
       },
     SpeciesByLocation: {
       filter: "",
@@ -58,17 +76,19 @@ class HomeScreen extends Component {
         global.subtitle = "";
         global.tipo_region = "";
         global.nom_reg = "";
-        global.locationData = {nom_reg: ""}
+        global.locationData = {nom_reg: ""};
         global.taxonPhotos = [];
         global.taxonPhotos_BDI_source = false;
-        
+
+        global.gFiltro = "";
+    global.gFiltroIcons =  {};
+
         global.listSpecies = "";
         global.LastlistSpecies = "";
         global.lastLocationData = ""
         global.classificationList = [];
-        global.ListReino = global.DataFilterReinos;
-        global.ListAnimales = global.DataFilterAnimales;
-        global.ListPlantas = global.DataFilterPlantas;
+        global.ListAnimales = Listas.DataFilterAnimales;
+        global.ListPlantas = Listas.DataFilterPlantas;
 
         this.state = {
             data: [],
@@ -98,6 +118,9 @@ class HomeScreen extends Component {
             'keyboardDidHide',
             this._keyboardDidHide
         );
+        
+        Helper.resteFilters();
+
         console.log("Estoy en HOME");
     }
 
@@ -107,38 +130,34 @@ class HomeScreen extends Component {
         this.keyboardDidHideListener.remove();
     }
     
+    // Ir al buscador de especies
     goToFind = () => {
         const {navigation} = this.props;
+        Helper.resteFilters();
         navigation.navigate("Find");
         navigation.closeDrawer();
     };
 
+    // Ir al buscador de especies por ubicación
     goToFindByL = () => {
         const {navigation} = this.props;
+        Helper.resteFilters();
         navigation.navigate("FindByLocation");
         navigation.closeDrawer();
     };
 
+    // Ir a las búsquedas a nivel nacional
     goToSpeciesList = (listName) => {
         if (listsParams[listName] !== undefined) {
+            // Limpiar filtros
+            Helper.resteFilters();
+            // Actualizar filtros globales
+            Helper.applyGFilters(listName);
+            // Abrir Vista
             const { navigation } = this.props;
-            this.setFilterProperties(listName);
             navigation.navigate(listName, {});
             navigation.closeDrawer();
         }
-    };
-
-    setFilterProperties = (speciesClass) => {
-        global.filtro = listsParams[speciesClass].filter;
-        global.filtroIcons = [listsParams[speciesClass].icon];
-        global.title = listsParams[speciesClass].title;
-        global.listSpecies = speciesClass;
-        global.subtitle = "";
-
-        global.ListReino = global.DataFilterReinos;
-        global.ListAnimales = global.DataFilterAnimales;
-        global.ListPlantas = global.DataFilterPlantas;
-        global.id_specie = 0;
     };
 
     footer = () => {

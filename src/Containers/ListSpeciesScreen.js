@@ -18,7 +18,6 @@ class ListSpeciesScreen extends Component {
 
   constructor(props) {
     super(props);
-    global.filtroIcons = "";
     this.state = {
       data: [],
       page: 1,
@@ -31,13 +30,14 @@ class ListSpeciesScreen extends Component {
   // Buscador por localización
   fetchSpeciesByLocation = async () => { 
     
-    this.setState({ spinner: true, refreshing: false, loadingMore: false });
     console.log(":::: > > fetchSpeciesByLocation < < ::::");
-    
+
+    this.setState({ spinner: true, refreshing: false, loadingMore: false });
     const location = global.locationData;
     const filtro = global.filtro == undefined ? "" : global.filtro;
     console.log(global.filtroIcons);
-    // SI existe una loclización activa:
+   
+    // SI existe una localización activa:
     if(location != null){
         let query = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${filtro}&pagina=1&por_pagina=50`;
         console.log(query);
@@ -48,7 +48,6 @@ class ListSpeciesScreen extends Component {
 
             // Intentar el manejo de resultados: 
             try {
-              
               console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
               const result = json.map(item => {
                 return {
@@ -62,11 +61,11 @@ class ListSpeciesScreen extends Component {
 
               function checkStatus(sresponse) {
                 if (sresponse.ok) {
-                  console.log("S");
-                    return Promise.resolve(sresponse);
+                  //console.log("S");
+                  return Promise.resolve(sresponse);
                 } else {
-                  console.log("N");
-                    return Promise.reject(new Error(sresponse.statusText));
+                  //console.log("N");
+                  return Promise.reject(new Error(sresponse.statusText));
                 }
               }
           
@@ -75,36 +74,32 @@ class ListSpeciesScreen extends Component {
               }
 
               Promise.all(result.map(item =>
-                fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+                fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=true&cat=especie`)
                     .then(checkStatus)
                     .then(parseJSON)
                     .then(data => {
-
                       try {
                         let lIcons = data.especie[0].data.cons_amb_dist
                         let listFinalIcons = [];
-              
                         for (let clave in lIcons){
                           listFinalIcons.push({"name": clave});
                         }
-
                         item.icons = listFinalIcons;
-
                       } catch (e){
                         console.log(e);
                       }
-
                       return item;
-                }).catch(error => console.log('There was a problem!', error))
+                }).catch(
+                  error => console.log('There was a problem!', error)
+                )
               ))
               .then(data => {
                     console.log("Continuo con mi desmadre");
-                    console.log(data);
-
-                    console.log("cargar paginado: ");
+                    //console.log(data);
+                    //console.log("cargar paginado: ");
                     var entries = this.state.totalRes;
                     var len = json.length;
-                    console.log(len);
+                    //console.log(len);
                     var totpage = 0;
                     var limit = 50;
                     if (len == limit) {
@@ -138,13 +133,17 @@ class ListSpeciesScreen extends Component {
     }
   }
   
-
-  getSpeciesInfo = async (filtro) => {
+  // Buscador de especies a nivel nacional, ya con filtros declarados
+  getSpeciesInfo = async () => {
     console.log("--------- getSpeciesInfo HABLANDO DE NIVEL NACIONAL ---------");
     this.setState({ spinner: true, refreshing: false, loadingMore: false });
-    
+    let filtro = global.gFiltro + global.filtro;
     if (filtro != "") {
-      console.log(global.filtroIcons);
+      console.log("Se hará una nueva búsqueda con FILTROS General: ");
+      console.log(global.gFiltro);
+      console.log("Se hará una nueva búsqueda con FILTROS Secundarios: ");
+      console.log(global.filtro);
+
       let query = `${Constants.API_ENCICLOVIDA}v2/especies/${filtro}&pagina=1&por_pagina=50`;
 
       console.log(query);
@@ -169,11 +168,11 @@ class ListSpeciesScreen extends Component {
 
             function checkStatus(sresponse) {
               if (sresponse.ok) {
-                console.log("S");
-                  return Promise.resolve(sresponse);
+                //console.log("S");
+                return Promise.resolve(sresponse);
               } else {
-                console.log("N");
-                  return Promise.reject(new Error(sresponse.statusText));
+                //console.log("N");
+                return Promise.reject(new Error(sresponse.statusText));
               }
             }
         
@@ -186,10 +185,8 @@ class ListSpeciesScreen extends Component {
                   .then(checkStatus)
                   .then(parseJSON)
                   .then(data => {
-                    console.log(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
-              
                     try {
-                      console.log(data);
+                      //console.log(data);
                       let lIcons = data.especie[0].data.cons_amb_dist
                       let listFinalIcons = [];
             
@@ -201,7 +198,7 @@ class ListSpeciesScreen extends Component {
                       item.icons = listFinalIcons;
 
                     } catch (e){
-                      console.log(e);
+                      //console.log(e);
                     }
 
                     return item;
@@ -209,7 +206,7 @@ class ListSpeciesScreen extends Component {
             ))
             .then(data => {
                   console.log("Continuo con mi desmadre");
-                  console.log(data);
+                  //console.log(data);
 
                   console.log("cargar paginado: ");
                   var entries = this.state.totalRes;
@@ -250,6 +247,7 @@ class ListSpeciesScreen extends Component {
     }
   }
 
+  // Cargar masespecies a nivel nacional
   loadmore = async () => {
     this.setState({
       spinner: true
@@ -286,6 +284,7 @@ class ListSpeciesScreen extends Component {
     }
   }
 
+  // Cargar más especies por localización
   loadmoreByL = async () => {
 
     this.setState({
@@ -373,6 +372,7 @@ class ListSpeciesScreen extends Component {
 
   }
 
+
   renderFooter() {
     if (this.state.loadingMore) {
       return (
@@ -402,7 +402,6 @@ class ListSpeciesScreen extends Component {
     global.title = nombre_comun;
     global.subtitle = nombre_cientifico;
     global.classificationList = [];
-
     this.props.navigation.navigate("About", {});
   };
 
@@ -490,7 +489,7 @@ class ListSpeciesScreen extends Component {
       this.fetchSpeciesByLocation();
     } else { // Si no, hacer búsqueda normal
       console.log("Vengo de NACIONAL"); 
-      this.getSpeciesInfo(global.filtro);
+      this.getSpeciesInfo();
     }
   };
 
@@ -499,43 +498,52 @@ class ListSpeciesScreen extends Component {
     let fName = name[0].toUpperCase() + name.substring(1, 3).toLowerCase();
 
     return(
-    <View style={styles.customHIcon}>
-      <Text style={styles.customHIconText}>{fName}</Text>
-    </View>);
+      <TouchableOpacity onPress={() => { alert(name) }} style={styles.customHIcon} >
+        <View >
+          <Text style={styles.customHIconText}>{fName}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  getIconList(filtrosICONAplicados) {
+    
+    return(
+      <FlatList
+        style = {styles.flatIconList} 
+        data={filtrosICONAplicados}
+        renderItem={({ item }) => (
+            item.icon == "-" ? this.createHIcon(item.name) : <CustomIcon onPress={() => { alert(item.name) }} style={[styles.filterHIcon, { color: Colors[item.icon]}]} name={item.icon}></CustomIcon>
+        )}
+        horizontal={true}
+        keyExtractor={(item, index) => index}
+      />
+    );
   }
 
   render() {
     let params = this.props.navigation.state;
-
-    let filterButton, filterButtonByL;
-    if(params.routeName == "SpeciesByLocation"){
-      filterButtonByL = true;
-      filterButton= false;
-    } else { // Si no, hacer búsqueda normal
-      filterButtonByL = false;
-      filterButton= true;
-    }
-
+    let TOTFilters = [];
+    TOTFilters = TOTFilters.concat(global.gFiltroIcons);
+    TOTFilters = TOTFilters.concat(global.filtroIcons);
+    const L1 = global.gFiltroIcons.length == undefined ? 0 : global.gFiltroIcons.length;
+    const L2 = global.filtroIcons.length == undefined ? 0 : global.filtroIcons.length;
+    let TOTFiltersNUM = L1 + L2;
     return (
       <View style={[styles.MainContainer]} >
-        <NavBar menuBlackButton={true} filterButton={filterButton} filterButtonByL={filterButtonByL} />
+        <NavBar menuBlackButton={true} filterButton={true} />
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
           <View style={styles.headerResults}>
             <Text style={styles.textInHeaderResults}> {this.state.totalRes} Especies</Text>
             <View style={styles.iconsInHeaderResults}>
               {
-                global.filtroIcons.length > 0 ?  <Text style={{fontFamily: Fonts.family.base_bold, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
+                TOTFiltersNUM > 0 ?  <Text style={{fontFamily: Fonts.family.base_bold, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
               }
-              <FlatList
-                style = {styles.flatIconList} 
-                data={global.filtroIcons}
-                renderItem={({ item }) => (
-                    item.icon == "-" ? this.createHIcon(item.name) : <CustomIcon style={[styles.filterHIcon, { color: Colors[item.icon]}]} name={item.icon}></CustomIcon>
-                )}
-                horizontal={true}
-                keyExtractor={(item, index) => index}
-              />
+              {
+                TOTFiltersNUM > 0 ? this.getIconList(TOTFilters) : <></>
+              }
+              
             </View>
           </View>
           <FlatList

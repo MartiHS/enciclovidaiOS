@@ -20,11 +20,8 @@ import { Colors, Fonts } from '../Theme';
 
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
-import { WebView } from 'react-native-webview';
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-
-import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
 
 
 
@@ -36,10 +33,7 @@ const CustomIcon = createIconSetFromFontello(config);
 /* ABOUTSCREEN: Pantalla en la que se muestra Una foto junto con información de la especie */
 class AboutScreen extends Component {
   constructor(props) {
-    
-    // JSON.stringify(props)
     console.log("\n\n\nLlamada a AboutScreen desde constructor \n---------------------------------\n");
-    ////CurrentTaxon.id_specie = 7632873;
     super(props)
     this.state = {
       imagen: "",
@@ -48,11 +42,12 @@ class AboutScreen extends Component {
     };
     
     this.aboutOptions = [
-      { title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
-      { title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
-      { title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
-      { title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
-      { title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
+      { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
+      { key: 'page_2', title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
+      { key: 'page_3', key: 'page_1', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
+      { key: 'page_4', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
+      { key: 'page_5', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
+      { key: 'page_6', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
     ];
 
     this.fetchData = this.fetchData.bind(this);
@@ -63,11 +58,12 @@ class AboutScreen extends Component {
 
   restartAboutOptions() {
     this.aboutOptions = [
-      { title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
-      { title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
-      { title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
-      { title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
-      { title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
+      { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
+      { key: 'page_2', title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
+      { key: 'page_3', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
+      { key: 'page_4', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
+      { key: 'page_5', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
+      { key: 'page_6', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
     ];
   }
 
@@ -91,18 +87,19 @@ class AboutScreen extends Component {
   
   getHTMLSpecieResume(id_specie, fuente='') {
 
-    let fuenteFin = fuente != '' ? ('?fuente=' + fuente) : '';
+    let fuenteFin = fuente != 'sin_fuente' ? ('?fuente=' + fuente) : ('?' + fuente + '=true');
+
+    console.log("SE BUSCARÂ CON: ");
+    console.log(fuenteFin);
 
     // Iteramos la lista de fuentes a consultar
     for (let option in this.aboutOptions) {
       // SI encontramos la que se requiere:
       if (this.aboutOptions[option].value == fuente){
         // Si el contenido aun no está cargado, cargarlo
-        if(this.aboutOptions[option].loaded == false) {
 
+        if(this.aboutOptions[option].loaded == false) {
           var urlToGetSpecieInfo = `${Constants.API_ENCICLOVIDA}v2/especies/${id_specie}${Constants.SPECIE_INFO_HTMLV2}${fuenteFin}`;
-          console.log(urlToGetSpecieInfo);
-          console.log(urlToGetSpecieInfo);
           console.log(urlToGetSpecieInfo);
           
           fetch(urlToGetSpecieInfo).then((response) => {
@@ -147,7 +144,7 @@ class AboutScreen extends Component {
         const audios = await response.audios;
 
         defaultPhoto = Helper.getRandomImage(fotos);
-        defaultPhoto2 = global.defaultPhoto2;
+        defaultPhoto2 = global.defaultPhoto;
 
         global.taxonPhotos = fotos;
         global.taxonVideos = videos;
@@ -159,17 +156,9 @@ class AboutScreen extends Component {
 
         this.setState({ imagen: defaultPhoto2 });
         //this.scrollToElement(0);
-        console.log(this.myScroll);
-        console.log("------");
-        console.log(this.myScroll.state);
-        console.log("------");
-        console.log(this.myScroll.state);
-        console.log("------");
-        console.log(this.myScroll.state);
+        console.log(global.defaultPhoto2);
 
-        //this.myScroll.scrollTo({x: 0, y: 0, animated: true});
-
-        await this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
+        await this.getHTMLSpecieResume(id_specie, 'sin_fuente');
 
       } else {
         this.setState({ spinner: false, pins: [] });
@@ -185,7 +174,7 @@ class AboutScreen extends Component {
 
     //about_id_specie
     //media_id_specie
-
+    //this.flatListRef.current.scrollTo({ animated: false, x: 0, y: 0 });
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.about_id_specie);
   }
@@ -204,14 +193,6 @@ class AboutScreen extends Component {
       }
     })
     
-    /*this.backHandler = BackHandler.addEventListener('hardwareBackPress', ()=>{
-        console.log("back_about");
-        global.navigation.navigate(global.listSpecies);
-    }); */
-    //this.s0! = this.props.navigation.addListener('willFocus', this.onEvent);
-    // this.s1! = this.props.navigation.addListener('didFocus', this.onEvent);
-    // this.s2! = this.props.navigation.addListener('willBlur', this.onEvent);
-    // this.s3! = this.props.navigation.addListener('didBlur', this.onEvent);
   }
 
   scrollToElement =(indexOf)=>{
@@ -223,11 +204,7 @@ class AboutScreen extends Component {
   
   // Se invoca inmediatamente antes de desmontar y destruir un componente
   componentWillUnmount() {
-    //console.log("\n\n - - componentWillUnmount - - \n\n");
-    // this.s0!.remove();
-    // this.s1!.remove();
-    // this.s2!.remove();
-    // this.s3!.remove();
+
   }
 
   renderText = (title, i) => {
@@ -264,17 +241,20 @@ class AboutScreen extends Component {
       <View style={{padding: 10}}>
         <View style={{flexDirection: 'row', paddingTop: 10}}>
           <Icon2 name="angle-left" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding:10}} />         
-          <Text style={{width:'80%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+          <Text style={{width:'80%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>{data.title}</Text>
           <Icon2 name="angle-right" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding: 10, padding: 10}} />   
         </View>
         
         <AutoHeightWebView 
           style={{ 
-            width: Dimensions.get('window').width, 
+            width: (Dimensions.get('window').width - 30) , 
             marginTop: 35, 
-            marginBottom: 40
+            marginBottom: 40,
+          
           }}
-          customScript={`document.body.style.background = 'transparent';`}
+          customScript={`
+            document.body.style.background = 'transparent';
+          `}
           customStyle={styles.customStyleView}
           //source={ { html: this.state.resumen_HTML} } 
           source={ { html: data.content} } 
@@ -294,22 +274,25 @@ class AboutScreen extends Component {
 
     switch(index) {
       case 1:
-        this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
+        this.getHTMLSpecieResume(id_specie, 'sin_fuente');
         break;
       case 2:
-        this.getHTMLSpecieResume(id_specie, 'conabio');
+        this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
         break;
       case 3:
-        this.getHTMLSpecieResume(id_specie, 'wikipedia_es');
+        this.getHTMLSpecieResume(id_specie, 'conabio');
         break;
       case 4:
-        this.getHTMLSpecieResume(id_specie, 'iucn');
+        this.getHTMLSpecieResume(id_specie, 'wikipedia_es');
         break;
       case 5:
+        this.getHTMLSpecieResume(id_specie, 'iucn');
+        break;
+      case 6:
         this.getHTMLSpecieResume(id_specie, 'wikipedia_en');
         break;
       default:
-        this.getHTMLSpecieResume(id_specie);
+        this.getHTMLSpecieResume(id_specie, 'sin_fuente');
         break;
     }
   }
@@ -351,8 +334,8 @@ class AboutScreen extends Component {
               fadeOutForeground={true}
               outputScaleValue={70}
               overScrollMode="never"
-              
-              ref={(ref) => this.myScroll = ref}
+              //ref={this.flatListRef}
+              ref={(ref) => this.flatListRef = ref}
 
               renderForeground={() => (
                 <View ref={ref => this._nodes.set('First Element', 0)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -376,9 +359,10 @@ class AboutScreen extends Component {
               )}>
               <View style={{ height: 'auto'}}>
                 <ViewPager
-                    data={this.aboutOptions}
+                    data={this.aboutOptions} 
                     renderPage={this._renderPage}
                     onPageChange={this._renderTitleChange}
+                    //initialPage={{key: 'page_1'}}
                 />
               </View>
             </ParallaxScrollView>

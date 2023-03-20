@@ -63,9 +63,8 @@ class HomeScreen extends Component {
         global.LastlistSpecies = "";
         global.lastLocationData = ""
         global.classificationList = [];
-        global.ListReino = global.DataFilterReinos;
-        global.ListAnimales = global.DataFilterAnimales;
-        global.ListPlantas = global.DataFilterPlantas;
+        global.ListAnimales = Listas.DataFilterAnimales;
+        global.ListPlantas = Listas.DataFilterPlantas;
 
         this.state = {
             data: [],
@@ -160,9 +159,8 @@ class HomeScreen extends Component {
         global.title = listsParams[speciesClass].title;
         global.listSpecies = speciesClass;
         global.subtitle = "";
-        global.ListReino = global.DataFilterReinos;
-        global.ListAnimales = global.DataFilterAnimales;
-        global.ListPlantas = global.DataFilterPlantas;
+        global.ListAnimales = Listas.DataFilterAnimales;
+        global.ListPlantas = Listas.DataFilterPlantas;
         global.id_specie = 0;
       };
 

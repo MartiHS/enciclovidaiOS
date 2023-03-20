@@ -17,126 +17,12 @@ import Autocomplete from 'react-native-autocomplete-input';
 import Constants from '../Config/Constants';
 import DialogInput from 'react-native-dialog-input';
 
+import Listas from '../Config/Listas';
+
+
 import Dialogs from "../Config/Helpers2"
 const CustomIcon = createIconSetFromFontello(config);
 
-// Tipo de distribución:
-const T_DISTRIBUCION = [
-  {id:"3", name: "Endémica", icon: "endemica", order: 1, selected: false},
-  {id:"7", name: "Nativa", icon: "nativa", order: 1, selected: false},
-  {id:"10", name: "Exótica", icon: "exotica", order: 1, selected: false},
-  {id:"6", name: "Exótica-Invasora", icon: "exotica-invasora", order: 1, selected: false},
-];
-
-// Norma Oficial Mexicana (NOM-059):
-const T_NOM_059 = [
-  {id:16, name: "Probablemente extinta en el medio silvestre (E)", icon: "probablemente-extinta-en-el-medio-silvestre-e", order: 1, selected: false},
-  {id:14, name: "En peligro de extinción (P)", icon: "en-peligro-de-extincion-p", order: 1, selected: false},
-  {id:15, name: "Amenazada (A)", icon: "amenazada-a", order: 1, selected: false},
-  {id:17, name: "Sujeta a protección especial (Pr)", icon: "sujeta-a-proteccion-especial-pr", order: 1, selected: false},
-];
-
-// Unión Internacional para la Conservación de la Naturaleza (IUCN):
-const T_IUCN = [
-  {id:25, name: "Extinto (EX)", icon: "extinto-ex", order: 1, selected: false},
-  {id:26, name: "Extinto en estado silvestre (EW)", icon: "extinto-en-estado-silvestre-ew", order: 1, selected: false},
-  {id:27, name: "En peligro crítico (CR)", icon: "en-peligro-critico-cr", order: 1, selected: false},
-  {id:28, name: "En peligro (EN)", icon: "en-peligro-en", order: 1, selected: false},
-  {id:29, name: "Vulnerable (VU)", icon: "vulnerable-vu", order: 1, selected: false},
-];
-
-// Comercio Internacional (CITES):
-const T_CITES = [
-  {id:22, name: "Apéndice I", icon: "apendice-i", order: 1, selected: false},
-  {id:23, name: "Apéndice II", icon: "apendice-ii", order: 1, selected: false},
-  {id:24, name: "Apéndice III", icon: "apendice-iii", order: 1, selected: false},
-];
-
-// Evaluación CONABIO:
-const T_EVAL_CONABIO = [
-  {id:1102, name: "En peligro de extinción (P)", icon: "en-peligro-de-extincion-p-evaluacion-conabio", order: 1, selected: false},
-  {id:1103, name: "Amenazada (A)", icon: "amenazada-a-evaluacion-conabio", order: 1, selected: false},
-  {id:1104, name: "Sujetas a protección especial (Pr)", icon: "sujetas-a-proteccion-especial-pr-evaluacion-conabio", order: 1, selected: false},
-]; 
-
-// USO
-const T_USO = [
-  {id:"11-4-0-0-0-0-0", name: "Ambiental", icon: "-", order: 1, selected: false},
-  {id:"11-16-0-0-0-0-0", name: "Artesanía", icon: "-", order: 1, selected: false},
-  {id:"11-5-0-0-0-0-0", name: "Combustible", icon: "-", order: 1, selected: false},
-  {id:"11-40-1-0-0-0-0", name: "Consumo animal", icon: "-", order: 1, selected: false},
-  {id:"11-40-2-0-0-0-0", name: "Consumo humano", icon: "-", order: 1, selected: false},
-  {id:"11-8-0-0-0-0-0", name: "Industrial", icon: "-", order: 1, selected: false},
-  {id:"11-47-0-0-0-0-0", name: "Maderable", icon: "-", order: 1, selected: false},
-  {id:"11-9-0-0-0-0-0", name: "Manejo de plagas", icon: "-", order: 1, selected: false},
-  {id:"11-10-0-0-0-0-0", name: "Materiales", icon: "-", order: 1, selected: false},
-  {id:"11-11-0-0-0-0-0", name: "Medicinal", icon: "-", order: 1, selected: false},
-  {id:"11-13-0-0-0-0-0", name: "Melífera", icon: "-", order: 1, selected: false},
-  {id:"11-15-0-0-0-0-0", name: "Ornamental", icon: "-", order: 1, selected: false},
-  {id:"11-14-0-0-0-0-0", name: "Sociales/religiosos", icon: "-", order: 1, selected: false},
-]; 
-
-
-// Forma de crecimiento (solo plantas)
-const T_FORMA_CRECIMIENTO = [
-  {id:"18-14-0-0-0-0-0", name: "Arborescente", icon: "-", order: 1, selected: false},
-  {id:"18-2-0-0-0-0-0", name: "Arbusto", icon: "-", order: 1, selected: false},
-  {id:"18-15-0-0-0-0-0", name: "Bejuco", icon: "-", order: 1, selected: false},
-  {id:"18-6-0-0-0-0-0", name: "Columnar", icon: "-", order: 1, selected: false},
-  {id:"18-9-0-0-0-0-0", name: "Epilítica", icon: "-", order: 1, selected: false},
-  {id:"18-7-0-0-0-0-0", name: "Epífita", icon: "-", order: 1, selected: false},
-  {id:"18-16-0-0-0-0-0", name: "Geófita", icon: "-", order: 1, selected: false},
-  {id:"18-3-0-0-0-0-0", name: "Hierba", icon: "-", order: 1, selected: false},
-  {id:"18-5-0-0-0-0-0", name: "Liana", icon: "-", order: 1, selected: false},
-  {id:"18-18-0-0-0-0-0", name: "Palma", icon: "-", order: 1, selected: false},
-  {id:"18-10-0-0-0-0-0", name: "Parásita", icon: "-", order: 1, selected: false},
-  {id:"18-11-0-0-0-0-0", name: "Rastrera", icon: "-", order: 1, selected: false},
-  {id:"18-8-0-0-0-0-0", name: "Rosetófila", icon: "-", order: 1, selected: false},
-  {id:"18-12-0-0-0-0-0", name: "Suculenta", icon: "-", order: 1, selected: false},
-  {id:"18-4-0-0-0-0-0", name: "Sufrútice", icon: "-", order: 1, selected: false},
-  {id:"18-13-0-0-0-0-0", name: "Taloide", icon: "-", order: 1, selected: false},
-  {id:"18-17-0-0-0-0-0", name: "Trepadora", icon: "-", order: 1, selected: false},
-  {id:"18-1-0-0-0-0-0", name: "Árbol", icon: "-", order: 1, selected: false},
-]; 
-
-
-// Ambiente
-const T_AMBIENTE = [
-  {id:1024, name: "Marino", icon: "marino", order: 1, selected: false},
-  {id:1025, name: "Dulceacuícola", icon: "dulceacuicola", order: 1, selected: false},
-  {id:1026, name: "Terrestre", icon: "terrestre", order: 1, selected: false},
-  {id:1027, name: "Salobre", icon: "salobre", order: 1, selected: false},
-  {id:1207, name: "Salino", icon: "-", order: 1, selected: false},
-  {id:1208, name: "Hiposalino", icon: "-", order: 1, selected: false},
-  {id:1209, name: "Mesosalino", icon: "-", order: 1, selected: false},
-  {id:1210, name: "Hipersalino", icon: "-", order: 1, selected: false}, 
-];
-
-const InfoArray = [
-    {id: 10, name: "Exótica", iconFont: 'exotica', icon:"ic_10",title: "Tipo de distribución", order: 1 },
-    {id: 7, name: "Nativa", iconFont: 'nativa', icon:"ic_7dd", title: "Tipo de distribución", order: 2 },
-    {id: 6, name: "Exótica - Invasora", iconFont: 'exotica-invasora', icon:"ic_6", title: "Tipo de distribución", order: 3 },
-    {id: 3, name: "Endémica", iconFont: 'endemica', icon:"ic_3", title: "Tipo de distribución", order: 4 },
-    {id: 17, name: "Sujeta a protección especial (Pr)", iconFont: 'sujeta-a-proteccion-especial-pr', icon:"ic_17", title: "Categoría nacional de riesgo", order: 5 },
-    {id: 15, name: "Amenazada (A)", iconFont: 'amenazada-a', icon:"ic_15", title: "Categoría nacional de riesgo", order: 6 },
-    {id: 14, name: "En peligro de extinción (P)", iconFont: 'en-peligro-de-extincion-p', icon:"ic_14", title: "Categoría nacional de riesgo", order: 7 },
-    {id: 16, name: "Probablemente extinta en el medio silvestre (E)", iconFont: 'probablemente-extinta-en-el-medio-silvestre-e', icon:"ic_16", title: "Categoría nacional de riesgo", order: 8 },
-    {id: 29, name: "Vulnerable (VU)", iconFont: 'vulnerable-vu', icon:"ic_29", title: "Categoría internacional de riesgo", order: 9 },
-    {id: 28, name: "En peligro (EN)", iconFont: 'en-peligro-en', icon:"ic_28", title: "Categoría internacional de riesgo", order: 10 },
-    {id: 27, name: "En peligro crítico (CR)", iconFont: 'en-peligro-critico-cr', icon:"ic_27", title: "Categoría internacional de riesgo", order: 11 },
-    {id: 26, name: "Extinto en estado silvestre (EW)", iconFont: 'extinto-en-estado-silvestre-ew', icon:"ic_26", title: "Categoría internacional de riesgo", order: 12 },
-    {id: 25, name: "Extinto (EX)", iconFont: 'extinto-ex', icon:"ic_25", title: "Categoría internacional de riesgo", order: 13 },
-    {id: 22, name: "Apéndice I", iconFont: 'apendice-i', icon:"ic_22", title: "Protegidas del comercio internacional", order: 14 },
-    {id: 23, name: "Apéndice II", iconFont: 'apendice-ii', icon:"ic_23", title: "Protegidas del comercio internacional", order: 15 },
-    {id: 24, name: "Apéndice III", iconFont: 'apendice-iii', icon:"ic_24", title: "Protegidas del comercio internacional", order: 16 },
-    {id: 1033, name: "Prioritaria con grado alta", iconFont: 'alta', icon:"ic_1033", title: "Prioritarias para la conservación", order: 17 },
-    {id: 1034, name: "Prioritaria con grado media", iconFont: 'media', icon:"ic_1034", title: "Prioritarias para la conservación", order: 18 },
-    {id: 1035, name: "Prioritaria con grado menor", iconFont: 'menor', icon:"ic_1053", title: "Prioritarias para la conservación", order: 19 },
-    {id: 1026, name: "Terrestre", iconFont: 'terrestre', icon:"ic_1026", title: "Ambiente", order: 20 },
-    {id: 1025, name: "Dulceacuícola", iconFont: 'dulceacuicola', icon:"ic_1025", title: "Ambiente", order: 21 },
-    {id: 1024, name: "Marino", iconFont: 'marino', icon:"ic_1024", title: "Ambiente", order: 23 },
-    {id: 1027, name: "Salobre", iconFont: 'salobre', icon:"ic_1027", title: "Ambiente", order: 24 },
-];
 var arraydata = [];
 
 const API = 'https://api.enciclovida.mx';
@@ -148,7 +34,6 @@ class NavBar extends React.Component {
     this.state = {
       dialog: false,
       filtershow: false,
-      filterByLshow: false,
       data: [],
       id_tmp: 0,
       title:"",
@@ -173,7 +58,7 @@ class NavBar extends React.Component {
   displayDrawerMenu = () => {
     const {navigation} = this.props;
     navigation.openDrawer();
-    this.setState({dialog: false ,filtershow: false, filterByLshow: false});
+    this.setState({dialog: false});
   }
 
   showSpecieInfo = () => {
@@ -189,13 +74,6 @@ class NavBar extends React.Component {
       this.setState({filtershow: true});
   };
 
-  showFilterByLDialog = () => {
-    if(this.state.filterByLshow)
-      this.setState({filterByLshow: false});
-    else
-      this.setState({filterByLshow: true});
-  };
-
   renderLeftButton = () => { 
     const { menuLightButton} = this.props;
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
@@ -207,7 +85,7 @@ class NavBar extends React.Component {
     };
 
   renderRightButton = () => {
-    const { infoButton, filterButton, imageButton, filterButtonByL } = this.props;
+    const { infoButton, filterButton, imageButton } = this.props;
     const { menuLightButton} = this.props;
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
     if(infoButton){
@@ -231,15 +109,9 @@ class NavBar extends React.Component {
         </TouchableOpacity>
       )
     }
-    else if(filterButtonByL) {
-      return(
-        <TouchableOpacity onPress={this.showFilterByLDialog} >
-          <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
-        </TouchableOpacity>
-      )
-    }
   };
 
+  // Limpia los filtros locales
   clearFilters = () => {  
     console.log("limpiar filtros");
 
@@ -259,7 +131,7 @@ class NavBar extends React.Component {
 
   getSpecieDescription=(propNameToEvaluate, jsonResponseArrayElement)=>{
     return jsonResponseArrayElement.map(item => { 
-      var found = InfoArray.find(function(element) {
+      var found = Listas.InfoArray.find(function(element) {
         return element.id == item[propNameToEvaluate];
       });
       if(found)
@@ -301,13 +173,13 @@ class NavBar extends React.Component {
 
         arraydata[arraydata.length-1].isLast = true;
 
+        console.log("Se actualiza: ");
+        console.log(json.e_foto_principal);
         global.defaultPhoto2 = json.e_foto_principal;
-
-        console.log(arraydata);
-
         this.setState({ data: arraydata });
       }).catch(error => {
-
+        console.log("ERROR");
+        console.log(error);
       });
     }
   }
@@ -371,11 +243,10 @@ class NavBar extends React.Component {
       item.selected = item.id == id;
       return item;
     }
-    reino = global.ListReino.map(filterArray);
+
     animal = global.ListAnimales.map(filterArray);
     planta = global.ListPlantas.map(filterArray);
     
-    global.ListReino = reino;
     global.ListAnimales = animal;
     global.ListPlantas = planta;
   };
@@ -385,11 +256,10 @@ class NavBar extends React.Component {
       item.selected = false;
       return item;
     };
-    var reino = global.ListReino.map(restartSelectedItem);
+
     var animal = global.ListAnimales.map(restartSelectedItem);
     var planta = global.ListPlantas.map(restartSelectedItem);
 
-    global.ListReino = reino;
     global.ListAnimales = animal;
     global.ListPlantas = planta;
   };
@@ -454,7 +324,6 @@ class NavBar extends React.Component {
     this.setState({
       dialog: false,
       filtershow: false,
-      filterByLshow: false,
     });
   }
   
@@ -649,11 +518,11 @@ class NavBar extends React.Component {
     if((this.state.selected_T_Group) !== "" ) { 
       allFilters += '&especie_id=' + this.state.selected_T_Group;
       if(this.state.selected_T_Group < 9) {
-        allIcons.push(this.findIconInList(global.DataFilterReinos, this.state.selected_T_Group));
+        allIcons.push(this.findIconInList(Listas.DataFilterReinos, this.state.selected_T_Group));
       } else if (this.state.selected_T_Group < 99999) {
-        allIcons.push(this.findIconInList(global.DataFilterAnimales, this.state.selected_T_Group));
+        allIcons.push(this.findIconInList(Listas.DataFilterAnimales, this.state.selected_T_Group));
       } else if(this.state.selected_T_Group < 999999) {
-        allIcons.push(this.findIconInList(global.DataFilterPlantas, this.state.selected_T_Group));
+        allIcons.push(this.findIconInList(Listas.DataFilterPlantas, this.state.selected_T_Group));
       }
     }
 
@@ -668,56 +537,56 @@ class NavBar extends React.Component {
     if((this.state.selected_T_DISTRIBUCION.length) > 0) {
       for(let item in this.state.selected_T_DISTRIBUCION) {
         allFilters += "&dist=" + this.state.selected_T_DISTRIBUCION[item];
-        allIcons.push(this.findIconInList(T_DISTRIBUCION, this.state.selected_T_DISTRIBUCION[item]));
+        allIcons.push(this.findIconInList(Listas.T_DISTRIBUCION, this.state.selected_T_DISTRIBUCION[item]));
       }
     }
     // recorrer filtro:  selected_T_NOM_059,
     if((this.state.selected_T_NOM_059.length) > 0) {
       for(let item in this.state.selected_T_NOM_059) {
         allFilters += "&nom_ids=" + this.state.selected_T_NOM_059[item];
-        allIcons.push(this.findIconInList(T_NOM_059, this.state.selected_T_NOM_059[item]));
+        allIcons.push(this.findIconInList(Listas.T_NOM_059, this.state.selected_T_NOM_059[item]));
       }
     }
     // recorrer filtro:  selected_T_IUCN,
     if((this.state.selected_T_IUCN.length) > 0) {
       for(let item in this.state.selected_T_IUCN) {
         allFilters += "&iucn_ids=" + this.state.selected_T_IUCN[item];
-        allIcons.push(this.findIconInList(T_IUCN, this.state.selected_T_IUCN[item]));
+        allIcons.push(this.findIconInList(Listas.T_IUCN, this.state.selected_T_IUCN[item]));
       }
     }
     // recorrer filtro:  selected_T_CITES, 
     if((this.state.selected_T_CITES.length) > 0) {
       for(let item in this.state.selected_T_CITES) {
         allFilters += "&cites_ids=" + this.state.selected_T_CITES[item];
-        allIcons.push(this.findIconInList(T_CITES, this.state.selected_T_CITES[item]));
+        allIcons.push(this.findIconInList(Listas.T_CITES, this.state.selected_T_CITES[item]));
       }
     } 
     // recorrer filtro:  selected_T_EVAL_CONABIO,
     if((this.state.selected_T_EVAL_CONABIO.length) > 0) {
       for(let item in this.state.selected_T_EVAL_CONABIO) {
         allFilters += "&ev_conabio_ids=" + this.state.selected_T_EVAL_CONABIO[item];
-        allIcons.push(this.findIconInList(T_EVAL_CONABIO, this.state.selected_T_EVAL_CONABIO[item]));
+        allIcons.push(this.findIconInList(Listas.T_EVAL_CONABIO, this.state.selected_T_EVAL_CONABIO[item]));
       }
     } 
     // recorrer filtro:  selected_T_USO,
     if((this.state.selected_T_USO.length) > 0) {
       for(let item in this.state.selected_T_USO) {
         allFilters += "&uso=" + this.state.selected_T_USO[item];
-        allIcons.push(this.findIconInList(T_USO, this.state.selected_T_USO[item]));
+        allIcons.push(this.findIconInList(Listas.T_USO, this.state.selected_T_USO[item]));
       }
     }
     // recorrer filtro:  selected_T_FORMA_CRECIMIENTO,
     if((this.state.selected_T_FORMA_CRECIMIENTO.length) > 0) {
       for(let item in this.state.selected_T_FORMA_CRECIMIENTO) {
         allFilters += "&forma=" + this.state.selected_T_FORMA_CRECIMIENTO[item];
-        allIcons.push(this.findIconInList(T_FORMA_CRECIMIENTO, this.state.selected_T_FORMA_CRECIMIENTO[item]));
+        allIcons.push(this.findIconInList(Listas.T_FORMA_CRECIMIENTO, this.state.selected_T_FORMA_CRECIMIENTO[item]));
       }
     }
     // recorrer filtro:  selected_T_AMBIENTE,
     if((this.state.selected_T_AMBIENTE.length) > 0) {
       for(let item in this.state.selected_T_AMBIENTE) {
         allFilters += "&ambiente=" + this.state.selected_T_AMBIENTE[item];
-        allIcons.push(this.findIconInList(T_AMBIENTE, this.state.selected_T_AMBIENTE[item]));
+        allIcons.push(this.findIconInList(Listas.T_AMBIENTE, this.state.selected_T_AMBIENTE[item]));
       }
     }
 
@@ -727,7 +596,10 @@ class NavBar extends React.Component {
     global.filtro = global.filtro + allFilters;
 
     const{navigation} = this.props;
-    global.listSpecies = "SpeciesByLocation";
+    let params = this.props.navigation.state;
+
+
+    global.listSpecies = params.routeName;
     global.filtro = allFilters;
     global.filtroIcons = allIcons;
     navigation.navigate(global.listSpecies, {
@@ -736,7 +608,7 @@ class NavBar extends React.Component {
   };
 
   closeDialog = () => {
-    this.setState({ filterByLshow: false });
+    this.setState({ filtershow: false });
   };
   
   changeFiltersType = (filterType) => {
@@ -833,33 +705,7 @@ class NavBar extends React.Component {
 
     return(
       <View style={{paddingTop: 15}}>    
-        
-        {
-          /**
-         <Text style={styles.title_flat}>Reinos</Text>
-        <FlatList
-          data={global.ListReino}
-          renderItem={({ item }) => ( 
-            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
-              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
-                <Text style={styles.view_text}>{item.name}</Text>
-              </TouchableOpacity>
-            </View> 
-          )}
-          horizontal={true}
-          keyExtractor={(item, index) => index}
-        />
-        <View style={styles.rightButtons}>
-            <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
-            </TouchableOpacity>
-        </View> 
-          
-          
-           */
-        }
-
+  
         <Text style={styles.title_flat}>Grupos de animales</Text>
         <FlatList
           data={global.ListAnimales}
@@ -905,7 +751,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Tipo de distribución</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_DISTRIBUCION}
+          items={Listas.T_DISTRIBUCION}
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_DISTRIBUCION = component }}
           onSelectedItemsChange={this.onSelectedT_DISTRIBUCIONChange}
@@ -924,8 +770,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -935,7 +781,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Especies en riesgo en México (NOM 059)</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_NOM_059}
+          items={Listas.T_NOM_059}
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_NOM_059 = component }}
           onSelectedItemsChange={this.onSelectedT_NOM_059Change}
@@ -954,8 +800,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -965,7 +811,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Especies en riesgo a nivel mundial (IUCN)</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_IUCN}
+          items={Listas.T_IUCN}
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_IUCN = component }}
           onSelectedItemsChange={this.onSelectedT_IUCNChange}
@@ -984,8 +830,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -995,7 +841,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Comercio Internacional (CITES)</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_CITES}
+          items={Listas.T_CITES}
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_CITES = component }}
           onSelectedItemsChange={this.onSelectedT_CITESChange}
@@ -1014,8 +860,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
           
@@ -1026,7 +872,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Evaluación CONABIO</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_EVAL_CONABIO} 
+          items={Listas.T_EVAL_CONABIO} 
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_EVAL_CONABIO = component }}
           onSelectedItemsChange={this.onSelectedT_EVAL_CONABIOChange}
@@ -1045,8 +891,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -1056,7 +902,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Uso y agrobiodiversidad</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_USO} 
+          items={Listas.T_USO} 
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_USO = component }}
           onSelectedItemsChange={this.onSelectedT_USOChange}
@@ -1075,8 +921,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -1086,7 +932,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Forma de crecimiento (plantas)</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_FORMA_CRECIMIENTO} 
+          items={Listas.T_FORMA_CRECIMIENTO} 
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_FORMA_CRECIMIENTO = component }}
           onSelectedItemsChange={this.onSelectedT_FORMA_CRECIMIENTOChange}
@@ -1105,8 +951,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -1116,7 +962,7 @@ class NavBar extends React.Component {
       <Text style={styles.title_flat}>Ambiente</Text>
       <View style={styles.flat_multiSelect}>
         <MultiSelect
-          items={T_AMBIENTE}
+          items={Listas.T_AMBIENTE}
           uniqueKey="id"
           ref={(component) => { this._multiSelect_T_AMBIENTE = component }}
           onSelectedItemsChange={this.onSelectedT_AMBIENTEChange}
@@ -1135,8 +981,8 @@ class NavBar extends React.Component {
           displayKey="name"
           submitButtonColor={Colors.green}
           submitButtonText="Listo"
-          fontFamily={Fonts.family.base}
-          itemFontFamily={Fonts.family.base}
+          fontFamily={Fonts.family.base_bold}
+          itemFontFamily={Fonts.family.base_bold}
           itemFontSize={Fonts.size.h4}
           fontSize={Fonts.size.small}
         />
@@ -1239,7 +1085,7 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { transparent, white, color, theColor } = this.props;
+    const { transparent, white } = this.props;
     const title= this.state.title;
     const subtitle=this.state.subtitle;
     const filtersTypeState=this.state.filtersTypeState
@@ -1278,14 +1124,14 @@ class NavBar extends React.Component {
           </Dialog>
           <Dialog
             onDismiss={() => {
-              this.setState({ filterByLshow: false });
+              this.setState({ filtershow: false });
             }}
             containerStyle={ styles.navBarDialog }
             width={0.80}
-            visible={this.state.filterByLshow}
+            visible={this.state.filtershow}
             rounded
             onTouchOutside={() => {
-              this.setState({ filterByLshow: false });
+              this.setState({ filtershow: false });
             }}
             actionsBordered 
           > 
@@ -1334,6 +1180,11 @@ class NavBar extends React.Component {
                   <Icon3 name="file-pdf-o" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
                   <Text style={styles.title}>Guía de especies</Text>
               </TouchableOpacity>
+              <View style={styles.tabSpace}/>
+              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
+                  <Icon3 name="share" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
+                  <Text style={styles.title}>Compartir búsqueda</Text>
+              </TouchableOpacity>
 
               </ScrollView>
             </DialogContent>
@@ -1350,71 +1201,6 @@ class NavBar extends React.Component {
           cancelText="Cerrar"
         >
         </DialogInput>
-        
-
-        <Dialog
-          onDismiss={() => {
-            this.setState({ filtershow: false });
-          }}
-          containerStyle={ styles.navBarDialog }
-          width={0.9}
-          visible={this.state.filtershow}
-          rounded
-          onTouchOutside={() => {
-            this.setState({ filtershow: false });
-          }}
-          actionsBordered
-        >
-          <DialogContent style={styles.content}>
-            <ScrollView>
-
-            
-            <Text style={styles.title_flat}>Grupos de animales</Text>
-        <FlatList
-          data={global.ListAnimales}
-          renderItem={({ item }) => (
-            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
-              <TouchableOpacity onPress={() => {this.handlePress(item.id, 2)}}>
-              
-              <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
-                <Text style={styles.view_text}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          horizontal={true}
-          keyExtractor={(item, index) => index}
-        />
-        <View style={styles.rightButtons}>
-            <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
-            </TouchableOpacity>
-        </View>
-
-        <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
-        <FlatList
-          data={global.ListPlantas}
-          renderItem={({ item }) => (
-            <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
-              <TouchableOpacity onPress={() => {this.handlePress(item.id, 3)}}>
-                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
-                <Text style={styles.view_text}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          horizontal={true}
-          keyExtractor={(item, index) => index}
-        />
-        <View style={styles.rightButtons}>
-            <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
-            </TouchableOpacity>
-        </View>
-        <View style={styles.tabLine}/>
-
-
-            </ScrollView>
-          </DialogContent>
-        </Dialog>
           
         </View>
       );

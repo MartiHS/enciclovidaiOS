@@ -1,4 +1,5 @@
 import Constants from './Constants';
+import Listas from './Listas';
 
 export default class Helper {
   
@@ -153,4 +154,48 @@ export default class Helper {
     return allMedia;
   }
 
+   // Función para resetear filtros
+  static resteFilters() {
+    console.log("Se van a resetear los filtros");
+    global.filtro = "";
+    global.filtroIcons =  {};
+
+    global.gFiltro = "";
+    global.gFiltroIcons =  {};
+    
+    global.title = ""
+    global.listSpecies = ""
+    global.subtitle = "";
+    global.locationData;
+
+    global.ListAnimales = Listas.DataFilterAnimales;
+    global.ListPlantas = Listas.DataFilterPlantas;
+    global.id_specie = 0;
+  }
+
+   // Función para aplicar filtros
+   static applyGFilters(speciesClass) {
+    console.log("Se aplicarán filtros GLOBALES");
+
+    global.gFiltro = Listas.listsParams[speciesClass].filter;
+    global.gFiltroIcons = Listas.listsParams[speciesClass].icon;
+    global.title = Listas.listsParams[speciesClass].title;
+    global.listSpecies = speciesClass;
+
+
+    global.ListAnimales = Listas.DataFilterAnimales;
+    global.ListPlantas = Listas.DataFilterPlantas;
+    global.id_specie = 0;
+
+
+    global.subtitle = "";
+
+  }
+
+
+
+
 }
+
+
+

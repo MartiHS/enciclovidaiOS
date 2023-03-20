@@ -10,7 +10,8 @@ const colors = {
     backgroundTabUnSelect: "#FFFFFF",
     TabSelect: "#FFFFFF",
     TabUnSelect: "#5D5D5D",
-    backgroundSlide: "#B0BB53",  
+    //backgroundSlide: "#B0BB53",  
+    backgroundSlide: "#104C5B",
     backgroundSlideItem: "#8A9D46",
     textdialog: "#5D5D5D",
     link: "#3B3BFF",
@@ -22,6 +23,7 @@ const colors = {
     white: "#FFFFFF",
     green: "#8A9D46",
     blue: "#304E5B",
+    blue2: "#104C5B",
     gray: 'gray',
     grayTransparent: 'rgba(50, 50, 50, 0.6)',
     //---
