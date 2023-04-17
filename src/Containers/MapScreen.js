@@ -26,19 +26,9 @@ class MapScreen extends Component {
     constructor(props) {
         super(props)
 
-        if((global.locationData['latitud'] != undefined) && (global.locationData['latitud'] != "")){
-            theCurrentRegion['latitude'] = global.locationData['latitud'];
-            theCurrentRegion['longitude'] = global.locationData['logitud'];
-            theCurrentRegion['latitudeDelta'] = global.locationData['latitudeDelta'];
-            theCurrentRegion['longitudeDelta'] = global.locationData['longitudeDelta'];
-            console.log(' - - - YA HAY REGION POR GPS - - - - -  ');
-            console.log(theCurrentRegion);
-            console.log(' - - - - - - - - - - -  ');
-        } else {
-            console.log(' - - - USAR REGION GENERAL - - - - -  ');
-            theCurrentRegion = Constants.DEFAULT_REGION;
-            console.log(theCurrentRegion);
-        }
+        console.log(' - - - USAR REGION GENERAL - - - - -  ');
+        this.theCurrentRegion = Constants.DEFAULT_REGION;
+        console.log(theCurrentRegion);
 
         this.state = {
             pins: [],
@@ -93,23 +83,37 @@ class MapScreen extends Component {
     }
     
     fetchData = async (id_specie, map_id_specie) => {
+        console.log("fetchData");
+        console.log(id_specie);
+        console.log(map_id_specie);
         if (id_specie != map_id_specie) {
-            this.setState({ pins: [], region: theCurrentRegion, spinner: true });
+            console.log("SII ");
+            console.log(this.theCurrentRegion);
+            this.setState({ pins: [], region: this.theCurrentRegion, spinner: true });
             if (id_specie != 0) {
-                fetch(`${Constants.API_ENCICLOVIDA}/especie/${id_specie}`).then(res => res.json()).then((json) => {
+                console.log("SI ES DIFERENTE");
+                let query = `${Constants.API_ENCICLOVIDA}v2/especies/${id_specie}`;
+                console.log(query);
+                fetch(query).then(res => res.json()).then((json) => {
                     const url = json.e_geodata.naturalista_mapa_json;
                     const url_snib = json.e_geodata.snib_mapa_json;
+                    console.log(url);
+                    console.log(url_snib);
                     if (url || url_snib) {
+                        console.log("SI PASO")
                         this.loadgeodata(url, url_snib, false);
                         this.setMapIdSpecie(id_specie);
                     }
                     else
                         this.setState({ spinner: false, showmap: false });
                 }).catch(error => {
+                    console.log("ERROR ");
+                    console.log(error);
+
                     this.setState({ spinner: false, showmap: false });
                 });
-            }
-            else {
+            } else {
+                console.log("NO ");
                 this.setState({ spinner: false, pins: [], showmap: false });
             }
         }
@@ -152,21 +156,9 @@ class MapScreen extends Component {
     }
     UNSAFE_componentWillReceiveProps = () => {
         console.log("\n\n - - UNSAFE_componentWillReceiveProps desde MapScreen- - \n\n");
-
-        if((global.locationData['latitud'] != undefined) && (global.locationData['latitud'] != "")){
-            theCurrentRegion['latitude'] = global.locationData['latitud'];
-            theCurrentRegion['longitude'] = global.locationData['logitud'];
-            theCurrentRegion['latitudeDelta'] = global.locationData['latitudeDelta'];
-            theCurrentRegion['longitudeDelta'] = global.locationData['longitudeDelta'];
-            console.log(' - - - YA HAY REGION POR GPS - - - - -  ');
-            console.log(theCurrentRegion);
-            console.log(' - - - - - - - - - - -  ');
-        } else {
-            console.log(' - - - USAR REGION GENERAL - - - - -  ');
-            theCurrentRegion = Constants.DEFAULT_REGION;
-        }
-    console.log(" <<<<<<<<<");
-    
+        console.log(' - - - USAR REGION GENERAL - - - - -  ');
+        theCurrentRegion = Constants.DEFAULT_REGION;
+        console.log(" <<<<<<<<<");
         this.fetchData(global.id_specie, global.map_id_specie);
     };
 

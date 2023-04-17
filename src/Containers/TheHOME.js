@@ -13,6 +13,9 @@ import config from "../Theme/Fonts/config.json"
 import { Fonts, Colors } from '../Theme';
 const CustomIcon = createIconSetFromFontello(config);
 
+import Geolocation from 'react-native-geolocation-service';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+
 import Listas from '../Config/Listas';
 import Helper from '../Config/Helpers';
 
@@ -160,6 +163,45 @@ class HomeScreen extends Component {
         }
     };
 
+    fetchMunicipality = async (location) => {
+        console.log(">> fetchMunicipality");
+        this.setState({ query: "" })
+        // Si existe una query para llamar:
+        if(location != null){ 
+            fetch('https://api.enciclovida.mx/v2/municipios/ubicacion?latitud=' + location['lat'] + '&longitud=' + location['lng'])
+            .then(res => res.json())
+            .then((json) => {
+                let dataLocation = {
+                    region_id: json.munid,
+                    nom_reg: json.nom_mun + ', ' + json.nom_ent,
+                    tipo_region: 'Municipio',
+                    latitud: location['lat'],
+                    logitud: location['lng'],
+                };
+                console.log(">> LOCATION INFO");
+                console.log(dataLocation);
+                this.setState({ dataLoc: dataLocation});
+                
+                const{ navigation } = this.props;
+                global.listSpecies = "SpeciesByLocation";
+                global.locationData = dataLocation;
+                global.title = global.locationData.nom_reg + " - " + global.locationData.tipo_region;
+                global.subtitle = "";
+          
+                navigation.navigate(global.listSpecies, {
+                    data: { 
+                        origen: 'ByLocation',
+                    },
+                });
+
+            }).catch((error) => {
+
+            });
+        } else {
+            this.setState({ dataLoc : [] });
+        }
+    }
+
     footer = () => {
         if(this.state.show){
             return(
@@ -187,9 +229,9 @@ class HomeScreen extends Component {
                 
                 <View style={styles.container}>
                     
-                    <View style={{flexDirection:'row', justifyContent: 'center', paddingLeft: 15, paddingRight: 15, top: 0, width: '100%'}}>
-                        <Text style={{textAlign: 'center', color: Colors.gray, fontFamily: Fonts.family.base_bold, fontSize: 15}}>
-                            Prueba nuestras diferentes herramientas de búsqueda:
+                    <View style={{flexDirection:'row', justifyContent: 'center', paddingLeft: 15, paddingRight: 15, top: -10, width: '100%'}}>
+                        <Text style={{textAlign: 'center', color: Colors.gray, fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1}}>
+                            Buscar
                         </Text>
                     </View>
                     
@@ -211,7 +253,36 @@ class HomeScreen extends Component {
                             </View>
                         </TouchableHighlight>
 
-                        <TouchableHighlight onPress = {this.goToFindByL} style={styles.fHOMEButtonContainer} >
+                        <TouchableHighlight 
+                            onPress = { async() => {
+                                const hasLocationPermission = await request(
+                                    Platform.select({
+                                        android: PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+                                        ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+                                    }),
+                                    {
+                                        title: 'Enciclovida',
+                                        message: 'Enciclovida would like access to your location ',
+                                    },
+                                );
+                                
+                                if (hasLocationPermission=== 'granted') {
+                                    Geolocation.getCurrentPosition(async(position) => {
+                                        console.log('position: ');
+                                        console.log(position);
+                                        console.log(position.coords.latitude);
+                                        console.log(position.coords.longitude);
+                                        let coordsDevice = {
+                                            lat: position.coords.latitude,
+                                            lng: position.coords.longitude
+                                        };
+                                        Helper.resteFilters();
+                                        this.fetchMunicipality(coordsDevice);
+                                    });
+                                }
+                            }}
+                        
+                         style={styles.fHOMEButtonContainer} >
                             <View>
                                 <View style={styles.imageHOMEButtonContainer}>
                                     <Image

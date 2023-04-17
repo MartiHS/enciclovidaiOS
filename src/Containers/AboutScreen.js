@@ -40,14 +40,16 @@ class AboutScreen extends Component {
       contenido_render_array: [],
       spinner: false
     };
-    
+
+    //scrollViewRef = React.createRef();
+    this.viewPager = React.createRef();
+
     this.aboutOptions = [
       { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
-      { key: 'page_2', title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
-      { key: 'page_3', key: 'page_1', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
-      { key: 'page_4', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
-      { key: 'page_5', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
-      { key: 'page_6', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
+      { key: 'page_2', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
+      { key: 'page_3', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
+      { key: 'page_4', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
+      { key: 'page_5', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
     ];
 
     this.fetchData = this.fetchData.bind(this);
@@ -59,11 +61,10 @@ class AboutScreen extends Component {
   restartAboutOptions() {
     this.aboutOptions = [
       { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
-      { key: 'page_2', title: 'CONABIO (resumen)', value: 'conabio_dgcc', content: '', loaded: false },
-      { key: 'page_3', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
-      { key: 'page_4', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
-      { key: 'page_5', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
-      { key: 'page_6', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
+      { key: 'page_2', title: 'CONABIO (descripción)', value: 'conabio', content: '', loaded: false },
+      { key: 'page_3', title: 'Wikipedia en español', value: 'wikipedia_es', content: '', loaded: false },
+      { key: 'page_4', title: 'Descripción de IUCN', value: 'iucn', content: '', loaded: false },
+      { key: 'page_5', title: 'Wikipedia en inglés', value: 'wikipedia_en', content: '', loaded: false },
     ];
   }
 
@@ -133,6 +134,8 @@ class AboutScreen extends Component {
   async fetchData(id_specie, about_id_specie) {
     if (id_specie != about_id_specie) {
       this.restartAboutOptions();
+
+      
       this.setState({ imagen: "", contenido_render_array: [], spinner: true });
       if (id_specie !== 0) {
         console.log("FETCH - LLAMADA A FOTOS Y RESUMEN");
@@ -144,7 +147,7 @@ class AboutScreen extends Component {
         const audios = await response.audios;
 
         defaultPhoto = Helper.getRandomImage(fotos);
-        defaultPhoto2 = global.defaultPhoto;
+        defaultPhoto2 = global.defaultPhoto2;
 
         global.taxonPhotos = fotos;
         global.taxonVideos = videos;
@@ -171,10 +174,14 @@ class AboutScreen extends Component {
   UNSAFE_componentWillReceiveProps(props) {
     console.log("\n\n - - UNSAFE_componentWillReceiveProps desde AboutScreen- - \n\n");
     //console.log(props.params);
-
+    //this.myScroll.scrollTo({ x: 0, y: position, animated: true });
     //about_id_specie
     //media_id_specie
+    //this.viewPager._setPageNumber(0);
+    //this.viewPager._setPageIndex(1);
+    //console.log(this.viewPager);
     //this.flatListRef.current.scrollTo({ animated: false, x: 0, y: 0 });
+   // this.scrollViewRef?.current?.scrollTo({x: 0, y: 0, animated: true});
     //Alert.alert("idProps", this.state.load.toString());
     this.fetchData(global.id_specie, global.about_id_specie);
   }
@@ -183,8 +190,10 @@ class AboutScreen extends Component {
   componentDidMount() {
     console.log("\n\n - - componentDidMount - - \n\n");
     console.log("id_specie: " + global.id_specie + "  -  about_id_specie: " + global.about_id_specie);
-
+    
     this.fetchData(global.id_specie, global.about_id_specie);
+    
+    //this.scrollViewRef?.current?.scrollTo({x: 0, y: 0, animated: true});
 
     const data = ['First Element', 'Second Element' ];
     data.filter((el, idx) => {
@@ -236,19 +245,39 @@ class AboutScreen extends Component {
     )
   }
 
+  _swipeLeft = () => {
+    return (  
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+        <Icon2 name="angle-left" color='#404040' style={{ fontSize: 23, padding:0}} />    
+        <Icon2 name="angle-left" color='#898888' style={{ fontSize: 23, padding:0}} />      
+        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+      </View>
+    )
+  }
+
+  _swipeRight = () => {
+    return (  
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+        <Icon2 name="angle-right" color='#898888' style={{ fontSize: 23, padding:0}} /> 
+        <Icon2 name="angle-right" color='#404040' style={{ fontSize: 23, padding:0}} />         
+      </View>
+    )
+  }
+
   _renderPage = ({data}) => {
     return (  
       <View style={{padding: 10}}>
         <View style={{flexDirection: 'row', paddingTop: 10}}>
-          <Icon2 name="angle-left" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding:10}} />         
-          <Text style={{width:'80%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>{data.title}</Text>
-          <Icon2 name="angle-right" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding: 10, padding: 10}} />   
+          {this._swipeLeft()}
+          <Text style={{width:'60%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+          {this._swipeRight()}
         </View>
         
         <AutoHeightWebView 
           style={{ 
             width: (Dimensions.get('window').width - 30) , 
-            marginTop: 35, 
+            marginTop: 10, 
             marginBottom: 40,
           
           }}
@@ -277,18 +306,15 @@ class AboutScreen extends Component {
         this.getHTMLSpecieResume(id_specie, 'sin_fuente');
         break;
       case 2:
-        this.getHTMLSpecieResume(id_specie, 'conabio_dgcc');
-        break;
-      case 3:
         this.getHTMLSpecieResume(id_specie, 'conabio');
         break;
-      case 4:
+      case 3:
         this.getHTMLSpecieResume(id_specie, 'wikipedia_es');
         break;
-      case 5:
+      case 4:
         this.getHTMLSpecieResume(id_specie, 'iucn');
         break;
-      case 6:
+      case 5:
         this.getHTMLSpecieResume(id_specie, 'wikipedia_en');
         break;
       default:
@@ -302,8 +328,8 @@ class AboutScreen extends Component {
       <ImageBackground 
         source={{uri: 'ic_imagen_not_found'}} 
         resizeMode='contain'
-        style={[{flex: 1, flexDirection: "column" }, styles.image]} 
-        imageStyle={{opacity:0.7}} > 
+        style={[{flex: 1, flexDirection: "column" }, styles.notFoundImage]} 
+        imageStyle={{opacity:0.3}} > 
       </ImageBackground>
     );
   }
@@ -334,8 +360,7 @@ class AboutScreen extends Component {
               fadeOutForeground={true}
               outputScaleValue={70}
               overScrollMode="never"
-              //ref={this.flatListRef}
-              ref={(ref) => this.flatListRef = ref}
+              ref={this.scrollViewRef}
 
               renderForeground={() => (
                 <View ref={ref => this._nodes.set('First Element', 0)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -362,7 +387,8 @@ class AboutScreen extends Component {
                     data={this.aboutOptions} 
                     renderPage={this._renderPage}
                     onPageChange={this._renderTitleChange}
-                    //initialPage={{key: 'page_1'}}
+                    initialPage={{key: 'page_1'}}
+                    ref={(viewPager) => {this.viewPager = viewPager}}
                 />
               </View>
             </ParallaxScrollView>

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, Text, Keyboard, Alert, BackHandler } from 'react-native';
+import { View, Image, TouchableOpacity, Text, Keyboard, Alert, StyleSheet } from 'react-native';
 
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import RNImageVideoGridViewer from "@leafletui/rn-image-video-grid-viewer";
 
 import NavBar from '../Components/NavBar'; 
 import styles from "../Components/Styles/HomeScreenStyles";
@@ -114,8 +116,32 @@ class HomeScreen extends Component {
     footer = () => {
         if(this.state.show){
             return(
-                <Image style={styles.footerImage}
-                    source={{uri: 'ic_footer_home'}}/>
+                <View style={styless.container}>
+                    <View style={styless.inner_container}>
+                        <RNImageVideoGridViewer
+                            images={[
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Thomisidae.jpeg", type: "image", videoThumbnail: null },
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Amanita-muscaria.jpg", type: "image", videoThumbnail: null },
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Taxodium-mucronatum.jpeg", type: "image", videoThumbnail: null },
+                                                    
+                            ]}
+                        onPress={(item) => { console.log(item, 'selected image properties', item.type, 'video/image') }}
+                        style={{}} 
+                        />
+                        <RNImageVideoGridViewer
+                            images={[
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Eumomota-superciliosa.jpg", type: "image", videoThumbnail: null },
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Dahlia-coccinea.jpeg", type: "image", videoThumbnail: null },
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Taxodium-mucronatum.jpeg", type: "image", videoThumbnail: null },
+                                { url: "https://enciclovida.mx/imagenes/app/bespecies/Plectrohyla-matudai.jpeg", type: "image", videoThumbnail: null },
+                                                    
+                            ]}
+                        onPress={(item) => { console.log(item, 'selected image properties', item.type, 'video/image') }}
+                        style={{}} 
+                        />
+                    </View>
+ 
+                </View>
             )
         }
         else { 
@@ -175,19 +201,29 @@ class HomeScreen extends Component {
                         </View>
                     </View>
 
-                    <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:60, zIndex: -10, padding: 10, width: '100%', }}> 
-                        <View>
-                            <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
-                            <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
-                        </View>
-                    </View>
-
                     {this.footer()}
                 </View>
             </View>
         );
     }
 }
+
+
+const styless = StyleSheet.create({
+    container: {
+      flex: 1,
+      width: '100%',
+      height: '100%'
+    },
+    inner_container: {
+      width: "100%",
+      height: "50%",
+    },
+      textStyle: {
+      textAlign: "center",
+      fontSize: 20,
+    }
+  });
 
 //make this component available to the app
 export default withNavigation(HomeScreen);

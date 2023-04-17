@@ -171,6 +171,13 @@ export default class Helper {
     global.ListAnimales = Listas.DataFilterAnimales;
     global.ListPlantas = Listas.DataFilterPlantas;
     global.id_specie = 0;
+
+
+    global.taxonPhotos = [];
+    global.taxonVideos = [];
+    global.taxonAudios = [];
+    global.defaultPhoto = "";
+    global.defaultPhoto2 = "";
   }
 
    // Función para aplicar filtros

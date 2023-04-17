@@ -98,7 +98,7 @@ class ClassificationScreen extends Component {
         if (id_specie !== classification_id_specie) {
             this.setState({ spinner: true, data: [] });
             if (id_especie != 0) {
-                var linkToCall = `${Constants.API_ENCICLOVIDA}especie/${id_especie}/ancestry`;
+                var linkToCall = `${Constants.API_ENCICLOVIDA}v2/especies/${id_especie}/clasificacion`;
                 console.log("Se realizó una llamada a: " + linkToCall);
                 fetch(linkToCall).then(res => res.json()).then((json) => {
                     maxlevel = 0;

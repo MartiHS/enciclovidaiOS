@@ -10,7 +10,6 @@ export default StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: Colors.mainBackground
   },
-
   container: {
     backgroundColor: '#F7F7F7',
     justifyContent: 'center',
@@ -70,7 +69,6 @@ export default StyleSheet.create({
     fontSize: 15
   },
   headerResults: {
-    flexDirection: 'row',
     width: '100%',
     backgroundColor: 'white',
     padding:3,
@@ -83,9 +81,12 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
+    //height: 58,
     elevation: 5,
     marginBottom: 10
+  },
+  footerResults: {
+    marginBottom: 5
   },
   textInHeaderResults: {
     width: '30%',

@@ -24,6 +24,10 @@ export default StyleSheet.create({
     height: 300,
     width: '100%',
   },
+  notFoundImage: {
+    height: 300,
+    width: '80%',
+  },
   textcontent: {
     margin: 50,
   },

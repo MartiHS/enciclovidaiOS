@@ -18,19 +18,10 @@ const EnciclovidaScreen = ()=>{
     return(
         <View style={[stylesEnci.mainScreen]}>
             <ScrollView>
-                <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', }}> 
-                    <View>
-                        <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
-                        <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
-                    </View>
-                </View>
-
                 <View style={[stylesEnci.container, stylesEnci.info]}>
                     <Text style={stylesEnci.text}>
-                    <Text style={stylesEnci.bold}>EncicloVida</Text> integra información de la 
-                    <Text style={stylesEnci.bold}> CONABIO</Text> y la complementa con 
-                    información de otras fuentes (CITES, Norma Oficial Mexicana 059, Lista roja de UICN, 
-                    NaturaLista, AverAves, Enciclopedia de la Vida, Wikipedia, Flickr, etc.).{'\n'}</Text>
+                    <Text style={stylesEnci.bold}>EncicloVida</Text> es una plataforma digital que integra información de 
+                    <Text style={stylesEnci.bold}> CONABIO</Text> y la complementa con información de otras fuentes (Norma Oficial Mexicana 059, Lista roja de IUCN, CITES, NaturaLista, Wikipedia, Universidad de Cornell, Jardín Botánico de Misuri).{'\n'}</Text>
 
                     <Text style={stylesEnci.rigth}>
                     Participa con fotos: utiliza 
@@ -38,12 +29,6 @@ const EnciclovidaScreen = ()=>{
                     {'\n'}
                     Consulta: utiliza EncicloVida{'\n'}
                     </Text>
-
-
-                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Ciencia ciudadana: </Text>
-                        Incluye tus propias observaciones. Utiliza la app Naturalista para capturar tus observaciones de plantas, hongos y animales en cualquier lugar. Cada una de tus observaciones contribuye a nuestro conocimiento de la naturaleza.  {'\n'}
-                    </Text>
-
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Nombres: </Text>
                     Nombres científicos, nombres comunes, sinonimias, estatus taxonómicos siguiendo los catálogos de autoridades de CONABIO.{'\n'}
@@ -53,13 +38,23 @@ const EnciclovidaScreen = ()=>{
                     Fotos de las especies provenientes del
                     <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://bdi.conabio.gob.mx/fotoweb')}> Banco de Imágenes de CONABIO</Text>, de
                     <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://www.naturalista.mx/')}> NaturaLista</Text>, de
-                    <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://es.wikipedia.org/wiki/Wikipedia:Portada')}> Wikipedia</Text> y de
-                    <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://www.flickr.com/')}> Flickr</Text>.{'\n'}
+                    <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://www.macaulaylibrary.org/')}> Biblioteca Mccaulay</Text> y de lade la  de la Universidad de Cornell.{'\n'}
                     </Text>
 
-                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Mapas: </Text>
-                    registros del Sistema Nacional de Información sobre Biodiversidad (colecciones científicas de plantas y animales de México) 
-                    y registros de observaciones de <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://www.naturalista.mx')}>NaturaLista</Text> y AverAVes.{'\n'}
+                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Audios: </Text> 
+                    Biblioteca Mccaulay de la Universidad de Cornell y Xeno-canto.{'\n'}
+                    </Text>
+
+                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Videos: </Text> 
+                    Biblioteca Mccaulay de la Universidad de Cornell.{'\n'}
+                    </Text>
+
+                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Mapas: </Text> 
+                    Mapas de distribución potencial de la CONABIO.{'\n'} 
+                    </Text>
+
+                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Registros de especies:</Text> 
+                    del Sistema Nacional de Información sobre Biodiversidad (colecciones científicas de plantas y animales de México) y registros de observaciones de <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://www.naturalista.mx/')}> NaturaLista</Text> y <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://ebird.org/home')}> AverAVes</Text>. {'\n'} 
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Categoría nacional de riesgo: </Text>
@@ -79,18 +74,20 @@ const EnciclovidaScreen = ()=>{
                     Especies seleccionadas como prioritarias para su conservación por el gobierno mexicano.{'\n'}
                     </Text>
 
+                    <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Especies evaluadas como en riesgo. </Text>
+                    Análisis de la Comisión Nacional para el Conocimiento y Uso de la Biodiversidad.{'\n'}
+                    </Text>
+
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Tipo de distribución: </Text>
-                    Indicación para especies nativas, endémicas, y exóticas (introducidas).{'\n'}
+                    Indicación para especies nativas, endémicas, exóticas (introducidas) y exóticas invasoras.{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Contenido biológico: </Text>
-                    Descripción de la especie, distribución, hábitat, alimentación, biología de poblaciones, 
-                    comportamiento, reproducción, estado de conservación, amenazas y referencias (Wikipedia).{'\n'}
+                    Descripción de la especie, distribución, hábitat, alimentación, biología de poblaciones, comportamiento, reproducción, estado de conservación, amenazas y referencias (CONABIO resumen, CONABIO descripción, Lista roja de UICN, Wikipedia en Español y Wikipedia en Inglés).{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Clasificación: </Text>
-                    Posición en la clasificación taxonómica, con opción de recorrer la jerarquía de clasificación y 
-                    conocer especies relacionadas (Reino, Phylum, Clase, Orden, Familia, Género y Especie).{'\n'}
+                    Posición en la clasificación taxonómica, con opción de recorrer la jerarquía de clasificación y conocer especies relacionadas (Reino, Phylum, Clase, Orden, Familia, Género y Especie).{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Catálogos de CONABIO: </Text>

@@ -1,15 +1,19 @@
 //import liraries
 import React from 'react';
-import { Keyboard, View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking, StatusBar } from 'react-native';
+import { Share, View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking, StatusBar } from 'react-native';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import { withNavigation } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
+import Icon4 from 'react-native-vector-icons/SimpleLineIcons';
+
 
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import styles from "./Styles/NavBarStyle";
 import stylesAUCOM from "../Components/Styles/HomeScreenStyles";
+import stylesByL from "../Components/Styles/FindByLocationStyles";
+
 import config from "../Theme/Fonts/config";
 import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
@@ -18,6 +22,7 @@ import Constants from '../Config/Constants';
 import DialogInput from 'react-native-dialog-input';
 
 import Listas from '../Config/Listas';
+
 
 
 import Dialogs from "../Config/Helpers2"
@@ -34,6 +39,7 @@ class NavBar extends React.Component {
     this.state = {
       dialog: false,
       filtershow: false,
+      filterBYLshow: false,
       data: [],
       id_tmp: 0,
       title:"",
@@ -55,6 +61,29 @@ class NavBar extends React.Component {
     
   }
 
+  onShare = async () => {
+    if(global.sharedUrl == "NOT_FOUND"  || global.sharedUrl == '' || global.sharedUrl == undefined)
+      Alert("Debe seleccionar al menos un filtro");
+    else{
+      try {
+        const result = await Share.share({
+          message: global.sharedUrl
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
+
   displayDrawerMenu = () => {
     const {navigation} = this.props;
     navigation.openDrawer();
@@ -74,6 +103,14 @@ class NavBar extends React.Component {
       this.setState({filtershow: true});
   };
 
+  showFilterBYLDialog = () => {
+    if(this.state.filterBYLshow)
+      this.setState({filterBYLshow: false});
+    else
+      this.setState({filterBYLshow: true});
+  };
+
+
   renderLeftButton = () => { 
     const { menuLightButton} = this.props;
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
@@ -85,29 +122,45 @@ class NavBar extends React.Component {
     };
 
   renderRightButton = () => {
+    let params = this.props.navigation.state;
     const { infoButton, filterButton, imageButton } = this.props;
     const { menuLightButton} = this.props;
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
     if(infoButton){
       return(
         <TouchableOpacity onPress={this.showSpecieInfo} >
-          <Icon name="ios-information-circle-outline" size={30} color={iconColor} style={[styles.favIcon]} />
+          <Icon4 name="options-vertical" size={25} color={iconColor} style={[styles.favIcon]} />
         </TouchableOpacity>
       )
     }
     else if(imageButton){
-      return(
+      return( 
         <TouchableOpacity onPress={() => Linking.openURL('http://enciclovida.mx/')}>
           <Icon name="ios-information-circle-outline" size={30} color={iconColor} style={[styles.favIcon]} />
         </TouchableOpacity>
       )
     }
     else if(filterButton){
-      return(
-        <TouchableOpacity onPress={this.showFilterDialog} >
-          <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
-        </TouchableOpacity>
-      )
+      if(params.routeName == "SpeciesByLocation") {
+        return(
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={{paddingRight: 10, paddingLeft: 5}} onPress={this.showFilterBYLDialog} >
+              <CustomIcon name="region" style={styles.favIcon2}></CustomIcon>
+            </TouchableOpacity>
+            <TouchableOpacity style={{}} onPress={this.showFilterDialog} >
+              <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
+            </TouchableOpacity>
+          </View>
+        );
+      } else {
+        return(
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={{}} onPress={this.showFilterDialog} >
+              <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
+            </TouchableOpacity>
+          </View>
+        );
+      }
     }
   };
 
@@ -152,10 +205,15 @@ class NavBar extends React.Component {
   getSpecieInfo = async (id_especie) => {
     if(id_especie != 0 && id_especie != this.state.id_tmp){
       this.setState({ id_tmp: id_especie });
-      console.log(`${API}/especie/${id_especie}`);
-      fetch(`${API}/especie/${id_especie}`)
-      .then(res => res.json())
-      .then((json) => {
+      let query = `${API}/v2/especies/${id_especie}`;
+      console.log(query);
+
+      fetch(query).then(res => { // Recuperar el # de especies
+        this.setState({sharedSpec: res.headers.get('shared-url')});
+        global.sharedUrl = res.headers.get('shared-url');
+        return res;
+      }).then(res => res.json()).then(json => {
+
         arraydata = [];
         Array.prototype.push.apply(
           arraydata, 
@@ -610,6 +668,10 @@ class NavBar extends React.Component {
   closeDialog = () => {
     this.setState({ filtershow: false });
   };
+
+  closeDialogByL = () => {
+    this.setState({ filterBYLshow: false });
+  };
   
   changeFiltersType = (filterType) => {
     // Asigno el nuevo tipo de filtro
@@ -691,6 +753,132 @@ class NavBar extends React.Component {
     );
   };
 
+  getFilterByLocation = () => {
+
+    const { query } = this.state;
+    const { data } = this.state;
+    
+    
+    return(
+      <View>
+        <View style={stylesAUCOM.viewIn}>
+          <View style={{height:46, width: '90%'}}>
+            <View style={[{height: 55, width:"100%"}]}>
+              <Autocomplete
+                  style={stylesByL.findBLAutocomplete}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  inputContainerStyle={stylesByL.inputContainerStyle}
+                  containerStyle={stylesByL.autocompleteContainer}
+                  listStyle={stylesByL.listStyle}
+                  data={data}
+                  defaultValue={query}
+                  hideResults={false}
+                  ref={(component) => { this._autocompleteByL = component }}
+                  onChangeText={text => this.fetchDataLocations(text)}
+                  placeholder="Ingresa una ubicación"
+                  keyExtractor={(item, index) => item.id.toString() }
+                  renderItem={({ item }) => (
+                      <TouchableOpacity 
+                          onPress={() => {
+                              this.handlePressLocations(item);
+                              this.setState({ query: "", filterBYLshow: false })
+                          }}>
+                          <View style={[stylesByL.contentItem]}>
+                              <View style={stylesByL.text_view}>
+                                  <Text style={stylesByL.itemText}>{item.data.nombre_region}</Text>
+                                  <Text style={stylesByL.itemTextSecond}>({item.data.geojson.properties.tipo_region})</Text>
+                              </View>
+                          </View>
+                      </TouchableOpacity>
+                  )}
+              />                  
+          </View> 
+          </View> 
+          <View style={{/* borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '15%'}}>
+              <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
+                  <Icon name="ios-close" style={stylesAUCOM.customClearIcon} />
+              </TouchableOpacity>
+          </View>
+        </View>
+        <View style={stylesAUCOM.especieSeleccionada}>
+          {
+            this.state.findSpecificSp[1] ? 
+            <View>
+              <Text style={[styles.title_flat, {textAlign: 'left'}]}>Filtro de especie:</Text>
+              <View style={stylesAUCOM.contentItem}>
+                <Image source={{ uri: this.state.findSpecificSp[1]}} style={stylesAUCOM.itemimage} />
+                <View style={stylesAUCOM.text_view}>
+                  <Text style={stylesAUCOM.itemText}>{findSpecificSp[2]}</Text>
+                  <Text style={stylesAUCOM.itemTextSecond}>({findSpecificSp[3]})</Text>
+                </View>
+              </View>
+            </View>
+            :
+            <View></View>
+          }
+          
+        </View>
+      </View>
+    );
+  };
+
+  fetchDataLocations = async (text) => {
+    this.setState({ query: text })
+    // Si existe una query para llamar:
+    if(text != null && text.length > 1){
+       console.log(`https://api.enciclovida.mx/v2/autocompleta/regiones?q=${encodeURIComponent(text)}&reg=estado&reg=municipio&reg=anp`);
+        fetch(`https://api.enciclovida.mx/v2/autocompleta/regiones?q=${encodeURIComponent(text)}&reg=estado&reg=municipio&reg=anp`)
+        .then(res => res.json())
+        .then((json) => {
+            arraydata = [];
+            if(!json.error){
+                Constants.RESULT_LOCATIONS.forEach( locationCategory => {
+                    console.log(locationCategory);
+                    Array.prototype.push.apply(
+                        arraydata, json[locationCategory].filter(item => item.data)
+                    )
+                    console.log(json[locationCategory]);
+
+                });
+            }
+            this.setState({ data: arraydata.slice() });
+        }).catch((error) => {
+
+        });
+    } else {
+        this.setState({ data : [] });
+    }
+}
+
+  // Función encargada de la acción al presionar una ubicación
+  handlePressLocations(item) {
+       
+    console.log("\n\n>> handlePress");
+    this.setState({ query: "" })
+    this.setState({ data : [] });
+    
+    let dataLocation = {
+        region_id: item.data.region_id,
+        nom_reg: item.data.nombre_region,
+        tipo_region: item.data.geojson.properties.tipo_region,
+    };
+
+    const{ navigation } = this.props;
+    global.listSpecies = "SpeciesByLocation";
+    global.locationData = dataLocation;
+    global.title = global.locationData.nom_reg + " - " + global.locationData.tipo_region;
+    global.subtitle = "";
+
+    navigation.navigate(global.listSpecies, {
+        data: { 
+            origen: 'ByLocation',
+        },
+    });
+
+    navigation.closeDrawer();
+}
+
   getFilterAdVANCED = () => {
     const { 
       selected_T_DISTRIBUCION,
@@ -726,7 +914,7 @@ class NavBar extends React.Component {
             </TouchableOpacity>
         </View>
 
-        <Text style={styles.title_flat}>Grupos de Hongos y Plantas</Text>
+        <Text style={styles.title_flat}>Grupos de hongos y plantas</Text>
         <FlatList
           data={global.ListPlantas}
           renderItem={({ item }) => (
@@ -1092,12 +1280,12 @@ class NavBar extends React.Component {
     const dialogPDFContent = this.state.dialogPDFContent
     return (
       <View {...this.props} style={[styles.navBar, transparent ? styles.transparent : null, white ? styles.navBarWhite : null]}>
-        <View style={styles.leftContainer}>{this.renderLeftButton()}</View>
-        <View style={styles.titleWrapper}>
+        <View style={[styles.leftContainer]}>{this.renderLeftButton()}</View>
+        <View style={[styles.titleWrapper]}>
           <Text style={[styles.title, title != null && title.length > 40 ? styles.title_small : null]}>{title}</Text>
             {subtitle != "" && <Text style={[ styles.subtitle]}>{subtitle}</Text> }
         </View>
-        <View style={styles.rightContainer}>{this.renderRightButton()}</View>
+        <View style={[{paddingRight: 15}]}>{this.renderRightButton()}</View>
           <Dialog
               onDismiss={() => {
                   this.setState({ dialog: false });
@@ -1120,6 +1308,11 @@ class NavBar extends React.Component {
                           this.renderItem({last: item.isLast, title: item.title, content: item.name, icon: item.icon, iconFont: item.iconFont})
                         )}
                     />
+                    <Text/>
+                    <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={this.onShare}>
+                      <Icon3 name="share" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
+                      <Text style={styles.title}>Compartir especie</Text>
+                    </TouchableOpacity>
                 </DialogContent>
           </Dialog>
           <Dialog
@@ -1181,11 +1374,54 @@ class NavBar extends React.Component {
                   <Text style={styles.title}>Guía de especies</Text>
               </TouchableOpacity>
               <View style={styles.tabSpace}/>
-              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
+              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={this.onShare}>
                   <Icon3 name="share" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
                   <Text style={styles.title}>Compartir búsqueda</Text>
               </TouchableOpacity>
 
+              </ScrollView>
+            </DialogContent>
+        </Dialog>
+
+
+        <Dialog
+            onDismiss={() => {
+              this.setState({ filterBYLshow: false });
+            }}
+            containerStyle={ styles.navBarDialog }
+            width={0.80}
+            visible={this.state.filterBYLshow}
+            rounded
+            onTouchOutside={() => {
+              this.setState({ filterBYLshow: false });
+            }}
+            actionsBordered 
+          > 
+            <DialogContent style={styles.content}>
+              
+              <ScrollView>
+
+              <View style={styles.upButtons}>
+                  <View>
+                    <TouchableOpacity style={styles.dialogButton3} onPress={this.closeDialogByL}>
+                        <Icon2 name="close-a" color='white' style={styles.dialogButtonIcon} />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection: "row", width: "100%", paddingLeft: 10, justifyContent: 'flex-start',}}>
+                    <TouchableOpacity style={[styles.dialogRounded, {backgroundColor:Colors.blue}]} onPress={()=>{this.changeFiltersType('XEspecie')}}>
+                      <CustomIcon name="region" color='white' style={styles.dialogButtonIcon} />
+                      <Text style={[styles.title_flat, {color: 'white'}]}>Buscar por region</Text>
+                    </TouchableOpacity>
+                  </View>
+              </View>
+
+              <View style={styles.tabSpace}/>
+
+              {
+                 this.getFilterByLocation()
+              } 
+
+              <View style={styles.tabLine}/>
               </ScrollView>
             </DialogContent>
         </Dialog>

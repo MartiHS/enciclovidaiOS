@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import {View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
+import {Share, View, FlatList, Image, Alert, Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from "react-navigation";
 import Spinner from 'react-native-loading-spinner-overlay';
 import NavBar from '../Components/NavBar';
@@ -8,6 +8,9 @@ import styles from "../Components/Styles/ListSpeciesScreenStyles";
 import Constants from '../Config/Constants';
 import {Colors, Fonts} from "../Theme/";
 
+import DialogInput from 'react-native-dialog-input';
+
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import config from "../Theme/Fonts/config";
 const CustomIcon = createIconSetFromFontello(config);
@@ -24,6 +27,8 @@ class ListSpeciesScreen extends Component {
       total: 1,
       loadingMore: false,
       refreshing: false,
+      sharedUrl: '',
+      dialogPDFContent: [false],
     };
   }
   
@@ -43,6 +48,12 @@ class ListSpeciesScreen extends Component {
         console.log(query);
         fetch(query).then(res => { // Recuperar el # de especies
           this.setState({totalRes: res.headers.get('num_especies')});
+          try {
+            this.setState({sharedUrl: res.headers.get('shared-url')});
+          } catch(e) {
+            this.setState({sharedUrl: 'NOT_FOUND'});
+          }
+          
           return res;
         }).then(res => res.json()).then(json => {
 
@@ -114,7 +125,10 @@ class ListSpeciesScreen extends Component {
                     console.log("Total: ", entries);
                     console.log("Páginas: ", totpage);
                     console.log("limit: ", limit);
+
+                    global.sharedUrl = this.state.sharedUrl;
                     
+                    console.log("LA SHARED: " + global.sharedUrl);
                     console.log("------------------FIN");
                     this.setState({ data: result, spinner: false, page: 1, total: totpage, loadingMore: entries > limit ? true : false });
               })
@@ -450,6 +464,118 @@ class ListSpeciesScreen extends Component {
     
   };
 
+  onShare = async () => {
+    if(global.sharedUrl == "NOT_FOUND"  || global.sharedUrl == '' || global.sharedUrl == undefined)
+      Alert("Debe seleccionar al menos un filtro");
+    else{
+      try {
+        const result = await Share.share({
+          message: global.sharedUrl
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
+
+  sendInputTOPDF = async (email) => {
+    // Ocultamos el dialogo
+    this.setState({ dialogPDFContent: [false] });
+    const ccEmail = email.replace(" ", "");
+    // Verificamos que el correo sea correcto:
+
+    const validateEmail = (email) => {
+      return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+    };
+
+    if(!validateEmail(ccEmail)) {
+      
+      Alert.alert("Asegurate de ingresar un correo válido");
+
+    } else {
+
+      const location = global.locationData;
+
+      console.log("Location data");
+      console.log(location);
+      console.log("Filtros:");
+      console.log(global.filtro);
+      
+      const URLFINAL = `https://api.enciclovida.mx/v2/especies/busqueda/region?tipo_region=${encodeURIComponent(location.tipo_region.toLowerCase())}&region_id=${encodeURIComponent(location.region_id)}${global.filtro}&guia=true&correo=${encodeURIComponent(ccEmail)}&pagina=1&por_pagina=50`
+      
+      console.log(URLFINAL);
+  
+      fetch(URLFINAL).then(res => res.json()).then((json) => {
+  
+        try {
+          const res = json;
+          console.log("RESPUESTA:");
+          console.log(res);
+          if(res.estatus == true) {
+            Alert.alert("¡La petición se envió correctamente!.");
+          } else {
+            Alert.alert(res.msg);
+          }
+        } catch(e) {
+  
+        }
+
+      }).catch(error => {
+  
+      });
+    }
+  }
+
+
+  sendPFDTOUser = (tipoReq) => {
+
+    console.log("sendPFDTOUser");
+    
+    let contentDialog = [false];
+    
+    // Pos ahora siempre entrará aquí
+    if(tipoReq == "Guia") {
+      // 2. Tener al menos un grupo seleccionado 
+      if((global.filtro) !== "" ) { 
+        if(this.state.totalRes >200){
+          contentDialog[0] = false;
+          contentDialog[2] = "El número de especies debe ser menor a 200";
+        } else {
+          contentDialog[0] = true;
+          contentDialog[1] = "Descarga la guía en PDF";
+          contentDialog[2] = "Toma en cuenta que entre más especies sean podría tardar más en generarlo, se te enviará un correo cuando se genere el PDF.";  
+        }
+
+      } else {
+        contentDialog[0] = false;
+        contentDialog[2] = "Se requiere seleccionar al menos un filtro";
+      }
+    } 
+
+    // Verificar si cumple con los requisitos, si si, mostrar el acceso a ingresar correo:
+    if(contentDialog[0]) {
+      this.setState({ dialogPDFContent: contentDialog });
+    } else {
+      Alert.alert(contentDialog[2]);
+    }
+  };
+
+  closeDialogPDF = (action) => {
+    const contentDialog = [action];
+    this.setState({ dialogPDFContent: contentDialog });
+  };
+
   _handleRefresh = () => {
     console.log(">> _handleRefresh ")
     this.setState( { page: 1, refreshing: true },
@@ -521,6 +647,23 @@ class ListSpeciesScreen extends Component {
     );
   }
 
+  getShareSpecies() {
+    return (
+      <View style={styles.footerResults}>
+        <View style={[{flexDirection: "row", alignItems: "center",  justifyContent: "center"}]}>
+          <TouchableOpacity style={[{width: '100%', backgroundColor: Colors.green, flexDirection: "row", alignItems: "center", justifyContent: "center", paddingTop: 3, paddingBottom: 3, borderRadius: 8, width:"45%", marginTop: 5, marginRight: 5}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
+              <Icon3 name="file-pdf-o" color='white' style={[{fontSize: 15, paddingRight: 8}]} />
+              <Text style={{color: Colors.white, fontFamily: Fonts.family.base_bold}}>Guía de especies</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[{width: '100%', backgroundColor: Colors.green, flexDirection: "row", alignItems: "center", justifyContent: "center", paddingTop: 3, paddingBottom: 3, borderRadius: 8, width:"45%", marginTop: 5}]} onPress={this.onShare}>
+              <Icon3 name="share" color='white' style={[{fontSize: 15, paddingRight: 8}]} />
+              <Text style={{color: Colors.white, fontFamily: Fonts.family.base_bold}}>Compartir búsqueda</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     let params = this.props.navigation.state;
     let TOTFilters = [];
@@ -529,25 +672,34 @@ class ListSpeciesScreen extends Component {
     const L1 = global.gFiltroIcons.length == undefined ? 0 : global.gFiltroIcons.length;
     const L2 = global.filtroIcons.length == undefined ? 0 : global.filtroIcons.length;
     let TOTFiltersNUM = L1 + L2;
+    const dialogPDFContent = this.state.dialogPDFContent
     return (
-      <View style={[styles.MainContainer]} >
+      <View style={[{padding: 0, margin: 0}]} >
         <NavBar menuBlackButton={true} filterButton={true} />
         <View style={styles.container}>
           <Spinner visible={this.state.spinner} textContent={'Cargando...'} textStyle={{ color: '#FFF' }} />
           <View style={styles.headerResults}>
-            <Text style={styles.textInHeaderResults}> {this.state.totalRes} Especies</Text>
-            <View style={styles.iconsInHeaderResults}>
-              {
-                TOTFiltersNUM > 0 ?  <Text style={{fontFamily: Fonts.family.base_bold, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
-              }
-              {
-                TOTFiltersNUM > 0 ? this.getIconList(TOTFilters) : <></>
-              }
-              
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textInHeaderResults}> {this.state.totalRes} Especies</Text>
+              <View style={styles.iconsInHeaderResults}>
+                {
+                  TOTFiltersNUM > 0 ?  <Text style={{fontFamily: Fonts.family.base_bold, color: Colors.green, paddingRight: 10}}>Filtros:</Text> : <></>
+                }
+                {
+                  TOTFiltersNUM > 0 ? this.getIconList(TOTFilters) : <></>
+                }
+              </View>
             </View>
+            
+            {
+              params.routeName == "SpeciesByLocation" ?
+                this.getShareSpecies() :
+                <></>
+            }
+            
           </View>
           <FlatList
-            style = {styles.flatList} 
+            style = {{height: '80%'}} 
             data={this.state.data}
             extraData={this.state}
             keyExtractor={(item) => item.id.toString()}
@@ -582,6 +734,18 @@ class ListSpeciesScreen extends Component {
             onRefresh = {this._handleRefresh}
             refreshing = {this.state.refreshing}
           />
+
+        <DialogInput isDialogVisible={dialogPDFContent[0]}
+          title={dialogPDFContent[1]}
+          message={dialogPDFContent[2]}
+          dialogStyle={{backgroundColor: Colors.white}}
+          hintInput ={"Ingresa tu correo electrónico"}
+          submitInput={ (inputText) => {this.sendInputTOPDF(inputText)} }
+          closeDialog={ () => {this.closeDialogPDF(false)}}
+          submitText="Enviar!"
+          cancelText="Cerrar"
+        >
+        </DialogInput>
 
         </View>
       </View>

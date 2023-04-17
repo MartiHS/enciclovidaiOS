@@ -152,8 +152,34 @@ class SideMenu extends React.Component {
           </View>
         </ScrollView>
       </View> 
-      );
-    }
+    );
+  }
+
+  enciclovidaContentModal = () => {
+    return(
+      <View style = {{flex: 1, backgroundColor: 'white', alignItems: 'center'}}>  
+          <View style = {{width: '100%', height: '30%', backgroundColor: "black"}}>  
+            <ImageBackground 
+              source={{uri: 'https://enciclovida.mx/imagenes/app/acerca/enciclovida.jpg'}} 
+              resizeMode='cover'
+              style={{width: '100%', height: '100%'}} 
+              imageStyle={{opacity:0.9}} > 
+            </ImageBackground>
+          </View>        
+          <View style = {{width: '80%', height: '20%', padding: 10, backgroundColor: "white", borderTopLeftRadius: 10, borderTopRightRadius: 10, top: -30}}>  
+            <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', }}> 
+                <View>
+                    <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
+                    <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
+                </View>
+            </View>
+          </View>
+          <ScrollView style={{top: -70, marginBottom: -60}}>
+            {EnciclovidaScreen()}
+          </ScrollView>
+      </View> 
+    );
+  }
 
   naturalistaContentModal = () => {
     return(
@@ -252,7 +278,8 @@ class SideMenu extends React.Component {
                       this.biomexContentModal() : 
                       mainModalUrl == 'naturalista' ? 
                         this.naturalistaContentModal() :
-                        EnciclovidaScreen()
+                        this.enciclovidaContentModal()
+                        
                   }
                 </View> 
             </View>
@@ -274,13 +301,13 @@ class SideMenu extends React.Component {
           </TouchableHighlight>
           <Text/>
 
-          <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'enciclovida', mainModalTitle: 'enciclovida.mx' })}} style = {[styles.menuItem, {alignItems: 'flex-end'}]} underlayColor = {itemUnderlaycolor} >
+          <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'enciclovida', mainModalTitle: 'enciclovida.mx' })}} style = {[styles.menuItem, {alignItems: 'flex-start'}]} underlayColor = {itemUnderlaycolor} >
             <View style = {[styles.row]} >
-              <Text style = {[styles.title, {textAlign: 'right', fontSize: 18, fontWeight: '800', marginRight: 10 }]} > ¿Qué es Enciclovida ? </Text>
+              <Text style = {[styles.title, {textAlign: 'left', fontSize: 18, fontWeight: '800', marginRight: 10 }]} > ¿Qué es Enciclovida ? </Text>
             </View>
           </TouchableHighlight> 
           
-          <TouchableHighlight onPress = {this.goToSymbology} style = {[styles.menuItem, {alignItems: 'flex-end'}]} underlayColor = {itemUnderlaycolor} >
+          <TouchableHighlight onPress = {this.goToSymbology} style = {[styles.menuItem, {alignItems: 'flex-start'}]} underlayColor = {itemUnderlaycolor} >
             <View style = {[styles.row, {flexDirection: 'row'}]} >
               <CustomIcon style={{fontSize: 28, color: 'white' }} name='enciclovida'></CustomIcon>
               <Text style = {[styles.title, {top: 10, marginLeft: 10, fontSize: 16, fontWeight: '800', marginRight: 10 }]} > Simbología </Text>

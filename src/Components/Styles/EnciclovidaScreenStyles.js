@@ -9,7 +9,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "stretch",
-    backgroundColor: Colors.mainBackground
+   backgroundColor: Colors.white,
+   //backgroundColor: 'red'
   },
   navBar: {
     height: Metrics.navBarHeight,
