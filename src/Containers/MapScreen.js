@@ -27,7 +27,7 @@ class MapScreen extends Component {
         super(props)
 
         console.log(' - - - USAR REGION GENERAL - - - - -  ');
-        this.theCurrentRegion = Constants.DEFAULT_REGION;
+        theCurrentRegion = Constants.DEFAULT_REGION;
         console.log(theCurrentRegion);
 
         this.state = {
@@ -44,11 +44,14 @@ class MapScreen extends Component {
 
     loadgeodata = async (url, url_snib, last) => {
         if (url) {
+            console.log(url);
             fetch(url).then(res => res.json()).then((json) => {
                 const result = json.map(data => {
                     if (last) return { id: `01,pin${data[2]}`, color: colors.iconMap1, location: { latitude: data[1], longitude: data[0] } };
                     else return { id: `00,pin${data[2]}`, color: colors.iconMap2, location: { latitude: data[1], longitude: data[0] } };
                 });
+
+                console.log(last);
                 if (last) {
                     arraydata = [];
 
@@ -88,8 +91,8 @@ class MapScreen extends Component {
         console.log(map_id_specie);
         if (id_specie != map_id_specie) {
             console.log("SII ");
-            console.log(this.theCurrentRegion);
-            this.setState({ pins: [], region: this.theCurrentRegion, spinner: true });
+            console.log(theCurrentRegion);
+            this.setState({ pins: [], region: theCurrentRegion, spinner: true });
             if (id_specie != 0) {
                 console.log("SI ES DIFERENTE");
                 let query = `${Constants.API_ENCICLOVIDA}v2/especies/${id_specie}`;

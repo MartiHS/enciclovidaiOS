@@ -20,7 +20,7 @@ import { Colors, Fonts } from '../Theme';
 
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
-
+import { useAnimatedRef, useDerivedValue, useSharedValue, scrollTo } from 'react-native-reanimated';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 
@@ -41,8 +41,9 @@ class AboutScreen extends Component {
       spinner: false
     };
 
-    //scrollViewRef = React.createRef();
+    //this.scrollViewRef = React.createRef();
     this.viewPager = React.createRef();
+    this.scrollViewRef = useAnimatedRef();
 
     this.aboutOptions = [
       { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
@@ -135,6 +136,11 @@ class AboutScreen extends Component {
     if (id_specie != about_id_specie) {
       this.restartAboutOptions();
 
+      console.log("this.scrollViewRef");
+      console.log(this.scrollViewRef.current.state);
+      console.log(this.scrollViewRef.current.scrollY);
+      //scrollTo(this.scrollViewRef, 0, scroll.value * (100 + 2 * 10), true)
+      //this.scrollViewRef.current.scrollTo({x: 0, y: 0, animated: true});
       
       this.setState({ imagen: "", contenido_render_array: [], spinner: true });
       if (id_specie !== 0) {

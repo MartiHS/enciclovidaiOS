@@ -144,9 +144,15 @@ class SideMenu extends React.Component {
               <Text/>
             </View>
             <View style = {{width: '100%', padding: 10, backgroundColor: "#E5E5E5"}}>  
-              <Text style={{fontFamily: Fonts.family.base_bold}}>Concurso de fotografía de naturaleza</Text>
+              <View style={{flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
+                <Image style={{width: 70, height: 40, resizeMode: 'contain'}} source={require('../../assets/images/logo_MosaicoNM.png')} />
+                <Text style={{paddingLeft: 10, fontFamily: Fonts.family.base_bold}}>Concurso de fotografía de naturaleza</Text>
+              </View>
               <Text/>
-              <Text style={{fontFamily: Fonts.family.base_bold}}>Concurso de dibujo y pintura para niños y jóvenes</Text>
+              <View style={{flexDirection: 'row', alignContent: 'center', alignItems: 'center', width: '90%'}}>
+                <Image style={{width: 70, height: 40, resizeMode: 'contain'}} source={require('../../assets/images/logo_entreAyV.png')} />
+                <Text style={{paddingLeft: 10, fontFamily: Fonts.family.base_bold}}>Concurso de dibujo y pintura para {'\n'} niños y jóvenes </Text>
+              </View>
             </View>
 
           </View>
@@ -331,15 +337,7 @@ class SideMenu extends React.Component {
 
             <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'biomex', mainModalTitle: 'biodiversidad.gob.mx' })}} underlayColor = {itemUnderlaycolor} >
               <View style = {[styles.row, {  alignItems: 'center'}]} >
-                <Image style={{position: 'relative',
-                  height: '35%',
-                  width: '70%',
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex:-1,
-                  resizeMode: 'cover'}} source={{uri: 'ic_footer_bio'}}
-                />
+                <Image style={{width:'50%', height: '40%', resizeMode: 'contain'}} source={require('../../assets/images/logo_Biomex.png')} />
                 <Text style={{textAlign: 'center', fontSize: Fonts.size.h2, fontFamily: Fonts.family.base_bold, color: '#74783C', top:-6}} >¿Quieres conocer más sobre la naturaleza de México?</Text>
               </View>
             </TouchableHighlight>
@@ -348,9 +346,8 @@ class SideMenu extends React.Component {
 
         </ScrollView>
         
-        <View style={[{flexDirection: 'row', height: '16%', backgroundColor: '#DEE3BA'}]}>
-          <CustomIcon style={{ alignItems:'center', width: '30%', fontSize: 100, color: '#722B2C', bottom: -45  }} name='conabio_vertical_1'></CustomIcon>
-          <CustomIcon style={{ textAlign: 'center', width: '60%', height:'100%', fontSize: 100, color: Colors.gray, left: -10 }} name='conabio_vertical_2'></CustomIcon>
+        <View style={[{flexDirection: 'row', height: '14%', backgroundColor: '#DEE3BA'}]}>
+          <Image style={{width:'100%', height: '90%', top: 0, resizeMode: 'center'}} source={require('../../assets/icons/conabio_horizontal.png')} />
         </View>
         
       </SafeAreaView>
