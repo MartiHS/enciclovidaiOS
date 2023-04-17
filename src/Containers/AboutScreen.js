@@ -20,7 +20,6 @@ import { Colors, Fonts } from '../Theme';
 
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
-import { useAnimatedRef, useDerivedValue, useSharedValue, scrollTo } from 'react-native-reanimated';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 
@@ -43,7 +42,7 @@ class AboutScreen extends Component {
 
     //this.scrollViewRef = React.createRef();
     this.viewPager = React.createRef();
-    this.scrollViewRef = useAnimatedRef();
+    this.scrollViewRef = React.createRef();
 
     this.aboutOptions = [
       { key: 'page_1', title: 'Resumen', value: 'sin_fuente', content: '', loaded: false },
