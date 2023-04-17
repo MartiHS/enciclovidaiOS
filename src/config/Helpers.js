@@ -178,6 +178,9 @@ export default class Helper {
     global.taxonAudios = [];
     global.defaultPhoto = "";
     global.defaultPhoto2 = "";
+
+
+    global.sharedUrl = "";
   }
 
    // Función para aplicar filtros
