@@ -186,6 +186,7 @@ export default styles = StyleSheet.create({
     title_flat:{
         ...Fonts.style.h3,
         fontFamily: Fonts.family.base_bold,
+        textAlign: 'left'
     },
     flat_multiSelect:{
         width:"100%",

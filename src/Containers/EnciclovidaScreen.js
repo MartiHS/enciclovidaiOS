@@ -21,7 +21,7 @@ const EnciclovidaScreen = ()=>{
                 <View style={[stylesEnci.container, stylesEnci.info]}>
                     <Text style={stylesEnci.text}>
                     <Text style={stylesEnci.bold}>EncicloVida</Text> es una plataforma digital que integra información de 
-                    <Text style={stylesEnci.bold}> CONABIO</Text> y la complementa con información de otras fuentes (Norma Oficial Mexicana 059, Lista roja de IUCN, CITES, NaturaLista, Wikipedia, Universidad de Cornell, Jardín Botánico de Misuri).{'\n'}</Text>
+                    <Text style={stylesEnci.bold}> CONABIO</Text> y la complementa con información de otras fuentes (Norma Oficial Mexicana 059, Lista roja de IUCN, CITES, NaturaLista, Wikipedia, Universidad de Cornell, Jardín Botánico de Missouri).{'\n'}</Text>
 
                     <Text style={stylesEnci.rigth}>
                     Participa con fotos: utiliza 
@@ -38,15 +38,15 @@ const EnciclovidaScreen = ()=>{
                     Fotos de las especies provenientes del
                     <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://bdi.conabio.gob.mx/fotoweb')}> Banco de Imágenes de CONABIO</Text>, de
                     <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://www.naturalista.mx/')}> NaturaLista</Text>, de
-                    <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://www.macaulaylibrary.org/')}> Biblioteca Mccaulay</Text> y de lade la  de la Universidad de Cornell.{'\n'}
+                    <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://www.macaulaylibrary.org/')}> Biblioteca Macaulay</Text> y de la  de la Universidad de Cornell.{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Audios: </Text> 
-                    Biblioteca Mccaulay de la Universidad de Cornell y Xeno-canto.{'\n'}
+                    Biblioteca Macaulay de la Universidad de Cornell y Xeno-canto.{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Videos: </Text> 
-                    Biblioteca Mccaulay de la Universidad de Cornell.{'\n'}
+                    Biblioteca Macaulay de la Universidad de Cornell.{'\n'}
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Mapas: </Text> 
@@ -91,7 +91,7 @@ const EnciclovidaScreen = ()=>{
                     </Text>
 
                     <Text style={stylesEnci.text}><Text style={stylesEnci.bold}>Catálogos de CONABIO: </Text>
-                    Información sobre las autoridades de los <Text style={stylesEnci.link}onPress={() => Linking.openURL('http://www.biodiversidad.gob.mx/especies/CAT.html')}>catálogos de nombres científicos</Text>.
+                    Información sobre las autoridades de los <Text style={stylesEnci.link}onPress={() => Linking.openURL('https://www.biodiversidad.gob.mx/especies/CAT')}>catálogos de nombres científicos</Text>.
                     </Text>
 
                 </View>

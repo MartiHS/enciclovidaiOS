@@ -253,11 +253,31 @@ class MediaScreen extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', paddingTop: 10 }}>
-          <Icon2 name="angle-left" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding:10}} />         
-          <Text style={{width:'80%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
-          <Icon2 name="angle-right" color={Colors.blue} style={{width:'10%', alignItems: 'center', justifyContent: 'center', fontSize: Fonts.size.h2, padding: 10, padding: 10}} />   
+          {this._swipeLeft()}        
+          <Text style={{width:'60%', textAlign:'center', fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h2,  color:Colors.blue, padding: 10}}>{data.title}</Text>
+          {this._swipeRight()}
         </View>
         {mediaContent}
+      </View>
+    )
+  }
+
+  _swipeLeft = () => {
+    return (  
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+        <Icon2 name="angle-left" color='#404040' style={{ fontSize: 23, padding:0}} />    
+        <Icon2 name="angle-left" color='#898888' style={{ fontSize: 23, padding:0}} />      
+        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+      </View>
+    )
+  }
+
+  _swipeRight = () => {
+    return (  
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+        <Icon2 name="angle-right" color='#898888' style={{ fontSize: 23, padding:0}} /> 
+        <Icon2 name="angle-right" color='#404040' style={{ fontSize: 23, padding:0}} />         
       </View>
     )
   }

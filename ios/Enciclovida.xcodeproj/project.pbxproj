@@ -15,11 +15,22 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* EnciclovidaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EnciclovidaTests.m */; };
-		6A11CB3E42C04EFB9AC09E12 /* enciclovida_icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80B11CE437E34DD897201ED1 /* enciclovida_icons.ttf */; };
 		6F1C0F3EBD0CFB44B9FA7A62 /* libPods-EnciclovidaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF8E8C2FBD3AC22A247EBF8 /* libPods-EnciclovidaTests.a */; };
 		7396B1539674BB6EC2BBE05D /* libPods-Enciclovida-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250B1D826B061FA948B38A36 /* libPods-Enciclovida-tvOS.a */; };
 		7DFF4F1A647D1732A12E044E /* libPods-Enciclovida.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCBD47CE6119132AA35C82B /* libPods-Enciclovida.a */; };
 		B8CEB1C519AACF0ACB0044A1 /* libPods-Enciclovida-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCD7F1FBDD01C93FEAF43FE /* libPods-Enciclovida-tvOSTests.a */; };
+		CBA1048429FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047829FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf */; };
+		CBA1048529FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047929FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf */; };
+		CBA1048629FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047A29FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf */; };
+		CBA1048729FDFE2500D4B2B3 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047B29FDFE2500D4B2B3 /* TitilliumWeb-ExtraLightItalic.ttf */; };
+		CBA1048829FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047C29FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf */; };
+		CBA1048A29FDFE2500D4B2B3 /* TitilliumWeb-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047E29FDFE2500D4B2B3 /* TitilliumWeb-SemiBold.ttf */; };
+		CBA1048B29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1047F29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf */; };
+		CBA1048C29FDFE2500D4B2B3 /* TitilliumWeb-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048029FDFE2500D4B2B3 /* TitilliumWeb-LightItalic.ttf */; };
+		CBA1048D29FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048129FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf */; };
+		CBA1048E29FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048229FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf */; };
+		CBA1048F29FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */; };
+		CBA1049529FE16C800D4B2B3 /* enciclovida-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +80,6 @@
 		70C4335BE8C9449F832EA34E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		76946D767E904EA7ABC14114 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		7FCBD47CE6119132AA35C82B /* libPods-Enciclovida.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Enciclovida.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		80B11CE437E34DD897201ED1 /* enciclovida_icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = enciclovida_icons.ttf; path = ../assets/fonts/enciclovida_icons.ttf; sourceTree = "<group>"; };
 		845F525F976C42D4B86F3A4F /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		8BB7960264634B4F858D67C9 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		94F908C43DD84519BDD40AD6 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -79,8 +89,18 @@
 		B1ADCB6E146644A38BBDB622 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		BAE2938864A94DACAA062681 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		C21E449F4A024F7DB13ACCBA /* Pods-EnciclovidaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.release.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.release.xcconfig"; sourceTree = "<group>"; };
-		C756F886104D4088A37E03DC /* Sriracha-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Sriracha-Regular.ttf"; path = "../assets/fonts/Sriracha-Regular.ttf"; sourceTree = "<group>"; };
-		D456001F93EB4848AFB65413 /* CaviarDreams.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = CaviarDreams.ttf; path = ../assets/fonts/CaviarDreams.ttf; sourceTree = "<group>"; };
+		CBA1047829FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-ExtraLight.ttf"; sourceTree = "<group>"; };
+		CBA1047929FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Regular.ttf"; sourceTree = "<group>"; };
+		CBA1047A29FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
+		CBA1047B29FDFE2500D4B2B3 /* TitilliumWeb-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		CBA1047C29FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-BoldItalic.ttf"; sourceTree = "<group>"; };
+		CBA1047E29FDFE2500D4B2B3 /* TitilliumWeb-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBold.ttf"; sourceTree = "<group>"; };
+		CBA1047F29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
+		CBA1048029FDFE2500D4B2B3 /* TitilliumWeb-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-LightItalic.ttf"; sourceTree = "<group>"; };
+		CBA1048129FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Black.ttf"; sourceTree = "<group>"; };
+		CBA1048229FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Italic.ttf"; sourceTree = "<group>"; };
+		CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "enciclovida-icons.ttf"; sourceTree = "<group>"; };
 		D75756A6B1BA7EFAAEC9BB65 /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E22C13976D3D4FD4ADB98841 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E76C03E3506A1CE5CBFD463D /* Pods-Enciclovida-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +191,18 @@
 		4185F13E23AF3DCC00B93080 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */,
+				CBA1048129FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf */,
+				CBA1047F29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf */,
+				CBA1047C29FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf */,
+				CBA1047829FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf */,
+				CBA1047B29FDFE2500D4B2B3 /* TitilliumWeb-ExtraLightItalic.ttf */,
+				CBA1048229FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf */,
+				CBA1047A29FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf */,
+				CBA1048029FDFE2500D4B2B3 /* TitilliumWeb-LightItalic.ttf */,
+				CBA1047929FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf */,
+				CBA1047E29FDFE2500D4B2B3 /* TitilliumWeb-SemiBold.ttf */,
+				CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */,
 				9A7F64FBB443492096E694D4 /* AntDesign.ttf */,
 				0F867DBA8E4F4996B22808F6 /* Entypo.ttf */,
 				3A59A3F6D2C64F4D9624F5A5 /* EvilIcons.ttf */,
@@ -187,9 +219,6 @@
 				01EA54FBDC8F4609AA9E1B4F /* Octicons.ttf */,
 				03D525DB829C4BE9BCEC97E4 /* SimpleLineIcons.ttf */,
 				76946D767E904EA7ABC14114 /* Zocial.ttf */,
-				D456001F93EB4848AFB65413 /* CaviarDreams.ttf */,
-				C756F886104D4088A37E03DC /* Sriracha-Regular.ttf */,
-				80B11CE437E34DD897201ED1 /* enciclovida_icons.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -336,6 +365,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 8ES3DNFXJS;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -385,9 +415,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA1049529FE16C800D4B2B3 /* enciclovida-icons.ttf in Resources */,
+				CBA1048629FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf in Resources */,
+				CBA1048529FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				6A11CB3E42C04EFB9AC09E12 /* enciclovida_icons.ttf in Resources */,
+				CBA1048E29FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf in Resources */,
+				CBA1048D29FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf in Resources */,
+				CBA1048B29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf in Resources */,
+				CBA1048F29FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */,
+				CBA1048429FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf in Resources */,
+				CBA1048829FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf in Resources */,
+				CBA1048A29FDFE2500D4B2B3 /* TitilliumWeb-SemiBold.ttf in Resources */,
+				CBA1048C29FDFE2500D4B2B3 /* TitilliumWeb-LightItalic.ttf in Resources */,
+				CBA1048729FDFE2500D4B2B3 /* TitilliumWeb-ExtraLightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=/usr/local/opt/node@16/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		07B6C90806F97B55374023F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -680,6 +721,7 @@
 			baseConfigurationReference = D75756A6B1BA7EFAAEC9BB65 /* Pods-EnciclovidaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8ES3DNFXJS;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -693,7 +735,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovidaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Enciclovida.app/Enciclovida";
 			};
@@ -705,6 +747,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 8ES3DNFXJS;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = EnciclovidaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -714,7 +757,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enciclovidaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Enciclovida.app/Enciclovida";
 			};

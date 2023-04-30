@@ -1368,17 +1368,6 @@ class NavBar extends React.Component {
                     <Text style={styles.title}>Borrar Filtros</Text>
                 </TouchableOpacity>
               </View>
-              <View style={styles.tabSpace}/>
-              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={()=>{this.sendPFDTOUser("Guia")}}>
-                  <Icon3 name="file-pdf-o" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
-                  <Text style={styles.title}>Guía de especies</Text>
-              </TouchableOpacity>
-              <View style={styles.tabSpace}/>
-              <TouchableOpacity style={[styles.dialogButton2, {width: '100%'}]} onPress={this.onShare}>
-                  <Icon3 name="share" color='white' style={[styles.dialogButtonIcon, {fontSize: 15}]} />
-                  <Text style={styles.title}>Compartir búsqueda</Text>
-              </TouchableOpacity>
-
               </ScrollView>
             </DialogContent>
         </Dialog>

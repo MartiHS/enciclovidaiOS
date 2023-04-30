@@ -261,41 +261,97 @@ class ListSpeciesScreen extends Component {
     }
   }
 
-  // Cargar masespecies a nivel nacional
-  loadmore = async () => {
-    this.setState({
-      spinner: true
-    });
-    const filter = global.filtro;
-    const page = this.state.page;
-    //console.log("Se cargarán más...");
-    if (filter != "") { 
-      fetch(`${Constants.API_ENCICLOVIDA}/especies/busqueda/avanzada?nivel=%3D${filter}&pagina=${page}`).then(res => res.json()).then((json) => {
-        arraydata = [];
-        const result = json.taxa.map(data => {
+    // Cargar más especies nivel nacional
+    loadmore2 = async () => {
+
+      this.setState({
+        spinner: true
+      });
+  
+      let filtro = global.gFiltro + global.filtro;
+      let page = this.state.page;
+  
+      console.log("Se hará una nueva búsqueda con FILTROS General: ");
+      console.log(global.gFiltro);
+      console.log("Se hará una nueva búsqueda con FILTROS Secundarios: ");
+      console.log(global.filtro);
+      console.log("La pàgina es: ");
+      console.log(page);
+  
+      let query = `${Constants.API_ENCICLOVIDA}v2/especies/${filtro}&pagina=${page}&por_pagina=50`;
+      
+      console.log("La url es: ");
+      console.log(query);
+
+      fetch(query).then(res => res.json()).then((json) => {
+        
+        console.log("\n\n\n: : : > > > Iterar la lista de resultados obtenidos < < < : : :");
+        const result = json.map(item => {
           return {
-            id: data.IdNombre,
-            imagen: data.foto_principal,
-            title: data.nombre_comun_principal,
-            subtitle: data.NombreCompleto
+            id: item.IdNombre,
+            imagen: item.foto_principal,
+            title: item.nombre_comun_principal,
+            subtitle: item.NombreCompleto,
+            icons: []
           };
         });
-        Array.prototype.push.apply(arraydata, this.state.data);
-        Array.prototype.push.apply(arraydata, result);
-        this.setState({
-          data: arraydata,
-          spinner: false
-        });
+
+        function checkStatus(sresponse) {
+          if (sresponse.ok) {
+              return Promise.resolve(sresponse);
+          } else {
+              return Promise.reject(new Error(sresponse.statusText));
+          }
+        }
+    
+        function parseJSON(sresponse) {
+          return sresponse.json();
+        }
+
+        Promise.all(result.map(item =>
+          fetch(`https://api.enciclovida.mx/v2/autocompleta/especies?q=${encodeURIComponent(item.subtitle)}&cat_principales=false&cat=especie`)
+              .then(checkStatus)
+              .then(parseJSON)
+              .then(data => {
+
+                try {
+                  let lIcons = data.especie[0].data.cons_amb_dist
+                  let listFinalIcons = [];
+        
+                  for (let clave in lIcons){
+                    listFinalIcons.push({"name": clave});
+                  }
+
+                  //console.log("Continuo ");
+                  item.icons = listFinalIcons;
+
+                } catch (e){
+                  console.log(e);
+                }
+
+                return item;
+          }).catch(error => console.log('There was a problem!', error))
+        ))
+        .then(data => {
+              console.log("Continuo con mi desmadre");
+              //console.log(data);
+
+              arraydata = [];
+              Array.prototype.push.apply(arraydata, this.state.data);
+              Array.prototype.push.apply(arraydata, data);
+              
+              console.log("------------------FIN");
+              this.setState({ data: arraydata, spinner: false});
+        })
+        
+        
       }).catch(error => {
+        console.log("ERROR - -- - - - " + error);
         this.setState({
           spinner: false
         });
       });
-    } else {
-      this.setState({
-        spinner: false
-      });
-    }
+
   }
 
   // Cargar más especies por localización
@@ -373,11 +429,6 @@ class ListSpeciesScreen extends Component {
                     this.setState({ data: arraydata, spinner: false});
               })
         
-        
-        this.setState({
-          data: arraydata,
-          spinner: false
-        });
       }).catch(error => {
         this.setState({
           spinner: false
@@ -454,7 +505,7 @@ class ListSpeciesScreen extends Component {
             loadingMore: this.state.page < this.state.total ? true : false
           }),
           () => {
-            this.loadmore();
+            this.loadmore2();
           }
         );
       } else {

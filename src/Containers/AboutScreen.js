@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Alert, ScrollView, BackHandler, Dimensions, findNodeHandle, ImageBackground } from 'react-native';
+import { View, Text, Image, Alert, StyleSheet, Dimensions, findNodeHandle, ImageBackground } from 'react-native';
 import { withNavigation } from "react-navigation";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -21,7 +21,14 @@ import { Colors, Fonts } from '../Theme';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import ListView from 'deprecated-react-native-listview';
 
+const window = Dimensions.get('window');
+
+const AVATAR_SIZE = 120;
+const ROW_HEIGHT = 60;
+const PARALLAX_HEADER_HEIGHT = 350;
+const STICKY_HEADER_HEIGHT = 70;
 
 
 const CustomIcon = createIconSetFromFontello(config);
@@ -37,7 +44,22 @@ class AboutScreen extends Component {
     this.state = {
       imagen: "",
       contenido_render_array: [],
-      spinner: false
+      spinner: false,
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      }).cloneWithRows([
+        'Simplicity Matters',
+        'Hammock Driven Development',
+        'Value of Values',
+        'Are We There Yet?',
+        'The Language of the System',
+        'Design, Composition, and Performance',
+        'Clojure core.async',
+        'The Functional Database',
+        'Deconstructing the Database',
+        'Hammock Driven Development',
+        'Value of Values'
+      ])
     };
 
     //this.scrollViewRef = React.createRef();
@@ -134,7 +156,6 @@ class AboutScreen extends Component {
   async fetchData(id_specie, about_id_specie) {
     if (id_specie != about_id_specie) {
       this.restartAboutOptions();
-
       console.log("this.scrollViewRef");
       console.log(this.scrollViewRef.current.state);
       console.log(this.scrollViewRef.current.scrollY);
@@ -342,8 +363,8 @@ class AboutScreen extends Component {
   render() {
     
     const defaultimage = this.state.imagen == '' ? 'ic_imagen_not_found' : this.state.imagen;
-    const data = ['First Element', 'Second Element'];
- 
+    const { onScroll = () => {} } = this.props;
+    
     return (
       <View style={[styles.mainScreen]}>
         <NavBar menuBlackButton={true} infoButton={true} />
@@ -356,6 +377,75 @@ class AboutScreen extends Component {
 
           <View style={{flex: 1}}>
 
+          <ListView
+            ref="ListView"
+            dataSource={ this.state.dataSource }
+            renderRow={(rowData) => (
+              <View key={rowData} style={ styless.row }>
+                <Text style={ styless.rowText }>
+                  { rowData }
+                </Text>
+              </View>
+            )}
+            renderScrollComponent={props => (
+          <ParallaxScrollView
+            onScroll={onScroll}
+            headerBackgroundColor="#333"
+            stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
+            parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
+            backgroundSpeed={10}
+
+            renderBackground={() => (
+              <View key="background">
+                <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg',
+                                width: window.width,
+                                height: PARALLAX_HEADER_HEIGHT}}/>
+                <View style={{position: 'absolute',
+                              top: 0,
+                              width: window.width,
+                              backgroundColor: 'rgba(0,0,0,.4)',
+                              height: PARALLAX_HEADER_HEIGHT}}/>
+              </View>
+            )}
+
+            renderForeground={() => (
+              <View key="parallax-header" style={ styless.parallaxHeader }>
+                <Image style={ styless.avatar } source={{
+                  uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg',
+                  width: AVATAR_SIZE,
+                  height: AVATAR_SIZE
+                }}/>
+                <Text style={ styless.sectionSpeakerText }>
+                  Talks by Rich Hickey
+                </Text>
+                <Text style={ styless.sectionTitleText }>
+                  CTO of Cognitec, Creator of Clojure
+                </Text>
+              </View>
+            )}
+
+            renderStickyHeader={() => (
+              <View key="sticky-header" style={styless.stickySection}>
+                <Text style={styless.stickySectionText}>Rich Hickey Talks</Text>
+              </View>
+            )}
+
+            renderFixedHeader={() => (
+              <View key="fixed-header" style={styless.fixedSection}>
+                <Text style={styless.fixedSectionText}
+                      onPress={() => this.refs.ListView.scrollTo({ x: 0, y: 0 })}>
+                  Scroll to top
+                </Text>
+              </View>
+            )}/>
+        )}
+      />
+
+
+
+
+
+
             <ParallaxScrollView
               backgroundColor="trasparent"
               contentBackgroundColor="white"
@@ -365,7 +455,8 @@ class AboutScreen extends Component {
               fadeOutForeground={true}
               outputScaleValue={70}
               overScrollMode="never"
-              ref={this.scrollViewRef}
+              //ref={this.scrollViewRef}
+              //
 
               renderForeground={() => (
                 <View ref={ref => this._nodes.set('First Element', 0)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -397,6 +488,7 @@ class AboutScreen extends Component {
                 />
               </View>
             </ParallaxScrollView>
+           
           </View>
 
         </View>
@@ -405,6 +497,74 @@ class AboutScreen extends Component {
     );
   }
 }
+
+
+
+const styless = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black'
+  },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: window.width,
+    height: PARALLAX_HEADER_HEIGHT
+  },
+  stickySection: {
+    height: STICKY_HEADER_HEIGHT,
+    width: 300,
+    justifyContent: 'flex-end'
+  },
+  stickySectionText: {
+    color: 'white',
+    fontSize: 20,
+    margin: 10
+  },
+  fixedSection: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10
+  },
+  fixedSectionText: {
+    color: '#999',
+    fontSize: 20
+  },
+  parallaxHeader: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
+    paddingTop: 100
+  },
+  avatar: {
+    marginBottom: 10,
+    borderRadius: AVATAR_SIZE / 2
+  },
+  sectionSpeakerText: {
+    color: 'white',
+    fontSize: 24,
+    paddingVertical: 5
+  },
+  sectionTitleText: {
+    color: 'white',
+    fontSize: 18,
+    paddingVertical: 5
+  },
+  row: {
+    overflow: 'hidden',
+    paddingHorizontal: 10,
+    height: ROW_HEIGHT,
+    backgroundColor: 'white',
+    borderColor: '#ccc',
+    borderBottomWidth: 1,
+    justifyContent: 'center'
+  },
+  rowText: {
+    fontSize: 20
+  }
+});
+
 
 //make this component available to the app
 export default withNavigation(AboutScreen);
