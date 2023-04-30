@@ -218,6 +218,8 @@ export default styles = StyleSheet.create({
         height: 115,
         borderColor: Colors.gray,
         marginBottom: 10,
+        borderWidth: 2,
+        borderColor: "#CACACA",
         padding: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -237,7 +239,8 @@ export default styles = StyleSheet.create({
         borderColor: Colors.gray,
         marginBottom: 10,
         padding: 10,
-        shadowColor: "#000",
+        borderWidth: 2,
+        borderColor: "#CACACA",
         shadowOffset: {
             width: 0,
             height: 2,

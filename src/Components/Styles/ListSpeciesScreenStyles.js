@@ -32,7 +32,7 @@ export default StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomEndRadius: 20,
     // Sobreado
-    shadowColor: "#000",
+    shadowColor: Colors.grayTransparent,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 10,
@@ -129,7 +129,8 @@ export default StyleSheet.create({
     fontWeight: 'normal',
     justifyContent: 'flex-start',
     fontStyle: 'italic',
-    paddingBottom: 10
+    paddingBottom: 10,
+    color: Colors.gray
   },
   btnfooter: {
     padding: 10,

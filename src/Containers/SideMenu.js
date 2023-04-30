@@ -1,9 +1,9 @@
 import React from "react";
 import {View, Text, ScrollView, TouchableOpacity, SafeAreaView, StatusBar, Image, ImageBackground, TouchableHighlight, Linking} from "react-native";
-import {createIconSetFromFontello} from "react-native-vector-icons";
+
 import {withNavigation} from "react-navigation";
-import Icon from 'react-native-vector-icons/Ionicons';
-import config from "../Theme/Fonts/config"
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import styles from "../Components/Styles/SideMenuStyles";
 import { Colors, Fonts, Metrics } from "../Theme";
 
@@ -14,8 +14,9 @@ import EnciclovidaScreen from "./EnciclovidaScreen";
 import Helper from '../Config/Helpers';
 import Listas from '../Config/Listas';
 
-const CustomIcon = createIconSetFromFontello(config);
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'; 
+
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
 
 var nav_dispatch = null;
 
@@ -100,6 +101,28 @@ class SideMenu extends React.Component {
     navigation.closeDrawer();
   };
 
+  iosEnciclovidaIcon = () => {
+    return(
+        <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', height: 70}}> 
+            <View>
+                <CustomAppIcon style={{fontSize:50, marginBottom:-50, color: Colors.blue, width: 150}} name='enciclo'></CustomAppIcon>
+                <CustomAppIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomAppIcon>
+            </View>
+        </View>
+    )
+  }; 
+
+  androidEnciclovidaIcon = () => {
+      return(
+          <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', height: 70}}> 
+              <View>
+                  <CustomAppIcon style={{fontSize:50, marginBottom:-67, color: Colors.blue, width: 150}} name='enciclo'></CustomAppIcon>
+                  <CustomAppIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomAppIcon>
+              </View>
+          </View>
+      )
+  }; 
+
   biomexContentModal = () => {
     return(
 
@@ -175,12 +198,11 @@ class SideMenu extends React.Component {
           <View style = {{width: '80%', height: '20%', padding: 10, backgroundColor: "white", borderTopLeftRadius: 10, borderTopRightRadius: 10, top: -30}}>  
             <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', }}> 
                 <View>
-                    <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
-                    <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
+                  {(Platform.OS === 'android') ?  this.androidEnciclovidaIcon() : this.iosEnciclovidaIcon()}
                 </View>
             </View>
           </View>
-          <ScrollView style={{top: -70, marginBottom: -60}}>
+          <ScrollView style={{top: -60, marginBottom: -60}}>
             {EnciclovidaScreen()}
           </ScrollView>
       </View> 
@@ -205,10 +227,10 @@ class SideMenu extends React.Component {
           
           <View style={{backgroundColor: 'white', height: 'auto'}}>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <CustomIcon style={{fontSize: 45, color: '#8F572E', top:-6}} name='naturalista'></CustomIcon>
-              <CustomIcon style={{fontSize: 30, bottom: -12, left: -25, color: '#74783C' }} name='naturalista-2'></CustomIcon>
-              <CustomIcon style={{fontSize: 80, top: -18, left: -10, color: '#74783C' }} name='naturalista-3'></CustomIcon>
-              <CustomIcon style={{fontSize: 50, top: 0, left: -8, color: '#8F572E' }} name='naturalista-4'></CustomIcon>
+              <CustomAppIcon style={{fontSize: 45, color: '#8F572E', top:-6}} name='naturalista'></CustomAppIcon>
+              <CustomAppIcon style={{fontSize: 30, bottom: -12, left: -25, color: '#74783C' }} name='naturalista-2'></CustomAppIcon>
+              <CustomAppIcon style={{fontSize: 80, top: -18, left: -10, color: '#74783C' }} name='naturalista-3'></CustomAppIcon>
+              <CustomAppIcon style={{fontSize: 50, top: 0, left: -8, color: '#8F572E' }} name='naturalista-4'></CustomAppIcon>
             </View>
             <Text style={{ fontSize: 14, fontFamily: Fonts.family.base_bold, top: -40, textAlign:'right', width: '100%', color: 'gray' }} onPress={() => Linking.openURL('https://www.naturalista.mx')}>www.naturalista.mx</Text>
           </View>
@@ -295,13 +317,13 @@ class SideMenu extends React.Component {
           
           <View style = {{ backgroundColor: 'transparent' }} >
             <TouchableHighlight style = {[styles.touchmenu]} onPress = {this.closeMenu} >
-              <Icon name="ios-menu"  size = {25} color = "white" style = {[styles.favicon, styles.pt_10]} />
+              <Icon name="menu"  size = {25} color = "white" style = {[styles.favicon, styles.pt_10]} />
             </TouchableHighlight>
           </View>
 
           <TouchableHighlight onPress = {this.goToHome} style = { [styles.menuItem] } >
             <View style = {styles.row2} >
-              <Icon name="ios-home" size = {25} color = "white" style = {styles.favicon }></Icon>
+              <Icon name="home" size = {25} color = "white" style = {styles.favicon }></Icon>
               <Text style = {[styles.title, {top: 10, color: 'white', fontSize: 20, fontWeight: '800'}]} > Inicio </Text>
             </View>
           </TouchableHighlight>
@@ -315,7 +337,7 @@ class SideMenu extends React.Component {
           
           <TouchableHighlight onPress = {this.goToSymbology} style = {[styles.menuItem, {alignItems: 'flex-start'}]} underlayColor = {itemUnderlaycolor} >
             <View style = {[styles.row, {flexDirection: 'row'}]} >
-              <CustomIcon style={{fontSize: 28, color: 'white' }} name='enciclovida'></CustomIcon>
+              <CustomAppIcon style={{fontSize: 28, color: 'white' }} name='enciclovida'></CustomAppIcon>
               <Text style = {[styles.title, {top: 10, marginLeft: 10, fontSize: 16, fontWeight: '800', marginRight: 10 }]} > Simbología </Text>
             </View>
           </TouchableHighlight> 
@@ -326,8 +348,8 @@ class SideMenu extends React.Component {
             <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'naturalista', mainModalTitle: 'naturalista.mx' })}} underlayColor = {itemUnderlaycolor} >
               <View style = {[styles.row, {alignItems: 'center'}]} >
                 <View style={{flexDirection: 'row'}}>
-                  <CustomIcon style={{fontSize: 45, color: '#8F572E', top:-6}} name='naturalista'></CustomIcon>
-                  <CustomIcon style={{fontSize: 30, bottom: -12, left: -25, color: '#74783C' }} name='naturalista-2'></CustomIcon>
+                  <CustomAppIcon style={{fontSize: 45, color: '#8F572E', top:-6}} name='naturalista'></CustomAppIcon>
+                  <CustomAppIcon style={{fontSize: 30, bottom: -12, left: -25, color: '#74783C' }} name='naturalista-2'></CustomAppIcon>
                 </View>
                 <Text style={{textAlign: 'center', fontSize: Fonts.size.h2, fontFamily: Fonts.family.base_bold, color: '#74783C', top:-6}} >¿Quieres contribuir al conocimiento de la Biodiversidad en México?</Text>
               </View>

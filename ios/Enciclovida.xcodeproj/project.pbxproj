@@ -31,6 +31,7 @@
 		CBA1048E29FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048229FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf */; };
 		CBA1048F29FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */; };
 		CBA1049529FE16C800D4B2B3 /* enciclovida-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */; };
+		CBA1049929FE24DE00D4B2B3 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1049829FE24DE00D4B2B3 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		CBA1048229FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Italic.ttf"; sourceTree = "<group>"; };
 		CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "enciclovida-icons.ttf"; sourceTree = "<group>"; };
+		CBA1049829FE24DE00D4B2B3 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 		D75756A6B1BA7EFAAEC9BB65 /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E22C13976D3D4FD4ADB98841 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E76C03E3506A1CE5CBFD463D /* Pods-Enciclovida-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		4185F13E23AF3DCC00B93080 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CBA1049829FE24DE00D4B2B3 /* icomoon.ttf */,
 				CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */,
 				CBA1048129FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf */,
 				CBA1047F29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf */,
@@ -415,6 +418,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA1049929FE24DE00D4B2B3 /* icomoon.ttf in Resources */,
 				CBA1049529FE16C800D4B2B3 /* enciclovida-icons.ttf in Resources */,
 				CBA1048629FDFE2500D4B2B3 /* TitilliumWeb-Light.ttf in Resources */,
 				CBA1048529FDFE2500D4B2B3 /* TitilliumWeb-Regular.ttf in Resources */,

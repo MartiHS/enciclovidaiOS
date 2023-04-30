@@ -9,11 +9,9 @@ import Constants from '../Config/Constants';
 import {Colors, Fonts} from "../Theme/";
 
 import DialogInput from 'react-native-dialog-input';
-
 import Icon3 from 'react-native-vector-icons/FontAwesome';
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config";
-const CustomIcon = createIconSetFromFontello(config);
+
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
 
 var arraydata = [];
 // create a component
@@ -690,7 +688,7 @@ class ListSpeciesScreen extends Component {
         style = {styles.flatIconList} 
         data={filtrosICONAplicados}
         renderItem={({ item }) => (
-            item.icon == "-" ? this.createHIcon(item.name) : <CustomIcon onPress={() => { alert(item.name) }} style={[styles.filterHIcon, { color: Colors[item.icon]}]} name={item.icon}></CustomIcon>
+            item.icon == "-" ? this.createHIcon(item.name) : <CustomAppIcon onPress={() => { alert(item.name) }} style={[styles.filterHIcon, { color: Colors[item.icon]}]} name={item.icon}></CustomAppIcon>
         )}
         horizontal={true}
         keyExtractor={(item, index) => index}
@@ -750,7 +748,6 @@ class ListSpeciesScreen extends Component {
             
           </View>
           <FlatList
-            style = {{height: '80%'}} 
             data={this.state.data}
             extraData={this.state}
             keyExtractor={(item) => item.id.toString()}
@@ -769,7 +766,7 @@ class ListSpeciesScreen extends Component {
                       style = {styles.flatIconList} 
                       data={item.icons}
                       renderItem={({ item }) => (
-                        <CustomIcon style={[styles.filterHIcon, { color: Colors[item.name]}]} name={item.name}></CustomIcon>
+                        <CustomAppIcon style={[styles.filterHIcon, { color: Colors[item.name]}]} name={item.name}></CustomAppIcon>
                       )}
                       horizontal={true}
                       keyExtractor={(item, index) => index}

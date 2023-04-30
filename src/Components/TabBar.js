@@ -4,6 +4,7 @@ import { withNavigation } from "react-navigation";
 
 import styles from "./Styles/TabBarStyles";
 const tabRoutes=["About", "Media", "Classification", "Map"];
+
 class TabBar extends React.Component {
   
   navigate({route}){

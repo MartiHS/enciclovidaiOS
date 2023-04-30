@@ -8,9 +8,7 @@ import TabBar from "../Components/TabBar";
 import styles from "../Components/Styles/SymbologyScreenStyle";
 import { Colors, Fonts } from '../Theme';
 
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config";
-const CustomIcon = createIconSetFromFontello(config);
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
 
 const InfoArray = {
     10: {name: "Exótica", iconFont: 'exotica', icon:"ic_10",title: "Tipo de distribución", order: 1},
@@ -55,19 +53,19 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[16]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[16]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[16]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[16]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[16]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[14]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[14]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[14]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[14]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[14]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[15]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[15]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[15]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[15]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[15]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[17]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[17]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[17]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[17]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[17]['name']}</Text>
                             </View>
                         </View>
@@ -78,23 +76,23 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[25]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[25]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[25]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[25]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[17]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[26]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[26]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[26]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[26]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[17]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[27]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[27]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[27]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[27]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[27]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[28]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[28]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[28]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[28]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[28]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[29]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[29]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[29]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[29]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[29]['name']}</Text>
                             </View>
                             
@@ -105,19 +103,19 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[3]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[3]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[3]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[3]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[3]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[7]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[7]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[7]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[7]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[7]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[10]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[10]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[10]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[10]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[10]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[6]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[6]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[6]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[6]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[6]['name']}</Text>
                             </View>
                         </View>
@@ -127,15 +125,15 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[1033]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1033]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[1033]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1033]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1033]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[1034]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1034]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[1034]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1034]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1034]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[1035]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1035]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[1035]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1035]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1035]['name']}</Text>
                             </View>
                         </View>
@@ -145,15 +143,15 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[22]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[22]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[22]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[22]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[22]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[23]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[23]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[23]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[23]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[23]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                                <CustomIcon name={InfoArray[24]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[24]['iconFont']] }]}></CustomIcon>
+                                <CustomAppIcon name={InfoArray[24]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[24]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[24]['name']}</Text>
                             </View>
                         </View>
@@ -163,19 +161,19 @@ class SymbologyScreen extends Component {
                         </View>
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
-                            <CustomIcon name={InfoArray[1026]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1026]['iconFont']] }]}></CustomIcon>
+                            <CustomAppIcon name={InfoArray[1026]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1026]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1026]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                            <CustomIcon name={InfoArray[1025]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1025]['iconFont']] }]}></CustomIcon>
+                            <CustomAppIcon name={InfoArray[1025]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1025]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1025]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                            <CustomIcon name={InfoArray[1024]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1024]['iconFont']] }]}></CustomIcon>
+                            <CustomAppIcon name={InfoArray[1024]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1024]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1024]['name']}</Text>
                             </View>
                             <View style={styles.element}>
-                            <CustomIcon name={InfoArray[1027]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1027]['iconFont']] }]}></CustomIcon>
+                            <CustomAppIcon name={InfoArray[1027]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[1027]['iconFont']] }]}></CustomAppIcon>
                                 <Text style={styles.text_element}>{InfoArray[1027]['name']}</Text>
                             </View>
                         </View>

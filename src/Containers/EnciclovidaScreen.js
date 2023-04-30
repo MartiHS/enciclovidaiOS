@@ -6,10 +6,7 @@ import { withNavigation } from "react-navigation";
 import NavBar from '../Components/NavBar';
 import TabBar from "../Components/TabBar";
 
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config.json"
 import { Fonts, Colors } from '../Theme';
-const CustomIcon = createIconSetFromFontello(config);
 
 import stylesEnci from "../Components/Styles/EnciclovidaScreenStyles";
 

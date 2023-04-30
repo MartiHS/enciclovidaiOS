@@ -3,20 +3,13 @@ import { View, Image, TouchableOpacity, Text, Keyboard, Alert, StyleSheet } from
 
 import Autocomplete from 'react-native-autocomplete-input';
 import { withNavigation } from "react-navigation";
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import RNImageVideoGridViewer from "@leafletui/rn-image-video-grid-viewer";
 
 import NavBar from '../Components/NavBar'; 
 import styles from "../Components/Styles/HomeScreenStyles";
 import Constants from '../Config/Constants';
-
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config.json"
-const CustomIcon = createIconSetFromFontello(config);
-
-import { Fonts, Colors } from '../Theme';
-
 
 var arraydata = [];
 
@@ -164,7 +157,7 @@ class HomeScreen extends Component {
                     </View>
                     <View style={styles.view}>
                         <View style={{height:46, width: '90%'}}>
-                            <Icon name="ios-search" style={styles.customSearchIcon} />
+                            <Icon name="search" style={styles.customSearchIcon} />
                             <Autocomplete
                                 style={styles.autocomplete}
                                 autoCapitalize="none"
@@ -194,9 +187,9 @@ class HomeScreen extends Component {
                                 )}
                             />
                         </View>
-                        <View style={{/*borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '10%'}}>
+                        <View style={{/*borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */color: 'gray', height: 45, width: '11%'}}>
                             <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
-                                <Icon name="ios-close" style={styles.customClearIcon} />
+                                <Icon name="close" style={styles.customClearIcon} />
                             </TouchableOpacity>
                         </View>
                     </View>

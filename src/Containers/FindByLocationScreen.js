@@ -14,12 +14,11 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config.json"
 import { Fonts, Colors } from '../Theme';
 import Listas from '../Config/Listas';
 
-const CustomIcon = createIconSetFromFontello(config);
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
+
 
 var arraydata = []; 
 
@@ -388,8 +387,8 @@ class HomeScreen extends Component {
 
                     <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:60, zIndex: -10, padding: 10, width: '100%', }}> 
                         <View>
-                            <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
-                            <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
+                            <CustomAppIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomAppIcon>
+                            <CustomAppIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomAppIcon>
                         </View>
                     </View>
                     

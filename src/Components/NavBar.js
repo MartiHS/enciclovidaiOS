@@ -1,9 +1,8 @@
 //import liraries
 import React from 'react';
 import { Share, View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking, StatusBar } from 'react-native';
-import { createIconSetFromFontello } from "react-native-vector-icons";
 import { withNavigation } from "react-navigation";
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/SimpleLineIcons';
@@ -14,7 +13,7 @@ import styles from "./Styles/NavBarStyle";
 import stylesAUCOM from "../Components/Styles/HomeScreenStyles";
 import stylesByL from "../Components/Styles/FindByLocationStyles";
 
-import config from "../Theme/Fonts/config";
+
 import MultiSelect from 'react-native-multiple-select';
 import { Colors, Fonts } from '../Theme';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -23,10 +22,7 @@ import DialogInput from 'react-native-dialog-input';
 
 import Listas from '../Config/Listas';
 
-
-
-import Dialogs from "../Config/Helpers2"
-const CustomIcon = createIconSetFromFontello(config);
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
 
 var arraydata = [];
 
@@ -116,7 +112,7 @@ class NavBar extends React.Component {
     const iconColor= menuLightButton? "#304E5B" : "#FFF";
     return(
       <TouchableOpacity style={styles.touchmenu} onPress={this.displayDrawerMenu}>
-        <Icon name="ios-menu" size={25} color={iconColor} style={styles.faviconmenu} />
+        <Icon name="menu" size={25} color={iconColor} style={styles.faviconmenu} />
       </TouchableOpacity>
     ) 
     };
@@ -145,10 +141,10 @@ class NavBar extends React.Component {
         return(
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity style={{paddingRight: 10, paddingLeft: 5}} onPress={this.showFilterBYLDialog} >
-              <CustomIcon name="region" style={styles.favIcon2}></CustomIcon>
+              <CustomAppIcon name="region" style={styles.favIcon2}></CustomAppIcon>
             </TouchableOpacity>
             <TouchableOpacity style={{}} onPress={this.showFilterDialog} >
-              <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
+              <CustomAppIcon name="avanzada" style={styles.favIcon2}></CustomAppIcon>
             </TouchableOpacity>
           </View>
         );
@@ -156,7 +152,7 @@ class NavBar extends React.Component {
         return(
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity style={{}} onPress={this.showFilterDialog} >
-              <CustomIcon name="avanzada" style={styles.favIcon2}></CustomIcon>
+              <CustomAppIcon name="avanzada" style={styles.favIcon2}></CustomAppIcon>
             </TouchableOpacity>
           </View>
         );
@@ -332,7 +328,7 @@ class NavBar extends React.Component {
         <Text style={[styles.items, styles.itemsdetails]}>{content}</Text>
         {!last && <View style={styles.tabLine} />}
         <View style={[styles.image, last ? styles.imagelast : null ]}>
-          <CustomIcon name={iconFont} style={[styles.iconImage, { color: Colors[iconFont] }]}></CustomIcon>  
+          <CustomAppIcon name={iconFont} style={[styles.iconImage, { color: Colors[iconFont] }]}></CustomAppIcon>  
         </View>
       </View>
     )
@@ -797,7 +793,7 @@ class NavBar extends React.Component {
           </View> 
           <View style={{/* borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '15%'}}>
               <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
-                  <Icon name="ios-close" style={stylesAUCOM.customClearIcon} />
+                  <Icon name="close" style={stylesAUCOM.customClearIcon} />
               </TouchableOpacity>
           </View>
         </View>
@@ -900,7 +896,7 @@ class NavBar extends React.Component {
           renderItem={({ item }) => (
             <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
               <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-              <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+              <CustomAppIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomAppIcon>
                 <Text style={styles.view_text}>{item.name}</Text>
               </TouchableOpacity>
             </View>
@@ -920,7 +916,7 @@ class NavBar extends React.Component {
           renderItem={({ item }) => (
             <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
               <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                <CustomIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomIcon>
+                <CustomAppIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomAppIcon>
                 <Text style={styles.view_text}>{item.name}</Text>
               </TouchableOpacity>
             </View>
@@ -1344,7 +1340,7 @@ class NavBar extends React.Component {
                       <Text style={[styles.title_flat, {color: 'white'}]}>Avanzada</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.dialogRight, {backgroundColor:Colors.blue}]} onPress={()=>{this.changeFiltersType('XEspecie')}}>
-                      <CustomIcon name="animalia" color='white' style={styles.dialogButtonIcon} />
+                      <CustomAppIcon name="animalia" color='white' style={styles.dialogButtonIcon} />
                       <Text style={[styles.title_flat, {color: 'white'}]}>Por especie</Text>
                     </TouchableOpacity>
                   </View>
@@ -1398,7 +1394,7 @@ class NavBar extends React.Component {
                   </View>
                   <View style={{flexDirection: "row", width: "100%", paddingLeft: 10, justifyContent: 'flex-start',}}>
                     <TouchableOpacity style={[styles.dialogRounded, {backgroundColor:Colors.blue}]} onPress={()=>{this.changeFiltersType('XEspecie')}}>
-                      <CustomIcon name="region" color='white' style={styles.dialogButtonIcon} />
+                      <CustomAppIcon name="region" color='white' style={styles.dialogButtonIcon} />
                       <Text style={[styles.title_flat, {color: 'white'}]}>Buscar por region</Text>
                     </TouchableOpacity>
                   </View>

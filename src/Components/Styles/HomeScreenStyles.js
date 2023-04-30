@@ -165,10 +165,10 @@ export default StyleSheet.create({
   customClearIcon: {
     //position: "absolute",
     //zIndex: 2,
-    //top: 10,
+    top: 5,
     //left: 320,
-    fontSize: 25,
-    padding: 10,
+    fontSize: 20,
+    padding: 8,
     color: Colors.gray,
     //backgroundColor: 'red'
   },

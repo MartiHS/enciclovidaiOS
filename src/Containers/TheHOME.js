@@ -6,18 +6,17 @@ import NavBar from '../Components/NavBar';
 import styles from "../Components/Styles/FindByLocationStyles";
 import Constants from '../Config/Constants';
 
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
-import { createIconSetFromFontello } from "react-native-vector-icons";
-import config from "../Theme/Fonts/config.json"
 import { Fonts, Colors } from '../Theme';
-const CustomIcon = createIconSetFromFontello(config);
 
 import Geolocation from 'react-native-geolocation-service';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 import Listas from '../Config/Listas';
 import Helper from '../Config/Helpers';
+
+import { CustomAppIcon } from '../Theme/Fonts/Custom.App.Icon';
 
 const listsParams = {
     SpeciesRisk: {
@@ -202,16 +201,31 @@ class HomeScreen extends Component {
         }
     }
 
+    iosEnciclovidaIcon = () => {
+        return(
+            <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', height: 70}}> 
+                <View>
+                    <CustomAppIcon style={{fontSize:50, marginBottom:-50, color: Colors.blue, width: 150}} name='enciclo'></CustomAppIcon>
+                    <CustomAppIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomAppIcon>
+                </View>
+            </View>
+        )
+    }; 
+
+    androidEnciclovidaIcon = () => {
+        return(
+            <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', height: 70}}> 
+                <View>
+                    <CustomAppIcon style={{fontSize:50, marginBottom:-67, color: Colors.blue, width: 150}} name='enciclo'></CustomAppIcon>
+                    <CustomAppIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomAppIcon>
+                </View>
+            </View>
+        )
+    }; 
+
     footer = () => {
         if(this.state.show){
-            return(
-                <View style= {{flexDirection: 'row', bottom: 0, justifyContent: "center", paddingTop:10, padding: 10, width: '100%', }}> 
-                    <View>
-                        <CustomIcon style={{fontSize:50, marginBottom:-60, color: Colors.blue, width: 150}} name='enciclo'></CustomIcon>
-                        <CustomIcon style={{fontSize:50, color: 'rgba(140, 154, 81, 1)', width: 150}} name='vida'></CustomIcon>
-                    </View>
-                </View>
-            )
+            return((Platform.OS === 'android') ?  this.androidEnciclovidaIcon() : this.iosEnciclovidaIcon());
         }
         else { 
             return(
@@ -247,7 +261,7 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomIcon style={styles.textHOMEButtonIcon} name='grupo-iconico'></CustomIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='grupo-iconico'></CustomAppIcon>
                                     <Text style={styles.textHOMEButton}>Especies</Text>
                                 </View>
                             </View>
@@ -292,7 +306,7 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <Icon2 name="crosshairs-gps" style={styles.textHOMEButtonIcon}></Icon2>
+                                    <Icon2 name="gps-fixed" style={styles.textHOMEButtonIcon}></Icon2>
                                     <Text style={styles.textHOMEButton}>Por tu ubicación</Text>
                                 </View>
                             </View>
@@ -312,7 +326,7 @@ class HomeScreen extends Component {
                                     />
                                 </View>
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomIcon style={styles.textHOMEButtonIcon} name='endemica'></CustomIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='endemica'></CustomAppIcon>
                                     <Text style={styles.textHOMEButton}>Endémicas</Text>
                                 </View>
                             </View>
@@ -328,7 +342,8 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomIcon style={styles.textHOMEButtonIcon} name='en-riesgo'></CustomIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='en-riesgo'></CustomAppIcon>
+                                    
                                     <Text style={styles.textHOMEButton}>En riesgo</Text>
                                 </View>
                             </View>
@@ -349,7 +364,7 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomAppIcon>
                                     <Text style={styles.textHOMEButton}>Usos y agrobiodiversidad</Text>
                                 </View>
                             </View>
@@ -365,7 +380,7 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomAppIcon>
                                     <Text style={styles.textHOMEButton}>Exóticas invasoras</Text>
                                 </View>
                             </View>
