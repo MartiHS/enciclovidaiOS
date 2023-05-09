@@ -77,11 +77,11 @@ class SymbologyScreen extends Component {
                         <View style={styles.viewelement}>
                             <View style={styles.element}>
                                 <CustomAppIcon name={InfoArray[25]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[25]['iconFont']] }]}></CustomAppIcon>
-                                <Text style={styles.text_element}>{InfoArray[17]['name']}</Text>
+                                <Text style={styles.text_element}>{InfoArray[25]['name']}</Text>
                             </View>
                             <View style={styles.element}>
                                 <CustomAppIcon name={InfoArray[26]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[26]['iconFont']] }]}></CustomAppIcon>
-                                <Text style={styles.text_element}>{InfoArray[17]['name']}</Text>
+                                <Text style={styles.text_element}>{InfoArray[26]['name']}</Text>
                             </View>
                             <View style={styles.element}>
                                 <CustomAppIcon name={InfoArray[27]['iconFont']} style={[styles.iconImage, { color: Colors[InfoArray[27]['iconFont']] }]}></CustomAppIcon>

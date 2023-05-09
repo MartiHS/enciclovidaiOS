@@ -63,7 +63,7 @@ const Listas = {
         {id: 22647, name: "Reptiles", img_icon: "ic_ga_reptiles", icon: 'reptilia',  order: 3, selected: false},
         {id: 22654, name: "Anfibios", img_icon: "ic_ga_anfibios", icon: 'amphibia',  order: 4, selected: false},
         {id: 213482, name: "Peces con aletas radiadas", img_icon: "ic_ga_peces", icon: 'actinopterygii',  order: 5, selected: false},
-        {id: 22987, name: "Lampreas", img_icon: "ic_ga_lamprea", icon: 'petomyzontidae',  order: 6, selected: false},
+        {id: 22987, name: "Lampreas", img_icon: "ic_ga_lamprea", icon: 'petromyzontidae',  order: 6, selected: false},
         {id: 22651, name: "Peces bruja	", img_icon: "ic_ga_peces_bruja", icon: 'myxini',  order: 7, selected: false},
         {id: 22650, name: "Tiburones y rayas", img_icon: "ic_ga_tiburones", icon: 'chondrichthyes',  order: 8, selected: false},
         {id: 66500, name: "Arañas, alacranes y parientes", img_icon: "ic_ga_alacranes", icon: 'arachnida',  order: 9, selected: false},

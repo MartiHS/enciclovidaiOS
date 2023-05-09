@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground, View, FlatList, Image, Text, TouchableOpacity, BackHandler, Button, TouchableHighlight, Dimensions } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { SafeAreaView, withNavigation } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ImageView from 'react-native-image-view';
 
@@ -17,6 +17,7 @@ import { WebView } from 'react-native-webview';
 import Modal from "react-native-modal";
 
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'; 
 
 import Helper from '../Config/Helpers';
 import { Colors, Fonts } from '../Theme';
@@ -265,9 +266,7 @@ class MediaScreen extends Component {
   _swipeLeft = () => {
     return (  
       <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Icon2 name="angle-left" color='#404040' style={{ fontSize: 23, padding:0}} />    
-        <Icon2 name="angle-left" color='#898888' style={{ fontSize: 23, padding:0}} />      
-        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+       
       </View>
     )
   }
@@ -275,9 +274,9 @@ class MediaScreen extends Component {
   _swipeRight = () => {
     return (  
       <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
-        <Icon2 name="angle-right" color='#898888' style={{ fontSize: 23, padding:0}} /> 
-        <Icon2 name="angle-right" color='#404040' style={{ fontSize: 23, padding:0}} />         
+        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+        <Icon3 name="gesture-swipe-horizontal" color={Colors.blue} style={{ fontSize: 30, padding:0}} /> 
+        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />         
       </View>
     )
   }
@@ -327,7 +326,7 @@ class MediaScreen extends Component {
           />
           <Modal 
             animationInTiming={400} 
-            coverScreen={true}
+            coverScreen={false}
             isVisible={modalVisible} 
             hasBackdrop={true}
             backdropColor={'black'}
@@ -368,12 +367,9 @@ class MediaScreen extends Component {
             coverScreen={false}
             isVisible={modalAudioVisible} 
             hasBackdrop={true}
-            //deviceHeight={10000}
             animationIn={'zoomInUp'}
             backdropColor={'black'}
             backdropOpacity={0.7}
-            //deviceHeight={10}
-            // Caundo presionamos fuera
             onBackdropPress={() => {
                 this.setState({modalAudioVisible: !modalAudioVisible});
                 try {

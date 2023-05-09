@@ -364,7 +364,7 @@ class HomeScreen extends Component {
                                 </View>
 
                                 <View style={styles.textHOMEButtonContainer}>
-                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='exotica-invasora'></CustomAppIcon>
+                                    <CustomAppIcon style={styles.textHOMEButtonIcon} name='usos'></CustomAppIcon>
                                     <Text style={styles.textHOMEButton}>Usos y agrobiodiversidad</Text>
                                 </View>
                             </View>

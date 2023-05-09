@@ -18,6 +18,7 @@ import { ViewPager } from 'react-native-viewpager-carousel'
 import { Colors, Fonts } from '../Theme';
 
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'; 
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
@@ -130,13 +131,8 @@ class AboutScreen extends Component {
   async fetchData(id_specie, about_id_specie) {
     if (id_specie != about_id_specie) {
       this.restartAboutOptions();
-
-      console.log("this.scrollViewRef");
-      console.log(this.scrollViewRef.current.state);
-      console.log(this.scrollViewRef.current.scrollY);
-      //scrollTo(this.scrollViewRef, 0, scroll.value * (100 + 2 * 10), true)
-      //this.scrollViewRef.current.scrollTo({x: 0, y: 0, animated: true});
       
+    
       this.setState({ imagen: "", contenido_render_array: [], spinner: true });
       if (id_specie !== 0) {
         console.log("FETCH - LLAMADA A FOTOS Y RESUMEN");
@@ -248,20 +244,17 @@ class AboutScreen extends Component {
 
   _swipeLeft = () => {
     return (  
-      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Icon2 name="angle-left" color='#404040' style={{ fontSize: 23, padding:0}} />    
-        <Icon2 name="angle-left" color='#898888' style={{ fontSize: 23, padding:0}} />      
-        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>   
+        <Icon2 name="angle-left" color='#A1A39A' style={{ fontSize: 23, padding:0}} />     
       </View>
     )
   }
 
   _swipeRight = () => {
     return (  
-      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
-        <Icon2 name="angle-right" color='#898888' style={{ fontSize: 23, padding:0}} /> 
-        <Icon2 name="angle-right" color='#404040' style={{ fontSize: 23, padding:0}} />         
+      <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>  
+        <Icon3 name="gesture-swipe" color={Colors.green} style={{ fontSize: 30, padding:0}} /> 
+        <Icon2 name="angle-right" color='#A1A39A' style={{ fontSize: 23, padding:0}} />         
       </View>
     )
   }
@@ -289,8 +282,9 @@ class AboutScreen extends Component {
           //source={ { html: this.state.resumen_HTML} } 
           source={ { html: data.content} } 
           scalesPageToFit={false}
-          viewportContent={'width=device-width, user-scalable=no'}
+          viewportContent={'width=device-width, user-scalable=yes'}
           showsVerticalScrollIndicator={true}
+          scrollEnabled={false}
         />
 
      </View>
@@ -338,7 +332,6 @@ class AboutScreen extends Component {
   render() {
     
     const defaultimage = this.state.imagen == '' ? 'ic_imagen_not_found' : this.state.imagen;
-    const data = ['First Element', 'Second Element'];
  
     return (
       <View style={[styles.mainScreen]}>
@@ -362,9 +355,8 @@ class AboutScreen extends Component {
               outputScaleValue={70}
               overScrollMode="never"
               ref={this.scrollViewRef}
-
               renderForeground={() => (
-                <View ref={ref => this._nodes.set('First Element', 0)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                  
                  { 
                   defaultimage == 'ic_imagen_not_found' 

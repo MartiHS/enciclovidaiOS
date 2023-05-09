@@ -691,7 +691,7 @@ class NavBar extends React.Component {
       <View>
         <View style={stylesAUCOM.viewIn}>
           <View style={{height:46, width: '90%'}}>
-              <Icon name="ios-search" style={stylesAUCOM.customSearchIcon} />
+              <Icon name="search" style={stylesAUCOM.customSearchIcon} />
               <Autocomplete
                   style={stylesAUCOM.autocomplete}
                   autoCapitalize="none"
@@ -723,7 +723,7 @@ class NavBar extends React.Component {
           </View> 
           <View style={{/* borderColor: 'blue', borderWidth: 1, borderBottomEndRadius:10, borderTopEndRadius: 10, */ color: 'gray', height: 45, width: '15%'}}>
               <TouchableOpacity onPress={() => { this.setState({ query: "", data : [] })}} >
-                  <Icon name="ios-close" style={stylesAUCOM.customClearIcon} />
+                  <Icon name="close" style={stylesAUCOM.customClearIcon} />
               </TouchableOpacity>
           </View>
         </View>
@@ -894,19 +894,17 @@ class NavBar extends React.Component {
         <FlatList
           data={global.ListAnimales}
           renderItem={({ item }) => (
-            <View style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
-              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
+            <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}} style={item.selected ? styles.columnSelectHo1 : styles.columnHo1 }>
               <CustomAppIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomAppIcon>
-                <Text style={styles.view_text}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
+              <Text style={styles.view_text}>{item.name}</Text>
+            </TouchableOpacity>
           )}
           horizontal={true}
           keyExtractor={(item, index) => index}
         />
         <View style={styles.rightButtons}>
             <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+                <Icon name="swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
             </TouchableOpacity>
         </View>
 
@@ -914,19 +912,17 @@ class NavBar extends React.Component {
         <FlatList
           data={global.ListPlantas}
           renderItem={({ item }) => (
-            <View style={item.selected ? styles.columnSelectHo2 : styles.columnHo2 }>
-              <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}}>
-                <CustomAppIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomAppIcon>
-                <Text style={styles.view_text}>{item.name}</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => {this.onHandlePressGroupChange(item.id)}} style={[item.selected ? styles.columnSelectHo2 : styles.columnHo2] }>
+              <CustomAppIcon name={item.icon} style={[styles.IconFilterHo, { color: Colors[item.icon] }]}></CustomAppIcon>
+              <Text style={styles.view_text}>{item.name}</Text>
+            </TouchableOpacity>
           )}
           horizontal={true}
           keyExtractor={(item, index) => index}
         />
         <View style={styles.rightButtons}>
             <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon2 name="angle-right" color='white' style={styles.dialogButtonIcon} />
+                <Icon name="swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
             </TouchableOpacity>
         </View>
         <View style={styles.tabLine}/>
@@ -1430,3 +1426,6 @@ class NavBar extends React.Component {
 
 //make this component available to the app
 export default withNavigation(NavBar);
+
+
+

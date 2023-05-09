@@ -254,8 +254,8 @@ class SideMenu extends React.Component {
             <View style = {{width: '100%', padding: 20}}>
               <Text style={{fontFamily: Fonts.family.base_bold}}>Disponible para:</Text>  
               <View style={{flexDirection: 'row'}}>
-                <Image style={{width: '38%', resizeMode: 'center'}} source={require('../../assets/icons/414-original.png')} />
-                <Image style={{marginLeft: 20, width: '38%', resizeMode: 'center' }} source={require('../../assets/icons/416-original.png')} />
+                <Image style={{width:'30%', resizeMode: 'contain', marginRight: 10}} source={require('../../assets/icons/414-original.png')} />
+                <Image style={{width:'30%', resizeMode: 'contain'}} source={require('../../assets/icons/416-original.png')} />
               </View>  
             </View>      
           </ScrollView>
@@ -286,31 +286,32 @@ class SideMenu extends React.Component {
             onBackdropPress={() => {
                 this.setState({mainModalVisible: !mainModalVisible});
             }}
-            style={{ flex: 1, top: (Platform.OS === 'android') ? 0 : Metrics.navBarHeight, backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10  }}
+            style={{ flex: 1, }}
         >
-            <View style={{ flex: 1 }}>
-                <View style={{flexDirection:'row'}}>
-                    <View  style={{ width: '70%'}}>
-                    <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>{mainModalTitle}</Text>
-                    </View>
-                    <View  style={{ width: '30%', alignContent:'flex-end', alignItems:'flex-end'}}>
-                    <TouchableOpacity style={{ }} onPress={() => { this.setState({mainModalVisible: !mainModalVisible}) }} >
-                        <Icon2 name="close" color={Colors.blue} style={{fontSize: Fonts.size.h2, padding: 10, paddingTop: 15}} />
-                    </TouchableOpacity>
-                    </View> 
-                </View>
-                
-                <View style = {{flex: 1}}>  
-                  {
-                    mainModalUrl == 'biomex' ? 
-                      this.biomexContentModal() : 
-                      mainModalUrl == 'naturalista' ? 
-                        this.naturalistaContentModal() :
-                        this.enciclovidaContentModal()
-                        
-                  }
-                </View> 
+     
+          <SafeAreaView style = {{flex: 1}}>
+            <View style={{flexDirection:'row', backgroundColor: 'white', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+              <View  style={{ width: '70%'}}>
+                <Text style={{fontFamily: Fonts.family.base_bold, fontSize: Fonts.size.h1,  color:Colors.blue, padding: 10}}>{mainModalTitle}</Text>
+              </View>
+              <View  style={{ width: '30%', alignContent:'flex-end', alignItems:'flex-end'}}>
+                <TouchableOpacity style={{ }} onPress={() => { this.setState({mainModalVisible: !mainModalVisible}) }} >
+                  <Icon2 name="close" color={Colors.blue} style={{fontSize: Fonts.size.h2, padding: 10, paddingTop: 15}} />
+                </TouchableOpacity>
+              </View> 
             </View>
+                
+            <View style = {{flex: 1}}>  
+              {
+                mainModalUrl == 'biomex' ? 
+                  this.biomexContentModal() : 
+                  mainModalUrl == 'naturalista' ? 
+                    this.naturalistaContentModal() :
+                    this.enciclovidaContentModal()
+                    
+              }
+            </View> 
+          </SafeAreaView>
         </Modal>
         
         <ScrollView contentContainerStyle = {styles.menu} >
@@ -359,7 +360,7 @@ class SideMenu extends React.Component {
 
             <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'biomex', mainModalTitle: 'biodiversidad.gob.mx' })}} underlayColor = {itemUnderlaycolor} >
               <View style = {[styles.row, {  alignItems: 'center'}]} >
-                <Image style={{width:'50%', height: '40%', resizeMode: 'contain'}} source={require('../../assets/images/logo_Biomex.png')} />
+                <Image style={{width:'50%', resizeMode: 'contain'}} source={require('../../assets/images/logo_Biomex.png')} />
                 <Text style={{textAlign: 'center', fontSize: Fonts.size.h2, fontFamily: Fonts.family.base_bold, color: '#74783C', top:-6}} >¿Quieres conocer más sobre la naturaleza de México?</Text>
               </View>
             </TouchableHighlight>
@@ -369,7 +370,7 @@ class SideMenu extends React.Component {
         </ScrollView>
         
         <View style={[{flexDirection: 'row', height: '14%', backgroundColor: '#DEE3BA'}]}>
-          <Image style={{width:'100%', height: '90%', top: 0, resizeMode: 'center'}} source={require('../../assets/icons/conabio_horizontal.png')} />
+          <Image style={{width:240, height: '90%', top: 0, resizeMode: 'contain'}} source={require('../../assets/icons/conabio_horizontal.png')} />
         </View>
         
       </SafeAreaView>

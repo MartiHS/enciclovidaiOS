@@ -236,7 +236,6 @@ export default styles = StyleSheet.create({
         textAlign: 'center',
         width: 100,
         height: 120,
-        borderColor: Colors.gray,
         marginBottom: 10,
         padding: 10,
         borderWidth: 2,
@@ -286,6 +285,7 @@ export default styles = StyleSheet.create({
         ...Fonts.style.textsmall,
         textAlign: 'center',
         fontFamily: Fonts.family.base_bold,
+        top:5,
         lineHeight: 15,
     },
     transparent: {
