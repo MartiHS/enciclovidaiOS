@@ -274,9 +274,9 @@ class MediaScreen extends Component {
   _swipeRight = () => {
     return (  
       <View style={{width:'20%', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Icon2 name="angle-left" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />     
+        <Icon2 name="angle-left" color={Colors.green} style={{ fontSize: 23, padding:0}} />     
         <Icon3 name="gesture-swipe-horizontal" color={Colors.blue} style={{ fontSize: 30, padding:0}} /> 
-        <Icon2 name="angle-right" color='#C4C4C4' style={{ fontSize: 23, padding:0}} />         
+        <Icon2 name="angle-right" color={Colors.green} style={{ fontSize: 23, padding:0}} />         
       </View>
     )
   }

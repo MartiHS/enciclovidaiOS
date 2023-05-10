@@ -360,7 +360,7 @@ class SideMenu extends React.Component {
 
             <TouchableHighlight onPress = {() => { this.setState({ mainModalVisible: true, mainModalUrl: 'biomex', mainModalTitle: 'biodiversidad.gob.mx' })}} underlayColor = {itemUnderlaycolor} >
               <View style = {[styles.row, {  alignItems: 'center'}]} >
-                <Image style={{width:'50%', resizeMode: 'contain'}} source={require('../../assets/images/logo_Biomex.png')} />
+                <Image style={{width:'50%', height: '40%', resizeMode: 'contain'}} source={require('../../assets/images/logo_Biomex.png')} />
                 <Text style={{textAlign: 'center', fontSize: Fonts.size.h2, fontFamily: Fonts.family.base_bold, color: '#74783C', top:-6}} >¿Quieres conocer más sobre la naturaleza de México?</Text>
               </View>
             </TouchableHighlight>

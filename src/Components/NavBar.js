@@ -2,7 +2,7 @@
 import React from 'react';
 import { Share, View, Text, TouchableOpacity, FlatList, Image, ScrollView, Alert, BackHandler, Linking, StatusBar } from 'react-native';
 import { withNavigation } from "react-navigation";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/SimpleLineIcons';
@@ -904,7 +904,7 @@ class NavBar extends React.Component {
         />
         <View style={styles.rightButtons}>
             <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon name="swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
+                <Icon name="gesture-swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
             </TouchableOpacity>
         </View>
 
@@ -922,7 +922,7 @@ class NavBar extends React.Component {
         />
         <View style={styles.rightButtons}>
             <TouchableOpacity style={styles.dialogButtonInfo} >
-                <Icon name="swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
+                <Icon name="gesture-swipe" color='white' style={[styles.dialogButtonIcon, {fontSize: 18}]} />
             </TouchableOpacity>
         </View>
         <View style={styles.tabLine}/>

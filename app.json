@@ -1,4 +1,6 @@
 {
   "name": "Enciclovida",
-  "displayName": "Enciclovida"
+  "displayName": "Enciclovida",
+  "orientation": "portrait",
+  "version": "2.0.1"
 }

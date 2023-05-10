@@ -1,6 +1,6 @@
 {
   "name": "Enciclovida",
-  "version": "0.0.2",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -42,7 +42,7 @@
     "react-native-screens": "^2.0.0-alpha.19",
     "react-native-sound-player": "^0.13.2",
     "react-native-status-bar-height": "^2.5.0",
-    "react-native-vector-icons": "^9.2.0",
+    "react-native-vector-icons": "6.6.0",
     "react-native-viewpager-carousel": "^0.3.2",
     "react-native-webview": "^11.26.1",
     "react-navigation": "^4.0.10",
