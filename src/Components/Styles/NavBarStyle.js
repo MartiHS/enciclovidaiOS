@@ -202,7 +202,7 @@ export default styles = StyleSheet.create({
         height:50,
     },
     IconFilterHo:{
-        fontSize:42
+        fontSize:42,
     },
     column:{
         flex: 1, 
@@ -211,6 +211,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center'
     },
     columnHo1:{
+        backgroundColor: 'white',
         margin: 1, 
         alignItems: 'center',
         textAlign: 'center',
@@ -231,6 +232,7 @@ export default styles = StyleSheet.create({
         elevation: 2,
     },
     columnHo2:{
+        backgroundColor: 'white',
         margin: 1, 
         alignItems: 'center',
         textAlign: 'center',

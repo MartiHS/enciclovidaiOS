@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,6 +32,9 @@
 		CBA1048F29FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */; };
 		CBA1049529FE16C800D4B2B3 /* enciclovida-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */; };
 		CBA1049929FE24DE00D4B2B3 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA1049829FE24DE00D4B2B3 /* icomoon.ttf */; };
+		CBFCB7CE2A310F2300430760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBFCB7CD2A310F2300430760 /* GoogleService-Info.plist */; };
+		CBFCB7CF2A310F2300430760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBFCB7CD2A310F2300430760 /* GoogleService-Info.plist */; };
+		CBFCB7D22A310FFA00430760 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CBFCB7D12A310FFA00430760 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,7 @@
 		CBA1048329FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		CBA1049329FE163800D4B2B3 /* enciclovida-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "enciclovida-icons.ttf"; sourceTree = "<group>"; };
 		CBA1049829FE24DE00D4B2B3 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
+		CBFCB7CD2A310F2300430760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D75756A6B1BA7EFAAEC9BB65 /* Pods-EnciclovidaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnciclovidaTests.debug.xcconfig"; path = "Target Support Files/Pods-EnciclovidaTests/Pods-EnciclovidaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E22C13976D3D4FD4ADB98841 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E76C03E3506A1CE5CBFD463D /* Pods-Enciclovida-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enciclovida-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Enciclovida-tvOSTests/Pods-Enciclovida-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBFCB7D22A310FFA00430760 /* FirebaseAnalytics in Frameworks */,
 				7DFF4F1A647D1732A12E044E /* libPods-Enciclovida.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +171,7 @@
 		13B07FAE1A68108700A75B9A /* Enciclovida */ = {
 			isa = PBXGroup;
 			children = (
+				CBFCB7CD2A310F2300430760 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -314,6 +320,9 @@
 			dependencies = (
 			);
 			name = Enciclovida;
+			packageProductDependencies = (
+				CBFCB7D12A310FFA00430760 /* FirebaseAnalytics */,
+			);
 			productName = Enciclovida;
 			productReference = 13B07F961A680F5B00A75B9A /* Enciclovida.app */;
 			productType = "com.apple.product-type.application";
@@ -394,6 +403,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				CBFCB7D02A310FFA00430760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,6 +439,7 @@
 				CBA1048E29FDFE2500D4B2B3 /* TitilliumWeb-Italic.ttf in Resources */,
 				CBA1048D29FDFE2500D4B2B3 /* TitilliumWeb-Black.ttf in Resources */,
 				CBA1048B29FDFE2500D4B2B3 /* TitilliumWeb-Bold.ttf in Resources */,
+				CBFCB7CE2A310F2300430760 /* GoogleService-Info.plist in Resources */,
 				CBA1048F29FDFE2500D4B2B3 /* TitilliumWeb-SemiBoldItalic.ttf in Resources */,
 				CBA1048429FDFE2500D4B2B3 /* TitilliumWeb-ExtraLight.ttf in Resources */,
 				CBA1048829FDFE2500D4B2B3 /* TitilliumWeb-BoldItalic.ttf in Resources */,
@@ -440,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBFCB7CF2A310F2300430760 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +747,11 @@
 				);
 				INFOPLIST_FILE = EnciclovidaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -755,7 +773,11 @@
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = EnciclovidaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -778,7 +800,10 @@
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -805,7 +830,10 @@
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Enciclovida/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -835,7 +863,10 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Enciclovida-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -862,7 +893,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Enciclovida-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -889,7 +923,11 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Enciclovida-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -916,7 +954,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Enciclovida-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1080,6 +1122,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBFCB7D02A310FFA00430760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBFCB7D12A310FFA00430760 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBFCB7D02A310FFA00430760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
